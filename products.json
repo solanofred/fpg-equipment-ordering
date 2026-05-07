@@ -9,7 +9,7 @@
         "price": 1200
       }
     ],
-    "price": 1440,
+    "price": 1450,
     "recommended": true,
     "available": true,
     "imageUrl": ""
@@ -28,7 +28,7 @@
         "price": 500
       }
     ],
-    "price": 2050,
+    "price": 7777,
     "recommended": true,
     "available": true,
     "imageUrl": ""
@@ -115,7 +115,7 @@
         "price": 300
       }
     ],
-    "price": 2357.5,
+    "price": 2400,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -375,7 +375,7 @@
         "price": 4000
       }
     ],
-    "price": 4500,
+    "price": 4800,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -390,7 +390,7 @@
         "price": 1300
       }
     ],
-    "price": 1495,
+    "price": 1560,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -417,7 +417,7 @@
         "price": 250
       }
     ],
-    "price": 2167.75,
+    "price": 2262,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -444,7 +444,7 @@
         "price": 250
       }
     ],
-    "price": 1937.75,
+    "price": 2022,
     "recommended": false,
     "available": true,
     "imageUrl": ""
