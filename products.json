@@ -9,7 +9,7 @@
         "price": 1200
       }
     ],
-    "price": 1450,
+    "price": 1320,
     "recommended": true,
     "available": true,
     "imageUrl": ""
@@ -51,7 +51,7 @@
         "price": 300
       }
     ],
-    "price": 2400,
+    "price": 2200,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -59,7 +59,7 @@
   {
     "id": 4,
     "title": "Monochrome (B/W) MFP",
-    "category": "peripherals",
+    "category": "desktop",
     "items": [
       {
         "name": "HP B&W LaserJet Pro MFP M3101fdw",
@@ -74,7 +74,7 @@
   {
     "id": 5,
     "title": "Color MFP",
-    "category": "peripherals",
+    "category": "desktop",
     "items": [
       {
         "name": "HP LaserJet Pro 3301fdw",
