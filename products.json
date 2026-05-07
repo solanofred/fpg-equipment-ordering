@@ -9,7 +9,7 @@
         "price": 1200
       }
     ],
-    "price": 1450,
+    "price": 1440,
     "recommended": true,
     "available": true,
     "imageUrl": ""
@@ -115,7 +115,7 @@
         "price": 300
       }
     ],
-    "price": 2400,
+    "price": 2357.5,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -390,7 +390,7 @@
         "price": 1300
       }
     ],
-    "price": 1500,
+    "price": 1495,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -417,7 +417,7 @@
         "price": 250
       }
     ],
-    "price": 2200,
+    "price": 2167.75,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -444,7 +444,7 @@
         "price": 250
       }
     ],
-    "price": 2000,
+    "price": 1937.75,
     "recommended": false,
     "available": true,
     "imageUrl": ""
