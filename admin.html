@@ -42,6 +42,137 @@
             color: var(--fpg-black);
         }
         
+        /* Custom Confirmation Modal */
+        .confirm-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            backdrop-filter: blur(4px);
+        }
+        
+        .confirm-modal {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 480px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.2s ease-out;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .confirm-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #1B5A8E 0%, #0F4068 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 28px;
+        }
+        
+        .success-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 28px;
+        }
+        
+        .confirm-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1A1A1A;
+            text-align: center;
+            margin-bottom: 0.75rem;
+        }
+        
+        .confirm-message {
+            font-size: 1rem;
+            color: #666666;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .confirm-detail {
+            font-size: 0.875rem;
+            color: #999999;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .confirm-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .confirm-btn {
+            flex: 1;
+            padding: 0.875rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .confirm-btn-cancel {
+            background: white;
+            color: #666666;
+            border: 2px solid #E5E7EB;
+        }
+        
+        .confirm-btn-cancel:hover {
+            background: #F9FAFB;
+            border-color: #D1D5DB;
+        }
+        
+        .confirm-btn-confirm {
+            background: linear-gradient(135deg, #1B5A8E 0%, #0F4068 100%);
+            color: white;
+        }
+        
+        .confirm-btn-confirm:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(27, 90, 142, 0.3);
+        }
+        
+        .confirm-btn-ok {
+            width: 100%;
+            background: linear-gradient(135deg, #1B5A8E 0%, #0F4068 100%);
+            color: white;
+        }
+        
+        .confirm-btn-ok:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(27, 90, 142, 0.3);
+        }
+        
         /* Login Screen */
         .login-container {
             min-height: 100vh;
@@ -873,6 +1004,53 @@
         };
 
         // Main App
+        // Custom Confirmation Modal Component
+        function ConfirmModal({ isOpen, title, message, detail, onConfirm, onCancel }) {
+            if (!isOpen) return null;
+            
+            return (
+                <div className="confirm-overlay" onClick={onCancel}>
+                    <div className="confirm-modal" onClick={(e) => e.stopPropagation()}>
+                        <div className="confirm-icon">
+                            ✓
+                        </div>
+                        <div className="confirm-title">{title}</div>
+                        <div className="confirm-message">{message}</div>
+                        {detail && <div className="confirm-detail">{detail}</div>}
+                        <div className="confirm-buttons">
+                            <button className="confirm-btn confirm-btn-cancel" onClick={onCancel}>
+                                Cancel
+                            </button>
+                            <button className="confirm-btn confirm-btn-confirm" onClick={onConfirm}>
+                                Publish
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        
+        // Custom Success Modal Component
+        function SuccessModal({ isOpen, title, message, detail, onClose }) {
+            if (!isOpen) return null;
+            
+            return (
+                <div className="confirm-overlay" onClick={onClose}>
+                    <div className="confirm-modal" onClick={(e) => e.stopPropagation()}>
+                        <div className="success-icon">
+                            ✓
+                        </div>
+                        <div className="confirm-title">{title}</div>
+                        <div className="confirm-message">{message}</div>
+                        {detail && <div className="confirm-detail">{detail}</div>}
+                        <button className="confirm-btn confirm-btn-ok" onClick={onClose}>
+                            OK
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
         function App() {
             const [isAuthenticated, setIsAuthenticated] = useState(AuthService.isAuthenticated());
             
@@ -960,6 +1138,10 @@
             const [editingProduct, setEditingProduct] = useState(null);
             const [showModal, setShowModal] = useState(false);
             const [showReviewModal, setShowReviewModal] = useState(false);
+            const [showConfirmModal, setShowConfirmModal] = useState(false);
+            const [showSuccessModal, setShowSuccessModal] = useState(false);
+            const [successData, setSuccessData] = useState({});
+            const [confirmData, setConfirmData] = useState({});
             const [draftCount, setDraftCount] = useState(DraftService.getDraftCount());
             const session = AuthService.getSession();
             
@@ -1009,7 +1191,16 @@
             };
             
             const handlePublishAll = async () => {
-                if (!confirm(`✅ Ready to Publish?\n\n${draftCount} product ${draftCount === 1 ? 'update' : 'updates'} will be published to the live site.\n\nYour changes will appear in 2-3 minutes.`)) return;
+                // Show custom confirmation modal
+                setConfirmData({
+                    count: draftCount,
+                    updates: draftCount === 1 ? 'update' : 'updates'
+                });
+                setShowConfirmModal(true);
+            };
+            
+            const handleConfirmPublish = async () => {
+                setShowConfirmModal(false);
                 
                 try {
                     // Show loading state
@@ -1045,9 +1236,12 @@
                     DraftService.clearAllDrafts();
                     setDraftCount(0);
                     
-                    alert(`✅ Successfully published ${finalProducts.length} products to GitHub!\n\n` +
-                          `Commit: ${result.commitSha?.substring(0, 7)}\n` +
-                          `Your changes will be live in 2-3 minutes.`);
+                    // Show success modal
+                    setSuccessData({
+                        count: finalProducts.length,
+                        commitSha: result.commitSha?.substring(0, 7)
+                    });
+                    setShowSuccessModal(true);
                     
                     // Reload products
                     ProductService.loadProducts().then(setProducts);
@@ -1270,6 +1464,23 @@
                             onClose={() => setShowReviewModal(false)}
                         />
                     )}
+                    
+                    <ConfirmModal
+                        isOpen={showConfirmModal}
+                        title="Ready to Publish?"
+                        message={`${confirmData.count || 0} product ${confirmData.updates || 'updates'} will be published to the live site.`}
+                        detail="Your changes will appear in 2-3 minutes."
+                        onConfirm={handleConfirmPublish}
+                        onCancel={() => setShowConfirmModal(false)}
+                    />
+                    
+                    <SuccessModal
+                        isOpen={showSuccessModal}
+                        title="Successfully Published!"
+                        message={`${successData.count || 0} products have been published to GitHub.`}
+                        detail={successData.commitSha ? `Commit: ${successData.commitSha}\nYour changes will be live in 2-3 minutes.` : "Your changes will be live in 2-3 minutes."}
+                        onClose={() => setShowSuccessModal(false)}
+                    />
                 </>
             );
         }
