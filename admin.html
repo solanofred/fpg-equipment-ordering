@@ -1009,7 +1009,7 @@
             };
             
             const handlePublishAll = async () => {
-                if (!confirm(`Publish ${draftCount} changes to GitHub?\n\nThis will automatically update the live site in 2-3 minutes.`)) return;
+                if (!confirm(`✅ Ready to Publish?\n\n${draftCount} product ${draftCount === 1 ? 'update' : 'updates'} will be published to the live site.\n\nYour changes will appear in 2-3 minutes.`)) return;
                 
                 try {
                     // Show loading state
