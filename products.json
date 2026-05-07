@@ -59,7 +59,7 @@
   {
     "id": 4,
     "title": "Monochrome (B/W) MFP",
-    "category": "peripherals",
+    "category": "desktop",
     "items": [
       {
         "name": "HP B&W LaserJet Pro MFP M3101fdw",
@@ -74,7 +74,7 @@
   {
     "id": 5,
     "title": "Color MFP",
-    "category": "desktop",
+    "category": "peripherals",
     "items": [
       {
         "name": "HP LaserJet Pro 3301fdw",
