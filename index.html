@@ -81,15 +81,13 @@
             -moz-osx-font-smoothing: grayscale;
         }
         
-        /* Header - Apple-style */
+        /* Header - SharePoint blue style */
         .header {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid var(--neutral-200);
+            background: linear-gradient(135deg, #1B5A8E 0%, #0F4068 100%);
+            border-bottom: none;
         }
         
         .header-content {
@@ -123,14 +121,14 @@
         .brand-title {
             font-size: 1.25rem;
             font-weight: 700;
-            color: var(--fpg-navy);
+            color: white;
             letter-spacing: -0.02em;
         }
         
         .brand-subtitle {
             font-size: 0.8125rem;
             font-weight: 600;
-            color: var(--fpg-navy);
+            color: rgba(255, 255, 255, 0.9);
         }
         
         /* Cart Button - Floating pill */
@@ -790,7 +788,7 @@
                                 onClick={() => setSelectedCategory(cat)}
                             >
                                 {cat === 'all' ? 'All Equipment' : 
-                                 cat === 'specialty_laptops' ? 'Special Order Laptops' :
+                                 cat === 'specialty_laptop' || cat === 'specialty_laptops' ? 'Special Order Laptops' :
                                  cat.charAt(0).toUpperCase() + cat.slice(1) + 's'}
                             </button>
                         ))}
