@@ -805,11 +805,8 @@ ${new Date().toLocaleString()}`;
                 // Open email client
                 window.location.href = mailtoLink;
                 
-                // Close form and clear cart after a moment
-                setTimeout(() => {
-                    setShowCheckoutForm(false);
-                    setCart([]);
-                }, 1000);
+                // Close form but DON'T clear cart (user might need to come back)
+                setShowCheckoutForm(false);
             };
             
             return (
@@ -1009,6 +1006,36 @@ ${new Date().toLocaleString()}`;
                                 >
                                     Proceed to Checkout
                                 </button>
+                                <button 
+                                    onClick={() => {
+                                        if (window.confirm('Are you sure you want to clear your cart? This cannot be undone.')) {
+                                            setCart([]);
+                                        }
+                                    }}
+                                    style={{
+                                        width: '100%',
+                                        padding: '0.75rem',
+                                        marginTop: '0.75rem',
+                                        background: 'white',
+                                        color: 'var(--text-secondary)',
+                                        border: '1px solid var(--neutral-300)',
+                                        borderRadius: '12px',
+                                        fontSize: '0.9375rem',
+                                        fontWeight: 600,
+                                        cursor: 'pointer',
+                                        transition: 'var(--transition)'
+                                    }}
+                                    onMouseOver={(e) => {
+                                        e.target.style.background = 'var(--neutral-100)';
+                                        e.target.style.borderColor = 'var(--neutral-400)';
+                                    }}
+                                    onMouseOut={(e) => {
+                                        e.target.style.background = 'white';
+                                        e.target.style.borderColor = 'var(--neutral-300)';
+                                    }}
+                                >
+                                    Clear Cart
+                                </button>
                             </div>
                         )}
                     </div>
@@ -1070,6 +1097,21 @@ ${new Date().toLocaleString()}`;
                     </div>
                     
                     <div className="cart-body" style={{padding: '1.5rem'}}>
+                        {/* Warning Box */}
+                        <div style={{marginBottom: '1.5rem', padding: '1rem', background: '#FEF3C7', border: '1px solid #F59E0B', borderRadius: '8px'}}>
+                            <div style={{display: 'flex', alignItems: 'start', gap: '0.75rem'}}>
+                                <span style={{fontSize: '1.25rem'}}>⚠️</span>
+                                <div>
+                                    <div style={{fontWeight: 600, color: '#92400E', marginBottom: '0.25rem'}}>
+                                        Review Your Order Carefully
+                                    </div>
+                                    <div style={{fontSize: '0.875rem', color: '#78350F'}}>
+                                        Once you submit this request, you cannot edit it. If you need to add more items or make changes, you'll need to submit a separate request.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <form onSubmit={handleSubmit}>
                             <div style={{marginBottom: '1.5rem'}}>
                                 <label style={{display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--text-primary)'}}>
@@ -1173,7 +1215,11 @@ ${new Date().toLocaleString()}`;
                             </div>
                             
                             <div style={{marginTop: '1rem', padding: '0.75rem', background: '#EFF6FF', borderRadius: '8px', fontSize: '0.8125rem', color: '#1E40AF'}}>
-                                ℹ️ Clicking "Submit Request" will open your email client with a pre-filled message to IT Help Desk.
+                                <div style={{fontWeight: 600, marginBottom: '0.25rem'}}>📧 How This Works:</div>
+                                <div>1. Click "Submit Request" below</div>
+                                <div>2. Your email client will open with a pre-filled message</div>
+                                <div>3. Review the email and click "Send"</div>
+                                <div>4. Your cart will remain until you manually clear it</div>
                             </div>
                         </form>
                     </div>
