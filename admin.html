@@ -430,6 +430,57 @@
             background: rgba(22, 97, 173, 0.1);
         }
         
+        .price-calculator {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 2px solid var(--border);
+        }
+        
+        .price-calc-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .price-calc-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            margin-top: 0.5rem;
+            border-top: 2px solid var(--border);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .price-warning {
+            background: #FEF3C7;
+            border: 2px solid #F59E0B;
+            color: #92400E;
+            padding: 0.875rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .price-good {
+            background: #D1FAE5;
+            border: 2px solid var(--success);
+            color: #065F46;
+            padding: 0.875rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
         .modal-footer {
             padding: 1.5rem 2rem;
             border-top: 1px solid var(--border);
@@ -820,6 +871,12 @@
         function ProductModal({ product, onSave, onClose }) {
             const [formData, setFormData] = useState(product);
             
+            // Calculate items subtotal
+            const itemsSubtotal = formData.items.reduce((sum, item) => sum + (parseFloat(item.price) || 0), 0);
+            const totalPrice = parseFloat(formData.price) || 0;
+            const isUnderpriced = totalPrice < itemsSubtotal;
+            const hasMarkup = totalPrice > itemsSubtotal;
+            
             const handleSubmit = (e) => {
                 e.preventDefault();
                 onSave(formData);
@@ -958,6 +1015,47 @@
                                         >
                                             + Add Item
                                         </button>
+                                        
+                                        {formData.items.length > 0 && (
+                                            <div className="price-calculator">
+                                                <div className="price-calc-row">
+                                                    <span style={{ color: 'var(--fpg-gray)' }}>Items Subtotal:</span>
+                                                    <span style={{ fontWeight: '600' }}>${itemsSubtotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                                                </div>
+                                                <div className="price-calc-total">
+                                                    <span>Total Package Price:</span>
+                                                    <span style={{ color: 'var(--primary)' }}>${totalPrice.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                                                </div>
+                                                
+                                                {isUnderpriced && (
+                                                    <div className="price-warning">
+                                                        <span style={{ fontSize: '1.25rem' }}>⚠️</span>
+                                                        <div>
+                                                            <strong>Warning: Total price is LESS than items subtotal!</strong>
+                                                            <br />
+                                                            You're underpricing by ${(itemsSubtotal - totalPrice).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                                
+                                                {hasMarkup && !isUnderpriced && (
+                                                    <div className="price-good">
+                                                        <span style={{ fontSize: '1.25rem' }}>✓</span>
+                                                        <div>
+                                                            Markup: ${(totalPrice - itemsSubtotal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} 
+                                                            ({Math.round(((totalPrice - itemsSubtotal) / itemsSubtotal) * 100)}%)
+                                                        </div>
+                                                    </div>
+                                                )}
+                                                
+                                                {totalPrice === itemsSubtotal && totalPrice > 0 && (
+                                                    <div className="price-good">
+                                                        <span style={{ fontSize: '1.25rem' }}>✓</span>
+                                                        <div>Total matches items exactly (no markup)</div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
