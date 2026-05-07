@@ -481,6 +481,80 @@
             gap: 0.5rem;
         }
         
+        .markup-section {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border);
+        }
+        
+        .markup-label {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: block;
+            color: var(--fpg-gray-dark);
+        }
+        
+        .markup-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.75rem;
+        }
+        
+        .btn-markup {
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.625rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .btn-markup:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .custom-markup {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .custom-markup-input {
+            width: 80px;
+            padding: 0.625rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .custom-markup-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .btn-apply-custom {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.625rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .btn-apply-custom:hover {
+            background: var(--fpg-orange-2);
+        }
+        
         .modal-footer {
             padding: 1.5rem 2rem;
             border-top: 1px solid var(--border);
@@ -870,12 +944,27 @@
 
         function ProductModal({ product, onSave, onClose }) {
             const [formData, setFormData] = useState(product);
+            const [customMarkup, setCustomMarkup] = useState('');
             
             // Calculate items subtotal
             const itemsSubtotal = formData.items.reduce((sum, item) => sum + (parseFloat(item.price) || 0), 0);
             const totalPrice = parseFloat(formData.price) || 0;
             const isUnderpriced = totalPrice < itemsSubtotal;
             const hasMarkup = totalPrice > itemsSubtotal;
+            
+            const applyMarkup = (percentage) => {
+                const markup = itemsSubtotal * (percentage / 100);
+                const newTotal = itemsSubtotal + markup;
+                setFormData({ ...formData, price: Math.round(newTotal * 100) / 100 });
+            };
+            
+            const applyCustomMarkup = () => {
+                const percentage = parseFloat(customMarkup);
+                if (!isNaN(percentage) && percentage >= 0) {
+                    applyMarkup(percentage);
+                    setCustomMarkup('');
+                }
+            };
             
             const handleSubmit = (e) => {
                 e.preventDefault();
@@ -937,19 +1026,6 @@
                                         <option value="specialty_laptop">Specialty Laptop</option>
                                         <option value="tribucast">Tribucast</option>
                                     </select>
-                                </div>
-                                
-                                <div className="form-group">
-                                    <label className="form-label">Total Price *</label>
-                                    <input
-                                        type="number"
-                                        className="form-input"
-                                        value={formData.price}
-                                        onChange={(e) => setFormData({ ...formData, price: parseFloat(e.target.value) || 0 })}
-                                        min="0"
-                                        step="0.01"
-                                        required
-                                    />
                                 </div>
                                 
                                 <div className="form-group">
@@ -1022,6 +1098,60 @@
                                                     <span style={{ color: 'var(--fpg-gray)' }}>Items Subtotal:</span>
                                                     <span style={{ fontWeight: '600' }}>${itemsSubtotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                                                 </div>
+                                                
+                                                <div className="markup-section">
+                                                    <label className="markup-label">Apply Markup:</label>
+                                                    <div className="markup-buttons">
+                                                        <button
+                                                            type="button"
+                                                            className="btn-markup"
+                                                            onClick={() => applyMarkup(10)}
+                                                        >
+                                                            +10%
+                                                        </button>
+                                                        <button
+                                                            type="button"
+                                                            className="btn-markup"
+                                                            onClick={() => applyMarkup(15)}
+                                                        >
+                                                            +15%
+                                                        </button>
+                                                        <button
+                                                            type="button"
+                                                            className="btn-markup"
+                                                            onClick={() => applyMarkup(20)}
+                                                        >
+                                                            +20%
+                                                        </button>
+                                                    </div>
+                                                    <div className="custom-markup">
+                                                        <span style={{ fontSize: '0.9rem', color: 'var(--fpg-gray)' }}>Custom:</span>
+                                                        <input
+                                                            type="number"
+                                                            className="custom-markup-input"
+                                                            placeholder="0"
+                                                            value={customMarkup}
+                                                            onChange={(e) => setCustomMarkup(e.target.value)}
+                                                            onKeyPress={(e) => {
+                                                                if (e.key === 'Enter') {
+                                                                    e.preventDefault();
+                                                                    applyCustomMarkup();
+                                                                }
+                                                            }}
+                                                            min="0"
+                                                            step="0.1"
+                                                        />
+                                                        <span style={{ fontSize: '0.9rem' }}>%</span>
+                                                        <button
+                                                            type="button"
+                                                            className="btn-apply-custom"
+                                                            onClick={applyCustomMarkup}
+                                                        >
+                                                            Apply
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                
                                                 <div className="price-calc-total">
                                                     <span>Total Package Price:</span>
                                                     <span style={{ color: 'var(--primary)' }}>${totalPrice.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
@@ -1057,6 +1187,23 @@
                                             </div>
                                         )}
                                     </div>
+                                </div>
+                                
+                                <div className="form-group">
+                                    <label className="form-label">Total Price * (can be manually overridden)</label>
+                                    <input
+                                        type="number"
+                                        className="form-input"
+                                        value={formData.price}
+                                        onChange={(e) => setFormData({ ...formData, price: parseFloat(e.target.value) || 0 })}
+                                        min="0"
+                                        step="0.01"
+                                        required
+                                        style={{ fontSize: '1.1rem', fontWeight: '600', color: 'var(--primary)' }}
+                                    />
+                                    <small style={{ color: 'var(--fpg-gray)', fontSize: '0.85rem', display: 'block', marginTop: '0.5rem' }}>
+                                        💡 Use markup buttons above or type manually to adjust for state-specific pricing
+                                    </small>
                                 </div>
                             </div>
                             
