@@ -762,6 +762,9 @@
 
         // Product Service
         const ProductService = {
+            // Azure Function URL - UPDATE THIS AFTER DEPLOYING
+            AZURE_FUNCTION_URL: 'https://fpg-equipment-function-bfhse3hufnbpecbu.eastus-01.azurewebsites.net/api/publish-products',
+            
             async loadProducts() {
                 try {
                     const response = await fetch('./products.json');
@@ -772,9 +775,32 @@
                 }
             },
             
+            async publishToGitHub(products, adminEmail) {
+                try {
+                    const response = await fetch(ProductService.AZURE_FUNCTION_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-admin-email': adminEmail
+                        },
+                        body: JSON.stringify({ products })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (!response.ok) {
+                        throw new Error(result.message || 'Failed to publish to GitHub');
+                    }
+                    
+                    return result;
+                } catch (error) {
+                    console.error('Error publishing to GitHub:', error);
+                    throw error;
+                }
+            },
+            
             async saveProducts(products) {
-                // In production, this would save to server
-                // For now, download as JSON file
+                // Fallback: Manual download (if Azure Function fails or not configured)
                 const dataStr = JSON.stringify(products, null, 2);
                 const blob = new Blob([dataStr], { type: 'application/json' });
                 const url = URL.createObjectURL(blob);
@@ -983,30 +1009,91 @@
             };
             
             const handlePublishAll = async () => {
-                if (!confirm(`Publish ${draftCount} changes to products.json?`)) return;
+                if (!confirm(`Publish ${draftCount} changes to GitHub?\n\nThis will automatically update the live site in 2-3 minutes.`)) return;
                 
-                // Apply all drafts to create final products array
-                const drafts = DraftService.getDrafts();
-                let finalProducts = [...products];
-                
-                // Apply all draft changes
-                Object.values(drafts).forEach(draft => {
-                    if (draft._deleted) {
-                        finalProducts = finalProducts.filter(p => p.id !== draft.id);
-                    } else {
-                        const index = finalProducts.findIndex(p => p.id === draft.id);
-                        const { _draftTimestamp, ...cleanDraft } = draft;
-                        if (index >= 0) {
-                            finalProducts[index] = cleanDraft;
-                        } else {
-                            finalProducts.push(cleanDraft);
-                        }
+                try {
+                    // Show loading state
+                    const publishBtn = document.querySelector('.btn-publish-all');
+                    if (publishBtn) {
+                        publishBtn.disabled = true;
+                        publishBtn.textContent = '⏳ Publishing...';
                     }
-                });
-                
-                await ProductService.saveProducts(finalProducts);
-                DraftService.clearAllDrafts();
-                setDraftCount(0);
+                    
+                    // Apply all drafts to create final products array
+                    const drafts = DraftService.getDrafts();
+                    let finalProducts = [...products];
+                    
+                    // Apply all draft changes
+                    Object.values(drafts).forEach(draft => {
+                        if (draft._deleted) {
+                            finalProducts = finalProducts.filter(p => p.id !== draft.id);
+                        } else {
+                            const index = finalProducts.findIndex(p => p.id === draft.id);
+                            const { _draftTimestamp, ...cleanDraft } = draft;
+                            if (index >= 0) {
+                                finalProducts[index] = cleanDraft;
+                            } else {
+                                finalProducts.push(cleanDraft);
+                            }
+                        }
+                    });
+                    
+                    // Publish to GitHub via Azure Function
+                    const result = await ProductService.publishToGitHub(finalProducts, session.email);
+                    
+                    // Success!
+                    DraftService.clearAllDrafts();
+                    setDraftCount(0);
+                    
+                    alert(`✅ Successfully published ${finalProducts.length} products to GitHub!\n\n` +
+                          `Commit: ${result.commitSha?.substring(0, 7)}\n` +
+                          `Your changes will be live in 2-3 minutes.`);
+                    
+                    // Reload products
+                    ProductService.loadProducts().then(setProducts);
+                    
+                } catch (error) {
+                    console.error('Publish error:', error);
+                    
+                    // Fallback to manual download
+                    const fallback = confirm(
+                        '❌ Auto-publish failed.\n\n' +
+                        error.message + '\n\n' +
+                        'Would you like to download products.json manually instead?'
+                    );
+                    
+                    if (fallback) {
+                        // Apply drafts
+                        const drafts = DraftService.getDrafts();
+                        let finalProducts = [...products];
+                        
+                        Object.values(drafts).forEach(draft => {
+                            if (draft._deleted) {
+                                finalProducts = finalProducts.filter(p => p.id !== draft.id);
+                            } else {
+                                const index = finalProducts.findIndex(p => p.id === draft.id);
+                                const { _draftTimestamp, ...cleanDraft } = draft;
+                                if (index >= 0) {
+                                    finalProducts[index] = cleanDraft;
+                                } else {
+                                    finalProducts.push(cleanDraft);
+                                }
+                            }
+                        });
+                        
+                        // Download manually
+                        await ProductService.saveProducts(finalProducts);
+                        DraftService.clearAllDrafts();
+                        setDraftCount(0);
+                    }
+                } finally {
+                    // Reset button state
+                    const publishBtn = document.querySelector('.btn-publish-all');
+                    if (publishBtn) {
+                        publishBtn.disabled = false;
+                        publishBtn.textContent = '📥 Publish All';
+                    }
+                }
             };
             
             const handleClearDrafts = () => {
