@@ -1,0 +1,452 @@
+[
+  {
+    "id": 1,
+    "title": "Desktop (Computer Only)",
+    "category": "desktop",
+    "items": [
+      {
+        "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
+        "price": 1200.0
+      }
+    ],
+    "price": 1450.0,
+    "recommended": true,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 2,
+    "title": "Desktop (TIO)",
+    "category": "desktop",
+    "items": [
+      {
+        "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
+        "price": 1200.0
+      },
+      {
+        "name": "Lenovo Tiny-in-One 27\" LED - QHD",
+        "price": 500.0
+      }
+    ],
+    "price": 2050.0,
+    "recommended": true,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 3,
+    "title": "Desktop (TIO) with Additional Monitor",
+    "category": "desktop",
+    "items": [
+      {
+        "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
+        "price": 1200.0
+      },
+      {
+        "name": "Lenovo Tiny-in-One 27\" LED - QHD",
+        "price": 500.0
+      },
+      {
+        "name": "Lenovo ThinkVision 27\" LED - E27q-40 QHD",
+        "price": 300.0
+      }
+    ],
+    "price": 2400.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 4,
+    "title": "Monochrome (B/W) MFP",
+    "category": "desktop",
+    "items": [
+      {
+        "name": "HP B&W LaserJet Pro MFP M3101fdw",
+        "price": 300.0
+      }
+    ],
+    "price": 450.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 5,
+    "title": "Color MFP",
+    "category": "desktop",
+    "items": [
+      {
+        "name": "HP LaserJet Pro 3301fdw",
+        "price": 650.0
+      }
+    ],
+    "price": 800.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 6,
+    "title": "Laptop",
+    "category": "laptop",
+    "items": [
+      {
+        "name": "Lenovo T14 - 32GB/512GB/Intel U7",
+        "price": 1750.0
+      }
+    ],
+    "price": 2050.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 7,
+    "title": "Laptop with Dock",
+    "category": "laptop",
+    "items": [
+      {
+        "name": "Lenovo T14 - 32GB/512GB/Intel U7",
+        "price": 1750.0
+      },
+      {
+        "name": "Lenovo ThinkPad Hybrid USB-C Dock",
+        "price": 300.0
+      }
+    ],
+    "price": 2400.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 8,
+    "title": "Laptop with Monitor",
+    "category": "laptop",
+    "items": [
+      {
+        "name": "Lenovo T14 - 32GB/512GB/Intel U7",
+        "price": 1750.0
+      },
+      {
+        "name": "ThinkVision 24\" T24-40 - 1080P LED",
+        "price": 200.0
+      },
+      {
+        "name": "Lenovo ThinkPad Hybrid USB-C Dock",
+        "price": 300.0
+      },
+      {
+        "name": "Logitech C920S Webcam",
+        "price": 70.0
+      },
+      {
+        "name": "Logitech MK270 Wireless Keyboard/Mouse",
+        "price": 30.0
+      }
+    ],
+    "price": 2750.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 9,
+    "title": "Laptop with 2 Monitors",
+    "category": "laptop",
+    "items": [
+      {
+        "name": "Lenovo T14 - 32GB/512GB/Intel U7",
+        "price": 1750.0
+      },
+      {
+        "name": "ThinkVision 24\" T24-40 - 1080P LED",
+        "price": 200.0
+      },
+      {
+        "name": "ThinkVision 24\" T24-40 - 1080P LED",
+        "price": 200.0
+      },
+      {
+        "name": "Lenovo ThinkPad Hybrid USB-C Dock",
+        "price": 300.0
+      },
+      {
+        "name": "Logitech C920S Webcam",
+        "price": 70.0
+      },
+      {
+        "name": "Logitech MK270 Wireless Keyboard/Mouse",
+        "price": 30.0
+      }
+    ],
+    "price": 3000.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 10,
+    "title": "Laptop with 2 Monitors (CCR)",
+    "category": "laptop",
+    "items": [
+      {
+        "name": "Lenovo T14 - 32GB/512GB/Intel U7",
+        "price": 1750.0
+      },
+      {
+        "name": "ThinkVision 24\" T24-40 - 1080P LED",
+        "price": 200.0
+      },
+      {
+        "name": "ThinkVision 24\" T24-40 - 1080P LED",
+        "price": 200.0
+      },
+      {
+        "name": "Lenovo ThinkPad Hybrid USB-C Dock",
+        "price": 300.0
+      },
+      {
+        "name": "Poly Blackwire 3210 Monoear USB-C/A",
+        "price": 35.0
+      },
+      {
+        "name": "Logitech C920S Webcam",
+        "price": 70.0
+      },
+      {
+        "name": "Logitech MK270 Wireless Keyboard/Mouse",
+        "price": 30.0
+      }
+    ],
+    "price": 2950.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 11,
+    "title": "Wireless Keyboard/Mouse",
+    "category": "peripherals",
+    "items": [
+      {
+        "name": "Logitech MK270 Wireless Keyboard/Mouse",
+        "price": 30.0
+      }
+    ],
+    "price": 50.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 12,
+    "title": "Headset",
+    "category": "peripherals",
+    "items": [
+      {
+        "name": "Poly Blackwire 3210 Monoear USB-C/A",
+        "price": 35.0
+      }
+    ],
+    "price": 100.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 13,
+    "title": "Webcam",
+    "category": "peripherals",
+    "items": [
+      {
+        "name": "Logitech C920S Webcam",
+        "price": 70.0
+      }
+    ],
+    "price": 100.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 14,
+    "title": "Dock",
+    "category": "peripherals",
+    "items": [
+      {
+        "name": "Lenovo ThinkPad Hybrid USB-C Dock",
+        "price": 300.0
+      }
+    ],
+    "price": 350.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 15,
+    "title": "Document Scanner",
+    "category": "peripherals",
+    "items": [
+      {
+        "name": "Epson DS-530 II Color Duplex Scanner",
+        "price": 400.0
+      }
+    ],
+    "price": 500.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 16,
+    "title": "Wireless Headset for Polycom Phones",
+    "category": "peripherals",
+    "items": [
+      {
+        "name": "Poly CS510 XD",
+        "price": 350.0
+      },
+      {
+        "name": "Poly APP-51 Eledtronic Hookswitch TAA",
+        "price": 75.0
+      }
+    ],
+    "price": 500.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 17,
+    "title": "Arrangement Room - 55\" TV Setup",
+    "category": "peripherals",
+    "items": [
+      {
+        "name": "Samsung CU7000 - 4K - 55\"",
+        "price": 450.0
+      },
+      {
+        "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
+        "price": 750.0
+      },
+      {
+        "name": "Logitech MK270 Wireless Keyboard/Mouse",
+        "price": 30.0
+      }
+    ],
+    "price": 1450.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 18,
+    "title": "Arrangement Room - 65\" TV Setup",
+    "category": "peripherals",
+    "items": [
+      {
+        "name": "Samsung CU7000 - 4K - 65\"",
+        "price": 500.0
+      },
+      {
+        "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
+        "price": 750.0
+      },
+      {
+        "name": "Logitech MK270 Wireless Keyboard/Mouse",
+        "price": 30.0
+      }
+    ],
+    "price": 1500.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 19,
+    "title": "Executive Laptop",
+    "category": "specialty_laptop",
+    "items": [
+      {
+        "name": "Lenovo P14s - 64GB/2TB/I-U7",
+        "price": 4000.0
+      }
+    ],
+    "price": 4500.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 20,
+    "title": "Accounting Laptop",
+    "category": "specialty_laptop",
+    "items": [
+      {
+        "name": "Lenovo L16 - 32GB/512GB/R5-215",
+        "price": 1300.0
+      }
+    ],
+    "price": 1500.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 21,
+    "title": "Tribucast - Cellular",
+    "category": "tribucast",
+    "items": [
+      {
+        "name": "iPad Pro 12.9\" (M5) + Monthly Cellular Cost (~$50)",
+        "price": 1500.0
+      },
+      {
+        "name": "iOgrapher Adjustable iPad Case",
+        "price": 100.0
+      },
+      {
+        "name": "Belkin 3.5mm Audio + USB-C Charge",
+        "price": 35.0
+      },
+      {
+        "name": "Rode VideoMic Pro",
+        "price": 250.0
+      }
+    ],
+    "price": 2200.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 22,
+    "title": "Tribucast - Wi-Fi",
+    "category": "tribucast",
+    "items": [
+      {
+        "name": "iPad Pro 12.9\" (M5) - Wi-Fi Only",
+        "price": 1300.0
+      },
+      {
+        "name": "iOgrapher Adjustable iPad Case",
+        "price": 100.0
+      },
+      {
+        "name": "Belkin 3.5mm Audio + USB-C Charge",
+        "price": 35.0
+      },
+      {
+        "name": "Rode VideoMic Pro",
+        "price": 250.0
+      }
+    ],
+    "price": 2000.0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  }
+]
