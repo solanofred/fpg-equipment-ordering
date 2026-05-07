@@ -555,6 +555,110 @@
             background: var(--fpg-orange-2);
         }
         
+        .draft-banner {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border: 2px solid #F59E0B;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .draft-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .draft-icon {
+            font-size: 1.5rem;
+        }
+        
+        .draft-text h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #92400E;
+            margin-bottom: 0.25rem;
+        }
+        
+        .draft-text p {
+            font-size: 0.875rem;
+            color: #B45309;
+        }
+        
+        .draft-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .btn-review {
+            background: white;
+            color: #92400E;
+            border: 2px solid #F59E0B;
+            padding: 0.625rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.875rem;
+        }
+        
+        .btn-review:hover {
+            background: #F59E0B;
+            color: white;
+        }
+        
+        .btn-publish-all {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 0.625rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.875rem;
+        }
+        
+        .btn-publish-all:hover {
+            background: #3d6b25;
+            transform: translateY(-2px);
+        }
+        
+        .btn-clear-drafts {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 0.625rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.875rem;
+        }
+        
+        .btn-clear-drafts:hover {
+            background: #DC2626;
+        }
+        
+        .product-row-edited {
+            background: #FEF3C7 !important;
+            border-left: 4px solid #F59E0B !important;
+        }
+        
+        .edited-badge {
+            background: #F59E0B;
+            color: white;
+            padding: 0.25rem 0.625rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
         .modal-footer {
             padding: 1.5rem 2rem;
             border-top: 1px solid var(--border);
@@ -684,6 +788,63 @@
                 return true;
             }
         };
+        
+        // Draft Management Service
+        const DraftService = {
+            DRAFTS_KEY: 'fpg_product_drafts_v1',
+            
+            getDrafts: () => {
+                try {
+                    const drafts = localStorage.getItem(DraftService.DRAFTS_KEY);
+                    return drafts ? JSON.parse(drafts) : {};
+                } catch (e) {
+                    return {};
+                }
+            },
+            
+            saveDraft: (product) => {
+                const drafts = DraftService.getDrafts();
+                drafts[product.id] = {
+                    ...product,
+                    _draftTimestamp: Date.now()
+                };
+                localStorage.setItem(DraftService.DRAFTS_KEY, JSON.stringify(drafts));
+            },
+            
+            removeDraft: (productId) => {
+                const drafts = DraftService.getDrafts();
+                delete drafts[productId];
+                localStorage.setItem(DraftService.DRAFTS_KEY, JSON.stringify(drafts));
+            },
+            
+            clearAllDrafts: () => {
+                localStorage.removeItem(DraftService.DRAFTS_KEY);
+            },
+            
+            hasDrafts: () => {
+                return Object.keys(DraftService.getDrafts()).length > 0;
+            },
+            
+            getDraftCount: () => {
+                return Object.keys(DraftService.getDrafts()).length;
+            },
+            
+            applyDrafts: (products) => {
+                const drafts = DraftService.getDrafts();
+                return products.map(p => {
+                    if (drafts[p.id]) {
+                        const { _draftTimestamp, ...draftProduct } = drafts[p.id];
+                        return draftProduct;
+                    }
+                    return p;
+                });
+            },
+            
+            isDraftProduct: (productId) => {
+                const drafts = DraftService.getDrafts();
+                return !!drafts[productId];
+            }
+        };
 
         // Main App
         function App() {
@@ -772,43 +933,90 @@
             const [products, setProducts] = useState([]);
             const [editingProduct, setEditingProduct] = useState(null);
             const [showModal, setShowModal] = useState(false);
+            const [showReviewModal, setShowReviewModal] = useState(false);
+            const [draftCount, setDraftCount] = useState(DraftService.getDraftCount());
             const session = AuthService.getSession();
             
             useEffect(() => {
                 ProductService.loadProducts().then(setProducts);
             }, []);
             
-            const handleSave = async (product) => {
+            const handleSave = (product) => {
+                // Save as draft instead of immediate download
+                DraftService.saveDraft(product);
+                
+                // Update local state to show changes
                 let updated;
-                if (product.id) {
-                    // Edit existing
+                if (products.find(p => p.id === product.id)) {
                     updated = products.map(p => p.id === product.id ? product : p);
                 } else {
-                    // Add new
                     product.id = Math.max(...products.map(p => p.id), 0) + 1;
                     updated = [...products, product];
                 }
                 
-                await ProductService.saveProducts(updated);
                 setProducts(updated);
+                setDraftCount(DraftService.getDraftCount());
                 setShowModal(false);
                 setEditingProduct(null);
             };
             
-            const handleDelete = async (productId) => {
+            const handleDelete = (productId) => {
                 if (confirm('Are you sure you want to delete this product?')) {
+                    // Mark as deleted in drafts
+                    DraftService.saveDraft({ id: productId, _deleted: true });
+                    
                     const updated = products.filter(p => p.id !== productId);
-                    await ProductService.saveProducts(updated);
                     setProducts(updated);
+                    setDraftCount(DraftService.getDraftCount());
                 }
             };
             
-            const handleToggleStatus = async (productId) => {
-                const updated = products.map(p => 
-                    p.id === productId ? { ...p, available: !p.available } : p
-                );
-                await ProductService.saveProducts(updated);
-                setProducts(updated);
+            const handleToggleStatus = (productId) => {
+                const product = products.find(p => p.id === productId);
+                const updated = { ...product, available: !product.available };
+                DraftService.saveDraft(updated);
+                
+                setProducts(products.map(p => 
+                    p.id === productId ? updated : p
+                ));
+                setDraftCount(DraftService.getDraftCount());
+            };
+            
+            const handlePublishAll = async () => {
+                if (!confirm(`Publish ${draftCount} changes to products.json?`)) return;
+                
+                // Apply all drafts to create final products array
+                const drafts = DraftService.getDrafts();
+                let finalProducts = [...products];
+                
+                // Apply all draft changes
+                Object.values(drafts).forEach(draft => {
+                    if (draft._deleted) {
+                        finalProducts = finalProducts.filter(p => p.id !== draft.id);
+                    } else {
+                        const index = finalProducts.findIndex(p => p.id === draft.id);
+                        const { _draftTimestamp, ...cleanDraft } = draft;
+                        if (index >= 0) {
+                            finalProducts[index] = cleanDraft;
+                        } else {
+                            finalProducts.push(cleanDraft);
+                        }
+                    }
+                });
+                
+                await ProductService.saveProducts(finalProducts);
+                DraftService.clearAllDrafts();
+                setDraftCount(0);
+            };
+            
+            const handleClearDrafts = () => {
+                if (!confirm(`Clear all ${draftCount} unsaved changes? This cannot be undone.`)) return;
+                
+                DraftService.clearAllDrafts();
+                setDraftCount(0);
+                
+                // Reload original products
+                ProductService.loadProducts().then(setProducts);
             };
             
             return (
@@ -826,6 +1034,29 @@
                     </header>
                     
                     <div className="admin-container">
+                        {draftCount > 0 && (
+                            <div className="draft-banner">
+                                <div className="draft-info">
+                                    <span className="draft-icon">⚠️</span>
+                                    <div className="draft-text">
+                                        <h3>{draftCount} Unsaved Change{draftCount !== 1 ? 's' : ''}</h3>
+                                        <p>Changes are saved locally and will survive browser close</p>
+                                    </div>
+                                </div>
+                                <div className="draft-actions">
+                                    <button className="btn-review" onClick={() => setShowReviewModal(true)}>
+                                        Review Changes
+                                    </button>
+                                    <button className="btn-publish-all" onClick={handlePublishAll}>
+                                        📥 Publish All
+                                    </button>
+                                    <button className="btn-clear-drafts" onClick={handleClearDrafts}>
+                                        Clear All
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                        
                         <div className="admin-toolbar">
                             <div>
                                 <h2 style={{ fontSize: '1.5rem', fontWeight: '300', marginBottom: '0.25rem' }}>
@@ -867,23 +1098,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {products.map(product => (
-                                        <tr key={product.id}>
-                                            <td>
-                                                <div className="product-cell">
-                                                    <div className="product-thumb">
-                                                        {product.imageUrl ? '🖼️' : '📦'}
+                                    {products.map(product => {
+                                        const isDraft = DraftService.isDraftProduct(product.id);
+                                        return (
+                                            <tr key={product.id} className={isDraft ? 'product-row-edited' : ''}>
+                                                <td>
+                                                    <div className="product-cell">
+                                                        <div className="product-thumb">
+                                                            {product.imageUrl ? '🖼️' : '📦'}
+                                                        </div>
+                                                        <div className="product-info">
+                                                            <h3>
+                                                                {product.title}
+                                                                {isDraft && <span className="edited-badge">EDITED</span>}
+                                                            </h3>
+                                                            {product.recommended && (
+                                                                <span className="product-category" style={{ color: 'var(--accent)' }}>
+                                                                    ⭐ Recommended
+                                                                </span>
+                                                            )}
+                                                        </div>
                                                     </div>
-                                                    <div className="product-info">
-                                                        <h3>{product.title}</h3>
-                                                        {product.recommended && (
-                                                            <span className="product-category" style={{ color: 'var(--accent)' }}>
-                                                                ⭐ Recommended
-                                                            </span>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            </td>
+                                                </td>
                                             <td>
                                                 <span className="product-category">
                                                     {product.category}
@@ -922,7 +1158,8 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    ))}
+                                        );
+                                    })}
                                 </tbody>
                             </table>
                         </div>
@@ -938,7 +1175,91 @@
                             }}
                         />
                     )}
+                    
+                    {showReviewModal && (
+                        <ReviewChangesModal
+                            drafts={DraftService.getDrafts()}
+                            products={products}
+                            onClose={() => setShowReviewModal(false)}
+                        />
+                    )}
                 </>
+            );
+        }
+        
+        function ReviewChangesModal({ drafts, products, onClose }) {
+            const draftsList = Object.values(drafts);
+            
+            return (
+                <div className="modal-overlay" onClick={onClose}>
+                    <div className="modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '900px' }}>
+                        <div className="modal-header">
+                            <h2>Review Unsaved Changes ({draftsList.length})</h2>
+                            <button className="btn-close" onClick={onClose}>×</button>
+                        </div>
+                        
+                        <div className="modal-content">
+                            <p style={{ marginBottom: '1.5rem', color: 'var(--fpg-gray)' }}>
+                                These changes are saved locally and will be included when you click "Publish All"
+                            </p>
+                            
+                            {draftsList.map(draft => {
+                                const original = products.find(p => p.id === draft.id);
+                                const isDeleted = draft._deleted;
+                                const isNew = !original;
+                                
+                                return (
+                                    <div key={draft.id} style={{ 
+                                        background: 'var(--bg-light)', 
+                                        padding: '1rem', 
+                                        borderRadius: '8px', 
+                                        marginBottom: '1rem',
+                                        border: isDeleted ? '2px solid var(--danger)' : '2px solid #F59E0B'
+                                    }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '0.5rem' }}>
+                                            <div>
+                                                <strong style={{ fontSize: '1.1rem' }}>
+                                                    {isDeleted ? '🗑️ ' : isNew ? '✨ ' : '✏️ '}
+                                                    {draft.title || (original && original.title)}
+                                                </strong>
+                                                <span style={{ 
+                                                    marginLeft: '0.75rem', 
+                                                    padding: '0.25rem 0.5rem', 
+                                                    background: isDeleted ? 'var(--danger)' : isNew ? 'var(--success)' : '#F59E0B',
+                                                    color: 'white',
+                                                    borderRadius: '4px',
+                                                    fontSize: '0.75rem',
+                                                    fontWeight: '600'
+                                                }}>
+                                                    {isDeleted ? 'DELETED' : isNew ? 'NEW' : 'EDITED'}
+                                                </span>
+                                            </div>
+                                            <small style={{ color: 'var(--fpg-gray)' }}>
+                                                {new Date(draft._draftTimestamp).toLocaleString()}
+                                            </small>
+                                        </div>
+                                        
+                                        {!isDeleted && (
+                                            <div style={{ fontSize: '0.9rem', color: 'var(--fpg-gray-dark)' }}>
+                                                <div>Category: {draft.category}</div>
+                                                <div>Price: ${draft.price?.toLocaleString()}</div>
+                                                <div>Items: {draft.items?.length}</div>
+                                                {draft.recommended && <div style={{ color: 'var(--accent)' }}>⭐ Recommended</div>}
+                                                {!draft.available && <div style={{ color: 'var(--danger)' }}>Inactive</div>}
+                                            </div>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        
+                        <div className="modal-footer">
+                            <button type="button" className="btn-secondary" onClick={onClose}>
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
             );
         }
 
