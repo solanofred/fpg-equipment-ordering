@@ -781,6 +781,7 @@
                 }).join('\n\n');
                 
                 const emailBody = `Employee Name: ${formData.employeeName}
+Employee Email: ${formData.employeeEmail || 'N/A (New Employee)'}
 Location/Cost Center: ${formData.location}
 Date Needed: ${formData.dateNeeded}
 Ship To Address: ${formData.shipTo}
@@ -1064,6 +1065,7 @@ ${new Date().toLocaleString()}`;
         function CheckoutForm({ cart, cartTotal, onSubmit, onClose }) {
             const [formData, setFormData] = React.useState({
                 employeeName: '',
+                employeeEmail: '',
                 location: '',
                 dateNeeded: '',
                 shipTo: '',
@@ -1098,14 +1100,14 @@ ${new Date().toLocaleString()}`;
                     
                     <div className="cart-body" style={{padding: '1.5rem'}}>
                         {/* Warning Box */}
-                        <div style={{marginBottom: '1.5rem', padding: '1rem', background: '#FEF3C7', border: '1px solid #F59E0B', borderRadius: '8px'}}>
+                        <div style={{marginBottom: '1.5rem', padding: '1rem', background: 'linear-gradient(135deg, #1B5A8E 0%, #0F4068 100%)', border: '1px solid #1B5A8E', borderRadius: '8px'}}>
                             <div style={{display: 'flex', alignItems: 'start', gap: '0.75rem'}}>
                                 <span style={{fontSize: '1.25rem'}}>⚠️</span>
                                 <div>
-                                    <div style={{fontWeight: 600, color: '#92400E', marginBottom: '0.25rem'}}>
+                                    <div style={{fontWeight: 600, color: 'white', marginBottom: '0.25rem'}}>
                                         Review Your Order Carefully
                                     </div>
-                                    <div style={{fontSize: '0.875rem', color: '#78350F'}}>
+                                    <div style={{fontSize: '0.875rem', color: 'rgba(255, 255, 255, 0.9)'}}>
                                         Once you submit this request, you cannot edit it. If you need to add more items or make changes, you'll need to submit a separate request.
                                     </div>
                                 </div>
@@ -1124,6 +1126,21 @@ ${new Date().toLocaleString()}`;
                                     onChange={handleChange}
                                     placeholder="Full name of person receiving equipment"
                                     required
+                                    style={{width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--neutral-300)', fontSize: '0.9375rem'}}
+                                />
+                            </div>
+                            
+                            <div style={{marginBottom: '1.5rem'}}>
+                                <label style={{display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--text-primary)'}}>
+                                    Employee Email Address
+                                    <span style={{fontSize: '0.8125rem', fontWeight: 400, color: 'var(--text-secondary)', marginLeft: '0.5rem'}}>(Optional - for existing employees)</span>
+                                </label>
+                                <input
+                                    type="email"
+                                    name="employeeEmail"
+                                    value={formData.employeeEmail}
+                                    onChange={handleChange}
+                                    placeholder="employee@foundationpartners.com"
                                     style={{width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--neutral-300)', fontSize: '0.9375rem'}}
                                 />
                             </div>
