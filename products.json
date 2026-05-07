@@ -54,12 +54,12 @@
     "price": 2200,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://i.postimg.cc/Fd8XZwcB/Lenovo-TIO.png"
+    "imageUrl": ""
   },
   {
     "id": 4,
     "title": "Monochrome (B/W) MFP",
-    "category": "desktop",
+    "category": "peripherals",
     "items": [
       {
         "name": "HP B&W LaserJet Pro MFP M3101fdw",
