@@ -958,7 +958,7 @@ ${new Date().toLocaleString()}`;
                                     <div key={item.id} className="cart-item">
                                         <div className="cart-item-image">
                                             {item.imageUrl ? (
-                                                <img src={item.imageUrl} alt={item.title} />
+                                                <img src={item.imageUrl} alt={item.title} style={{width:'70px', height:'70px', objectFit:'contain', borderRadius:'8px', flexShrink:0}} />
                                             ) : (
                                                 <span style={{fontSize: '2rem', opacity: 0.3}}>📦</span>
                                             )}
