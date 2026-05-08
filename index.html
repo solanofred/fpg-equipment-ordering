@@ -862,7 +862,9 @@ ${new Date().toLocaleString()}`;
                             >
                                 {cat === 'all' ? 'All Equipment' : 
                                  cat === 'specialty_laptop' || cat === 'specialty_laptops' ? 'Special Order Laptops' :
-                                 cat.charAt(0).toUpperCase() + cat.slice(1) + 's'}
+                                 cat === 'peripherals' ? 'Peripherals' :
+                                 cat === 'tribucast' ? 'Tribucast' :
+                                 cat.charAt(0).toUpperCase() + cat.slice(1)}
                             </button>
                         ))}
                     </div>
