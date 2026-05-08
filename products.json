@@ -31,7 +31,7 @@
     "price": 2050,
     "recommended": true,
     "available": true,
-    "imageUrl": "https://i.postimg.cc/Fd8XZwcB/Lenovo-TIO.png"
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-TIO.jpg"
   },
   {
     "id": 3,
@@ -54,7 +54,7 @@
     "price": 2200,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-TIO-Extra-Monitor.jpg"
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-TIO-Extra-Monitor"
   },
   {
     "id": 4,
