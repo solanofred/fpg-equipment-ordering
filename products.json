@@ -340,7 +340,7 @@
     "price": 1450,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Samsung-AR-TV.jpg"
+    "imageUrl": ""
   },
   {
     "id": 18,
@@ -363,7 +363,7 @@
     "price": 1500,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Samsung-AR-TV.jpg"
+    "imageUrl": ""
   },
   {
     "id": 19,
@@ -393,7 +393,7 @@
     "price": 1500,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-L16.jpg"
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-L16-Accounting.jpg"
   },
   {
     "id": 21,
