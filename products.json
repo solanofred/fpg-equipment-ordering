@@ -420,7 +420,7 @@
     "price": 2200,
     "recommended": false,
     "available": true,
-    "imageUrl": ""
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/iPad.jpg"
   },
   {
     "id": 22,
@@ -447,6 +447,6 @@
     "price": 2000,
     "recommended": false,
     "available": true,
-    "imageUrl": ""
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/iPad.jpg"
   }
 ]
