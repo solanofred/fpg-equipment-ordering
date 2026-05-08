@@ -69,7 +69,7 @@
     "price": 450,
     "recommended": false,
     "available": true,
-    "imageUrl": ""
+    "imageUrl": "images/HPLaserJet-M3101fdw-BW.jpg"
   },
   {
     "id": 5,
@@ -84,7 +84,7 @@
     "price": 800,
     "recommended": false,
     "available": true,
-    "imageUrl": ""
+    "imageUrl": "images/HPLaserJet-3301fdw-Color.jpg"
   },
   {
     "id": 6,
@@ -99,7 +99,7 @@
     "price": 2050,
     "recommended": false,
     "available": true,
-    "imageUrl": ""
+    "imageUrl": "images/Lenovo-ThinkPad-T14.jpg"
   },
   {
     "id": 7,
@@ -118,7 +118,7 @@
     "price": 2400,
     "recommended": false,
     "available": true,
-    "imageUrl": ""
+    "imageUrl": "images/Lenovo-ThinkPad-T14-and-Dock.jpg"
   },
   {
     "id": 8,
@@ -149,7 +149,7 @@
     "price": 2750,
     "recommended": false,
     "available": true,
-    "imageUrl": "images/laptop-with-single-monitor.jpg"
+    "imageUrl": ""
   },
   {
     "id": 9,
@@ -184,7 +184,7 @@
     "price": 3000,
     "recommended": false,
     "available": true,
-    "imageUrl": "images/laptop-with-dual-monitors.jpg"
+    "imageUrl": ""
   },
   {
     "id": 10,
@@ -223,7 +223,7 @@
     "price": 2950,
     "recommended": false,
     "available": true,
-    "imageUrl": "images/laptop-with-dual-monitors-CCR.jpg"
+    "imageUrl": ""
   },
   {
     "id": 11,
