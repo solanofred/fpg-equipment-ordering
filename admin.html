@@ -1243,8 +1243,10 @@
                     });
                     setShowSuccessModal(true);
                     
-                    // Reload products
-                    ProductService.loadProducts().then(setProducts);
+                    // Reload products and apply any remaining drafts
+                    ProductService.loadProducts().then(fresh => {
+                        setProducts(DraftService.applyDrafts(fresh));
+                    });
                     
                 } catch (error) {
                     console.error('Publish error:', error);
@@ -1562,7 +1564,7 @@
         }
 
         function ProductModal({ product, onSave, onClose }) {
-            const [formData, setFormData] = useState(product);
+            const [formData, setFormData] = useState({ ...product, imageUrl: product.imageUrl || '' });
             const [customMarkup, setCustomMarkup] = useState('');
             
             // Calculate items subtotal
