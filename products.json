@@ -184,7 +184,7 @@
     "price": 3000,
     "recommended": false,
     "available": true,
-    "imageUrl": ""
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/laptop-with-dual-monitors.jpg"
   },
   {
     "id": 10,
