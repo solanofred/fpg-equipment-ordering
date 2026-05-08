@@ -6,10 +6,10 @@
     "items": [
       {
         "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
-        "price": 1200
+        "price": 1450
       }
     ],
-    "price": 1524,
+    "price": 1450,
     "recommended": true,
     "available": true,
     "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-M75q-Gen5.jpg"
@@ -51,7 +51,7 @@
         "price": 300
       }
     ],
-    "price": 2200,
+    "price": 2400,
     "recommended": false,
     "available": true,
     "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-TIO-and-ThinkVision.jpg"
