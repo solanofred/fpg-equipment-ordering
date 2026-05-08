@@ -31,7 +31,7 @@
     "price": 2050,
     "recommended": true,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-TIO.jpg"
+    "imageUrl": "https://i.postimg.cc/Fd8XZwcB/Lenovo-TIO.png"
   },
   {
     "id": 3,
@@ -54,7 +54,7 @@
     "price": 2200,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-TIO-and-ThinkVision.jpg"
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-TIO-Extra-Monitor.jpg"
   },
   {
     "id": 4,
@@ -420,7 +420,7 @@
     "price": 2200,
     "recommended": false,
     "available": true,
-    "imageUrl": ""
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/iPad.jpg"
   },
   {
     "id": 22,
@@ -447,6 +447,6 @@
     "price": 2000,
     "recommended": false,
     "available": true,
-    "imageUrl": ""
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/iPad.jpg"
   }
 ]
