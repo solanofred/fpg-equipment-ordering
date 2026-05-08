@@ -12,7 +12,7 @@
     "price": 1524,
     "recommended": true,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-M75q-Gen5.jpg"
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-M75q-Gen5.png"
   },
   {
     "id": 2,
@@ -54,7 +54,7 @@
     "price": 2200,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-TIO-Extra-Monitor"
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-TIO-Extra-Monitor.jpg"
   },
   {
     "id": 4,
@@ -393,7 +393,7 @@
     "price": 1500,
     "recommended": false,
     "available": true,
-    "imageUrl": ""
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-L16.jpg"
   },
   {
     "id": 21,
