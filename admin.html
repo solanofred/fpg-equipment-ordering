@@ -1146,7 +1146,10 @@
             const session = AuthService.getSession();
             
             useEffect(() => {
-                ProductService.loadProducts().then(setProducts);
+                ProductService.loadProducts().then(data => {
+                    const withDrafts = DraftService.applyDrafts(data);
+                    setProducts(withDrafts);
+                });
             }, []);
             
             const handleSave = (product) => {
@@ -1210,11 +1213,13 @@
                         publishBtn.textContent = '⏳ Publishing...';
                     }
                     
-                    // Apply all drafts to create final products array
+                    // Always fetch fresh from GitHub before applying drafts
+                    // This prevents stale local state from overwriting imageUrl
+                    const freshProducts = await ProductService.loadProducts();
                     const drafts = DraftService.getDrafts();
-                    let finalProducts = [...products];
+                    let finalProducts = [...freshProducts];
                     
-                    // Apply all draft changes
+                    // Apply all draft changes on top of fresh data
                     Object.values(drafts).forEach(draft => {
                         if (draft._deleted) {
                             finalProducts = finalProducts.filter(p => p.id !== draft.id);
@@ -1243,10 +1248,8 @@
                     });
                     setShowSuccessModal(true);
                     
-                    // Reload products and apply any remaining drafts
-                    ProductService.loadProducts().then(fresh => {
-                        setProducts(DraftService.applyDrafts(fresh));
-                    });
+                    // Update local state with what was just published
+                    setProducts(finalProducts);
                     
                 } catch (error) {
                     console.error('Publish error:', error);
@@ -1259,9 +1262,10 @@
                     );
                     
                     if (fallback) {
-                        // Apply drafts
+                        // Fetch fresh + apply drafts for manual download too
+                        const freshProducts = await ProductService.loadProducts();
                         const drafts = DraftService.getDrafts();
-                        let finalProducts = [...products];
+                        let finalProducts = [...freshProducts];
                         
                         Object.values(drafts).forEach(draft => {
                             if (draft._deleted) {
