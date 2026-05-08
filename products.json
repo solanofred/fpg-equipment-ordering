@@ -12,7 +12,7 @@
     "price": 1524,
     "recommended": true,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-M75q-Gen5.png"
+    "imageUrl": ""
   },
   {
     "id": 2,
@@ -69,7 +69,7 @@
     "price": 450,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/HPLaserJet-M3101fdw-BW.jpg"
+    "imageUrl": "images/HPLaserJet-M3101fdw-BW.jpg"
   },
   {
     "id": 5,
@@ -84,7 +84,7 @@
     "price": 800,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/HPLaserJet-3301fdw-Color.jpg"
+    "imageUrl": "images/HPLaserJet-3301fdw-Color.jpg"
   },
   {
     "id": 6,
@@ -99,7 +99,7 @@
     "price": 2050,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-ThinkPad-T14.jpg"
+    "imageUrl": "images/Lenovo-ThinkPad-T14.jpg"
   },
   {
     "id": 7,
@@ -118,7 +118,7 @@
     "price": 2400,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-ThinkPad-T14-and-Dock.jpg"
+    "imageUrl": "images/Lenovo-ThinkPad-T14-and-Dock.jpg"
   },
   {
     "id": 8,
@@ -149,7 +149,7 @@
     "price": 2750,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/laptop-with-single-monitor.jpg"
+    "imageUrl": ""
   },
   {
     "id": 9,
@@ -184,7 +184,7 @@
     "price": 3000,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/laptop-with-dual-monitors.jpg"
+    "imageUrl": ""
   },
   {
     "id": 10,
@@ -223,7 +223,7 @@
     "price": 2950,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/laptop-with-dual-monitors-CCR.jpg"
+    "imageUrl": ""
   },
   {
     "id": 11,
@@ -238,7 +238,7 @@
     "price": 50,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/LogitechMK270-KVM.jpg"
+    "imageUrl": ""
   },
   {
     "id": 12,
@@ -253,7 +253,7 @@
     "price": 100,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Poly-3210-Wired-Headset.jpg"
+    "imageUrl": ""
   },
   {
     "id": 13,
@@ -268,7 +268,7 @@
     "price": 100,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Logitech-C920S-Webcam.jpg"
+    "imageUrl": ""
   },
   {
     "id": 14,
@@ -283,7 +283,7 @@
     "price": 350,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-Hybrid-USB-C-Dock.jpg"
+    "imageUrl": ""
   },
   {
     "id": 15,
@@ -298,7 +298,7 @@
     "price": 500,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Epson-DS-530-Scanner.jpg"
+    "imageUrl": ""
   },
   {
     "id": 16,
@@ -378,7 +378,7 @@
     "price": 4500,
     "recommended": false,
     "available": true,
-    "imageUrl": ""
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-P14S.jpg"
   },
   {
     "id": 20,
