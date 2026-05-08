@@ -806,8 +806,13 @@ ${new Date().toLocaleString()}`;
                 // Open email client
                 window.location.href = mailtoLink;
                 
-                // Close form but DON'T clear cart (user might need to come back)
+                // Close form
                 setShowCheckoutForm(false);
+                
+                // Auto-clear cart after 2 seconds
+                setTimeout(() => {
+                    setCart([]);
+                }, 2000);
             };
             
             return (
