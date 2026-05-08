@@ -1146,10 +1146,7 @@
             const session = AuthService.getSession();
             
             useEffect(() => {
-                ProductService.loadProducts().then(data => {
-                    const withDrafts = DraftService.applyDrafts(data);
-                    setProducts(withDrafts);
-                });
+                ProductService.loadProducts().then(setProducts);
             }, []);
             
             const handleSave = (product) => {
@@ -1213,13 +1210,11 @@
                         publishBtn.textContent = '⏳ Publishing...';
                     }
                     
-                    // Always fetch fresh from GitHub before applying drafts
-                    // This prevents stale local state from overwriting imageUrl
-                    const freshProducts = await ProductService.loadProducts();
+                    // Apply all drafts to create final products array
                     const drafts = DraftService.getDrafts();
-                    let finalProducts = [...freshProducts];
+                    let finalProducts = [...products];
                     
-                    // Apply all draft changes on top of fresh data
+                    // Apply all draft changes
                     Object.values(drafts).forEach(draft => {
                         if (draft._deleted) {
                             finalProducts = finalProducts.filter(p => p.id !== draft.id);
@@ -1248,8 +1243,8 @@
                     });
                     setShowSuccessModal(true);
                     
-                    // Update local state with what was just published
-                    setProducts(finalProducts);
+                    // Reload products
+                    ProductService.loadProducts().then(setProducts);
                     
                 } catch (error) {
                     console.error('Publish error:', error);
@@ -1262,10 +1257,9 @@
                     );
                     
                     if (fallback) {
-                        // Fetch fresh + apply drafts for manual download too
-                        const freshProducts = await ProductService.loadProducts();
+                        // Apply drafts
                         const drafts = DraftService.getDrafts();
-                        let finalProducts = [...freshProducts];
+                        let finalProducts = [...products];
                         
                         Object.values(drafts).forEach(draft => {
                             if (draft._deleted) {
@@ -1659,7 +1653,7 @@
                                         type="text"
                                         className="form-input"
                                         placeholder="https://example.com/image.jpg"
-                                        value={formData.imageUrl}
+                                        value={formData.imageUrl || ''}
                                         onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
                                     />
                                 </div>
