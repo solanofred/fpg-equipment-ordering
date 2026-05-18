@@ -1993,8 +1993,21 @@
             const loadAdmins = async () => {
                 try {
                     setLoading(true);
-                    const data = await callApi('get-admins');
-                    setAdmins(data.admins || []);
+                    // Try Azure Function first, fall back to direct file read
+                    let adminList = [];
+                    try {
+                        const data = await callApi('get-admins');
+                        adminList = data.admins || [];
+                    } catch (e) {
+                        // Fallback: load directly from admins.json
+                        const res = await fetch('./admins.json');
+                        if (res.ok) {
+                            adminList = await res.json();
+                        } else {
+                            throw new Error('Could not load admins from either source');
+                        }
+                    }
+                    setAdmins(adminList);
                 } catch (e) {
                     setStatus({ type: 'error', message: 'Could not load admins: ' + e.message });
                 } finally {
