@@ -1418,7 +1418,7 @@
             };
             
             return (
-                <>
+                <div>
                     <header className="admin-header">
                         <div className="admin-header-content">
                             <h1>🛠️ Equipment Admin Panel</h1>
@@ -1612,7 +1612,7 @@
                         detail={successData.commitSha ? `Commit: ${successData.commitSha}\nYour changes will be live in 2-3 minutes.` : "Your changes will be live in 2-3 minutes."}
                         onClose={() => setShowSuccessModal(false)}
                     />
-                </>
+                </div>
             );
         }
         
