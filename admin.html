@@ -1442,7 +1442,7 @@
                             </button>
                         </div>
 
-                        {activeTab === 'products' && <>
+                        {activeTab === 'products' && <div>
                         {draftCount > 0 && (
                             <div className="draft-banner">
                                 <div className="draft-info">
@@ -1573,10 +1573,9 @@
                             </table>
                         </div>
                     </div>
-                        </>}
+                        </div>}
 
                         {activeTab === 'access' && <AccessManagement session={session} azureUrl={AZURE_FUNCTION_URL} adminPortalUrl={ADMIN_PORTAL_URL} />}
-
                     </div>
                     
                     {showModal && (
