@@ -1,0 +1,26 @@
+[
+  {
+    "email": "fred.solano@foundationpartners.com",
+    "name": "Fred Solano",
+    "addedBy": "system",
+    "addedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "email": "matthew.ritchotte@foundationpartners.com",
+    "name": "Matthew Ritchotte",
+    "addedBy": "system",
+    "addedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "email": "joe.choss@foundationpartners.com",
+    "name": "Joe Choss",
+    "addedBy": "system",
+    "addedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "email": "chezarae.carter@foundationpartners.com",
+    "name": "Chezarae Carter",
+    "addedBy": "system",
+    "addedAt": "2025-01-01T00:00:00.000Z"
+  }
+]
