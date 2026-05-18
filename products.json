@@ -52,7 +52,7 @@
       }
     ],
     "price": 2400,
-    "recommended": false,
+    "recommended": true,
     "available": true,
     "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/images/Lenovo-TIO-and-ThinkVision.jpg"
   },
