@@ -1,0 +1,17 @@
+{
+  "name": "fpg-equipment-function",
+  "version": "1.0.0",
+  "description": "Azure Function to publish FPG equipment products to GitHub",
+  "main": "index.js",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"No tests yet\""
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
