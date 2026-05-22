@@ -1174,9 +1174,9 @@
                         const allSlugs = [...new Set([...slugs, ...extras.map(e => e.slug)])];
                         const labelMap = { desktop: 'Desktop', laptop: 'Laptop', peripherals: 'Peripherals', specialty_laptop: 'Specialty Laptop', tribucast: 'Tribucast' };
                         extras.forEach(e => { labelMap[e.slug] = e.label; });
-                        setCategories(allSlugs.map(s => ({ slug: s, label: labelMap[s] || s.replace(/_/g, ' ').replace(/\w/g, c => c.toUpperCase()) })));
+                        setCategories(allSlugs.map(s => ({ slug: s, label: labelMap[s] || s.split('_').map(function(w){return w.charAt(0).toUpperCase()+w.slice(1)}).join(' ') })));
                     }).catch(() => {
-                        setCategories(slugs.map(s => ({ slug: s, label: s.replace(/_/g, ' ').replace(/\w/g, c => c.toUpperCase()) })));
+                        setCategories(slugs.map(s => ({ slug: s, label: s.split('_').map(function(w){return w.charAt(0).toUpperCase()+w.slice(1)}).join(' ') })));
                     });
                 });
             }, []);
@@ -1628,7 +1628,7 @@
             };
 
             const handleSaveNewCategory = async () => {
-                const slug = newCategoryInput.trim().toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+                const slug = newCategoryInput.trim().toLowerCase().split(' ').join('_').replace(/[^a-z0-9_]/g, '');
                 if (!slug) return;
                 setSavingCategory(true);
                 try {
