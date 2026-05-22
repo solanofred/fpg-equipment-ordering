@@ -1260,11 +1260,47 @@
             const [confirmData, setConfirmData] = useState({});
             const [draftCount, setDraftCount] = useState(DraftService.getDraftCount());
             const [activeTab, setActiveTab] = useState('products');
+            const [categories, setCategories] = useState([
+                { slug: 'desktop', label: 'Desktop' },
+                { slug: 'laptop', label: 'Laptop' },
+                { slug: 'peripherals', label: 'Peripherals' },
+                { slug: 'specialty_laptop', label: 'Specialty Laptop' },
+                { slug: 'tribucast', label: 'Tribucast' }
+            ]);
             const session = AuthService.getSession();
             
             useEffect(() => {
-                ProductService.loadProducts().then(setProducts);
+                ProductService.loadProducts().then(prods => {
+                    setProducts(prods);
+                    // Build category list from products + any extras in categories.json
+                    const slugs = [...new Set(prods.map(p => p.category))];
+                    fetch('./categories.json').then(r => r.ok ? r.json() : []).then(extras => {
+                        const allSlugs = [...new Set([...slugs, ...extras.map(e => e.slug)])];
+                        const labelMap = {
+                            desktop: 'Desktop', laptop: 'Laptop', peripherals: 'Peripherals',
+                            specialty_laptop: 'Specialty Laptop', tribucast: 'Tribucast'
+                        };
+                        extras.forEach(e => { labelMap[e.slug] = e.label; });
+                        setCategories(allSlugs.map(s => ({ slug: s, label: labelMap[s] || s.replace(/_/g, ' ').replace(/\w/g, c => c.toUpperCase()) })));
+                    }).catch(() => {
+                        setCategories(slugs.map(s => ({ slug: s, label: s.replace(/_/g, ' ').replace(/\w/g, c => c.toUpperCase()) })));
+                    });
+                });
             }, []);
+
+            const handleCategoryAdded = async (slug, label) => {
+                // Save to categories.json via Azure Function
+                const res = await fetch(ProductService.AZURE_FUNCTION_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
+                    body: JSON.stringify({ action: 'add-category', slug, label })
+                });
+                const text = await res.text();
+                if (!text) throw new Error('Empty response from server');
+                const data = JSON.parse(text);
+                if (!res.ok) throw new Error(data.message || 'Failed to save category');
+                setCategories(prev => [...prev, { slug, label }]);
+            };
             
             const handleSave = (product) => {
                 // Save as draft instead of immediate download
@@ -1580,6 +1616,8 @@
                     {showModal && (
                         <ProductModal
                             product={editingProduct}
+                            categories={categories}
+                            onCategoryAdded={handleCategoryAdded}
                             onSave={handleSave}
                             onClose={() => {
                                 setShowModal(false);
@@ -1692,9 +1730,37 @@
             );
         }
 
-        function ProductModal({ product, onSave, onClose }) {
+        function ProductModal({ product, onSave, onClose, onCategoryAdded, categories }) {
             const [formData, setFormData] = useState({ ...product, imageUrl: product.imageUrl || '' });
             const [customMarkup, setCustomMarkup] = useState('');
+            const [showNewCategory, setShowNewCategory] = useState(false);
+            const [newCategoryInput, setNewCategoryInput] = useState('');
+            const [savingCategory, setSavingCategory] = useState(false);
+
+            const handleCategoryChange = (e) => {
+                if (e.target.value === '__add_new__') {
+                    setShowNewCategory(true);
+                } else {
+                    setFormData({ ...formData, category: e.target.value });
+                    setShowNewCategory(false);
+                }
+            };
+
+            const handleSaveNewCategory = async () => {
+                const slug = newCategoryInput.trim().toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+                if (!slug) return;
+                setSavingCategory(true);
+                try {
+                    await onCategoryAdded(slug, newCategoryInput.trim());
+                    setFormData({ ...formData, category: slug });
+                    setShowNewCategory(false);
+                    setNewCategoryInput('');
+                } catch(e) {
+                    alert('Could not save category: ' + e.message);
+                } finally {
+                    setSavingCategory(false);
+                }
+            };
             
             // Calculate items subtotal
             const itemsSubtotal = formData.items.reduce((sum, item) => sum + (parseFloat(item.price) || 0), 0);
@@ -1766,16 +1832,46 @@
                                     <label className="form-label">Category *</label>
                                     <select
                                         className="form-input"
-                                        value={formData.category}
-                                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                                        required
+                                        value={showNewCategory ? '__add_new__' : formData.category}
+                                        onChange={handleCategoryChange}
+                                        required={!showNewCategory}
                                     >
-                                        <option value="desktop">Desktop</option>
-                                        <option value="laptop">Laptop</option>
-                                        <option value="peripherals">Peripherals</option>
-                                        <option value="specialty_laptop">Specialty Laptop</option>
-                                        <option value="tribucast">Tribucast</option>
+                                        {categories.map(cat => (
+                                            <option key={cat.slug} value={cat.slug}>
+                                                {cat.label}
+                                            </option>
+                                        ))}
+                                        <option value="__add_new__">➕ Add New Category...</option>
                                     </select>
+                                    {showNewCategory && (
+                                        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
+                                            <input
+                                                type="text"
+                                                className="form-input"
+                                                placeholder="New category name (e.g. Monitors)"
+                                                value={newCategoryInput}
+                                                onChange={(e) => setNewCategoryInput(e.target.value)}
+                                                autoFocus
+                                            />
+                                            <button
+                                                type="button"
+                                                className="btn btn-primary"
+                                                onClick={handleSaveNewCategory}
+                                                disabled={savingCategory || !newCategoryInput.trim()}
+                                                style={{ whiteSpace: 'nowrap' }}
+                                            >
+                                                {savingCategory ? 'Saving...' : 'Save'}
+                                            </button>
+                                            <button
+                                                type="button"
+                                                className="btn"
+                                                onClick={() => { setShowNewCategory(false); setNewCategoryInput(''); }}
+                                                style={{ whiteSpace: 'nowrap' }}
+                                            >
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
                                 
                                 <div className="form-group">
