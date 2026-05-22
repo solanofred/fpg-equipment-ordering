@@ -1202,16 +1202,20 @@
             };
             
             const handleSave = (product) => {
+                // Merge with existing product to preserve fields not in the form (e.g. imageUrl)
+                const existing = products.find(function(p) { return p.id === product.id; });
+                const merged = existing ? Object.assign({}, existing, product) : product;
+                
                 // Save as draft instead of immediate download
-                DraftService.saveDraft(product);
+                DraftService.saveDraft(merged);
                 
                 // Update local state to show changes
                 let updated;
-                if (products.find(p => p.id === product.id)) {
-                    updated = products.map(p => p.id === product.id ? product : p);
+                if (existing) {
+                    updated = products.map(function(p) { return p.id === merged.id ? merged : p; });
                 } else {
-                    product.id = Math.max(...products.map(p => p.id), 0) + 1;
-                    updated = [...products, product];
+                    merged.id = Math.max.apply(null, products.map(function(p) { return p.id; }).concat([0])) + 1;
+                    updated = [...products, merged];
                 }
                 
                 setProducts(updated);
