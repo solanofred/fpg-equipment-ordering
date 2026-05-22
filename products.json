@@ -448,24 +448,5 @@
     "recommended": false,
     "available": true,
     "imageUrl": ""
-  },
-  {
-    "title": "Audio Visual Equipment with Two ZOnes",
-    "category": "audio_visual_system",
-    "items": [],
-    "price": 0,
-    "recommended": true,
-    "available": true,
-    "imageUrl": "",
-    "id": 23
-  },
-  {
-    "title": "Audio Visual Equipment with Two ZOnes",
-    "category": "audio_visual_system",
-    "items": [],
-    "price": 0,
-    "recommended": true,
-    "available": true,
-    "imageUrl": ""
   }
 ]
