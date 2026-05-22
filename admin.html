@@ -841,7 +841,7 @@
         const { useState, useEffect } = React;
 
         // Authorized admin emails
-        const AUTHORIZED_ADMINS = [
+        const FALLBACK_ADMINS = [
             'matthew.ritchotte@foundationpartners.com',
             'joe.choss@foundationpartners.com',
             'chezarae.carter@foundationpartners.com',
@@ -849,16 +849,27 @@
         ];
 
         const SESSION_KEY = 'fpg_admin_session';
+        const AZURE_FUNCTION_URL = 'https://fpg-equipment-function-bfhse3hufnbpecbu.eastus-01.azurewebsites.net/api/publish-products';
+        const ADMIN_PORTAL_URL = 'https://equipmentorder.foundationpartners.com/admin.html';
+
+        async function loadAdminEmails() {
+            try {
+                const res = await fetch('./admins.json');
+                if (res.ok) {
+                    const data = await res.json();
+                    return data.map(a => a.email.toLowerCase().trim());
+                }
+            } catch (e) {}
+            return FALLBACK_ADMINS;
+        }
 
         // Auth Service
         const AuthService = {
-            login: (email) => {
+            login: async (email) => {
                 const normalizedEmail = email.toLowerCase().trim();
-                if (AUTHORIZED_ADMINS.includes(normalizedEmail)) {
-                    const session = {
-                        email: normalizedEmail,
-                        timestamp: Date.now()
-                    };
+                const authorizedEmails = await loadAdminEmails();
+                if (authorizedEmails.includes(normalizedEmail)) {
+                    const session = { email: normalizedEmail, timestamp: Date.now() };
                     localStorage.setItem(SESSION_KEY, JSON.stringify(session));
                     return true;
                 }
@@ -1054,11 +1065,9 @@
         function App() {
             const [isAuthenticated, setIsAuthenticated] = useState(AuthService.isAuthenticated());
             
-            const handleLogin = (email) => {
-                if (AuthService.login(email)) {
-                    setIsAuthenticated(true);
-                    return true;
-                }
+            const handleLogin = async (email) => {
+                const result = await AuthService.login(email);
+                if (result) { setIsAuthenticated(true); return true; }
                 return false;
             };
             
@@ -1077,19 +1086,23 @@
         function LoginScreen({ onLogin }) {
             const [email, setEmail] = useState('');
             const [error, setError] = useState('');
+            const [loading, setLoading] = useState(false);
+            const [adminNames, setAdminNames] = useState(['Matthew Ritchotte', 'Joe Choss', 'Chezarae Carter', 'Fred Solano']);
+
+            React.useEffect(() => {
+                fetch('./admins.json').then(r => r.json()).then(data => {
+                    setAdminNames(data.map(a => a.name));
+                }).catch(() => {});
+            }, []);
             
-            const handleSubmit = (e) => {
+            const handleSubmit = async (e) => {
                 e.preventDefault();
                 setError('');
-                
-                if (!email) {
-                    setError('Please enter your email address.');
-                    return;
-                }
-                
-                if (!onLogin(email)) {
-                    setError('Access denied. You are not authorized to access the admin panel.');
-                }
+                if (!email) { setError('Please enter your email address.'); return; }
+                setLoading(true);
+                const ok = await onLogin(email);
+                setLoading(false);
+                if (!ok) setError('Access denied. You are not authorized to access the admin panel.');
             };
             
             return (
@@ -1115,18 +1128,14 @@
                                     autoFocus
                                 />
                             </div>
-                            
-                            <button type="submit" className="btn btn-primary">
-                                Access Admin Panel
+                            <button type="submit" className="btn btn-primary" disabled={loading}>
+                                {loading ? 'Verifying...' : 'Access Admin Panel'}
                             </button>
                         </form>
                         
                         <div style={{ marginTop: '2rem', padding: '1rem', background: 'var(--bg-light)', borderRadius: '8px', fontSize: '0.85rem', color: 'var(--fpg-gray)' }}>
                             <strong>Authorized Admins:</strong><br />
-                            • Matthew Ritchotte<br />
-                            • Joe Choss<br />
-                            • Chezarae Carter<br />
-                            • Fred Solano
+                            {adminNames.map((name, i) => <span key={i}>• {name}<br /></span>)}
                         </div>
                     </div>
                 </div>
@@ -1143,11 +1152,43 @@
             const [successData, setSuccessData] = useState({});
             const [confirmData, setConfirmData] = useState({});
             const [draftCount, setDraftCount] = useState(DraftService.getDraftCount());
+            const [activeTab, setActiveTab] = useState('products');
+            const [categories, setCategories] = useState([
+                { slug: 'desktop', label: 'Desktop' },
+                { slug: 'laptop', label: 'Laptop' },
+                { slug: 'peripherals', label: 'Peripherals' },
+                { slug: 'specialty_laptop', label: 'Specialty Laptop' },
+                { slug: 'tribucast', label: 'Tribucast' }
+            ]);
             const session = AuthService.getSession();
             
             useEffect(() => {
-                ProductService.loadProducts().then(setProducts);
+                ProductService.loadProducts().then(prods => {
+                    setProducts(prods);
+                    const slugs = [...new Set(prods.map(p => p.category))];
+                    fetch('./categories.json').then(r => r.ok ? r.json() : []).then(extras => {
+                        const allSlugs = [...new Set([...slugs, ...extras.map(e => e.slug)])];
+                        const labelMap = { desktop: 'Desktop', laptop: 'Laptop', peripherals: 'Peripherals', specialty_laptop: 'Specialty Laptop', tribucast: 'Tribucast' };
+                        extras.forEach(e => { labelMap[e.slug] = e.label; });
+                        setCategories(allSlugs.map(s => ({ slug: s, label: labelMap[s] || s.replace(/_/g, ' ').replace(/\w/g, c => c.toUpperCase()) })));
+                    }).catch(() => {
+                        setCategories(slugs.map(s => ({ slug: s, label: s.replace(/_/g, ' ').replace(/\w/g, c => c.toUpperCase()) })));
+                    });
+                });
             }, []);
+
+            const handleCategoryAdded = async (slug, label) => {
+                const res = await fetch(AZURE_FUNCTION_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
+                    body: JSON.stringify({ action: 'add-category', slug, label })
+                });
+                const text = await res.text();
+                if (!text) throw new Error('Empty response from server');
+                const data = JSON.parse(text);
+                if (!res.ok) throw new Error(data.message || 'Failed to save category');
+                setCategories(prev => [...prev, { slug, label }]);
+            };
             
             const handleSave = (product) => {
                 // Save as draft instead of immediate download
@@ -1315,6 +1356,14 @@
                     </header>
                     
                     <div className="admin-container">
+                        <div className="tab-nav" style={{display:'flex',gap:'0.5rem',marginBottom:'1.5rem',background:'white',padding:'0.5rem',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',width:'fit-content'}}>
+                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='products'?'#1B5A8E':'transparent',color:activeTab==='products'?'white':'#666'}} onClick={()=>setActiveTab('products')}>📦 Products</button>
+                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='access'?'#1B5A8E':'transparent',color:activeTab==='access'?'white':'#666'}} onClick={()=>setActiveTab('access')}>👥 Access Management</button>
+                        </div>
+
+                        {activeTab === 'access' && <AccessManagement session={session} azureUrl={AZURE_FUNCTION_URL} adminPortalUrl={ADMIN_PORTAL_URL} />}
+
+                        {activeTab === 'products' && <div>
                         {draftCount > 0 && (
                             <div className="draft-banner">
                                 <div className="draft-info">
@@ -1445,10 +1494,15 @@
                             </table>
                         </div>
                     </div>
+                        </div>}
+
+                    </div>
                     
                     {showModal && (
                         <ProductModal
                             product={editingProduct}
+                            categories={categories}
+                            onCategoryAdded={handleCategoryAdded}
                             onSave={handleSave}
                             onClose={() => {
                                 setShowModal(false);
@@ -1561,7 +1615,28 @@
             );
         }
 
-        function ProductModal({ product, onSave, onClose }) {
+        function ProductModal({ product, onSave, onClose, categories, onCategoryAdded }) {
+            const [showNewCategory, setShowNewCategory] = React.useState(false);
+            const [newCategoryInput, setNewCategoryInput] = React.useState('');
+            const [savingCategory, setSavingCategory] = React.useState(false);
+
+            const handleCategoryChange = (e) => {
+                if (e.target.value === '__add_new__') { setShowNewCategory(true); }
+                else { setFormData({ ...formData, category: e.target.value }); setShowNewCategory(false); }
+            };
+
+            const handleSaveNewCategory = async () => {
+                const slug = newCategoryInput.trim().toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+                if (!slug) return;
+                setSavingCategory(true);
+                try {
+                    await onCategoryAdded(slug, newCategoryInput.trim());
+                    setFormData({ ...formData, category: slug });
+                    setShowNewCategory(false);
+                    setNewCategoryInput('');
+                } catch(e) { alert('Could not save category: ' + e.message); }
+                finally { setSavingCategory(false); }
+            };
             const [formData, setFormData] = useState({ ...product, imageUrl: product.imageUrl || '' });
             const [customMarkup, setCustomMarkup] = useState('');
             
@@ -1635,16 +1710,22 @@
                                     <label className="form-label">Category *</label>
                                     <select
                                         className="form-input"
-                                        value={formData.category}
-                                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                                        required
+                                        value={showNewCategory ? '__add_new__' : formData.category}
+                                        onChange={handleCategoryChange}
+                                        required={!showNewCategory}
                                     >
-                                        <option value="desktop">Desktop</option>
-                                        <option value="laptop">Laptop</option>
-                                        <option value="peripherals">Peripherals</option>
-                                        <option value="specialty_laptop">Specialty Laptop</option>
-                                        <option value="tribucast">Tribucast</option>
+                                        {(categories || []).map(cat => (
+                                            <option key={cat.slug} value={cat.slug}>{cat.label}</option>
+                                        ))}
+                                        <option value="__add_new__">➕ Add New Category...</option>
                                     </select>
+                                    {showNewCategory && (
+                                        <div style={{display:'flex',gap:'0.5rem',marginTop:'0.5rem'}}>
+                                            <input type="text" className="form-input" placeholder="New category name (e.g. Monitors)" value={newCategoryInput} onChange={(e)=>setNewCategoryInput(e.target.value)} autoFocus />
+                                            <button type="button" className="btn btn-primary" onClick={handleSaveNewCategory} disabled={savingCategory||!newCategoryInput.trim()} style={{whiteSpace:'nowrap'}}>{savingCategory?'Saving...':'Save'}</button>
+                                            <button type="button" className="btn" onClick={()=>{setShowNewCategory(false);setNewCategoryInput('');}} style={{whiteSpace:'nowrap'}}>Cancel</button>
+                                        </div>
+                                    )}
                                 </div>
                                 
                                 <div className="form-group">
@@ -1835,6 +1916,147 @@
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            );
+        }
+
+        function AccessManagement({ session, azureUrl, adminPortalUrl }) {
+            const [admins, setAdmins] = React.useState([]);
+            const [loading, setLoading] = React.useState(true);
+            const [newName, setNewName] = React.useState('');
+            const [newEmail, setNewEmail] = React.useState('');
+            const [adding, setAdding] = React.useState(false);
+            const [status, setStatus] = React.useState(null);
+
+            const callApi = async (action, extra = {}) => {
+                const res = await fetch(azureUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
+                    body: JSON.stringify({ action, ...extra })
+                });
+                const text = await res.text();
+                if (!text || text.trim() === '') throw new Error('Azure Function returned empty response.');
+                const data = JSON.parse(text);
+                if (!res.ok) throw new Error(data.message || 'Request failed');
+                return data;
+            };
+
+            const loadAdmins = async () => {
+                try {
+                    setLoading(true);
+                    let adminList = [];
+                    try {
+                        const data = await callApi('get-admins');
+                        adminList = data.admins || [];
+                    } catch(e) {
+                        const res = await fetch('./admins.json');
+                        if (res.ok) adminList = await res.json();
+                        else throw new Error('Could not load admins');
+                    }
+                    setAdmins(adminList);
+                } catch(e) {
+                    setStatus({ type: 'error', message: 'Could not load admins: ' + e.message });
+                } finally { setLoading(false); }
+            };
+
+            React.useEffect(() => { loadAdmins(); }, []);
+
+            const handleAdd = async () => {
+                if (!newName.trim() || !newEmail.trim()) { setStatus({ type: 'error', message: 'Please enter both name and email.' }); return; }
+                if (!newEmail.includes('@')) { setStatus({ type: 'error', message: 'Please enter a valid email.' }); return; }
+                setAdding(true); setStatus(null);
+                try {
+                    const data = await callApi('add-admin', { newAdminEmail: newEmail, newAdminName: newName });
+                    setAdmins(data.admins);
+                    setStatus({ type: 'success', message: newName + ' has been added!' });
+                    const subject = encodeURIComponent('Equipment Admin Access Approved by Fred Solano');
+                    const body = encodeURIComponent('Hi ' + newName + ',
+
+You have been granted access to the FPG Equipment Ordering Admin Portal.
+
+Access it here:
+' + adminPortalUrl + '
+
+Log in using: ' + newEmail.toLowerCase().trim() + '
+
+Best regards,
+FPG IT Team');
+                    const a = document.createElement('a'); a.href = 'mailto:' + newEmail + '?subject=' + subject + '&body=' + body;
+                    a.style.display = 'none'; document.body.appendChild(a); a.click(); setTimeout(() => document.body.removeChild(a), 100);
+                    setNewName(''); setNewEmail('');
+                } catch(e) { setStatus({ type: 'error', message: e.message }); }
+                finally { setAdding(false); }
+            };
+
+            const handleRemove = async (email, name) => {
+                if (!confirm('Remove ' + name + ' from admin access?')) return;
+                setStatus(null);
+                try {
+                    const data = await callApi('remove-admin', { removeEmail: email });
+                    setAdmins(data.admins);
+                    setStatus({ type: 'success', message: name + ' has been removed.' });
+                } catch(e) { setStatus({ type: 'error', message: e.message }); }
+            };
+
+            const getInitials = (name) => name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2);
+            const formatDate = (iso) => iso ? new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+
+            return (
+                <div style={{maxWidth:'700px'}}>
+                    <div style={{background:'white',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',marginBottom:'1.5rem',overflow:'hidden'}}>
+                        <div style={{padding:'1.25rem 1.5rem',borderBottom:'1px solid #e5e7eb'}}>
+                            <h3 style={{fontSize:'1.1rem',fontWeight:600}}>👥 Current Admins</h3>
+                            <p style={{fontSize:'0.85rem',color:'#666',marginTop:'0.2rem'}}>{loading ? 'Loading...' : admins.length + ' authorized user' + (admins.length !== 1 ? 's' : '')}</p>
+                        </div>
+                        {status && (
+                            <div style={{margin:'0.75rem 1.5rem',padding:'0.75rem 1rem',borderRadius:'8px',fontSize:'0.875rem',background:status.type==='success'?'#D1FAE5':'#FEE2E2',color:status.type==='success'?'#065F46':'#991B1B'}}>
+                                {status.type === 'success' ? '✅' : '❌'} {status.message}
+                            </div>
+                        )}
+                        <div>
+                            {loading ? <div style={{padding:'2rem',textAlign:'center',color:'#666'}}>Loading admins...</div> :
+                            admins.map((admin, i) => {
+                                const isYou = admin.email.toLowerCase() === session.email.toLowerCase();
+                                return (
+                                    <div key={i} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'0.875rem 1.5rem',borderBottom:'1px solid #f3f4f6'}}>
+                                        <div style={{display:'flex',alignItems:'center',gap:'0.875rem'}}>
+                                            <div style={{width:'40px',height:'40px',background:'linear-gradient(135deg,#1B5A8E,#0F4068)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontWeight:700,fontSize:'0.9rem',flexShrink:0}}>{getInitials(admin.name)}</div>
+                                            <div>
+                                                <div style={{fontWeight:600,fontSize:'0.95rem'}}>{admin.name}{isYou && <span style={{background:'#DBEAFE',color:'#1E40AF',padding:'0.2rem 0.6rem',borderRadius:'20px',fontSize:'0.75rem',fontWeight:600,marginLeft:'0.5rem'}}>You</span>}</div>
+                                                <div style={{fontSize:'0.8rem',color:'#666'}}>{admin.email}</div>
+                                                {admin.addedAt && admin.addedBy !== 'system' && <div style={{fontSize:'0.75rem',color:'#999',marginTop:'0.1rem'}}>Added by {admin.addedBy} · {formatDate(admin.addedAt)}</div>}
+                                            </div>
+                                        </div>
+                                        {!isYou && <button onClick={()=>handleRemove(admin.email,admin.name)} style={{background:'none',border:'2px solid #dc2626',color:'#dc2626',padding:'0.375rem 0.875rem',borderRadius:'8px',fontSize:'0.8rem',fontWeight:600,cursor:'pointer'}}>Remove</button>}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    <div style={{background:'white',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',overflow:'hidden'}}>
+                        <div style={{padding:'1.25rem 1.5rem',borderBottom:'1px solid #e5e7eb'}}>
+                            <h3 style={{fontSize:'1.1rem',fontWeight:600}}>➕ Add New Admin</h3>
+                            <p style={{fontSize:'0.85rem',color:'#666',marginTop:'0.2rem'}}>They will receive an email invitation with the portal link</p>
+                        </div>
+                        <div style={{padding:'1.5rem',display:'flex',flexDirection:'column',gap:'1rem'}}>
+                            <div style={{display:'flex',gap:'0.75rem'}}>
+                                <input type="text" className="form-input" placeholder="Full Name" value={newName} onChange={(e)=>setNewName(e.target.value)} style={{flex:1}} />
+                                <input type="email" className="form-input" placeholder="email@foundationpartners.com" value={newEmail} onChange={(e)=>setNewEmail(e.target.value)} style={{flex:1}} />
+                            </div>
+                            {newName && newEmail && (
+                                <div style={{background:'#F0FDF4',border:'2px solid #86EFAC',borderRadius:'10px',padding:'1rem',fontSize:'0.85rem',color:'#166534'}}>
+                                    <strong style={{display:'block',marginBottom:'0.4rem'}}>📧 Invite email preview:</strong>
+                                    To: {newEmail}<br/>
+                                    Subject: <em>Equipment Admin Access Approved by Fred Solano</em><br/>
+                                    Body: Hi {newName}, you have been granted access to the FPG Equipment Admin Portal...
+                                </div>
+                            )}
+                            <button onClick={handleAdd} disabled={adding} style={{background:'#4a7c2f',color:'white',border:'none',padding:'0.875rem',borderRadius:'10px',fontWeight:600,cursor:'pointer',fontSize:'0.95rem'}}>
+                                {adding ? '⏳ Adding...' : '✅ Add Admin & Send Invite'}
+                            </button>
+                        </div>
                     </div>
                 </div>
             );
