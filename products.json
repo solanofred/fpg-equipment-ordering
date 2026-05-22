@@ -6,10 +6,10 @@
     "items": [
       {
         "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
-        "price": 1200.0
+        "price": 1200
       }
     ],
-    "price": 1450.0,
+    "price": 1450,
     "recommended": true,
     "available": true,
     "imageUrl": ""
@@ -21,14 +21,14 @@
     "items": [
       {
         "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
-        "price": 1200.0
+        "price": 1200
       },
       {
         "name": "Lenovo Tiny-in-One 27\" LED - QHD",
-        "price": 500.0
+        "price": 500
       }
     ],
-    "price": 2050.0,
+    "price": 2050,
     "recommended": true,
     "available": true,
     "imageUrl": ""
@@ -40,18 +40,18 @@
     "items": [
       {
         "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
-        "price": 1200.0
+        "price": 1200
       },
       {
         "name": "Lenovo Tiny-in-One 27\" LED - QHD",
-        "price": 500.0
+        "price": 500
       },
       {
         "name": "Lenovo ThinkVision 27\" LED - E27q-40 QHD",
-        "price": 300.0
+        "price": 300
       }
     ],
-    "price": 2400.0,
+    "price": 2400,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -63,10 +63,10 @@
     "items": [
       {
         "name": "HP B&W LaserJet Pro MFP M3101fdw",
-        "price": 300.0
+        "price": 300
       }
     ],
-    "price": 450.0,
+    "price": 450,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -78,10 +78,10 @@
     "items": [
       {
         "name": "HP LaserJet Pro 3301fdw",
-        "price": 650.0
+        "price": 650
       }
     ],
-    "price": 800.0,
+    "price": 800,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -93,10 +93,10 @@
     "items": [
       {
         "name": "Lenovo T14 - 32GB/512GB/Intel U7",
-        "price": 1750.0
+        "price": 1750
       }
     ],
-    "price": 2050.0,
+    "price": 2050,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -108,14 +108,14 @@
     "items": [
       {
         "name": "Lenovo T14 - 32GB/512GB/Intel U7",
-        "price": 1750.0
+        "price": 1750
       },
       {
         "name": "Lenovo ThinkPad Hybrid USB-C Dock",
-        "price": 300.0
+        "price": 300
       }
     ],
-    "price": 2400.0,
+    "price": 2400,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -127,26 +127,26 @@
     "items": [
       {
         "name": "Lenovo T14 - 32GB/512GB/Intel U7",
-        "price": 1750.0
+        "price": 1750
       },
       {
         "name": "ThinkVision 24\" T24-40 - 1080P LED",
-        "price": 200.0
+        "price": 200
       },
       {
         "name": "Lenovo ThinkPad Hybrid USB-C Dock",
-        "price": 300.0
+        "price": 300
       },
       {
         "name": "Logitech C920S Webcam",
-        "price": 70.0
+        "price": 70
       },
       {
         "name": "Logitech MK270 Wireless Keyboard/Mouse",
-        "price": 30.0
+        "price": 30
       }
     ],
-    "price": 2750.0,
+    "price": 2750,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -158,30 +158,30 @@
     "items": [
       {
         "name": "Lenovo T14 - 32GB/512GB/Intel U7",
-        "price": 1750.0
+        "price": 1750
       },
       {
         "name": "ThinkVision 24\" T24-40 - 1080P LED",
-        "price": 200.0
+        "price": 200
       },
       {
         "name": "ThinkVision 24\" T24-40 - 1080P LED",
-        "price": 200.0
+        "price": 200
       },
       {
         "name": "Lenovo ThinkPad Hybrid USB-C Dock",
-        "price": 300.0
+        "price": 300
       },
       {
         "name": "Logitech C920S Webcam",
-        "price": 70.0
+        "price": 70
       },
       {
         "name": "Logitech MK270 Wireless Keyboard/Mouse",
-        "price": 30.0
+        "price": 30
       }
     ],
-    "price": 3000.0,
+    "price": 3000,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -193,34 +193,34 @@
     "items": [
       {
         "name": "Lenovo T14 - 32GB/512GB/Intel U7",
-        "price": 1750.0
+        "price": 1750
       },
       {
         "name": "ThinkVision 24\" T24-40 - 1080P LED",
-        "price": 200.0
+        "price": 200
       },
       {
         "name": "ThinkVision 24\" T24-40 - 1080P LED",
-        "price": 200.0
+        "price": 200
       },
       {
         "name": "Lenovo ThinkPad Hybrid USB-C Dock",
-        "price": 300.0
+        "price": 300
       },
       {
         "name": "Poly Blackwire 3210 Monoear USB-C/A",
-        "price": 35.0
+        "price": 35
       },
       {
         "name": "Logitech C920S Webcam",
-        "price": 70.0
+        "price": 70
       },
       {
         "name": "Logitech MK270 Wireless Keyboard/Mouse",
-        "price": 30.0
+        "price": 30
       }
     ],
-    "price": 2950.0,
+    "price": 2950,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -232,10 +232,10 @@
     "items": [
       {
         "name": "Logitech MK270 Wireless Keyboard/Mouse",
-        "price": 30.0
+        "price": 30
       }
     ],
-    "price": 50.0,
+    "price": 50,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -247,10 +247,10 @@
     "items": [
       {
         "name": "Poly Blackwire 3210 Monoear USB-C/A",
-        "price": 35.0
+        "price": 35
       }
     ],
-    "price": 100.0,
+    "price": 100,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -262,10 +262,10 @@
     "items": [
       {
         "name": "Logitech C920S Webcam",
-        "price": 70.0
+        "price": 70
       }
     ],
-    "price": 100.0,
+    "price": 100,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -277,10 +277,10 @@
     "items": [
       {
         "name": "Lenovo ThinkPad Hybrid USB-C Dock",
-        "price": 300.0
+        "price": 300
       }
     ],
-    "price": 350.0,
+    "price": 350,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -292,10 +292,10 @@
     "items": [
       {
         "name": "Epson DS-530 II Color Duplex Scanner",
-        "price": 400.0
+        "price": 400
       }
     ],
-    "price": 500.0,
+    "price": 500,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -307,14 +307,14 @@
     "items": [
       {
         "name": "Poly CS510 XD",
-        "price": 350.0
+        "price": 350
       },
       {
         "name": "Poly APP-51 Eledtronic Hookswitch TAA",
-        "price": 75.0
+        "price": 75
       }
     ],
-    "price": 500.0,
+    "price": 500,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -326,18 +326,18 @@
     "items": [
       {
         "name": "Samsung CU7000 - 4K - 55\"",
-        "price": 450.0
+        "price": 450
       },
       {
         "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
-        "price": 750.0
+        "price": 750
       },
       {
         "name": "Logitech MK270 Wireless Keyboard/Mouse",
-        "price": 30.0
+        "price": 30
       }
     ],
-    "price": 1450.0,
+    "price": 1450,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -349,18 +349,18 @@
     "items": [
       {
         "name": "Samsung CU7000 - 4K - 65\"",
-        "price": 500.0
+        "price": 500
       },
       {
         "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
-        "price": 750.0
+        "price": 750
       },
       {
         "name": "Logitech MK270 Wireless Keyboard/Mouse",
-        "price": 30.0
+        "price": 30
       }
     ],
-    "price": 1500.0,
+    "price": 1500,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -372,10 +372,10 @@
     "items": [
       {
         "name": "Lenovo P14s - 64GB/2TB/I-U7",
-        "price": 4000.0
+        "price": 4000
       }
     ],
-    "price": 4500.0,
+    "price": 4500,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -387,10 +387,10 @@
     "items": [
       {
         "name": "Lenovo L16 - 32GB/512GB/R5-215",
-        "price": 1300.0
+        "price": 1300
       }
     ],
-    "price": 1500.0,
+    "price": 1500,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -402,22 +402,22 @@
     "items": [
       {
         "name": "iPad Pro 12.9\" (M5) + Monthly Cellular Cost (~$50)",
-        "price": 1500.0
+        "price": 1500
       },
       {
         "name": "iOgrapher Adjustable iPad Case",
-        "price": 100.0
+        "price": 100
       },
       {
         "name": "Belkin 3.5mm Audio + USB-C Charge",
-        "price": 35.0
+        "price": 35
       },
       {
         "name": "Rode VideoMic Pro",
-        "price": 250.0
+        "price": 250
       }
     ],
-    "price": 2200.0,
+    "price": 2200,
     "recommended": false,
     "available": true,
     "imageUrl": ""
@@ -429,23 +429,42 @@
     "items": [
       {
         "name": "iPad Pro 12.9\" (M5) - Wi-Fi Only",
-        "price": 1300.0
+        "price": 1300
       },
       {
         "name": "iOgrapher Adjustable iPad Case",
-        "price": 100.0
+        "price": 100
       },
       {
         "name": "Belkin 3.5mm Audio + USB-C Charge",
-        "price": 35.0
+        "price": 35
       },
       {
         "name": "Rode VideoMic Pro",
-        "price": 250.0
+        "price": 250
       }
     ],
-    "price": 2000.0,
+    "price": 2000,
     "recommended": false,
+    "available": true,
+    "imageUrl": ""
+  },
+  {
+    "title": "Audio Visual Equipment with Two ZOnes",
+    "category": "audio_visual_system",
+    "items": [],
+    "price": 0,
+    "recommended": true,
+    "available": true,
+    "imageUrl": "",
+    "id": 23
+  },
+  {
+    "title": "Audio Visual Equipment with Two ZOnes",
+    "category": "audio_visual_system",
+    "items": [],
+    "price": 0,
+    "recommended": true,
     "available": true,
     "imageUrl": ""
   }
