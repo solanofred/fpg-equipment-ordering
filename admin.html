@@ -1969,17 +1969,7 @@
                     setAdmins(data.admins);
                     setStatus({ type: 'success', message: newName + ' has been added!' });
                     const subject = encodeURIComponent('Equipment Admin Access Approved by Fred Solano');
-                    const body = encodeURIComponent('Hi ' + newName + ',
-
-You have been granted access to the FPG Equipment Ordering Admin Portal.
-
-Access it here:
-' + adminPortalUrl + '
-
-Log in using: ' + newEmail.toLowerCase().trim() + '
-
-Best regards,
-FPG IT Team');
+                    const body = encodeURIComponent('Hi ' + newName + ',\n\nYou have been granted access to the FPG Equipment Ordering Admin Portal.\n\nAccess it here:\n' + adminPortalUrl + '\n\nLog in using: ' + newEmail.toLowerCase().trim() + '\n\nBest regards,\nFPG IT Team');
                     const a = document.createElement('a'); a.href = 'mailto:' + newEmail + '?subject=' + subject + '&body=' + body;
                     a.style.display = 'none'; document.body.appendChild(a); a.click(); setTimeout(() => document.body.removeChild(a), 100);
                     setNewName(''); setNewEmail('');
