@@ -1167,17 +1167,20 @@
             const session = AuthService.getSession();
             
             useEffect(() => {
-                ProductService.loadProducts().then(prods => {
-                    setProducts(prods);
-                    const slugs = [...new Set(prods.map(p => p.category))];
-                    fetch('./categories.json').then(r => r.ok ? r.json() : []).then(extras => {
-                        const allSlugs = [...new Set([...slugs, ...extras.map(e => e.slug)])];
-                        const labelMap = { desktop: 'Desktop', laptop: 'Laptop', peripherals: 'Peripherals', specialty_laptop: 'Specialty Laptop', tribucast: 'Tribucast' };
-                        extras.forEach(e => { labelMap[e.slug] = e.label; });
-                        setCategories(allSlugs.map(s => ({ slug: s, label: labelMap[s] || s.split('_').map(function(w){return w.charAt(0).toUpperCase()+w.slice(1)}).join(' ') })));
-                    }).catch(() => {
-                        setCategories(slugs.map(s => ({ slug: s, label: s.split('_').map(function(w){return w.charAt(0).toUpperCase()+w.slice(1)}).join(' ') })));
+                ProductService.loadProducts().then(function(prods) {
+                    setProducts(DraftService.applyDrafts(prods));
+                    var slugs = prods.map(function(p) { return p.category; }).filter(function(v, i, a) { return a.indexOf(v) === i; });
+                    fetch('./categories.json').then(function(r) { return r.ok ? r.json() : []; }).then(function(extras) {
+                        var allSlugs = slugs.concat(extras.map(function(e) { return e.slug; })).filter(function(v, i, a) { return a.indexOf(v) === i; });
+                        var labelMap = { desktop: 'Desktop', laptop: 'Laptop', peripherals: 'Peripherals', specialty_laptop: 'Specialty Laptop', tribucast: 'Tribucast' };
+                        extras.forEach(function(e) { labelMap[e.slug] = e.label; });
+                        setCategories(allSlugs.map(function(s) { return { slug: s, label: labelMap[s] || s.split('_').map(function(w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ') }; }));
+                    }).catch(function() {
+                        setCategories(slugs.map(function(s) { return { slug: s, label: s.split('_').map(function(w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ') }; }));
                     });
+                }).catch(function(err) {
+                    console.error('Failed to load products:', err);
+                    setProducts([]);
                 });
             }, []);
 
