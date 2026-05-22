@@ -2057,7 +2057,13 @@ Log in using this email address: ${newEmail.toLowerCase().trim()}
 Best regards,
 FPG IT Team`
                     );
-                    window.location.href = `mailto:${newEmail}?subject=${subject}&body=${body}`;
+                    // Use hidden link to avoid page navigation
+                    const mailtoLink = document.createElement('a');
+                    mailtoLink.href = `mailto:${newEmail}?subject=${subject}&body=${body}`;
+                    mailtoLink.style.display = 'none';
+                    document.body.appendChild(mailtoLink);
+                    mailtoLink.click();
+                    setTimeout(() => document.body.removeChild(mailtoLink), 100);
 
                     setNewName('');
                     setNewEmail('');
