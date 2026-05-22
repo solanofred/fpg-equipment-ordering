@@ -1284,7 +1284,7 @@
                     // Show success modal
                     setSuccessData({
                         count: finalProducts.length,
-                        commitSha: result.commitSha?.substring(0, 7)
+                        commitSha: (result.commitSha ? result.commitSha.substring(0, 7) : '')
                     });
                     setShowSuccessModal(true);
                     
@@ -1596,8 +1596,8 @@
                                         {!isDeleted && (
                                             <div style={{ fontSize: '0.9rem', color: 'var(--fpg-gray-dark)' }}>
                                                 <div>Category: {draft.category}</div>
-                                                <div>Price: ${draft.price?.toLocaleString()}</div>
-                                                <div>Items: {draft.items?.length}</div>
+                                                <div>Price: ${(draft.price != null ? draft.price.toLocaleString() : '')}</div>
+                                                <div>Items: {(draft.items ? draft.items.length : 0)}</div>
                                                 {draft.recommended && <div style={{ color: 'var(--accent)' }}>⭐ Recommended</div>}
                                                 {!draft.available && <div style={{ color: 'var(--danger)' }}>Inactive</div>}
                                             </div>
