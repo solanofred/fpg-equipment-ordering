@@ -451,21 +451,12 @@
   },
   {
     "title": "AUdio Visual Stardart Setup with 2 AUdio ZOnes",
-    "category": "desktop",
+    "category": "audio_visual",
     "items": [],
     "price": 0,
     "recommended": false,
     "available": true,
     "imageUrl": "",
     "id": 23
-  },
-  {
-    "title": "AUdio Visual Stardart Setup with 2 AUdio ZOnes",
-    "category": "desktop",
-    "items": [],
-    "price": 0,
-    "recommended": false,
-    "available": true,
-    "imageUrl": ""
   }
 ]
