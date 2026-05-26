@@ -2,8 +2,8 @@ name: Keep Azure Function Alive
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Every 5 minutes
-  workflow_dispatch:         # Allow manual trigger for testing
+    - cron: '* * * * *'
+  workflow_dispatch:
 
 jobs:
   ping:
@@ -11,15 +11,6 @@ jobs:
     steps:
       - name: Ping Azure Function
         run: |
-          response=$(curl -s -o /dev/null -w "%{http_code}" \
-            -X POST \
-            -H "Content-Type: application/json" \
-            -H "x-admin-email: fred.solano@foundationpartners.com" \
-            -d '{"action":"get-admins"}' \
-            "https://fpg-equipment-function-bfhse3hufnbpecbu.eastus-01.azurewebsites.net/api/publish-products")
-          echo "Response code: $response"
-          if [ "$response" = "200" ]; then
-            echo "✅ Azure Function is alive"
-          else
-            echo "⚠️ Azure Function returned $response - may need attention"
-          fi
+          response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/json" -H "x-admin-email: fred.solano@foundationpartners.com" -d '{"action":"get-admins"}' "https://fpg-equipment-function-bfhse3hufnbpecbu.eastus-01.azurewebsites.net/api/publish-products")
+          echo "Response: $response"
+          if [ "$response" = "200" ]; then echo "Azure Function is alive"; else echo "Warning: $response"; fi
