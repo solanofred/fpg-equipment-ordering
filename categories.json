@@ -4,5 +4,11 @@
     "label": "Audio Visual",
     "addedBy": "fred.solano@foundationpartners.com",
     "addedAt": "2026-05-26T18:01:18.622Z"
+  },
+  {
+    "slug": "test_b1",
+    "label": "Test B1",
+    "addedBy": "fred.solano@foundationpartners.com",
+    "addedAt": "2026-05-26T18:28:57.844Z"
   }
 ]
