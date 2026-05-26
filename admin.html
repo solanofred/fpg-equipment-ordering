@@ -2185,12 +2185,11 @@
                             <div style={{display:'flex',gap:'0.75rem'}}>
                                 <input
                                     type="text"
-                                    className="form-input"
                                     placeholder="Category name (e.g. Audio Visual)"
                                     value={newCatName}
                                     onChange={function(e){setNewCatName(e.target.value);}}
                                     onKeyDown={function(e){if(e.key==='Enter') handleAdd();}}
-                                    style={{flex:1}}
+                                    style={{flex:1,padding:'0.75rem 1rem',border:'1px solid #d1d5db',borderRadius:'8px',fontSize:'0.95rem',outline:'none',minWidth:'200px'}}
                                 />
                                 <button
                                     onClick={handleAdd}
