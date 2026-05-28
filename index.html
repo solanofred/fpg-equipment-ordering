@@ -900,7 +900,7 @@ ${new Date().toLocaleString()}`;
                                  cat === 'tribucast' ? 'Tribucast' :
                                  cat === 'audio_visual' ? 'Audio Visual' :
                                  cat === 'physical_security' ? 'Physical Security' :
-                                 cat.charAt(0).toUpperCase() + cat.slice(1)}
+                                 cat.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
                             </button>
                         ))}
                     </div>
