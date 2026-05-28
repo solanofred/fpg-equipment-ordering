@@ -13,9 +13,7 @@
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-M75q-Gen5.jpg",
-    "categories": [
-      "recommended_items"
-    ]
+    "categories": []
   },
   {
     "id": 2,
@@ -35,9 +33,7 @@
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-TIO.jpg",
-    "categories": [
-      "recommended_items"
-    ]
+    "categories": []
   },
   {
     "id": 3,
@@ -73,7 +69,7 @@
       }
     ],
     "price": 450,
-    "recommended": true,
+    "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/HPLaserJet-M3101fdw-BW.jpg",
     "categories": [
@@ -94,9 +90,7 @@
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/HPLaserJet-3301fdw-Color.jpg",
-    "categories": [
-      "recommended_items"
-    ]
+    "categories": []
   },
   {
     "id": 6,
@@ -475,8 +469,6 @@
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/AVRack.jpg",
     "id": 23,
-    "categories": [
-      "recommended_items"
-    ]
+    "categories": []
   }
 ]
