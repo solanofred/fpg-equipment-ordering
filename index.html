@@ -712,7 +712,6 @@
             const [cartOpen, setCartOpen] = useState(false);
             const [loading, setLoading] = useState(true);
             const [showCheckoutForm, setShowCheckoutForm] = useState(false);
-            const [showOrderSuccess, setShowOrderSuccess] = useState(false);
             const [showEmailReminder, setShowEmailReminder] = useState(false);
             
             // Fetch products
@@ -821,15 +820,11 @@ ${new Date().toLocaleString()}`;
                 // Open email client without navigating away from the page
                 window.open(mailtoLink, '_self');
                 
-                // Close checkout form and cart, show success, clear cart
+                // Close checkout form and cart, clear cart, show email reminder
                 setShowCheckoutForm(false);
                 setCartOpen(false);
                 setCart([]);
-                setShowOrderSuccess(true);
-                setTimeout(() => {
-                    setShowOrderSuccess(false);
-                    setShowEmailReminder(true);
-                }, 3000);
+                setShowEmailReminder(true);
             };
             
             return (
@@ -1083,36 +1078,6 @@ ${new Date().toLocaleString()}`;
                         </>
                     )}
 
-                    {/* Order Success Banner */}
-                    {showOrderSuccess && (
-                        <div style={{
-                            position: 'fixed',
-                            top: '2rem',
-                            left: '50%',
-                            transform: 'translateX(-50%)',
-                            zIndex: 2000,
-                            background: 'linear-gradient(135deg, #568935 0%, #3d6626 100%)',
-                            color: 'white',
-                            padding: '1.25rem 2.5rem',
-                            borderRadius: '16px',
-                            boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.875rem',
-                            fontSize: '1.0625rem',
-                            fontWeight: 600,
-                            animation: 'fadeInDown 0.3s ease'
-                        }}>
-                            <span style={{fontSize: '1.5rem'}}>✅</span>
-                            <div>
-                                <div>Order Request Submitted Successfully!</div>
-                                <div style={{fontSize: '0.8125rem', fontWeight: 400, opacity: 0.9, marginTop: '0.2rem'}}>
-                                    Check your email client to send the request to IT Help.
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
                     {/* Email Reminder Banner - persists until dismissed */}
                     {showEmailReminder && (
                         <div style={{
@@ -1121,7 +1086,7 @@ ${new Date().toLocaleString()}`;
                             left: '50%',
                             transform: 'translateX(-50%)',
                             zIndex: 2000,
-                            background: 'linear-gradient(135deg, #B7622B 0%, #8B4A20 100%)',
+                            background: 'linear-gradient(135deg, #568935 0%, #3d6626 100%)',
                             color: 'white',
                             padding: '1.25rem 2rem',
                             borderRadius: '16px',
@@ -1139,7 +1104,7 @@ ${new Date().toLocaleString()}`;
                             <div style={{flex: 1}}>
                                 <div>Action Required — Send Your Email</div>
                                 <div style={{fontSize: '0.8125rem', fontWeight: 400, opacity: 0.95, marginTop: '0.35rem', lineHeight: 1.5}}>
-                                    Your email client should have opened with a pre-filled equipment request. You must click <strong>Send</strong> in Outlook to complete your order. If the email did not open, contact <strong>ithelp@foundationpartners.com</strong> directly.
+                                    Your email client should have opened with a pre-filled equipment request. You must click <strong>Send</strong> in Outlook to complete your order. Once the message is sent, your request will be sent to our ITHelp Team for processing. If the email did not open, contact <strong>ithelp@foundationpartners.com</strong> directly.
                                 </div>
                             </div>
                             <button
