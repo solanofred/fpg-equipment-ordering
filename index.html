@@ -735,13 +735,24 @@
             useEffect(() => {
                 if (selectedCategory === 'all') {
                     setFilteredProducts([...products].sort((a, b) => a.title.localeCompare(b.title)));
+                } else if (selectedCategory === 'recommended') {
+                    setFilteredProducts(products.filter(p => p.recommended).sort((a, b) => a.title.localeCompare(b.title)));
                 } else {
-                    setFilteredProducts(products.filter(p => p.category === selectedCategory).sort((a, b) => a.title.localeCompare(b.title)));
+                    setFilteredProducts(products.filter(p => {
+                        const primary = p.category === selectedCategory;
+                        const additional = Array.isArray(p.categories) && p.categories.includes(selectedCategory);
+                        return primary || additional;
+                    }).sort((a, b) => a.title.localeCompare(b.title)));
                 }
             }, [selectedCategory, products]);
             
-            // Get unique categories
-            const categories = ['all', ...[...new Set(products.map(p => p.category))].sort()];
+            // Get unique categories — include 'recommended' if any products are marked recommended
+            const hasRecommended = products.some(p => p.recommended);
+            const categories = [
+                'all',
+                ...(hasRecommended ? ['recommended'] : []),
+                ...[...new Set(products.flatMap(p => [p.category, ...(Array.isArray(p.categories) ? p.categories : [])]))].filter(Boolean).sort()
+            ];
             
             // Cart functions
             const addToCart = (product) => {
@@ -883,6 +894,7 @@ ${new Date().toLocaleString()}`;
                                 onClick={() => setSelectedCategory(cat)}
                             >
                                 {cat === 'all' ? 'All Equipment' : 
+                                 cat === 'recommended' ? '⭐ Recommended' :
                                  cat === 'specialty_laptop' || cat === 'specialty_laptops' ? 'Special Order Laptops' :
                                  cat === 'peripherals' ? 'Peripherals' :
                                  cat === 'tribucast' ? 'Tribucast' :

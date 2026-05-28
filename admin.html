@@ -1747,7 +1747,7 @@
                                 </div>
                                 
                                 <div className="form-group">
-                                    <label className="form-label">Category *</label>
+                                    <label className="form-label">Primary Category *</label>
                                     <select
                                         className="form-input"
                                         value={formData.category}
@@ -1759,6 +1759,36 @@
                                         ))}
                                     </select>
                                     <div style={{fontSize:'0.8rem',color:'var(--fpg-gray)',marginTop:'0.3rem'}}>Manage categories in the Categories tab</div>
+                                </div>
+
+                                <div className="form-group">
+                                    <label className="form-label">Also Appears In</label>
+                                    <div style={{display:'flex',flexWrap:'wrap',gap:'0.5rem',padding:'0.75rem',border:'1px solid #d1d5db',borderRadius:'8px',background:'#f9fafb'}}>
+                                        {(categories || []).slice().sort((a, b) => a.label.localeCompare(b.label))
+                                            .filter(cat => cat.slug !== formData.category)
+                                            .map(cat => {
+                                                const checked = Array.isArray(formData.categories) && formData.categories.includes(cat.slug);
+                                                return (
+                                                    <label key={cat.slug} style={{display:'flex',alignItems:'center',gap:'0.4rem',cursor:'pointer',padding:'0.35rem 0.75rem',borderRadius:'20px',background:checked?'#E6F1FB':'white',border:checked?'1.5px solid #1B5A8E':'1.5px solid #d1d5db',fontSize:'0.875rem',fontWeight:checked?600:400,color:checked?'#0C447C':'#374151',transition:'all 0.15s'}}>
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={checked}
+                                                            style={{display:'none'}}
+                                                            onChange={(e) => {
+                                                                const current = Array.isArray(formData.categories) ? formData.categories : [];
+                                                                const updated = e.target.checked
+                                                                    ? [...current, cat.slug]
+                                                                    : current.filter(s => s !== cat.slug);
+                                                                setFormData({ ...formData, categories: updated });
+                                                            }}
+                                                        />
+                                                        {checked ? '✓ ' : ''}{cat.label}
+                                                    </label>
+                                                );
+                                            })
+                                        }
+                                    </div>
+                                    <div style={{fontSize:'0.8rem',color:'var(--fpg-gray)',marginTop:'0.3rem'}}>Select additional categories this product should appear in</div>
                                 </div>
                                 
                                 <div className="form-group">
