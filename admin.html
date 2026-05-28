@@ -1754,7 +1754,7 @@
                                         onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                                         required
                                     >
-                                        {(categories || []).map(cat => (
+                                        {(categories || []).slice().sort((a, b) => a.label.localeCompare(b.label)).map(cat => (
                                             <option key={cat.slug} value={cat.slug}>{cat.label}</option>
                                         ))}
                                     </select>
