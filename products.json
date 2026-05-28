@@ -468,5 +468,24 @@
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/AVRack.jpg",
     "id": 23,
     "categories": []
+  },
+  {
+    "title": "Amcrest Network Video Recorder",
+    "category": "video_surveillance",
+    "items": [],
+    "price": 300,
+    "recommended": true,
+    "available": true,
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/NVR.jpg",
+    "id": 24
+  },
+  {
+    "title": "Amcrest Network Video Recorder",
+    "category": "video_surveillance",
+    "items": [],
+    "price": 300,
+    "recommended": true,
+    "available": true,
+    "imageUrl": ""
   }
 ]
