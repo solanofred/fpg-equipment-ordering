@@ -69,12 +69,10 @@
       }
     ],
     "price": 450,
-    "recommended": false,
+    "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/HPLaserJet-M3101fdw-BW.jpg",
-    "categories": [
-      "recommended_items"
-    ]
+    "categories": []
   },
   {
     "id": 5,
