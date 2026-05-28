@@ -342,7 +342,7 @@
       },
       {
         "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
-        "price": 750
+        "price": 1200
       },
       {
         "name": "Logitech MK270 Wireless Keyboard/Mouse",
@@ -365,7 +365,7 @@
       },
       {
         "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
-        "price": 750
+        "price": 1200
       },
       {
         "name": "Logitech MK270 Wireless Keyboard/Mouse",
@@ -462,13 +462,21 @@
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/iPad.jpg"
   },
   {
-    "title": "Audio Visual Stardard Setup with 2 Audio Zones Updated",
+    "title": "Audio Visual Stardard Setup with 2 Audio Zones - 4 Ceiling Speakers",
     "category": "audio_visual",
-    "items": [],
-    "price": 0,
-    "recommended": false,
+    "items": [
+      {
+        "name": "AV System - 2 Zones - 4 Ceiling Speakers",
+        "price": 10000
+      }
+    ],
+    "price": 10000,
+    "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/AVRack.jpg",
-    "id": 23
+    "id": 23,
+    "categories": [
+      "recommended_items"
+    ]
   }
 ]
