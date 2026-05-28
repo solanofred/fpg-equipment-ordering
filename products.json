@@ -90,8 +90,8 @@
         "price": 650
       }
     ],
-    "price": 800,
-    "recommended": false,
+    "price": 715,
+    "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/HPLaserJet-3301fdw-Color.jpg",
     "categories": [
