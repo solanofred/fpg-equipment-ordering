@@ -732,9 +732,9 @@
             // Filter products by category
             useEffect(() => {
                 if (selectedCategory === 'all') {
-                    setFilteredProducts(products);
+                    setFilteredProducts([...products].sort((a, b) => a.title.localeCompare(b.title)));
                 } else {
-                    setFilteredProducts(products.filter(p => p.category === selectedCategory));
+                    setFilteredProducts(products.filter(p => p.category === selectedCategory).sort((a, b) => a.title.localeCompare(b.title)));
                 }
             }, [selectedCategory, products]);
             
