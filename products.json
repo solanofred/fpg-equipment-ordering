@@ -450,7 +450,7 @@
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/iPad.jpg"
   },
   {
-    "title": "AUdio Visual Stardart Setup with 2 AUdio ZOnes",
+    "title": "Audio Visual Stardart Setup with 2 Audio Zones",
     "category": "audio_visual",
     "items": [],
     "price": 0,
@@ -458,24 +458,5 @@
     "available": true,
     "imageUrl": "",
     "id": 23
-  },
-  {
-    "title": "Camera",
-    "category": "audio_visual",
-    "items": [],
-    "price": 0,
-    "recommended": false,
-    "available": true,
-    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/HPLaserJet-M3101fdw-BW.jpg",
-    "id": 24
-  },
-  {
-    "title": "Camera",
-    "category": "audio_visual",
-    "items": [],
-    "price": 0,
-    "recommended": false,
-    "available": true,
-    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/HPLaserJet-M3101fdw-BW.jpg"
   }
 ]
