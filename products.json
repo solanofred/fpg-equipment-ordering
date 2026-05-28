@@ -450,13 +450,42 @@
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/iPad.jpg"
   },
   {
-    "title": "Audio Visual Stardard Setup with 2 Audio Zones & 4 Ceiling Speakers",
+    "title": "Audio Visual Stardart Setup with 2 Audio Zones",
     "category": "audio_visual",
     "items": [],
-    "price": 10000,
+    "price": 0,
     "recommended": false,
     "available": true,
     "imageUrl": "",
     "id": 23
+  },
+  {
+    "title": "Test Product 01 - AV",
+    "category": "audio_visual",
+    "items": [
+      {
+        "name": "Test",
+        "price": 10000
+      }
+    ],
+    "price": 0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": "",
+    "id": 24
+  },
+  {
+    "title": "Test Product 01 - AV",
+    "category": "audio_visual",
+    "items": [
+      {
+        "name": "Test",
+        "price": 10000
+      }
+    ],
+    "price": 0,
+    "recommended": false,
+    "available": true,
+    "imageUrl": ""
   }
 ]
