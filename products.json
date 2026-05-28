@@ -475,14 +475,9 @@
     "id": 24
   },
   {
-    "title": "Test Product 01 - AV",
-    "category": "audio_visual",
-    "items": [
-      {
-        "name": "Test",
-        "price": 10000
-      }
-    ],
+    "title": "Video Items",
+    "category": "video_surveillance",
+    "items": [],
     "price": 0,
     "recommended": false,
     "available": true,
