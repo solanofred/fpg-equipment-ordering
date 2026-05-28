@@ -454,23 +454,9 @@
     "category": "audio_visual",
     "items": [],
     "price": 0,
-    "recommended": true,
+    "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/AVRack.jpg",
     "id": 23
-  },
-  {
-    "title": "Test Product 01 - AV",
-    "category": "audio_visual",
-    "items": [
-      {
-        "name": "Test",
-        "price": 10000
-      }
-    ],
-    "price": 0,
-    "recommended": false,
-    "available": true,
-    "imageUrl": ""
   }
 ]
