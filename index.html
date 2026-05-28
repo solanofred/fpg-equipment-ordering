@@ -727,7 +727,7 @@
             }, [selectedCategory, products]);
             
             // Get unique categories
-            const categories = ['all', ...new Set(products.map(p => p.category))];
+            const categories = ['all', ...[...new Set(products.map(p => p.category))].sort()];
             
             // Cart functions
             const addToCart = (product) => {
