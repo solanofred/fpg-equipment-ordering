@@ -713,14 +713,16 @@
             const [loading, setLoading] = useState(true);
             const [showCheckoutForm, setShowCheckoutForm] = useState(false);
             const [showEmailReminder, setShowEmailReminder] = useState(false);
+            const [lastUpdated, setLastUpdated] = useState(null);
             
-            // Fetch products
+            // Fetch products - cache bust with timestamp to always get fresh data
             useEffect(() => {
-                fetch('products.json')
+                fetch('products.json?v=' + Date.now())
                     .then(res => res.json())
                     .then(data => {
                         setProducts(data);
                         setFilteredProducts(data);
+                        setLastUpdated(new Date());
                         setLoading(false);
                     })
                     .catch(error => {
@@ -860,6 +862,16 @@ ${new Date().toLocaleString()}`;
                         <p className="hero-subtitle">
                             Professional equipment packages designed for productivity and performance. Select what you need, we'll handle the rest.
                         </p>
+                        {lastUpdated && (
+                            <p style={{
+                                fontSize: '0.8125rem',
+                                color: 'var(--neutral-400)',
+                                marginTop: '-1.5rem',
+                                marginBottom: '0.5rem'
+                            }}>
+                                Catalog last refreshed: {lastUpdated.toLocaleString()}
+                            </p>
+                        )}
                     </section>
                     
                     {/* Category Filter */}
