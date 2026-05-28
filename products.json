@@ -59,7 +59,7 @@
   {
     "id": 4,
     "title": "Monochrome (B/W) MFP",
-    "category": "peripherals",
+    "category": "printers_and_scanners",
     "items": [
       {
         "name": "HP B&W LaserJet Pro MFP M3101fdw",
@@ -74,7 +74,7 @@
   {
     "id": 5,
     "title": "Color MFP",
-    "category": "peripherals",
+    "category": "printers_and_scanners",
     "items": [
       {
         "name": "HP LaserJet Pro 3301fdw",
@@ -288,7 +288,7 @@
   {
     "id": 15,
     "title": "Document Scanner",
-    "category": "peripherals",
+    "category": "printers_and_scanners",
     "items": [
       {
         "name": "Epson DS-530 II Color Duplex Scanner",
@@ -322,7 +322,7 @@
   {
     "id": 17,
     "title": "Arrangement Room - 55\" TV Setup",
-    "category": "peripherals",
+    "category": "arrangement_rooms",
     "items": [
       {
         "name": "Samsung CU7000 - 4K - 55\"",
@@ -345,7 +345,7 @@
   {
     "id": 18,
     "title": "Arrangement Room - 65\" TV Setup",
-    "category": "peripherals",
+    "category": "arrangement_rooms",
     "items": [
       {
         "name": "Samsung CU7000 - 4K - 65\"",
