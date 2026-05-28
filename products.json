@@ -454,9 +454,9 @@
     "category": "audio_visual",
     "items": [],
     "price": 0,
-    "recommended": false,
+    "recommended": true,
     "available": true,
-    "imageUrl": "",
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/AVRack.jpg",
     "id": 23
   },
   {
