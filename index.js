@@ -230,6 +230,55 @@ module.exports = async function (context, req) {
             return;
         }
 
+        // 5. ADD CATEGORY
+        if (action === 'add-category') {
+            const { slug, label } = req.body;
+            if (!slug || !label) {
+                context.res = { status: 400, headers, body: JSON.stringify({ error: 'Bad Request', message: 'slug and label required' }) };
+                return;
+            }
+            const { content: cats, sha } = await getGitHubFile('categories.json');
+            const current = cats || [];
+            if (current.find(c => c.slug === slug)) {
+                context.res = { status: 409, headers, body: JSON.stringify({ error: 'Conflict', message: 'Category already exists' }) };
+                return;
+            }
+            const updated = [...current, { slug, label, addedBy: normalizedEmail, addedAt: new Date().toISOString() }];
+            const result = await putGitHubFile('categories.json', updated, sha, `Add category ${slug} by ${normalizedEmail}`);
+            context.res = { status: 200, headers, body: JSON.stringify({ success: true, message: `Category ${label} added`, categories: updated, commitSha: result.commit.sha }) };
+            return;
+        }
+
+        // 6. REMOVE CATEGORY
+        if (action === 'remove-category') {
+            const { slug } = req.body;
+            if (!slug) {
+                context.res = { status: 400, headers, body: JSON.stringify({ error: 'Bad Request', message: 'slug required' }) };
+                return;
+            }
+            const { content: cats, sha } = await getGitHubFile('categories.json');
+            const current = cats || [];
+            const updated = current.filter(c => c.slug !== slug);
+            const result = await putGitHubFile('categories.json', updated, sha, `Remove category ${slug} by ${normalizedEmail}`);
+            context.res = { status: 200, headers, body: JSON.stringify({ success: true, message: `Category removed`, categories: updated, commitSha: result.commit.sha }) };
+            return;
+        }
+
+        // 7. RENAME CATEGORY
+        if (action === 'rename-category') {
+            const { slug, newLabel } = req.body;
+            if (!slug || !newLabel) {
+                context.res = { status: 400, headers, body: JSON.stringify({ error: 'Bad Request', message: 'slug and newLabel required' }) };
+                return;
+            }
+            const { content: cats, sha } = await getGitHubFile('categories.json');
+            const current = cats || [];
+            const updated = current.map(c => c.slug === slug ? { ...c, label: newLabel.trim() } : c);
+            const result = await putGitHubFile('categories.json', updated, sha, `Rename category ${slug} to ${newLabel} by ${normalizedEmail}`);
+            context.res = { status: 200, headers, body: JSON.stringify({ success: true, message: `Category renamed to ${newLabel}`, categories: updated, commitSha: result.commit.sha }) };
+            return;
+        }
+
         // Unknown action
         context.res = { status: 400, headers, body: JSON.stringify({ error: 'Bad Request', message: `Unknown action: ${action}` }) };
 
