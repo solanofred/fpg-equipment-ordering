@@ -713,6 +713,7 @@
             const [loading, setLoading] = useState(true);
             const [showCheckoutForm, setShowCheckoutForm] = useState(false);
             const [showOrderSuccess, setShowOrderSuccess] = useState(false);
+            const [showEmailReminder, setShowEmailReminder] = useState(false);
             
             // Fetch products
             useEffect(() => {
@@ -827,6 +828,7 @@ ${new Date().toLocaleString()}`;
                 setShowOrderSuccess(true);
                 setTimeout(() => {
                     setShowOrderSuccess(false);
+                    setShowEmailReminder(true);
                 }, 3000);
             };
             
@@ -1108,6 +1110,56 @@ ${new Date().toLocaleString()}`;
                                     Check your email client to send the request to IT Help.
                                 </div>
                             </div>
+                        </div>
+                    )}
+
+                    {/* Email Reminder Banner - persists until dismissed */}
+                    {showEmailReminder && (
+                        <div style={{
+                            position: 'fixed',
+                            top: '2rem',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            zIndex: 2000,
+                            background: 'linear-gradient(135deg, #B7622B 0%, #8B4A20 100%)',
+                            color: 'white',
+                            padding: '1.25rem 2rem',
+                            borderRadius: '16px',
+                            boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: '0.875rem',
+                            fontSize: '1rem',
+                            fontWeight: 600,
+                            maxWidth: '520px',
+                            width: '90%',
+                            animation: 'fadeInDown 0.3s ease'
+                        }}>
+                            <span style={{fontSize: '1.5rem', flexShrink: 0}}>⚠️</span>
+                            <div style={{flex: 1}}>
+                                <div>Action Required — Send Your Email</div>
+                                <div style={{fontSize: '0.8125rem', fontWeight: 400, opacity: 0.95, marginTop: '0.35rem', lineHeight: 1.5}}>
+                                    Your email client should have opened with a pre-filled equipment request. You must click <strong>Send</strong> in Outlook to complete your order. If the email did not open, contact <strong>ithelp@foundationpartners.com</strong> directly.
+                                </div>
+                            </div>
+                            <button
+                                onClick={() => setShowEmailReminder(false)}
+                                style={{
+                                    background: 'rgba(255,255,255,0.2)',
+                                    border: 'none',
+                                    color: 'white',
+                                    borderRadius: '50%',
+                                    width: '28px',
+                                    height: '28px',
+                                    cursor: 'pointer',
+                                    fontSize: '1rem',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    flexShrink: 0,
+                                    marginTop: '-0.25rem'
+                                }}
+                            >✕</button>
                         </div>
                     )}
                 </>
