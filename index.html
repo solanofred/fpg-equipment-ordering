@@ -817,8 +817,8 @@ ${new Date().toLocaleString()}`;
                 // Create mailto link
                 const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
                 
-                // Open email client
-                window.location.href = mailtoLink;
+                // Open email client without navigating away from the page
+                window.open(mailtoLink, '_self');
                 
                 // Close checkout form and cart, show success, clear cart
                 setShowCheckoutForm(false);
