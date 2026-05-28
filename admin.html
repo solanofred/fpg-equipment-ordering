@@ -1206,10 +1206,7 @@
                 const existing = products.find(function(p) { return p.id === product.id; });
                 const merged = existing ? Object.assign({}, existing, product) : product;
                 
-                // Save as draft instead of immediate download
-                DraftService.saveDraft(merged);
-                
-                // Update local state to show changes
+                // Assign ID BEFORE saving draft so the draft has a proper ID
                 let updated;
                 if (existing) {
                     updated = products.map(function(p) { return p.id === merged.id ? merged : p; });
@@ -1217,6 +1214,9 @@
                     merged.id = Math.max.apply(null, products.map(function(p) { return p.id; }).concat([0])) + 1;
                     updated = [...products, merged];
                 }
+                
+                // Save as draft with proper ID
+                DraftService.saveDraft(merged);
                 
                 setProducts(updated);
                 setDraftCount(DraftService.getDraftCount());
