@@ -13,7 +13,7 @@
     <!-- Google Fonts - Corporate Elegant -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -74,7 +74,8 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            background: var(--neutral-100);
+            background: linear-gradient(180deg, #F0F4F8 0%, #EAEEF2 100%);
+            background-attachment: fixed;
             color: var(--text-primary);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
@@ -87,7 +88,7 @@
             top: 0;
             z-index: 100;
             background: linear-gradient(135deg, #1B5A8E 0%, #0F4068 100%);
-            border-bottom: none;
+            border-bottom: 3px solid #DB802E;
         }
         
         .header-content {
@@ -138,12 +139,12 @@
             align-items: center;
             gap: 0.625rem;
             padding: 0.625rem 1.25rem;
-            background: var(--bg-primary);
-            border: 1.5px solid var(--neutral-200);
+            background: rgba(219, 128, 46, 0.15);
+            border: 1.5px solid #DB802E;
             border-radius: 50px;
             font-size: 0.9375rem;
             font-weight: 500;
-            color: var(--text-primary);
+            color: white;
             cursor: pointer;
             transition: var(--transition);
             box-shadow: var(--shadow);
@@ -152,7 +153,7 @@
         .cart-button:hover {
             transform: translateY(-1px);
             box-shadow: var(--shadow-lg);
-            border-color: var(--neutral-300);
+            background: rgba(219, 128, 46, 0.25);
         }
         
         .cart-icon {
@@ -165,7 +166,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--fpg-navy);
+            background: #DB802E;
             color: white;
             border-radius: 50%;
             font-size: 0.75rem;
@@ -181,9 +182,9 @@
         }
         
         .hero-title {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: Georgia, 'Times New Roman', serif;
             font-size: 2.75rem;
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: -0.02em;
             line-height: 1.2;
             margin-bottom: 0.75rem;
@@ -869,9 +870,9 @@ ${new Date().toLocaleString()}`;
                     
                     {/* Hero */}
                     <section className="hero">
-                        <h1 className="hero-title">Let's Get Your Order Started</h1>
+                        <h1 className="hero-title">FPG Technology Equipment</h1>
                         <p className="hero-subtitle">
-                            Professional equipment packages designed for productivity and performance. Select what you need, we'll handle the rest.
+                            Select the equipment your team needs. Submitting this form sends a request directly to the IT Help Team for processing.
                         </p>
                         {lastUpdated && (
                             <p style={{
@@ -892,6 +893,7 @@ ${new Date().toLocaleString()}`;
                                 key={cat}
                                 className={`category-pill ${selectedCategory === cat ? 'active' : ''}`}
                                 onClick={() => setSelectedCategory(cat)}
+                                style={cat === 'recommended' && selectedCategory !== cat ? {borderColor:'#DB802E', color:'#B7622B'} : {}}
                             >
                                 {cat === 'all' ? 'All Equipment' : 
                                  cat === 'recommended' ? '⭐ Recommended' :
@@ -911,6 +913,12 @@ ${new Date().toLocaleString()}`;
                             <div className="loading">
                                 <div className="loading-spinner"></div>
                                 Loading products...
+                            </div>
+                        ) : filteredProducts.length === 0 ? (
+                            <div style={{textAlign:'center',padding:'4rem 2rem'}}>
+                                <div style={{fontSize:'3rem',marginBottom:'1rem',opacity:0.2}}>📦</div>
+                                <div style={{fontSize:'1.125rem',fontWeight:600,color:'var(--neutral-600)',marginBottom:'0.5rem'}}>No products in this category yet</div>
+                                <div style={{fontSize:'0.9375rem',color:'var(--neutral-400)'}}>Check back soon or contact <a href="mailto:ithelp@foundationpartners.com" style={{color:'var(--fpg-navy)'}}>ithelp@foundationpartners.com</a></div>
                             </div>
                         ) : (
                             <div className="products-grid">
@@ -950,8 +958,11 @@ ${new Date().toLocaleString()}`;
                                             </div>
                                             
                                             <div className="product-footer">
-                                                <div className="product-price">
-                                                    ${product.price.toFixed(2)}
+                                                <div style={{display:'flex',flexDirection:'column'}}>
+                                                    <span style={{fontSize:'0.6875rem',color:'var(--neutral-400)',textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:'0.125rem'}}>Est. Cost</span>
+                                                    <div className="product-price">
+                                                        ${product.price.toFixed(2)}
+                                                    </div>
                                                 </div>
                                                 <button 
                                                     className="add-button"
@@ -1178,6 +1189,26 @@ ${new Date().toLocaleString()}`;
                             >Got it — Dismiss</button>
                         </div>
                     )}
+
+                    {/* Footer */}
+                    <footer style={{
+                        background: 'linear-gradient(135deg, #1B5A8E 0%, #0A2540 100%)',
+                        borderTop: '3px solid #DB802E',
+                        marginTop: '2rem',
+                        padding: '1.25rem 2rem',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        flexWrap: 'wrap',
+                        gap: '0.75rem'
+                    }}>
+                        <div style={{fontSize:'0.8125rem',color:'rgba(255,255,255,0.65)'}}>
+                            Foundation Partners Group · Technology Equipment Portal
+                        </div>
+                        <div style={{fontSize:'0.8125rem',color:'rgba(255,255,255,0.65)'}}>
+                            Questions? <a href="mailto:ithelp@foundationpartners.com" style={{color:'#DB802E',textDecoration:'none',fontWeight:500}}>ithelp@foundationpartners.com</a>
+                        </div>
+                    </footer>
                 </>
             );
         }
