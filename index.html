@@ -95,7 +95,7 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
-            height: 80px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -108,9 +108,9 @@
         }
         
         .logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
             object-fit: cover;
         }
         
@@ -173,12 +173,21 @@
             font-weight: 600;
         }
         
-        /* Hero Section - Apple-style */
+        /* Hero Section */
         .hero {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 4rem 2rem 2rem;
+            padding: 3rem 2rem 1.5rem;
             text-align: center;
+        }
+        
+        .hero-eyebrow {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--fpg-gold);
+            margin-bottom: 0.625rem;
         }
         
         .hero-title {
@@ -200,6 +209,65 @@
             line-height: 1.6;
         }
         
+        /* Search Bar */
+        .search-wrap {
+            max-width: 680px;
+            margin: 0 auto 1.5rem;
+            padding: 0 2rem;
+        }
+
+        .search-input-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            background: white;
+            border: 1.5px solid var(--neutral-200);
+            border-radius: 14px;
+            padding: 0.75rem 1.125rem;
+            transition: var(--transition);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .search-input-wrap:focus-within {
+            border-color: #1B5A8E;
+            box-shadow: 0 2px 12px rgba(27,90,142,0.12);
+        }
+
+        .search-input-icon {
+            font-size: 1rem;
+            color: var(--neutral-400);
+            flex-shrink: 0;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 0.9375rem;
+            color: var(--text-primary);
+            background: transparent;
+            font-family: inherit;
+        }
+
+        .search-input::placeholder {
+            color: var(--neutral-400);
+        }
+
+        .search-clear {
+            border: none;
+            background: var(--neutral-200);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.625rem;
+            color: var(--neutral-600);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
         /* Category Filter - Pill tabs */
         .category-filter {
             max-width: 1400px;
@@ -239,7 +307,24 @@
             transform: translateY(-2px);
         }
         
-        /* Products Grid - Amazon-style clarity */
+        /* Section count label */
+        .products-section-header {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .products-section-count {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--neutral-500);
+            letter-spacing: -0.01em;
+        }
+
+        /* Products Grid - Apple flush style */
         .products-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -248,15 +333,19 @@
         
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1px;
+            background: var(--neutral-200);
+            border: 1px solid var(--neutral-200);
+            border-radius: 16px;
+            overflow: hidden;
         }
         
-        /* Product Card - Premium glass-morphism */
+        /* Product Card - Apple flush grid style */
         .product-card {
             background: var(--bg-primary);
-            border-radius: 20px;
-            border: 1px solid var(--neutral-200);
+            border-radius: 0;
+            border: none;
             overflow: hidden;
             transition: var(--transition);
             cursor: pointer;
@@ -265,20 +354,17 @@
         }
         
         .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--neutral-300);
+            background: var(--neutral-50);
         }
         
-        /* Recommended Product - Gold Accent */
+        /* Recommended Product - Gold top accent */
         .product-card.recommended {
-            border: 2px solid var(--fpg-gold);
-            box-shadow: 0 8px 24px rgba(219, 128, 46, 0.15);
+            background: #FFFCF9;
+            border-top: 3px solid var(--fpg-gold);
         }
         
         .product-card.recommended:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 32px rgba(219, 128, 46, 0.25);
+            background: #FFF8F0;
         }
         
         .product-card.recommended .product-image-container {
@@ -306,7 +392,7 @@
         .product-image-container {
             position: relative;
             width: 100%;
-            aspect-ratio: 4/3;
+            aspect-ratio: 16/9;
             background: linear-gradient(135deg, var(--neutral-50) 0%, var(--neutral-100) 100%);
             display: flex;
             align-items: center;
@@ -329,26 +415,24 @@
         
         .product-badge {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            padding: 0.375rem 0.875rem;
-            background: linear-gradient(135deg, var(--fpg-gold) 0%, var(--fpg-gold-dark) 100%);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            font-size: 0.75rem;
+            top: 0.75rem;
+            left: 0.75rem;
+            padding: 0.25rem 0.625rem;
+            background: #DB802E;
+            border-radius: 6px;
+            font-size: 0.6875rem;
             font-weight: 700;
             color: white;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            box-shadow: 0 4px 12px rgba(219, 128, 46, 0.3);
+            letter-spacing: 0.06em;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
         
         .product-badge::before {
-            content: '✨';
-            font-size: 0.875rem;
+            content: '✦';
+            font-size: 0.5rem;
         }
         
         .product-content {
@@ -709,6 +793,7 @@
             const [products, setProducts] = useState([]);
             const [filteredProducts, setFilteredProducts] = useState([]);
             const [selectedCategory, setSelectedCategory] = useState('all');
+            const [searchQuery, setSearchQuery] = useState('');
             const [cart, setCart] = useState([]);
             const [cartOpen, setCartOpen] = useState(false);
             const [loading, setLoading] = useState(true);
@@ -732,20 +817,29 @@
                     });
             }, []);
             
-            // Filter products by category
+            // Filter products by category and search query
             useEffect(() => {
+                const q = searchQuery.trim().toLowerCase();
+                let base = [];
                 if (selectedCategory === 'all') {
-                    setFilteredProducts([...products].sort((a, b) => a.title.localeCompare(b.title)));
+                    base = [...products];
                 } else if (selectedCategory === 'recommended') {
-                    setFilteredProducts(products.filter(p => p.recommended).sort((a, b) => a.title.localeCompare(b.title)));
+                    base = products.filter(p => p.recommended);
                 } else {
-                    setFilteredProducts(products.filter(p => {
+                    base = products.filter(p => {
                         const primary = p.category === selectedCategory;
                         const additional = Array.isArray(p.categories) && p.categories.includes(selectedCategory);
                         return primary || additional;
-                    }).sort((a, b) => a.title.localeCompare(b.title)));
+                    });
                 }
-            }, [selectedCategory, products]);
+                if (q) {
+                    base = base.filter(p =>
+                        p.title.toLowerCase().includes(q) ||
+                        (p.items || []).some(i => i.name.toLowerCase().includes(q))
+                    );
+                }
+                setFilteredProducts(base.sort((a, b) => a.title.localeCompare(b.title)));
+            }, [selectedCategory, products, searchQuery]);
             
             // Get unique categories — only include categories that have at least one product
             const hasRecommended = products.some(p => p.recommended);
@@ -860,7 +954,7 @@ ${new Date().toLocaleString()}`;
                             </div>
                             
                             <button className="cart-button" onClick={() => setCartOpen(true)}>
-                                <span className="cart-icon">🛒</span>
+                                <span className="cart-icon">🛍️</span>
                                 <span>Cart</span>
                                 {cart.length > 0 && (
                                     <span className="cart-count">{cart.length}</span>
@@ -871,6 +965,7 @@ ${new Date().toLocaleString()}`;
                     
                     {/* Hero */}
                     <section className="hero">
+                        <div className="hero-eyebrow">Foundation Partners Group</div>
                         <h1 className="hero-title">FPG Technology Equipment</h1>
                         <p className="hero-subtitle">
                             Select the equipment your team needs. Submitting this form sends a request directly to the IT Help Team for processing.
@@ -887,6 +982,23 @@ ${new Date().toLocaleString()}`;
                         )}
                     </section>
                     
+                    {/* Search Bar */}
+                    <div className="search-wrap">
+                        <div className="search-input-wrap">
+                            <span className="search-input-icon">🔍</span>
+                            <input
+                                className="search-input"
+                                type="text"
+                                placeholder="Search equipment..."
+                                value={searchQuery}
+                                onChange={e => setSearchQuery(e.target.value)}
+                            />
+                            {searchQuery && (
+                                <button className="search-clear" onClick={() => setSearchQuery('')}>✕</button>
+                            )}
+                        </div>
+                    </div>
+
                     {/* Category Filter */}
                     <div className="category-filter">
                         {categories.map(cat => (
@@ -909,6 +1021,18 @@ ${new Date().toLocaleString()}`;
                     </div>
                     
                     {/* Products Grid */}
+                    <div className="products-section-header">
+                        <span className="products-section-count">
+                            {searchQuery
+                                ? `${filteredProducts.length} result${filteredProducts.length !== 1 ? 's' : ''} for "${searchQuery}"`
+                                : selectedCategory === 'all'
+                                    ? `All Equipment — ${filteredProducts.length} items`
+                                    : selectedCategory === 'recommended'
+                                        ? `Recommended — ${filteredProducts.length} items`
+                                        : `${selectedCategory.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')} — ${filteredProducts.length} items`
+                            }
+                        </span>
+                    </div>
                     <main className="products-container">
                         {loading ? (
                             <div className="loading">
