@@ -1372,9 +1372,9 @@
                     
                     <div className="admin-container">
                         <div className="tab-nav" style={{display:'flex',gap:'0.5rem',marginBottom:'1.5rem',background:'white',padding:'0.5rem',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',width:'fit-content'}}>
-                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='products'?'#1B5A8E':'transparent',color:activeTab==='products'?'white':'#666'}} onClick={()=>setActiveTab('products')}>📦 Products</button>
-                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='categories'?'#1B5A8E':'transparent',color:activeTab==='categories'?'white':'#666'}} onClick={()=>setActiveTab('categories')}>🏷️ Categories</button>
                             <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='access'?'#1B5A8E':'transparent',color:activeTab==='access'?'white':'#666'}} onClick={()=>setActiveTab('access')}>👥 Access Management</button>
+                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='categories'?'#1B5A8E':'transparent',color:activeTab==='categories'?'white':'#666'}} onClick={()=>setActiveTab('categories')}>🏷️ Categories</button>
+                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='products'?'#1B5A8E':'transparent',color:activeTab==='products'?'white':'#666'}} onClick={()=>setActiveTab('products')}>📦 Products</button>
                         </div>
 
                         {activeTab === 'access' && <AccessManagement session={session} azureUrl={AZURE_FUNCTION_URL} adminPortalUrl={ADMIN_PORTAL_URL} />}
@@ -1445,7 +1445,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {products.map(product => {
+                                    {[...products].sort((a, b) => a.title.localeCompare(b.title)).map(product => {
                                         const isDraft = DraftService.isDraftProduct(product.id);
                                         return (
                                             <tr key={product.id} className={isDraft ? 'product-row-edited' : ''}>
