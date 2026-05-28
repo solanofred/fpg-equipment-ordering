@@ -12,7 +12,10 @@
     "price": 1450,
     "recommended": true,
     "available": true,
-    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-M75q-Gen5.jpg"
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-M75q-Gen5.jpg",
+    "categories": [
+      "recommended_items"
+    ]
   },
   {
     "id": 2,
@@ -31,7 +34,10 @@
     "price": 2050,
     "recommended": true,
     "available": true,
-    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-TIO.jpg"
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-TIO.jpg",
+    "categories": [
+      "recommended_items"
+    ]
   },
   {
     "id": 3,
@@ -67,9 +73,12 @@
       }
     ],
     "price": 450,
-    "recommended": false,
+    "recommended": true,
     "available": true,
-    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/HPLaserJet-M3101fdw-BW.jpg"
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/HPLaserJet-M3101fdw-BW.jpg",
+    "categories": [
+      "recommended_items"
+    ]
   },
   {
     "id": 5,
@@ -84,7 +93,10 @@
     "price": 800,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/HPLaserJet-3301fdw-Color.jpg"
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/HPLaserJet-3301fdw-Color.jpg",
+    "categories": [
+      "recommended_items"
+    ]
   },
   {
     "id": 6,
@@ -321,7 +333,7 @@
   },
   {
     "id": 17,
-    "title": "Arrangement Room - 55\" TV Setup",
+    "title": "Arrangement Room - 55\" TV Setup - Includes PC and Keyboard/Mouse",
     "category": "arrangement_rooms",
     "items": [
       {
@@ -344,7 +356,7 @@
   },
   {
     "id": 18,
-    "title": "Arrangement Room - 65\" TV Setup",
+    "title": "Arrangement Room - 65\" TV Setup - Includes PC and Keyboard/Mouse",
     "category": "arrangement_rooms",
     "items": [
       {
