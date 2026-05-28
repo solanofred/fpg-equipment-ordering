@@ -1088,43 +1088,70 @@ ${new Date().toLocaleString()}`;
                             zIndex: 2000,
                             background: 'linear-gradient(135deg, #568935 0%, #3d6626 100%)',
                             color: 'white',
-                            padding: '1.25rem 2rem',
+                            padding: '2rem 2.5rem',
                             borderRadius: '16px',
                             boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
                             display: 'flex',
-                            alignItems: 'flex-start',
-                            gap: '0.875rem',
-                            fontSize: '1rem',
-                            fontWeight: 600,
-                            maxWidth: '520px',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            textAlign: 'center',
+                            gap: '1rem',
+                            maxWidth: '560px',
                             width: '90%',
                             animation: 'fadeInDown 0.3s ease'
                         }}>
-                            <span style={{fontSize: '1.5rem', flexShrink: 0}}>⚠️</span>
-                            <div style={{flex: 1}}>
-                                <div>Action Required — Send Your Email</div>
-                                <div style={{fontSize: '0.8125rem', fontWeight: 400, opacity: 0.95, marginTop: '0.35rem', lineHeight: 1.5}}>
-                                    Your email client should have opened with a pre-filled equipment request. You must click <strong>Send</strong> in Outlook to complete your order. Once the message is sent, your request will be sent to our ITHelp Team for processing. If the email did not open, contact <strong>ithelp@foundationpartners.com</strong> directly.
-                                </div>
+                            <span style={{fontSize: '2rem'}}>✅</span>
+                            <div style={{fontWeight: 700, fontSize: '1.125rem', letterSpacing: '-0.01em'}}>
+                                Action Required — Send Your Email
                             </div>
+                            <div style={{fontSize: '0.9375rem', fontWeight: 400, opacity: 0.95, lineHeight: 1.6}}>
+                                An email has been generated with your pre-filled equipment request.
+                            </div>
+                            <ul style={{
+                                listStyle: 'none',
+                                padding: 0,
+                                margin: 0,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '0.625rem',
+                                width: '100%'
+                            }}>
+                                <li style={{
+                                    background: 'rgba(255,255,255,0.15)',
+                                    borderRadius: '10px',
+                                    padding: '0.75rem 1rem',
+                                    fontSize: '0.9375rem',
+                                    fontWeight: 500,
+                                    lineHeight: 1.5
+                                }}>
+                                    📧 Please switch to Outlook and click <strong>Send</strong> to submit your order to the IT Help Team.
+                                </li>
+                                <li style={{
+                                    background: 'rgba(255,255,255,0.15)',
+                                    borderRadius: '10px',
+                                    padding: '0.75rem 1rem',
+                                    fontSize: '0.9375rem',
+                                    fontWeight: 500,
+                                    lineHeight: 1.5
+                                }}>
+                                    ⚠️ If the email window did not open automatically, please contact <strong>ithelp@foundationpartners.com</strong> directly.
+                                </li>
+                            </ul>
                             <button
                                 onClick={() => setShowEmailReminder(false)}
                                 style={{
+                                    marginTop: '0.5rem',
+                                    padding: '0.625rem 2rem',
                                     background: 'rgba(255,255,255,0.2)',
-                                    border: 'none',
+                                    border: '1.5px solid rgba(255,255,255,0.5)',
                                     color: 'white',
-                                    borderRadius: '50%',
-                                    width: '28px',
-                                    height: '28px',
+                                    borderRadius: '50px',
                                     cursor: 'pointer',
-                                    fontSize: '1rem',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    flexShrink: 0,
-                                    marginTop: '-0.25rem'
+                                    fontSize: '0.9375rem',
+                                    fontWeight: 600,
+                                    letterSpacing: '0.01em'
                                 }}
-                            >✕</button>
+                            >Got it — Dismiss</button>
                         </div>
                     )}
                 </>
