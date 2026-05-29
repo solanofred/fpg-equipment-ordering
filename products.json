@@ -5,11 +5,11 @@
     "category": "desktop",
     "items": [
       {
-        "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
-        "price": 1200
+        "name": "Lenovo M75q Gen 5 - 16GB/512GB/R5-8500",
+        "price": 1100
       }
     ],
-    "price": 1450,
+    "price": 1265,
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-M75q-Gen5.jpg",
@@ -21,15 +21,15 @@
     "category": "desktop",
     "items": [
       {
-        "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
-        "price": 1200
+        "name": "Lenovo M75q Gen 5 - 16GB/512GB/R5-8500",
+        "price": 1100
       },
       {
-        "name": "Lenovo Tiny-in-One 27\" LED - QHD",
-        "price": 500
+        "name": "Lenovo Tiny-in-One (TIO) 24\"",
+        "price": 290
       }
     ],
-    "price": 2050,
+    "price": 1598.5,
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-TIO.jpg",
@@ -41,19 +41,19 @@
     "category": "desktop",
     "items": [
       {
-        "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
-        "price": 1200
+        "name": "Lenovo M75q Gen 5 - 16GB/512GB/R5-8500",
+        "price": 1100
       },
       {
-        "name": "Lenovo Tiny-in-One 27\" LED - QHD",
-        "price": 500
+        "name": "Lenovo Tiny-in-One 24\" LED",
+        "price": 290
       },
       {
-        "name": "Lenovo ThinkVision 27\" LED - E27q-40 QHD",
-        "price": 300
+        "name": "Lenovo ThinkVision 24\" LED",
+        "price": 170
       }
     ],
-    "price": 2400,
+    "price": 1794,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-TIO-and-ThinkVision.jpg"
@@ -68,7 +68,7 @@
         "price": 300
       }
     ],
-    "price": 450,
+    "price": 345,
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/HPLaserJet-M3101fdw-BW.jpg",
@@ -84,7 +84,7 @@
         "price": 650
       }
     ],
-    "price": 715,
+    "price": 747.5,
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/HPLaserJet-3301fdw-Color.jpg",
@@ -100,7 +100,7 @@
         "price": 1750
       }
     ],
-    "price": 1900,
+    "price": 1925,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-ThinkPad-T14.jpg"
@@ -185,7 +185,7 @@
         "price": 30
       }
     ],
-    "price": 3000,
+    "price": 2805,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/laptop-with-dual-monitors.jpg"
@@ -224,7 +224,7 @@
         "price": 30
       }
     ],
-    "price": 2950,
+    "price": 2843.5,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/laptop-with-dual-monitors-CCR.jpg"
@@ -341,8 +341,8 @@
         "price": 30
       }
     ],
-    "price": 1450,
-    "recommended": false,
+    "price": 1848,
+    "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Samsung-AR-TV.jpg"
   },
@@ -364,7 +364,7 @@
         "price": 30
       }
     ],
-    "price": 1500,
+    "price": 1903,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Samsung-AR-TV.jpg"
@@ -391,13 +391,16 @@
     "items": [
       {
         "name": "Lenovo L16 - 32GB/512GB/R5-215",
-        "price": 1850
+        "price": 1900
       }
     ],
-    "price": 2100,
+    "price": 2090,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-L16-Accounting.jpg"
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-L16-Accounting.jpg",
+    "categories": [
+      "laptop"
+    ]
   },
   {
     "id": 21,
