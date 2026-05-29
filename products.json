@@ -5,11 +5,11 @@
     "category": "desktop",
     "items": [
       {
-        "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
-        "price": 1200
+        "name": "Lenovo M75q Gen 5 - 16GB/512GB/R5-8500",
+        "price": 1100
       }
     ],
-    "price": 1450,
+    "price": 1265,
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-M75q-Gen5.jpg",
@@ -21,15 +21,15 @@
     "category": "desktop",
     "items": [
       {
-        "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
-        "price": 1200
+        "name": "Lenovo M75q Gen 5 - 16GB/512GB/R5-8500",
+        "price": 1100
       },
       {
-        "name": "Lenovo Tiny-in-One 27\" LED - QHD",
-        "price": 500
+        "name": "Lenovo Tiny-in-One 24\" LED",
+        "price": 290
       }
     ],
-    "price": 2050,
+    "price": 1598.5,
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-TIO.jpg",
@@ -42,18 +42,18 @@
     "items": [
       {
         "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
-        "price": 1200
+        "price": 1100
       },
       {
-        "name": "Lenovo Tiny-in-One 27\" LED - QHD",
-        "price": 500
+        "name": "Lenovo Tiny-in-One 24\" LED",
+        "price": 290
       },
       {
-        "name": "Lenovo ThinkVision 27\" LED - E27q-40 QHD",
-        "price": 300
+        "name": "Lenovo ThinkVision 24\" LED",
+        "price": 170
       }
     ],
-    "price": 2400,
+    "price": 1794,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-TIO-and-ThinkVision.jpg"
@@ -112,14 +112,14 @@
     "items": [
       {
         "name": "Lenovo T14 - 32GB/512GB/Intel U7",
-        "price": 1700
+        "price": 1750
       },
       {
         "name": "Lenovo ThinkPad Hybrid USB-C Dock",
         "price": 300
       }
     ],
-    "price": 2300,
+    "price": 2400,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-ThinkPad-T14-and-Dock.jpg"
