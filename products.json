@@ -478,5 +478,15 @@
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/NVR.jpg",
     "id": 24
+  },
+  {
+    "title": "Tiny-in-One (TIO) Monitor - 27\" QHD",
+    "category": "monitors",
+    "items": [],
+    "price": 500,
+    "recommended": false,
+    "available": true,
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-TIO.jpg",
+    "id": 25
   }
 ]
