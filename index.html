@@ -1028,11 +1028,13 @@
 
                 // Send to Power Automate in background
                 const POWER_AUTOMATE_URL = 'https://default98c6bcb2ecac45b48db79976d46784.c4.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/49f8f3edc7024616a09b9a7bdf4ec7f0/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=BFBNWeGCqOfqFORB3CF9QZmJoKIPt2vfhT-wKXGRyOM';
+                const payloadString = JSON.stringify(orderPayload);
+                console.log('PAYLOAD BEING SENT:', payloadString);
                 try {
                     await fetch(POWER_AUTOMATE_URL, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(orderPayload)
+                        body: payloadString
                     });
                 } catch (error) {
                     console.error('Order submission error:', error);
