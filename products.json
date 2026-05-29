@@ -478,5 +478,15 @@
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/NVR.jpg",
     "id": 24
+  },
+  {
+    "title": "Firewall",
+    "category": "test",
+    "items": [],
+    "price": 0,
+    "recommended": true,
+    "available": true,
+    "imageUrl": "",
+    "id": 25
   }
 ]
