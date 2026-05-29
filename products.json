@@ -41,7 +41,7 @@
     "category": "desktop",
     "items": [
       {
-        "name": "Lenovo M75q Gen 5 - 16GB/512GB/R5-8500",
+        "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
         "price": 1100
       },
       {
@@ -112,14 +112,14 @@
     "items": [
       {
         "name": "Lenovo T14 - 32GB/512GB/Intel U7",
-        "price": 1750
+        "price": 1700
       },
       {
         "name": "Lenovo ThinkPad Hybrid USB-C Dock",
         "price": 300
       }
     ],
-    "price": 2400,
+    "price": 2300,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-ThinkPad-T14-and-Dock.jpg"
@@ -131,11 +131,11 @@
     "items": [
       {
         "name": "Lenovo T14 - 32GB/512GB/Intel U7",
-        "price": 1750
+        "price": 1700
       },
       {
         "name": "ThinkVision 24\" T24-40 - 1080P LED",
-        "price": 200
+        "price": 290
       },
       {
         "name": "Lenovo ThinkPad Hybrid USB-C Dock",
@@ -150,7 +150,7 @@
         "price": 30
       }
     ],
-    "price": 2750,
+    "price": 2748.5,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/laptop-with-single-monitor.jpg"
@@ -197,7 +197,7 @@
     "items": [
       {
         "name": "Lenovo T14 - 32GB/512GB/Intel U7",
-        "price": 1750
+        "price": 1700
       },
       {
         "name": "Lenovo Tiny-in-One 24\" LED",
@@ -224,7 +224,7 @@
         "price": 30
       }
     ],
-    "price": 3179.75,
+    "price": 3122.25,
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/laptop-with-dual-monitors-CCR.jpg"
@@ -269,7 +269,7 @@
         "price": 70
       }
     ],
-    "price": 100,
+    "price": 80.5,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Logitech-C920S-Webcam.jpg"
