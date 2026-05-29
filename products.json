@@ -480,13 +480,33 @@
     "id": 24
   },
   {
-    "title": "ThinkVision Monitor - 27\" QHD",
+    "title": "ThinkVision Monitor - 24\" QHD",
     "category": "monitors",
-    "items": [],
-    "price": 300,
+    "items": [
+      {
+        "name": "ThinkVision - 24\"",
+        "price": 170
+      }
+    ],
+    "price": 250,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo_27inch.jpg",
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo_24inch.jpg",
     "id": 25
+  },
+  {
+    "title": "Tiny-in-One (TIO) Monitor - 24\"",
+    "category": "desktop",
+    "items": [
+      {
+        "name": "TIO Monitor",
+        "price": 290
+      }
+    ],
+    "price": 350,
+    "recommended": false,
+    "available": true,
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-TIO.jpg",
+    "id": 26
   }
 ]
