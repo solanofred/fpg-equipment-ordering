@@ -9,7 +9,7 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://alcdn.msauth.net/browser/2.38.3/js/msal-browser.min.js"></script>
+    <script src="https://unpkg.com/@azure/msal-browser@3.10.0/lib/msal-browser.min.js"></script>
     
     <!-- Google Fonts - Corporate Elegant -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -805,14 +805,21 @@
             }
         };
 
-        const msalInstance = new msal.PublicClientApplication(msalConfig);
+        let msalInstance = null;
+        try {
+            if (typeof msal !== 'undefined') {
+                msalInstance = new msal.PublicClientApplication(msalConfig);
+            }
+        } catch(e) {
+            console.warn('MSAL init failed:', e);
+        }
 
         const graphScopes = ['User.Read'];
 
         async function signInAndGetUser() {
             try {
+                if (!msalInstance) return null;
                 await msalInstance.initialize();
-                // Try silent first
                 const accounts = msalInstance.getAllAccounts();
                 if (accounts.length > 0) {
                     const silentResult = await msalInstance.acquireTokenSilent({
@@ -821,26 +828,30 @@
                     });
                     return await fetchGraphProfile(silentResult.accessToken);
                 }
-                // Fall back to popup login
                 const loginResult = await msalInstance.loginPopup({ scopes: graphScopes });
                 return await fetchGraphProfile(loginResult.accessToken);
             } catch (e) {
-                console.error('MSAL auth error:', e);
+                console.warn('MSAL auth error:', e);
                 return null;
             }
         }
 
         async function fetchGraphProfile(token) {
-            const res = await fetch('https://graph.microsoft.com/v1.0/me', {
-                headers: { Authorization: 'Bearer ' + token }
-            });
-            const profile = await res.json();
-            return {
-                name: profile.displayName || '',
-                email: profile.mail || profile.userPrincipalName || '',
-                title: profile.jobTitle || '',
-                department: profile.department || ''
-            };
+            try {
+                const res = await fetch('https://graph.microsoft.com/v1.0/me', {
+                    headers: { Authorization: 'Bearer ' + token }
+                });
+                const profile = await res.json();
+                return {
+                    name: profile.displayName || '',
+                    email: profile.mail || profile.userPrincipalName || '',
+                    title: profile.jobTitle || '',
+                    department: profile.department || ''
+                };
+            } catch(e) {
+                console.warn('Graph profile error:', e);
+                return null;
+            }
         }
         // ────────────────────────────────────────────────────
         
