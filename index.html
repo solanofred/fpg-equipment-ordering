@@ -820,18 +820,38 @@
             try {
                 if (!msalInstance) return null;
                 await msalInstance.initialize();
+                // Handle redirect response first
+                await msalInstance.handleRedirectPromise();
                 const accounts = msalInstance.getAllAccounts();
                 if (accounts.length > 0) {
-                    const silentResult = await msalInstance.acquireTokenSilent({
-                        scopes: graphScopes,
-                        account: accounts[0]
-                    });
-                    return await fetchGraphProfile(silentResult.accessToken);
+                    try {
+                        const silentResult = await msalInstance.acquireTokenSilent({
+                            scopes: graphScopes,
+                            account: accounts[0]
+                        });
+                        return await fetchGraphProfile(silentResult.accessToken);
+                    } catch(silentErr) {
+                        // Silent failed — return null, user will sign in manually
+                        console.warn('Silent token failed:', silentErr);
+                        return null;
+                    }
                 }
-                const loginResult = await msalInstance.loginPopup({ scopes: graphScopes });
-                return await fetchGraphProfile(loginResult.accessToken);
+                // No accounts — don't auto-popup, let user click Sign In
+                return null;
             } catch (e) {
                 console.warn('MSAL auth error:', e);
+                return null;
+            }
+        }
+
+        async function signInWithPopup() {
+            try {
+                if (!msalInstance) return null;
+                await msalInstance.initialize();
+                const loginResult = await msalInstance.loginPopup({ scopes: graphScopes });
+                return await fetchGraphProfile(loginResult.accessToken);
+            } catch(e) {
+                console.warn('Popup login error:', e);
                 return null;
             }
         }
@@ -1323,6 +1343,7 @@
                                 submitter={submitter}
                                 onSubmit={handleSubmitOrder}
                                 onClose={() => setShowCheckoutForm(false)}
+                                onSignIn={(user) => setSubmitter(user)}
                             />
                         </>
                     )}
@@ -1428,7 +1449,7 @@
         }
         
         // Checkout Form Component
-        function CheckoutForm({ cart, cartTotal, submitter, onSubmit, onClose }) {
+        function CheckoutForm({ cart, cartTotal, submitter, onSubmit, onClose, onSignIn }) {
             const [formData, setFormData] = React.useState({
                 recipientName: '',
                 recipientEmail: '',
@@ -1438,6 +1459,14 @@
                 shipTo: '',
                 instructions: ''
             });
+            const [signingIn, setSigningIn] = React.useState(false);
+
+            const handleSignIn = async () => {
+                setSigningIn(true);
+                const user = await signInWithPopup();
+                if (user) onSignIn(user);
+                setSigningIn(false);
+            };
             
             const handleChange = (e) => {
                 setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -1498,27 +1527,45 @@
                                     <span style={{fontSize: '1rem'}}>🔒</span>
                                     <span style={{fontWeight: 600, color: '#276749', fontSize: '0.9375rem'}}>Submitted by — verified via Microsoft 365</span>
                                 </div>
-                                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem'}}>
-                                    <div>
-                                        <label style={{...labelStyle, fontSize: '0.8125rem', color: 'var(--neutral-600)'}}>Name</label>
-                                        <input type="text" value={submitter?.name || 'Loading...'} readOnly style={lockedStyle} />
+                                {submitter ? (
+                                    <>
+                                        <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem'}}>
+                                            <div>
+                                                <label style={{...labelStyle, fontSize: '0.8125rem', color: 'var(--neutral-600)'}}>Name</label>
+                                                <input type="text" value={submitter.name} readOnly style={lockedStyle} />
+                                            </div>
+                                            <div>
+                                                <label style={{...labelStyle, fontSize: '0.8125rem', color: 'var(--neutral-600)'}}>Email</label>
+                                                <input type="text" value={submitter.email} readOnly style={lockedStyle} />
+                                            </div>
+                                            <div>
+                                                <label style={{...labelStyle, fontSize: '0.8125rem', color: 'var(--neutral-600)'}}>Title</label>
+                                                <input type="text" value={submitter.title || '—'} readOnly style={lockedStyle} />
+                                            </div>
+                                            <div>
+                                                <label style={{...labelStyle, fontSize: '0.8125rem', color: 'var(--neutral-600)'}}>Department</label>
+                                                <input type="text" value={submitter.department || '—'} readOnly style={lockedStyle} />
+                                            </div>
+                                        </div>
+                                        <div style={{marginTop: '0.75rem', fontSize: '0.8125rem', color: '#276749'}}>
+                                            ✉️ ConnectWise ticket updates will be sent to your email automatically.
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div style={{textAlign: 'center', padding: '0.75rem 0'}}>
+                                        <p style={{fontSize: '0.875rem', color: '#276749', marginBottom: '0.875rem'}}>
+                                            Sign in with your FPG Microsoft account to auto-fill your details and receive ConnectWise ticket updates.
+                                        </p>
+                                        <button
+                                            type="button"
+                                            onClick={handleSignIn}
+                                            disabled={signingIn}
+                                            style={{padding: '0.625rem 1.5rem', borderRadius: '50px', border: 'none', background: '#0A2540', color: 'white', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer'}}
+                                        >
+                                            {signingIn ? 'Signing in...' : '🔐 Sign in with Microsoft'}
+                                        </button>
                                     </div>
-                                    <div>
-                                        <label style={{...labelStyle, fontSize: '0.8125rem', color: 'var(--neutral-600)'}}>Email</label>
-                                        <input type="text" value={submitter?.email || 'Loading...'} readOnly style={lockedStyle} />
-                                    </div>
-                                    <div>
-                                        <label style={{...labelStyle, fontSize: '0.8125rem', color: 'var(--neutral-600)'}}>Title</label>
-                                        <input type="text" value={submitter?.title || '—'} readOnly style={lockedStyle} />
-                                    </div>
-                                    <div>
-                                        <label style={{...labelStyle, fontSize: '0.8125rem', color: 'var(--neutral-600)'}}>Department</label>
-                                        <input type="text" value={submitter?.department || '—'} readOnly style={lockedStyle} />
-                                    </div>
-                                </div>
-                                <div style={{marginTop: '0.75rem', fontSize: '0.8125rem', color: '#276749'}}>
-                                    ✉️ ConnectWise ticket updates will be sent to your email automatically.
-                                </div>
+                                )}
                             </div>
 
                             {/* ── RECIPIENT SECTION ── */}
