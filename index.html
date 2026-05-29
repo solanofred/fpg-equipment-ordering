@@ -9,6 +9,7 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://alcdn.msauth.net/browser/2.38.3/js/msal-browser.min.js"></script>
     
     <!-- Google Fonts - Corporate Elegant -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -791,6 +792,58 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
         
+        // ── MSAL Configuration ──────────────────────────────
+        const msalConfig = {
+            auth: {
+                clientId: '3935ca7b-0c3e-48dc-b337-04f87e55a555',
+                authority: 'https://login.microsoftonline.com/common',
+                redirectUri: window.location.origin
+            },
+            cache: {
+                cacheLocation: 'sessionStorage',
+                storeAuthStateInCookie: false
+            }
+        };
+
+        const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+        const graphScopes = ['User.Read'];
+
+        async function signInAndGetUser() {
+            try {
+                await msalInstance.initialize();
+                // Try silent first
+                const accounts = msalInstance.getAllAccounts();
+                if (accounts.length > 0) {
+                    const silentResult = await msalInstance.acquireTokenSilent({
+                        scopes: graphScopes,
+                        account: accounts[0]
+                    });
+                    return await fetchGraphProfile(silentResult.accessToken);
+                }
+                // Fall back to popup login
+                const loginResult = await msalInstance.loginPopup({ scopes: graphScopes });
+                return await fetchGraphProfile(loginResult.accessToken);
+            } catch (e) {
+                console.error('MSAL auth error:', e);
+                return null;
+            }
+        }
+
+        async function fetchGraphProfile(token) {
+            const res = await fetch('https://graph.microsoft.com/v1.0/me', {
+                headers: { Authorization: 'Bearer ' + token }
+            });
+            const profile = await res.json();
+            return {
+                name: profile.displayName || '',
+                email: profile.mail || profile.userPrincipalName || '',
+                title: profile.jobTitle || '',
+                department: profile.department || ''
+            };
+        }
+        // ────────────────────────────────────────────────────
+        
         // Mock data - will be replaced by products.json
         const mockProducts = [];
         
@@ -805,6 +858,16 @@
             const [showCheckoutForm, setShowCheckoutForm] = useState(false);
             const [showEmailReminder, setShowEmailReminder] = useState(false);
             const [lastUpdated, setLastUpdated] = useState(null);
+            const [submitter, setSubmitter] = useState(null);
+            const [authLoading, setAuthLoading] = useState(true);
+
+            // Sign in on load — silent if already authenticated
+            useEffect(() => {
+                signInAndGetUser().then(user => {
+                    setSubmitter(user);
+                    setAuthLoading(false);
+                });
+            }, []);
             
             // Fetch products - cache bust with timestamp to always get fresh data
             useEffect(() => {
@@ -901,44 +964,53 @@
                 setShowCheckoutForm(true);
             };
             
-            const handleSubmitOrder = (formData) => {
-                // Build order summary for email
-                const itemsList = cart.map(item => {
-                    const itemDetails = item.items.map(i => `  • ${i.name} - $${i.price.toFixed(2)}`).join('\n');
-                    return `${item.title} (Qty: ${item.quantity})\n${itemDetails}\nUnit Price: $${item.price.toFixed(2)}\nSubtotal: $${(item.price * item.quantity).toFixed(2)}`;
-                }).join('\n\n');
-                
-                const emailBody = `Employee Name: ${formData.employeeName}
-Employee Email: ${formData.employeeEmail || 'N/A (New Employee)'}
-Location/Cost Center: ${formData.location}
-Date Needed: ${formData.dateNeeded}
-Ship To Address: ${formData.shipTo}
-Special Instructions: ${formData.instructions || 'None'}
+            const handleSubmitOrder = async (formData) => {
+                const orderPayload = {
+                    // Submitter — auto from Microsoft 365 (ConnectWise requester)
+                    submitterName: submitter?.name || 'Unknown',
+                    submitterEmail: submitter?.email || '',
+                    submitterTitle: submitter?.title || '',
+                    submitterDepartment: submitter?.department || '',
+                    // Recipient — entered in form (who gets the equipment)
+                    recipientName: formData.recipientName,
+                    recipientEmail: formData.recipientEmail || 'Not provided',
+                    isNewEmployee: formData.isNewEmployee,
+                    // Delivery details
+                    location: formData.location,
+                    dateNeeded: formData.dateNeeded,
+                    shipTo: formData.shipTo,
+                    instructions: formData.instructions || 'None',
+                    submittedAt: new Date().toLocaleString(),
+                    totalCost: cartTotal.toFixed(2),
+                    items: cart.map(item => ({
+                        title: item.title,
+                        quantity: item.quantity,
+                        unitPrice: item.price.toFixed(2),
+                        subtotal: (item.price * item.quantity).toFixed(2),
+                        components: item.items.map(i => ({
+                            name: i.name,
+                            price: i.price.toFixed(2)
+                        }))
+                    }))
+                };
 
-EQUIPMENT REQUESTED:
-━━━━━━━━━━━━━━━━━━━━━━
-${itemsList}
-
-TOTAL: $${cartTotal.toFixed(2)}
-
----
-This request was submitted via the FPG Equipment Ordering Portal
-${new Date().toLocaleString()}`;
-
-                const subject = 'Equipment Procurement Request';
-                const recipient = 'ithelp@foundationpartners.com';
-                
-                // Create mailto link
-                const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
-                
-                // Open email client without navigating away from the page
-                window.open(mailtoLink, '_self');
-                
-                // Close checkout form and cart, clear cart, show email reminder
+                // Close UI immediately — don't wait for network
                 setShowCheckoutForm(false);
                 setCartOpen(false);
                 setCart([]);
                 setShowEmailReminder(true);
+
+                // Send to Power Automate in background
+                const POWER_AUTOMATE_URL = 'https://default98c6bcb2ecac45b48db79976d46784.c4.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/49f8f3edc7024616a09b9a7bdf4ec7f0/triggers/manual/paths/invoke?api-version=1';
+                try {
+                    await fetch(POWER_AUTOMATE_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(orderPayload)
+                    });
+                } catch (error) {
+                    console.error('Order submission error:', error);
+                }
             };
             
             return (
@@ -1237,6 +1309,7 @@ ${new Date().toLocaleString()}`;
                             <CheckoutForm 
                                 cart={cart}
                                 cartTotal={cartTotal}
+                                submitter={submitter}
                                 onSubmit={handleSubmitOrder}
                                 onClose={() => setShowCheckoutForm(false)}
                             />
@@ -1267,10 +1340,10 @@ ${new Date().toLocaleString()}`;
                         }}>
                             <span style={{fontSize: '2rem'}}>✅</span>
                             <div style={{fontWeight: 700, fontSize: '1.125rem', letterSpacing: '-0.01em'}}>
-                                Action Required — Send Your Email
+                                Order Request Submitted!
                             </div>
                             <div style={{fontSize: '0.9375rem', fontWeight: 400, opacity: 0.95, lineHeight: 1.6}}>
-                                An email has been generated with your pre-filled equipment request.
+                                Your equipment request has been sent directly to the IT Help Team for processing.
                             </div>
                             <ul style={{
                                 listStyle: 'none',
@@ -1289,7 +1362,7 @@ ${new Date().toLocaleString()}`;
                                     fontWeight: 500,
                                     lineHeight: 1.5
                                 }}>
-                                    📧 Please switch to Outlook and click <strong>Send</strong> to submit your order to the IT Help Team.
+                                    📧 A notification has been sent to the IT Help Team and your order has been logged for tracking.
                                 </li>
                                 <li style={{
                                     background: 'rgba(255,255,255,0.15)',
@@ -1299,7 +1372,7 @@ ${new Date().toLocaleString()}`;
                                     fontWeight: 500,
                                     lineHeight: 1.5
                                 }}>
-                                    ⚠️ If the email window did not open automatically, please contact <strong>ithelp@foundationpartners.com</strong> directly.
+                                    ⚠️ If you do not receive a confirmation within 15 minutes, please contact <strong>ithelp@foundationpartners.com</strong> directly.
                                 </li>
                             </ul>
                             <button
@@ -1344,10 +1417,11 @@ ${new Date().toLocaleString()}`;
         }
         
         // Checkout Form Component
-        function CheckoutForm({ cart, cartTotal, onSubmit, onClose }) {
+        function CheckoutForm({ cart, cartTotal, submitter, onSubmit, onClose }) {
             const [formData, setFormData] = React.useState({
-                employeeName: '',
-                employeeEmail: '',
+                recipientName: '',
+                recipientEmail: '',
+                isNewEmployee: 'no',
                 location: '',
                 dateNeeded: '',
                 shipTo: '',
@@ -1355,22 +1429,34 @@ ${new Date().toLocaleString()}`;
             });
             
             const handleChange = (e) => {
-                setFormData({
-                    ...formData,
-                    [e.target.name]: e.target.value
-                });
+                setFormData({ ...formData, [e.target.name]: e.target.value });
             };
             
             const handleSubmit = (e) => {
                 e.preventDefault();
-                
-                // Validate required fields
-                if (!formData.employeeName || !formData.location || !formData.dateNeeded || !formData.shipTo) {
+                if (!formData.recipientName || !formData.location || !formData.dateNeeded || !formData.shipTo) {
                     alert('Please fill in all required fields.');
                     return;
                 }
-                
                 onSubmit(formData);
+            };
+
+            const inputStyle = {
+                width: '100%', padding: '0.75rem', borderRadius: '8px',
+                border: '1px solid var(--neutral-300)', fontSize: '0.9375rem',
+                fontFamily: 'inherit', background: 'white'
+            };
+
+            const lockedStyle = {
+                ...inputStyle,
+                background: 'var(--neutral-100)',
+                color: 'var(--neutral-600)',
+                cursor: 'not-allowed'
+            };
+
+            const labelStyle = {
+                display: 'block', marginBottom: '0.5rem',
+                fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.9375rem'
             };
             
             return (
@@ -1381,151 +1467,131 @@ ${new Date().toLocaleString()}`;
                     </div>
                     
                     <div className="cart-body" style={{padding: '1.5rem', overflowY: 'auto', flex: 1}}>
-                        {/* Warning Box */}
-                        <div style={{marginBottom: '1.5rem', padding: '1rem', background: 'linear-gradient(135deg, #1B5A8E 0%, #0F4068 100%)', border: '1px solid #1B5A8E', borderRadius: '8px'}}>
+
+                        {/* Review warning */}
+                        <div style={{marginBottom: '1.5rem', padding: '1rem', background: 'linear-gradient(135deg, #1B5A8E 0%, #0F4068 100%)', borderRadius: '8px'}}>
                             <div style={{display: 'flex', alignItems: 'start', gap: '0.75rem'}}>
                                 <span style={{fontSize: '1.25rem'}}>⚠️</span>
                                 <div>
-                                    <div style={{fontWeight: 600, color: 'white', marginBottom: '0.25rem'}}>
-                                        Review Your Order Carefully
-                                    </div>
-                                    <div style={{fontSize: '0.875rem', color: 'rgba(255, 255, 255, 0.9)'}}>
-                                        Once you submit this request, you cannot edit it. If you need to add more items or make changes, you'll need to submit a separate request.
-                                    </div>
+                                    <div style={{fontWeight: 600, color: 'white', marginBottom: '0.25rem'}}>Review Your Order Carefully</div>
+                                    <div style={{fontSize: '0.875rem', color: 'rgba(255,255,255,0.9)'}}>Once submitted, this request cannot be edited. Submit a separate request for additional items.</div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <form onSubmit={handleSubmit}>
-                            <div style={{marginBottom: '1.5rem'}}>
-                                <label style={{display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--text-primary)'}}>
-                                    Employee Name <span style={{color: '#dc2626'}}>*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="employeeName"
-                                    value={formData.employeeName}
-                                    onChange={handleChange}
-                                    placeholder="Full name of person receiving equipment"
-                                    required
-                                    style={{width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--neutral-300)', fontSize: '0.9375rem'}}
-                                />
+
+                            {/* ── SUBMITTER SECTION ── */}
+                            <div style={{marginBottom: '1.5rem', padding: '1rem', background: '#F0FFF4', border: '1px solid #9AE6B4', borderRadius: '10px'}}>
+                                <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem'}}>
+                                    <span style={{fontSize: '1rem'}}>🔒</span>
+                                    <span style={{fontWeight: 600, color: '#276749', fontSize: '0.9375rem'}}>Submitted by — verified via Microsoft 365</span>
+                                </div>
+                                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem'}}>
+                                    <div>
+                                        <label style={{...labelStyle, fontSize: '0.8125rem', color: 'var(--neutral-600)'}}>Name</label>
+                                        <input type="text" value={submitter?.name || 'Loading...'} readOnly style={lockedStyle} />
+                                    </div>
+                                    <div>
+                                        <label style={{...labelStyle, fontSize: '0.8125rem', color: 'var(--neutral-600)'}}>Email</label>
+                                        <input type="text" value={submitter?.email || 'Loading...'} readOnly style={lockedStyle} />
+                                    </div>
+                                    <div>
+                                        <label style={{...labelStyle, fontSize: '0.8125rem', color: 'var(--neutral-600)'}}>Title</label>
+                                        <input type="text" value={submitter?.title || '—'} readOnly style={lockedStyle} />
+                                    </div>
+                                    <div>
+                                        <label style={{...labelStyle, fontSize: '0.8125rem', color: 'var(--neutral-600)'}}>Department</label>
+                                        <input type="text" value={submitter?.department || '—'} readOnly style={lockedStyle} />
+                                    </div>
+                                </div>
+                                <div style={{marginTop: '0.75rem', fontSize: '0.8125rem', color: '#276749'}}>
+                                    ✉️ ConnectWise ticket updates will be sent to your email automatically.
+                                </div>
                             </div>
-                            
-                            <div style={{marginBottom: '1.5rem'}}>
-                                <label style={{display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--text-primary)'}}>
-                                    Employee Email Address
-                                    <span style={{fontSize: '0.8125rem', fontWeight: 400, color: 'var(--text-secondary)', marginLeft: '0.5rem'}}>(Optional - for existing employees)</span>
-                                </label>
-                                <input
-                                    type="email"
-                                    name="employeeEmail"
-                                    value={formData.employeeEmail}
-                                    onChange={handleChange}
-                                    placeholder="employee@foundationpartners.com"
-                                    style={{width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--neutral-300)', fontSize: '0.9375rem'}}
-                                />
+
+                            {/* ── RECIPIENT SECTION ── */}
+                            <div style={{marginBottom: '1.5rem', paddingBottom: '1.5rem', borderBottom: '1px solid var(--neutral-200)'}}>
+                                <div style={{fontWeight: 600, fontSize: '1rem', color: 'var(--fpg-navy)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                                    <span>👤</span> Equipment recipient
+                                </div>
+                                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem'}}>
+                                    <div>
+                                        <label style={labelStyle}>Recipient Name <span style={{color: '#dc2626'}}>*</span></label>
+                                        <input type="text" name="recipientName" value={formData.recipientName} onChange={handleChange} placeholder="Full name of person receiving equipment" required style={inputStyle} />
+                                    </div>
+                                    <div>
+                                        <label style={labelStyle}>Recipient Email <span style={{fontSize: '0.8125rem', fontWeight: 400, color: 'var(--neutral-500)'}}>(optional)</span></label>
+                                        <input type="email" name="recipientEmail" value={formData.recipientEmail} onChange={handleChange} placeholder="recipient@foundationpartners.com" style={inputStyle} />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label style={labelStyle}>Is this for a new employee?</label>
+                                    <div style={{display: 'flex', gap: '0.75rem'}}>
+                                        {['yes', 'no'].map(val => (
+                                            <label key={val} style={{display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', padding: '0.5rem 1rem', borderRadius: '20px', border: `1.5px solid ${formData.isNewEmployee === val ? 'var(--fpg-navy)' : 'var(--neutral-300)'}`, background: formData.isNewEmployee === val ? 'var(--fpg-navy)' : 'white', color: formData.isNewEmployee === val ? 'white' : 'var(--text-primary)', fontWeight: 500, fontSize: '0.9375rem', transition: 'all 0.15s'}}>
+                                                <input type="radio" name="isNewEmployee" value={val} checked={formData.isNewEmployee === val} onChange={handleChange} style={{display: 'none'}} />
+                                                {val === 'yes' ? 'Yes — new employee' : 'No — existing employee'}
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
-                            
+
+                            {/* ── DELIVERY SECTION ── */}
                             <div style={{marginBottom: '1.5rem'}}>
-                                <label style={{display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--text-primary)'}}>
-                                    Location ID / Cost Center <span style={{color: '#dc2626'}}>*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="location"
-                                    value={formData.location}
-                                    onChange={handleChange}
-                                    placeholder="e.g., 12345 - Tampa Office"
-                                    required
-                                    style={{width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--neutral-300)', fontSize: '0.9375rem'}}
-                                />
+                                <div style={{fontWeight: 600, fontSize: '1rem', color: 'var(--fpg-navy)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                                    <span>📦</span> Delivery details
+                                </div>
+                                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem'}}>
+                                    <div>
+                                        <label style={labelStyle}>Location / Cost Center <span style={{color: '#dc2626'}}>*</span></label>
+                                        <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="e.g., 12345 - Tampa Office" required style={inputStyle} />
+                                    </div>
+                                    <div>
+                                        <label style={labelStyle}>Date Needed <span style={{color: '#dc2626'}}>*</span></label>
+                                        <input type="date" name="dateNeeded" value={formData.dateNeeded} onChange={handleChange} required style={inputStyle} />
+                                    </div>
+                                </div>
+                                <div style={{marginBottom: '1rem'}}>
+                                    <label style={labelStyle}>Ship To Address <span style={{color: '#dc2626'}}>*</span></label>
+                                    <textarea name="shipTo" value={formData.shipTo} onChange={handleChange} placeholder="Full shipping address" required rows="3" style={{...inputStyle, resize: 'vertical'}} />
+                                </div>
+                                <div>
+                                    <label style={labelStyle}>Special Instructions <span style={{fontSize: '0.8125rem', fontWeight: 400, color: 'var(--neutral-500)'}}>(optional)</span></label>
+                                    <textarea name="instructions" value={formData.instructions} onChange={handleChange} placeholder="Any special requirements or notes" rows="3" style={{...inputStyle, resize: 'vertical'}} />
+                                </div>
                             </div>
-                            
-                            <div style={{marginBottom: '1.5rem'}}>
-                                <label style={{display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--text-primary)'}}>
-                                    Date Needed <span style={{color: '#dc2626'}}>*</span>
-                                </label>
-                                <input
-                                    type="date"
-                                    name="dateNeeded"
-                                    value={formData.dateNeeded}
-                                    onChange={handleChange}
-                                    required
-                                    style={{width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--neutral-300)', fontSize: '0.9375rem'}}
-                                />
-                            </div>
-                            
-                            <div style={{marginBottom: '1.5rem'}}>
-                                <label style={{display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--text-primary)'}}>
-                                    Ship To Address <span style={{color: '#dc2626'}}>*</span>
-                                </label>
-                                <textarea
-                                    name="shipTo"
-                                    value={formData.shipTo}
-                                    onChange={handleChange}
-                                    placeholder="Full shipping address"
-                                    required
-                                    rows="3"
-                                    style={{width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--neutral-300)', fontSize: '0.9375rem', fontFamily: 'inherit', resize: 'vertical'}}
-                                />
-                            </div>
-                            
-                            <div style={{marginBottom: '1.5rem'}}>
-                                <label style={{display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--text-primary)'}}>
-                                    Special Instructions (Optional)
-                                </label>
-                                <textarea
-                                    name="instructions"
-                                    value={formData.instructions}
-                                    onChange={handleChange}
-                                    placeholder="Any special requirements or notes"
-                                    rows="3"
-                                    style={{width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--neutral-300)', fontSize: '0.9375rem', fontFamily: 'inherit', resize: 'vertical'}}
-                                />
-                            </div>
-                            
+
+                            {/* ── ORDER SUMMARY ── */}
                             <div style={{padding: '1rem', background: 'var(--neutral-100)', borderRadius: '8px', marginBottom: '1.5rem'}}>
-                                <div style={{fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-primary)'}}>Order Summary:</div>
+                                <div style={{fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-primary)'}}>Order Summary</div>
                                 {cart.map((item) => (
                                     <div key={item.id} style={{fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '0.25rem'}}>
-                                        {item.title} (Qty: {item.quantity}) - ${(item.price * item.quantity).toFixed(2)}
+                                        {item.title} (Qty: {item.quantity}) — ${(item.price * item.quantity).toFixed(2)}
                                     </div>
                                 ))}
                                 <div style={{borderTop: '1px solid var(--neutral-300)', paddingTop: '0.5rem', marginTop: '0.5rem', fontWeight: 700, color: 'var(--fpg-navy)', fontSize: '1.125rem'}}>
                                     Total: ${cartTotal.toFixed(2)}
                                 </div>
                             </div>
-                            
-                            <div style={{display: 'flex', gap: '1rem'}}>
-                                <button
-                                    type="button"
-                                    onClick={onClose}
-                                    style={{flex: 1, padding: '0.875rem', background: 'white', color: 'var(--text-primary)', border: '1px solid var(--neutral-300)', borderRadius: '8px', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer'}}
-                                >
+
+                            {/* ── SUBMIT ── */}
+                            <div style={{display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '0.75rem'}}>
+                                <button type="button" onClick={onClose} style={{padding: '0.875rem', borderRadius: '50px', border: '1.5px solid var(--neutral-300)', background: 'white', fontSize: '0.9375rem', cursor: 'pointer', fontWeight: 500}}>
                                     Cancel
                                 </button>
-                                <button
-                                    type="submit"
-                                    style={{flex: 1, padding: '0.875rem', background: 'var(--fpg-navy)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer'}}
-                                >
-                                    Submit Request
+                                <button type="submit" style={{padding: '0.875rem', borderRadius: '50px', border: 'none', background: 'var(--fpg-navy)', color: 'white', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer'}}>
+                                    Submit Order Request
                                 </button>
                             </div>
-                            
-                            <div style={{marginTop: '1rem', padding: '0.75rem', background: '#EFF6FF', borderRadius: '8px', fontSize: '0.8125rem', color: '#1E40AF'}}>
-                                <div style={{fontWeight: 600, marginBottom: '0.25rem'}}>📧 How This Works:</div>
-                                <div>1. Click "Submit Request" below</div>
-                                <div>2. Your email client will open with a pre-filled message</div>
-                                <div>3. Review the email and click "Send"</div>
-                                <div>4. Your cart will remain until you manually clear it</div>
-                            </div>
+
                         </form>
                     </div>
                 </div>
             );
         }
-        
+            
         ReactDOM.render(<App />, document.getElementById('root'));
     </script>
 </body>
