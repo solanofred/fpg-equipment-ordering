@@ -112,14 +112,14 @@
     "items": [
       {
         "name": "Lenovo T14 - 32GB/512GB/Intel U7",
-        "price": 1700
+        "price": 1750
       },
       {
         "name": "Lenovo ThinkPad Hybrid USB-C Dock",
         "price": 300
       }
     ],
-    "price": 2300,
+    "price": 2400,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-ThinkPad-T14-and-Dock.jpg"
@@ -131,11 +131,11 @@
     "items": [
       {
         "name": "Lenovo T14 - 32GB/512GB/Intel U7",
-        "price": 1700
+        "price": 1750
       },
       {
         "name": "ThinkVision 24\" T24-40 - 1080P LED",
-        "price": 290
+        "price": 200
       },
       {
         "name": "Lenovo ThinkPad Hybrid USB-C Dock",
@@ -150,7 +150,7 @@
         "price": 30
       }
     ],
-    "price": 2748.5,
+    "price": 2750,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/laptop-with-single-monitor.jpg"
@@ -197,7 +197,7 @@
     "items": [
       {
         "name": "Lenovo T14 - 32GB/512GB/Intel U7",
-        "price": 1700
+        "price": 1750
       },
       {
         "name": "Lenovo Tiny-in-One 24\" LED",
@@ -224,7 +224,7 @@
         "price": 30
       }
     ],
-    "price": 3122.25,
+    "price": 3179.75,
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/laptop-with-dual-monitors-CCR.jpg"
@@ -239,7 +239,7 @@
         "price": 30
       }
     ],
-    "price": 50,
+    "price": 40,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/LogitechMK270-KVM.jpg"
@@ -254,7 +254,7 @@
         "price": 35
       }
     ],
-    "price": 100,
+    "price": 40.25,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Poly-3210-Wired-Headset.jpg"
@@ -284,7 +284,7 @@
         "price": 300
       }
     ],
-    "price": 350,
+    "price": 345,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-Hybrid-USB-C-Dock.jpg"
@@ -299,10 +299,13 @@
         "price": 400
       }
     ],
-    "price": 500,
+    "price": 460,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Epson-DS-530-Scanner.jpg"
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Epson-DS-530-Scanner.jpg",
+    "categories": [
+      "peripherals"
+    ]
   },
   {
     "id": 16,
@@ -318,7 +321,7 @@
         "price": 75
       }
     ],
-    "price": 500,
+    "price": 488.75,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Poly-CS510-Wireless-Headset.jpg"
