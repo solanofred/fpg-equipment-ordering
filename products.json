@@ -112,14 +112,14 @@
     "items": [
       {
         "name": "Lenovo T14 - 32GB/512GB/Intel U7",
-        "price": 1750
+        "price": 1700
       },
       {
         "name": "Lenovo ThinkPad Hybrid USB-C Dock",
         "price": 300
       }
     ],
-    "price": 2400,
+    "price": 2300,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-ThinkPad-T14-and-Dock.jpg"
