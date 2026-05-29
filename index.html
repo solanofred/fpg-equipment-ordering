@@ -1030,6 +1030,7 @@
                 setCartOpen(false);
                 setCart([]);
                 setShowEmailReminder(true);
+                setTimeout(() => setShowEmailReminder(false), 4000);
 
                 // Send to Power Automate in background
                 const POWER_AUTOMATE_URL = 'https://default98c6bcb2ecac45b48db79976d46784.c4.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/49f8f3edc7024616a09b9a7bdf4ec7f0/triggers/manual/paths/invoke?api-version=1';
@@ -1356,7 +1357,7 @@
                             left: '50%',
                             transform: 'translateX(-50%)',
                             zIndex: 2000,
-                            background: 'linear-gradient(135deg, #568935 0%, #3d6626 100%)',
+                            background: 'linear-gradient(135deg, #1B5A8E 0%, #0A2540 100%)',
                             color: 'white',
                             padding: '2rem 2.5rem',
                             borderRadius: '16px',
@@ -1522,10 +1523,10 @@
                         <form onSubmit={handleSubmit}>
 
                             {/* ── SUBMITTER SECTION ── */}
-                            <div style={{marginBottom: '1.5rem', padding: '1rem', background: '#F0FFF4', border: '1px solid #9AE6B4', borderRadius: '10px'}}>
+                            <div style={{marginBottom: '1.5rem', padding: '1rem', background: '#EBF4FF', border: '1px solid #B5D4F4', borderRadius: '10px'}}>
                                 <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem'}}>
                                     <span style={{fontSize: '1rem'}}>🔒</span>
-                                    <span style={{fontWeight: 600, color: '#276749', fontSize: '0.9375rem'}}>Submitted by — verified via Microsoft 365</span>
+                                    <span style={{fontWeight: 600, color: '#0C447C', fontSize: '0.9375rem'}}>Submitted by — verified via Microsoft 365</span>
                                 </div>
                                 {submitter ? (
                                     <>
@@ -1547,13 +1548,13 @@
                                                 <input type="text" value={submitter.department || '—'} readOnly style={lockedStyle} />
                                             </div>
                                         </div>
-                                        <div style={{marginTop: '0.75rem', fontSize: '0.8125rem', color: '#276749'}}>
+                                        <div style={{marginTop: '0.75rem', fontSize: '0.8125rem', color: '#0C447C'}}>
                                             ✉️ ConnectWise ticket updates will be sent to your email automatically.
                                         </div>
                                     </>
                                 ) : (
                                     <div style={{textAlign: 'center', padding: '0.75rem 0'}}>
-                                        <p style={{fontSize: '0.875rem', color: '#276749', marginBottom: '0.875rem'}}>
+                                        <p style={{fontSize: '0.875rem', color: '#0C447C', marginBottom: '0.875rem'}}>
                                             Sign in with your FPG Microsoft account to auto-fill your details and receive ConnectWise ticket updates.
                                         </p>
                                         <button
@@ -1587,7 +1588,7 @@
                                     <label style={labelStyle}>Is this for a new employee?</label>
                                     <div style={{display: 'flex', gap: '0.75rem'}}>
                                         {['yes', 'no'].map(val => (
-                                            <label key={val} style={{display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', padding: '0.5rem 1rem', borderRadius: '20px', border: `1.5px solid ${formData.isNewEmployee === val ? 'var(--fpg-navy)' : 'var(--neutral-300)'}`, background: formData.isNewEmployee === val ? 'var(--fpg-navy)' : 'white', color: formData.isNewEmployee === val ? 'white' : 'var(--text-primary)', fontWeight: 500, fontSize: '0.9375rem', transition: 'all 0.15s'}}>
+                                            <label key={val} style={{display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', padding: '0.5rem 1rem', borderRadius: '20px', border: `1.5px solid ${formData.isNewEmployee === val ? 'var(--fpg-gold)' : 'var(--neutral-300)'}`, background: formData.isNewEmployee === val ? 'var(--fpg-gold)' : 'white', color: formData.isNewEmployee === val ? 'white' : 'var(--text-primary)', fontWeight: 500, fontSize: '0.9375rem', transition: 'all 0.15s'}}>
                                                 <input type="radio" name="isNewEmployee" value={val} checked={formData.isNewEmployee === val} onChange={handleChange} style={{display: 'none'}} />
                                                 {val === 'yes' ? 'Yes — new employee' : 'No — existing employee'}
                                             </label>
