@@ -1014,8 +1014,8 @@
                     submittedAt: new Date().toLocaleString(),
                     totalCost: cartTotal.toFixed(2),
                     items: cart.map(item => {
-                        const componentLines = item.items.map(i => `     • ${i.name} — $${i.price.toFixed(2)}`).join('\n');
-                        return `${item.title} (Qty: ${item.quantity}) — $${(item.price * item.quantity).toFixed(2)}\n${componentLines}`;
+                        const componentLines = item.items.map(i => `  - ${i.name}: $${i.price.toFixed(2)}`).join('\n');
+                        return `${item.title} (Qty: ${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}\n${componentLines}`;
                     }).join('\n\n')
                 };
 
