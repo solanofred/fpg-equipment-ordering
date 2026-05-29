@@ -391,10 +391,10 @@
     "items": [
       {
         "name": "Lenovo L16 - 32GB/512GB/R5-215",
-        "price": 1300
+        "price": 1850
       }
     ],
-    "price": 1500,
+    "price": 2100,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-L16-Accounting.jpg"
@@ -478,15 +478,5 @@
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/NVR.jpg",
     "id": 24
-  },
-  {
-    "title": "Firewall",
-    "category": "new_location_setup",
-    "items": [],
-    "price": 0,
-    "recommended": true,
-    "available": true,
-    "imageUrl": "",
-    "id": 25
   }
 ]
