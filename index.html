@@ -997,12 +997,12 @@
             
             const handleSubmitOrder = async (formData) => {
                 const orderPayload = {
-                    // Submitter — auto from Microsoft 365 (ConnectWise requester)
+                    // Submitter - auto from Microsoft 365 (ConnectWise requester)
                     submitterName: submitter?.name || 'Unknown',
                     submitterEmail: submitter?.email || '',
                     submitterTitle: submitter?.title || '',
                     submitterDepartment: submitter?.department || '',
-                    // Recipient — entered in form (who gets the equipment)
+                    // Recipient - entered in form (who gets the equipment)
                     recipientName: formData.recipientName,
                     recipientEmail: formData.recipientEmail || 'Not provided',
                     isNewEmployee: formData.isNewEmployee,
