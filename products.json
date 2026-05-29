@@ -100,7 +100,7 @@
         "price": 1750
       }
     ],
-    "price": 2050,
+    "price": 1900,
     "recommended": false,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-ThinkPad-T14.jpg"
@@ -491,11 +491,11 @@
     "price": 250,
     "recommended": true,
     "available": true,
-    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo_24inch.jpg",
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo_27inch.jpg",
     "id": 25
   },
   {
-    "title": "Tiny-in-One (TIO) - 24\"",
+    "title": "Tiny-in-One (TIO) Monitor - 24\"",
     "category": "monitors",
     "items": [
       {
