@@ -57,7 +57,8 @@
   },
   {
     "slug": "specialty_laptop",
-    "label": "Specialty Laptop"
+    "label": "Specialty Laptop",
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Lenovo-P14S.jpg"
   },
   {
     "slug": "tribucast",
