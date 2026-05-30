@@ -54,5 +54,9 @@
   {
     "slug": "cisco",
     "label": "Cisco"
+  },
+  {
+    "slug": "cisco2",
+    "label": "Cisco2"
   }
 ]
