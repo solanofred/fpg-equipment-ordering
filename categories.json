@@ -42,7 +42,8 @@
   },
   {
     "slug": "peripherals",
-    "label": "Peripherals"
+    "label": "Peripherals",
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Peripherals.jpg"
   },
   {
     "slug": "phones",
