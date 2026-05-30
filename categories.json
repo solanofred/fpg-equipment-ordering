@@ -46,5 +46,9 @@
     "label": "Monitors",
     "addedBy": "fred.solano@foundationpartners.com",
     "addedAt": "2026-05-28T21:43:47.076Z"
+  },
+  {
+    "slug": "networking",
+    "label": "Networking"
   }
 ]
