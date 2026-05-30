@@ -2154,6 +2154,8 @@
             const [editImageUrl, setEditImageUrl] = React.useState('');
             const [showAddModal, setShowAddModal] = React.useState(false);
             const getProductCount = function(slug) {
+                if (slug === 'all') return (products || []).length;
+                if (slug === 'recommended') return (products || []).filter(function(p) { return p.recommended; }).length;
                 return (products || []).filter(function(p) { return p.category === slug; }).length;
             };
 
