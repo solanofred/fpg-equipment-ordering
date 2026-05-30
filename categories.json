@@ -50,5 +50,9 @@
   {
     "slug": "networking",
     "label": "Networking"
+  },
+  {
+    "slug": "cisco",
+    "label": "Cisco"
   }
 ]
