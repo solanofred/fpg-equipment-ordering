@@ -1014,9 +1014,9 @@
                     submittedAt: new Date().toLocaleString(),
                     totalCost: cartTotal.toFixed(2),
                     items: cart.map(item => {
-                        const componentLines = item.items.map(i => `  - ${i.name}: $${i.price.toFixed(2)}`).join('\n');
-                        return `${item.title} (Qty: ${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}\n${componentLines}`;
-                    }).join('\n\n')
+                        const componentLines = item.items.map(i => `&nbsp;&nbsp;- ${i.name}: $${i.price.toFixed(2)}`).join('<br>');
+                        return `<b>${item.title} (Qty: ${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}</b><br>${componentLines}`;
+                    }).join('<br><br>')
                 };
 
                 // Close UI immediately — don't wait for network
