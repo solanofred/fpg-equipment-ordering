@@ -12,6 +12,7 @@
     <script src="https://unpkg.com/@azure/msal-browser@3.10.0/lib/msal-browser.min.js"></script>
     
     <!-- Google Fonts - Corporate Elegant -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230A2540'/><text y='72' x='50' text-anchor='middle' font-size='60' font-family='Arial' fill='%23DB802E'>F</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -858,7 +859,7 @@
 
         async function fetchGraphProfile(token) {
             try {
-                const res = await fetch('https://graph.microsoft.com/v1.0/me', {
+                const res = await fetch('https://graph.microsoft.com/v1.0/me?$select=displayName,mail,userPrincipalName,jobTitle,department,officeLocation,companyName', {
                     headers: { Authorization: 'Bearer ' + token }
                 });
                 const profile = await res.json();
@@ -866,7 +867,7 @@
                     name: profile.displayName || '',
                     email: profile.mail || profile.userPrincipalName || '',
                     title: profile.jobTitle || '',
-                    department: profile.department || ''
+                    department: profile.department || profile.officeLocation || profile.companyName || ''
                 };
             } catch(e) {
                 console.warn('Graph profile error:', e);
