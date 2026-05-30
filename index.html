@@ -1473,6 +1473,10 @@
             
             const handleSubmit = (e) => {
                 e.preventDefault();
+                if (!submitter || !submitter.email) {
+                    alert('Please sign in with your Microsoft account before submitting.');
+                    return;
+                }
                 if (!formData.recipientName || !formData.location || !formData.dateNeeded || !formData.shipTo) {
                     alert('Please fill in all required fields.');
                     return;
