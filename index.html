@@ -1051,14 +1051,28 @@
                 setFilteredProducts(base.sort((a, b) => a.title.localeCompare(b.title)));
             }, [selectedCategory, products, searchQuery]);
             
-            // Get unique categories — only include categories that have at least one product
+            // Get unique categories — use categoryData order if available, fall back to product slugs
             const hasRecommended = products.some(p => p.recommended);
             const activeSlugs = new Set(products.flatMap(p => [p.category, ...(Array.isArray(p.categories) ? p.categories : [])]));
-            const categories = [
-                'all',
-                ...(hasRecommended ? ['recommended'] : []),
-                ...[...activeSlugs].filter(Boolean).sort()
-            ];
+
+            let categories;
+            if (categoryData.length > 0) {
+                // Use categoryData as the ordered list, filtered to only show slugs that have products
+                // Always include 'all' and 'recommended' (special slugs)
+                categories = categoryData
+                    .map(c => c.slug)
+                    .filter(slug => slug === 'all' || (slug === 'recommended' && hasRecommended) || activeSlugs.has(slug));
+                // Ensure 'all' is first, 'recommended' is second if present
+                const special = categories.filter(s => s === 'all' || s === 'recommended');
+                const rest = categories.filter(s => s !== 'all' && s !== 'recommended');
+                categories = [...special, ...rest];
+            } else {
+                categories = [
+                    'all',
+                    ...(hasRecommended ? ['recommended'] : []),
+                    ...[...activeSlugs].filter(Boolean).sort()
+                ];
+            }
             
             // Cart functions
             const addToCart = (product) => {
