@@ -1,21 +1,27 @@
 [
   {
+    "slug": "arrangement_rooms",
+    "label": "Arrangement Rooms",
+    "addedBy": "fred.solano@foundationpartners.com",
+    "addedAt": "2026-05-28T20:10:43.070Z"
+  },
+  {
     "slug": "audio_visual",
     "label": "Audio Visual",
     "addedBy": "fred.solano@foundationpartners.com",
     "addedAt": "2026-05-26T18:01:18.622Z"
   },
   {
-    "slug": "video_surveillance",
-    "label": "Video Surveillance",
-    "addedBy": "matthew.ritchotte@foundationpartners.com",
-    "addedAt": "2026-05-28T17:47:22.406Z"
+    "slug": "desktop",
+    "label": "Desktop",
+    "addedBy": "fred.solano@foundationpartners.com",
+    "addedAt": "2026-05-30T06:00:00.000Z"
   },
   {
-    "slug": "phones",
-    "label": "Phones",
+    "slug": "laptop",
+    "label": "Laptop",
     "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-28T19:41:32.150Z"
+    "addedAt": "2026-05-30T06:00:00.000Z"
   },
   {
     "slug": "mobile_devices",
@@ -24,10 +30,28 @@
     "addedAt": "2026-05-28T19:42:00.431Z"
   },
   {
+    "slug": "monitors",
+    "label": "Monitors",
+    "addedBy": "fred.solano@foundationpartners.com",
+    "addedAt": "2026-05-28T21:43:47.076Z"
+  },
+  {
     "slug": "new_location_setup",
     "label": "New Location Setup",
     "addedBy": "fred.solano@foundationpartners.com",
     "addedAt": "2026-05-28T19:42:13.956Z"
+  },
+  {
+    "slug": "peripherals",
+    "label": "Peripherals",
+    "addedBy": "fred.solano@foundationpartners.com",
+    "addedAt": "2026-05-30T06:00:00.000Z"
+  },
+  {
+    "slug": "phones",
+    "label": "Phones",
+    "addedBy": "fred.solano@foundationpartners.com",
+    "addedAt": "2026-05-28T19:41:32.150Z"
   },
   {
     "slug": "printers_and_scanners",
@@ -36,15 +60,21 @@
     "addedAt": "2026-05-28T20:06:34.024Z"
   },
   {
-    "slug": "arrangement_rooms",
-    "label": "Arrangement Rooms",
+    "slug": "specialty_laptop",
+    "label": "Specialty Laptop",
     "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-28T20:10:43.063Z"
+    "addedAt": "2026-05-30T06:00:00.000Z"
   },
   {
-    "slug": "monitors",
-    "label": "Monitors",
+    "slug": "tribucast",
+    "label": "Tribucast",
     "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-28T21:43:47.076Z"
+    "addedAt": "2026-05-30T06:00:00.000Z"
+  },
+  {
+    "slug": "video_surveillance",
+    "label": "Video Surveillance",
+    "addedBy": "matthew.ritchotte@foundationpartners.com",
+    "addedAt": "2026-05-28T17:47:22.406Z"
   }
 ]

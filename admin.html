@@ -1164,24 +1164,20 @@
             const [confirmData, setConfirmData] = useState({});
             const [draftCount, setDraftCount] = useState(DraftService.getDraftCount());
             const [activeTab, setActiveTab] = useState('products');
-            const [categories, setCategories] = useState([
-                { slug: 'desktop', label: 'Desktop' },
-                { slug: 'laptop', label: 'Laptop' },
-                { slug: 'peripherals', label: 'Peripherals' },
-                { slug: 'specialty_laptop', label: 'Specialty Laptop' },
-                { slug: 'tribucast', label: 'Tribucast' }
-            ]);
+            const [categories, setCategories] = useState([]);
             const session = AuthService.getSession();
             
             useEffect(() => {
                 ProductService.loadProducts().then(function(prods) {
                     setProducts(DraftService.applyDrafts(prods));
                     var slugs = prods.map(function(p) { return p.category; }).filter(function(v, i, a) { return a.indexOf(v) === i; });
-                    fetch('./categories.json').then(function(r) { return r.ok ? r.json() : []; }).then(function(extras) {
-                        var allSlugs = slugs.concat(extras.map(function(e) { return e.slug; })).filter(function(v, i, a) { return a.indexOf(v) === i; });
-                        var labelMap = { desktop: 'Desktop', laptop: 'Laptop', peripherals: 'Peripherals', specialty_laptop: 'Specialty Laptop', tribucast: 'Tribucast' };
-                        extras.forEach(function(e) { labelMap[e.slug] = e.label; });
-                        setCategories(allSlugs.map(function(s) { return { slug: s, label: labelMap[s] || s.split('_').map(function(w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ') }; }));
+                    fetch('./categories.json?v=' + Date.now()).then(function(r) { return r.ok ? r.json() : []; }).then(function(cats) {
+                        if (cats && cats.length > 0) {
+                            setCategories(cats);
+                        } else {
+                            // Fallback to product slugs only if categories.json is empty
+                            setCategories(slugs.map(function(s) { return { slug: s, label: s.split('_').map(function(w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ') }; }));
+                        }
                     }).catch(function() {
                         setCategories(slugs.map(function(s) { return { slug: s, label: s.split('_').map(function(w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ') }; }));
                     });
