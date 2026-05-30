@@ -1185,16 +1185,28 @@
             }, []);
 
             const handleCategoryAdded = async (slug, label) => {
-                const res = await fetch(AZURE_FUNCTION_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
-                    body: JSON.stringify({ action: 'add-category', slug, label })
-                });
-                const text = await res.text();
-                if (!text) throw new Error('Empty response from server');
-                const data = JSON.parse(text);
-                if (!res.ok) throw new Error(data.message || 'Failed to save category');
+                // Update UI instantly — optimistic
                 setCategories(prev => [...prev, { slug, label }]);
+                // Sync to GitHub in background
+                try {
+                    const res = await fetch(AZURE_FUNCTION_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
+                        body: JSON.stringify({ action: 'add-category', slug, label })
+                    });
+                    const text = await res.text();
+                    if (!text) throw new Error('Empty response from server');
+                    const data = JSON.parse(text);
+                    if (!res.ok) {
+                        // Revert on failure
+                        setCategories(prev => prev.filter(c => c.slug !== slug));
+                        throw new Error(data.message || 'Failed to save category');
+                    }
+                } catch(e) {
+                    // Revert on network error
+                    setCategories(prev => prev.filter(c => c.slug !== slug));
+                    throw e;
+                }
             };
 
             const handleCategoryRemoved = (slug) => {
@@ -2129,30 +2141,43 @@
             const handleAdd = async function() {
                 if (!newCatName.trim()) return;
                 const slug = newCatName.trim().toLowerCase().split(' ').join('_').replace(/[^a-z0-9_]/g, '');
+                const label = newCatName.trim();
                 setSaving(true);
                 setStatus(null);
+                // Update UI instantly
+                onCategoryAdded(slug, label);
+                setNewCatName('');
+                setStatus({ type: 'success', text: label + ' added successfully!' });
+                setSaving(false);
+                // Sync to GitHub in background
                 try {
                     const res = await fetch(azureUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
-                        body: JSON.stringify({ action: 'add-category', slug: slug, label: newCatName.trim() })
+                        body: JSON.stringify({ action: 'add-category', slug: slug, label: label })
                     });
                     const text = await res.text();
-                    if (!text) throw new Error('Empty response from server');
+                    if (!text) throw new Error('Empty response');
                     const data = JSON.parse(text);
-                    if (!res.ok) throw new Error(data.message || 'Failed');
-                    onCategoryAdded(slug, newCatName.trim());
-                    setNewCatName('');
-                    setStatus({ type: 'success', text: newCatName.trim() + ' added successfully!' });
+                    if (!res.ok) {
+                        onCategoryRemoved(slug); // revert
+                        setStatus({ type: 'error', text: data.message || 'Failed to save' });
+                    }
                 } catch(e) {
+                    onCategoryRemoved(slug); // revert
                     setStatus({ type: 'error', text: e.message });
-                } finally { setSaving(false); }
+                }
             };
 
             const handleRemove = async function(slug, label) {
                 if (!confirm('Remove category "' + label + '"? This cannot be undone.')) return;
                 setSaving(true);
                 setStatus(null);
+                // Update UI instantly
+                onCategoryRemoved(slug);
+                setStatus({ type: 'success', text: label + ' removed.' });
+                setSaving(false);
+                // Sync to GitHub in background
                 try {
                     const res = await fetch(azureUrl, {
                         method: 'POST',
@@ -2160,14 +2185,16 @@
                         body: JSON.stringify({ action: 'remove-category', slug: slug })
                     });
                     const text = await res.text();
-                    if (!text) throw new Error('Empty response from server');
+                    if (!text) throw new Error('Empty response');
                     const data = JSON.parse(text);
-                    if (!res.ok) throw new Error(data.message || 'Failed');
-                    onCategoryRemoved(slug);
-                    setStatus({ type: 'success', text: label + ' removed.' });
+                    if (!res.ok) {
+                        onCategoryAdded(slug, label); // revert
+                        setStatus({ type: 'error', text: data.message || 'Failed to remove' });
+                    }
                 } catch(e) {
+                    onCategoryAdded(slug, label); // revert
                     setStatus({ type: 'error', text: e.message });
-                } finally { setSaving(false); }
+                }
             };
 
             const handleStartEdit = function(cat) {
@@ -2185,23 +2212,32 @@
                 if (!editLabel.trim()) return;
                 setSaving(true);
                 setStatus(null);
+                const newLabel = editLabel.trim();
+                const oldLabel = (categories||[]).find(c => c.slug === slug)?.label || slug;
+                // Update UI instantly
+                onCategoryAdded(slug, newLabel);
+                setStatus({ type: 'success', text: 'Category renamed to "' + newLabel + '".' });
+                setEditingSlug(null);
+                setEditLabel('');
+                setSaving(false);
+                // Sync to GitHub in background
                 try {
                     const res = await fetch(azureUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
-                        body: JSON.stringify({ action: 'rename-category', slug: slug, newLabel: editLabel.trim() })
+                        body: JSON.stringify({ action: 'rename-category', slug: slug, newLabel: newLabel })
                     });
                     const text = await res.text();
-                    if (!text) throw new Error('Empty response from server');
+                    if (!text) throw new Error('Empty response');
                     const data = JSON.parse(text);
-                    if (!res.ok) throw new Error(data.message || 'Failed');
-                    onCategoryAdded(slug, editLabel.trim());
-                    setStatus({ type: 'success', text: 'Category renamed to "' + editLabel.trim() + '".' });
-                    setEditingSlug(null);
-                    setEditLabel('');
+                    if (!res.ok) {
+                        onCategoryAdded(slug, oldLabel); // revert
+                        setStatus({ type: 'error', text: data.message || 'Failed to rename' });
+                    }
                 } catch(e) {
+                    onCategoryAdded(slug, oldLabel); // revert
                     setStatus({ type: 'error', text: e.message });
-                } finally { setSaving(false); }
+                }
             };
 
             return (
