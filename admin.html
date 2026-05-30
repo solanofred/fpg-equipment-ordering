@@ -1164,29 +1164,27 @@
             const [confirmData, setConfirmData] = useState({});
             const [draftCount, setDraftCount] = useState(DraftService.getDraftCount());
             const [activeTab, setActiveTab] = useState('products');
-            const [categories, setCategories] = useState([]);
+            const [categories, setCategories] = useState([
+                { slug: 'desktop', label: 'Desktop' },
+                { slug: 'laptop', label: 'Laptop' },
+                { slug: 'peripherals', label: 'Peripherals' },
+                { slug: 'specialty_laptop', label: 'Specialty Laptop' },
+                { slug: 'tribucast', label: 'Tribucast' }
+            ]);
             const session = AuthService.getSession();
             
             useEffect(() => {
                 ProductService.loadProducts().then(function(prods) {
                     setProducts(DraftService.applyDrafts(prods));
-                    // Load categories ONLY from categories.json — it is the source of truth
-                    fetch('./categories.json?v=' + Date.now())
-                        .then(function(r) { return r.ok ? r.json() : []; })
-                        .then(function(cats) {
-                            if (cats && cats.length > 0) {
-                                setCategories(cats);
-                            }
-                            // If categories.json is empty, fall back to product slugs so admin isn't stranded
-                            else {
-                                var slugs = prods.map(function(p) { return p.category; }).filter(function(v, i, a) { return v && a.indexOf(v) === i; });
-                                setCategories(slugs.map(function(s) { return { slug: s, label: s.split('_').map(function(w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ') }; }));
-                            }
-                        })
-                        .catch(function() {
-                            var slugs = prods.map(function(p) { return p.category; }).filter(function(v, i, a) { return v && a.indexOf(v) === i; });
-                            setCategories(slugs.map(function(s) { return { slug: s, label: s.split('_').map(function(w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ') }; }));
-                        });
+                    var slugs = prods.map(function(p) { return p.category; }).filter(function(v, i, a) { return a.indexOf(v) === i; });
+                    fetch('./categories.json').then(function(r) { return r.ok ? r.json() : []; }).then(function(extras) {
+                        var allSlugs = slugs.concat(extras.map(function(e) { return e.slug; })).filter(function(v, i, a) { return a.indexOf(v) === i; });
+                        var labelMap = { desktop: 'Desktop', laptop: 'Laptop', peripherals: 'Peripherals', specialty_laptop: 'Specialty Laptop', tribucast: 'Tribucast' };
+                        extras.forEach(function(e) { labelMap[e.slug] = e.label; });
+                        setCategories(allSlugs.map(function(s) { return { slug: s, label: labelMap[s] || s.split('_').map(function(w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ') }; }));
+                    }).catch(function() {
+                        setCategories(slugs.map(function(s) { return { slug: s, label: s.split('_').map(function(w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ') }; }));
+                    });
                 }).catch(function(err) {
                     console.error('Failed to load products:', err);
                     setProducts([]);
@@ -1392,10 +1390,10 @@
                     </header>
                     
                     <div className="admin-container">
-                        <div className="tab-nav" style={{display:'flex',gap:'0.25rem',marginBottom:'1.5rem',background:'#f1f3f5',padding:'4px',borderRadius:'12px',width:'fit-content'}}>
-                            <button style={{padding:'0.55rem 1.1rem',border:'none',borderRadius:'9px',fontWeight:600,cursor:'pointer',fontSize:'0.875rem',transition:'all 0.15s',background:activeTab==='access'?'white':'transparent',color:activeTab==='access'?'#1B5A8E':'#666',boxShadow:activeTab==='access'?'0 1px 3px rgba(0,0,0,0.12)':'none'}} onClick={()=>setActiveTab('access')}>👥 Access Management</button>
-                            <button style={{padding:'0.55rem 1.1rem',border:'none',borderRadius:'9px',fontWeight:600,cursor:'pointer',fontSize:'0.875rem',transition:'all 0.15s',background:activeTab==='categories'?'white':'transparent',color:activeTab==='categories'?'#1B5A8E':'#666',boxShadow:activeTab==='categories'?'0 1px 3px rgba(0,0,0,0.12)':'none'}} onClick={()=>setActiveTab('categories')}>🏷️ Categories</button>
-                            <button style={{padding:'0.55rem 1.1rem',border:'none',borderRadius:'9px',fontWeight:600,cursor:'pointer',fontSize:'0.875rem',transition:'all 0.15s',background:activeTab==='products'?'white':'transparent',color:activeTab==='products'?'#1B5A8E':'#666',boxShadow:activeTab==='products'?'0 1px 3px rgba(0,0,0,0.12)':'none'}} onClick={()=>setActiveTab('products')}>📦 Products</button>
+                        <div className="tab-nav" style={{display:'flex',gap:'0.5rem',marginBottom:'1.5rem',background:'white',padding:'0.5rem',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',width:'fit-content'}}>
+                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='access'?'#1B5A8E':'transparent',color:activeTab==='access'?'white':'#666'}} onClick={()=>setActiveTab('access')}>👥 Access Management</button>
+                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='categories'?'#1B5A8E':'transparent',color:activeTab==='categories'?'white':'#666'}} onClick={()=>setActiveTab('categories')}>🏷️ Categories</button>
+                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='products'?'#1B5A8E':'transparent',color:activeTab==='products'?'white':'#666'}} onClick={()=>setActiveTab('products')}>📦 Products</button>
                         </div>
 
                         {activeTab === 'access' && <AccessManagement session={session} azureUrl={AZURE_FUNCTION_URL} adminPortalUrl={ADMIN_PORTAL_URL} />}
@@ -2138,10 +2136,12 @@
 
         function CategoryManagement({ session, azureUrl, categories, products, onCategoryAdded, onCategoryRemoved }) {
             const [newCatName, setNewCatName] = React.useState('');
+            const [newCatImageUrl, setNewCatImageUrl] = React.useState('');
             const [saving, setSaving] = React.useState(false);
             const [status, setStatus] = React.useState(null);
             const [editingSlug, setEditingSlug] = React.useState(null);
             const [editLabel, setEditLabel] = React.useState('');
+            const [editImageUrl, setEditImageUrl] = React.useState('');
             const [showAddModal, setShowAddModal] = React.useState(false);
             const getProductCount = function(slug) {
                 return (products || []).filter(function(p) { return p.category === slug; }).length;
@@ -2151,11 +2151,13 @@
                 if (!newCatName.trim()) return;
                 const slug = newCatName.trim().toLowerCase().split(' ').join('_').replace(/[^a-z0-9_]/g, '');
                 const label = newCatName.trim();
+                const imageUrl = newCatImageUrl.trim();
                 setSaving(true);
                 setStatus(null);
                 // Update UI instantly
                 onCategoryAdded(slug, label);
                 setNewCatName('');
+                setNewCatImageUrl('');
                 setStatus({ type: 'success', text: label + ' added successfully!' });
                 setSaving(false);
                 // Sync to GitHub in background
@@ -2163,7 +2165,7 @@
                     const res = await fetch(azureUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
-                        body: JSON.stringify({ action: 'add-category', slug: slug, label: label })
+                        body: JSON.stringify({ action: 'add-category', slug: slug, label: label, imageUrl: imageUrl })
                     });
                     const text = await res.text();
                     if (!text) throw new Error('Empty response');
@@ -2209,12 +2211,14 @@
             const handleStartEdit = function(cat) {
                 setEditingSlug(cat.slug);
                 setEditLabel(cat.label);
+                setEditImageUrl(cat.imageUrl || '');
                 setStatus(null);
             };
 
             const handleCancelEdit = function() {
                 setEditingSlug(null);
                 setEditLabel('');
+                setEditImageUrl('');
             };
 
             const handleSaveEdit = async function(slug) {
@@ -2222,19 +2226,21 @@
                 setSaving(true);
                 setStatus(null);
                 const newLabel = editLabel.trim();
+                const newImageUrl = editImageUrl.trim();
                 const oldLabel = (categories||[]).find(c => c.slug === slug)?.label || slug;
                 // Update UI instantly
                 onCategoryAdded(slug, newLabel);
                 setStatus({ type: 'success', text: 'Category renamed to "' + newLabel + '".' });
                 setEditingSlug(null);
                 setEditLabel('');
+                setEditImageUrl('');
                 setSaving(false);
                 // Sync to GitHub in background
                 try {
                     const res = await fetch(azureUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
-                        body: JSON.stringify({ action: 'rename-category', slug: slug, newLabel: newLabel })
+                        body: JSON.stringify({ action: 'rename-category', slug: slug, newLabel: newLabel, imageUrl: newImageUrl })
                     });
                     const text = await res.text();
                     if (!text) throw new Error('Empty response');
@@ -2260,17 +2266,30 @@
                                     placeholder="e.g. Headsets"
                                     value={newCatName}
                                     onChange={function(e){setNewCatName(e.target.value);}}
-                                    onKeyDown={function(e){if(e.key==='Enter') handleAdd();if(e.key==='Escape'){setShowAddModal(false);setNewCatName("");}}}
+                                    onKeyDown={function(e){if(e.key==='Enter') handleAdd();if(e.key==='Escape'){setShowAddModal(false);setNewCatName('');setNewCatImageUrl('');}}}
                                     autoFocus
+                                    style={{width:'100%',padding:'0.75rem 1rem',border:'1px solid #d1d5db',borderRadius:'8px',fontSize:'0.95rem',outline:'none',boxSizing:'border-box',marginBottom:'0.75rem'}}
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="Image URL (optional) — https://..."
+                                    value={newCatImageUrl}
+                                    onChange={function(e){setNewCatImageUrl(e.target.value);}}
                                     style={{width:'100%',padding:'0.75rem 1rem',border:'1px solid #d1d5db',borderRadius:'8px',fontSize:'0.95rem',outline:'none',boxSizing:'border-box',marginBottom:'1rem'}}
                                 />
+                                {newCatImageUrl.trim() && (
+                                    <div style={{marginBottom:'1rem',display:'flex',alignItems:'center',gap:'0.75rem',padding:'0.5rem',background:'#f9fafb',borderRadius:'8px'}}>
+                                        <img src={newCatImageUrl.trim()} alt="preview" style={{width:'48px',height:'48px',objectFit:'cover',borderRadius:'8px',border:'1px solid #e5e7eb'}} onError={function(e){e.target.style.display='none';}} />
+                                        <span style={{fontSize:'0.8rem',color:'#6b7280'}}>Image preview</span>
+                                    </div>
+                                )}
                                 {status && showAddModal && (
                                     <div style={{marginBottom:'1rem',padding:'0.75rem 1rem',borderRadius:'8px',fontSize:'0.875rem',background:status.type==='success'?'#D1FAE5':'#FEE2E2',color:status.type==='success'?'#065F46':'#991B1B'}}>
                                         {status.type === 'success' ? '✅' : '❌'} {status.text}
                                     </div>
                                 )}
                                 <div style={{display:'flex',gap:'0.75rem',justifyContent:'flex-end'}}>
-                                    <button onClick={function(){setShowAddModal(false);setNewCatName("");setStatus(null);}} style={{padding:'0.6rem 1.25rem',borderRadius:'8px',border:'1px solid #d1d5db',background:'white',fontSize:'0.95rem',cursor:'pointer'}}>Cancel</button>
+                                    <button onClick={function(){setShowAddModal(false);setNewCatName('');setNewCatImageUrl('');setStatus(null);}} style={{padding:'0.6rem 1.25rem',borderRadius:'8px',border:'1px solid #d1d5db',background:'white',fontSize:'0.95rem',cursor:'pointer'}}>Cancel</button>
                                     <button onClick={function(){handleAdd();setTimeout(function(){setShowAddModal(false);},300);}} disabled={saving || !newCatName.trim()} className="btn btn-primary" style={{whiteSpace:'nowrap'}}>
                                         {saving ? 'Saving...' : 'Add category'}
                                     </button>
@@ -2303,20 +2322,42 @@
                                 return (
                                     <div key={i} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'0.875rem 1.5rem',borderBottom:'1px solid #f3f4f6',gap:'1rem'}}>
                                         <div style={{display:'flex',alignItems:'center',gap:'0.875rem',flex:1}}>
-                                            <div style={{width:'10px',height:'10px',borderRadius:'50%',background:isEmpty?'#d1d5db':'#1B5A8E',flexShrink:0}}></div>
                                             {isEditing ? (
-                                                <input
-                                                    type="text"
-                                                    value={editLabel}
-                                                    onChange={function(e){setEditLabel(e.target.value);}}
-                                                    onKeyDown={function(e){if(e.key==='Enter') handleSaveEdit(cat.slug); if(e.key==='Escape') handleCancelEdit();}}
-                                                    autoFocus
-                                                    style={{flex:1,padding:'0.375rem 0.625rem',border:'2px solid #1B5A8E',borderRadius:'6px',fontSize:'0.95rem',outline:'none'}}
-                                                />
+                                                <div style={{flex:1,display:'flex',flexDirection:'column',gap:'6px'}}>
+                                                    <input
+                                                        type="text"
+                                                        value={editLabel}
+                                                        onChange={function(e){setEditLabel(e.target.value);}}
+                                                        onKeyDown={function(e){if(e.key==='Enter') handleSaveEdit(cat.slug); if(e.key==='Escape') handleCancelEdit();}}
+                                                        autoFocus
+                                                        placeholder="Category name"
+                                                        style={{width:'100%',padding:'0.375rem 0.625rem',border:'2px solid #1B5A8E',borderRadius:'6px',fontSize:'0.95rem',outline:'none'}}
+                                                    />
+                                                    <input
+                                                        type="text"
+                                                        value={editImageUrl}
+                                                        onChange={function(e){setEditImageUrl(e.target.value);}}
+                                                        placeholder="Image URL (optional) — https://..."
+                                                        style={{width:'100%',padding:'0.375rem 0.625rem',border:'1.5px solid #d1d5db',borderRadius:'6px',fontSize:'0.85rem',outline:'none'}}
+                                                    />
+                                                    {editImageUrl.trim() && (
+                                                        <div style={{display:'flex',alignItems:'center',gap:'6px'}}>
+                                                            <img src={editImageUrl.trim()} alt="preview" style={{width:'32px',height:'32px',objectFit:'cover',borderRadius:'6px',border:'1px solid #e5e7eb'}} onError={function(e){e.target.style.display='none';}} />
+                                                            <span style={{fontSize:'0.75rem',color:'#9ca3af'}}>Preview</span>
+                                                        </div>
+                                                    )}
+                                                </div>
                                             ) : (
-                                                <div>
-                                                    <div style={{fontWeight:600,fontSize:'0.95rem'}}>{cat.label}</div>
-                                                    <div style={{fontSize:'0.8rem',color:'#666'}}>{count} product{count !== 1 ? 's' : ''}</div>
+                                                <div style={{display:'flex',alignItems:'center',gap:'0.75rem',flex:1}}>
+                                                    {cat.imageUrl ? (
+                                                        <img src={cat.imageUrl} alt={cat.label} style={{width:'32px',height:'32px',objectFit:'cover',borderRadius:'6px',border:'1px solid #e5e7eb',flexShrink:0}} onError={function(e){e.target.style.display='none';}} />
+                                                    ) : (
+                                                        <div style={{width:'10px',height:'10px',borderRadius:'50%',background:isEmpty?'#d1d5db':'#1B5A8E',flexShrink:0}}></div>
+                                                    )}
+                                                    <div>
+                                                        <div style={{fontWeight:600,fontSize:'0.95rem'}}>{cat.label}</div>
+                                                        <div style={{fontSize:'0.8rem',color:'#666'}}>{count} product{count !== 1 ? 's' : ''}</div>
+                                                    </div>
                                                 </div>
                                             )}
                                         </div>
@@ -2337,7 +2378,7 @@
                                             ) : (
                                                 <>
                                                     {!isEmpty && (
-                                                        <span style={{background:'#EBFBEE',color:'#2B8A3E',padding:'0.2rem 0.65rem',borderRadius:'20px',fontSize:'0.72rem',fontWeight:700,letterSpacing:'0.02em',display:'inline-flex',alignItems:'center',gap:'4px'}}><span style={{width:'6px',height:'6px',borderRadius:'50%',background:'#2F9E44',display:'inline-block'}}></span>In use</span>
+                                                        <span style={{background:'#E6F1FB',color:'#0C447C',padding:'0.2rem 0.7rem',borderRadius:'20px',fontSize:'0.75rem',fontWeight:600}}>In use</span>
                                                     )}
                                                     <button
                                                         onClick={function(){handleStartEdit(cat);}}
