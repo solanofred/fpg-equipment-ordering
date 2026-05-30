@@ -2,86 +2,60 @@
   {
     "slug": "arrangement_rooms",
     "label": "Arrangement Rooms",
-    "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-28T20:10:43.070Z",
     "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/ArrangementRoom.jpg"
   },
   {
     "slug": "audio_visual",
     "label": "Audio Visual",
-    "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-26T18:01:18.622Z",
     "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Audio_Visual.jpg"
   },
   {
     "slug": "desktop",
     "label": "Desktop",
-    "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-30T06:00:00.000Z",
     "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Dekstop.jpg"
   },
   {
     "slug": "laptop",
     "label": "Laptop",
-    "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-30T06:00:00.000Z",
     "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/laptop.jpg"
   },
   {
     "slug": "mobile_devices",
-    "label": "Mobile Devices",
-    "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-28T19:42:00.431Z"
+    "label": "Mobile Devices"
   },
   {
     "slug": "monitors",
-    "label": "Monitorshttps://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Monitor.jpg",
-    "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-28T21:43:47.076Z"
+    "label": "Monitors"
   },
   {
     "slug": "new_location_setup",
-    "label": "New Location Setup",
-    "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-28T19:42:13.956Z"
+    "label": "New Location Setup"
   },
   {
     "slug": "peripherals",
-    "label": "Peripherals",
-    "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-30T06:00:00.000Z"
+    "label": "Peripherals"
   },
   {
     "slug": "phones",
-    "label": "Phones",
-    "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-28T19:41:32.150Z"
+    "label": "Phones"
   },
   {
     "slug": "printers_and_scanners",
     "label": "Printers and Scanners",
-    "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-28T20:06:34.024Z",
     "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/HPLaserJet-3301fdw-Color.jpg"
   },
   {
     "slug": "specialty_laptop",
-    "label": "Specialty Laptop",
-    "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-30T06:00:00.000Z"
+    "label": "Specialty Laptop"
   },
   {
     "slug": "tribucast",
     "label": "Tribucast",
-    "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-30T06:00:00.000Z",
     "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Tribucast.jpg"
   },
   {
     "slug": "video_surveillance",
     "label": "Video Surveillance",
-    "addedBy": "matthew.ritchotte@foundationpartners.com",
-    "addedAt": "2026-05-28T17:47:22.406Z",
     "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Video_Surveillance.jpg"
   }
 ]
