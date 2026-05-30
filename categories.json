@@ -45,7 +45,8 @@
   },
   {
     "slug": "phones",
-    "label": "Phones"
+    "label": "Phones",
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Phones.jpg"
   },
   {
     "slug": "printers_and_scanners",
