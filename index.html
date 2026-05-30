@@ -899,6 +899,21 @@
                     setAuthLoading(false);
                 });
             }, []);
+
+            // Keep Azure Function warm — ping every 4 minutes
+            useEffect(() => {
+                const FUNCTION_URL = 'https://fpg-equipment-function-b1.azurewebsites.net/api/publish-products';
+                const ping = () => {
+                    fetch(FUNCTION_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ action: 'ping' })
+                    }).catch(() => {}); // silent — ignore errors
+                };
+                ping(); // ping immediately on load
+                const interval = setInterval(ping, 4 * 60 * 1000); // then every 4 minutes
+                return () => clearInterval(interval);
+            }, []);
             
             // Fetch products - cache bust with timestamp to always get fresh data
             useEffect(() => {
