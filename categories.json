@@ -34,7 +34,8 @@
   },
   {
     "slug": "monitors",
-    "label": "Monitors"
+    "label": "Monitors",
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Monitor.jpg"
   },
   {
     "slug": "new_location_setup",
