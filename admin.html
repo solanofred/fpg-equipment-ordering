@@ -1164,27 +1164,29 @@
             const [confirmData, setConfirmData] = useState({});
             const [draftCount, setDraftCount] = useState(DraftService.getDraftCount());
             const [activeTab, setActiveTab] = useState('products');
-            const [categories, setCategories] = useState([
-                { slug: 'desktop', label: 'Desktop' },
-                { slug: 'laptop', label: 'Laptop' },
-                { slug: 'peripherals', label: 'Peripherals' },
-                { slug: 'specialty_laptop', label: 'Specialty Laptop' },
-                { slug: 'tribucast', label: 'Tribucast' }
-            ]);
+            const [categories, setCategories] = useState([]);
             const session = AuthService.getSession();
             
             useEffect(() => {
                 ProductService.loadProducts().then(function(prods) {
                     setProducts(DraftService.applyDrafts(prods));
-                    var slugs = prods.map(function(p) { return p.category; }).filter(function(v, i, a) { return a.indexOf(v) === i; });
-                    fetch('./categories.json').then(function(r) { return r.ok ? r.json() : []; }).then(function(extras) {
-                        var allSlugs = slugs.concat(extras.map(function(e) { return e.slug; })).filter(function(v, i, a) { return a.indexOf(v) === i; });
-                        var labelMap = { desktop: 'Desktop', laptop: 'Laptop', peripherals: 'Peripherals', specialty_laptop: 'Specialty Laptop', tribucast: 'Tribucast' };
-                        extras.forEach(function(e) { labelMap[e.slug] = e.label; });
-                        setCategories(allSlugs.map(function(s) { return { slug: s, label: labelMap[s] || s.split('_').map(function(w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ') }; }));
-                    }).catch(function() {
-                        setCategories(slugs.map(function(s) { return { slug: s, label: s.split('_').map(function(w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ') }; }));
-                    });
+                    // Load categories ONLY from categories.json — it is the source of truth
+                    fetch('./categories.json?v=' + Date.now())
+                        .then(function(r) { return r.ok ? r.json() : []; })
+                        .then(function(cats) {
+                            if (cats && cats.length > 0) {
+                                setCategories(cats);
+                            }
+                            // If categories.json is empty, fall back to product slugs so admin isn't stranded
+                            else {
+                                var slugs = prods.map(function(p) { return p.category; }).filter(function(v, i, a) { return v && a.indexOf(v) === i; });
+                                setCategories(slugs.map(function(s) { return { slug: s, label: s.split('_').map(function(w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ') }; }));
+                            }
+                        })
+                        .catch(function() {
+                            var slugs = prods.map(function(p) { return p.category; }).filter(function(v, i, a) { return v && a.indexOf(v) === i; });
+                            setCategories(slugs.map(function(s) { return { slug: s, label: s.split('_').map(function(w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ') }; }));
+                        });
                 }).catch(function(err) {
                     console.error('Failed to load products:', err);
                     setProducts([]);
@@ -1390,10 +1392,10 @@
                     </header>
                     
                     <div className="admin-container">
-                        <div className="tab-nav" style={{display:'flex',gap:'0.5rem',marginBottom:'1.5rem',background:'white',padding:'0.5rem',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',width:'fit-content'}}>
-                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='access'?'#1B5A8E':'transparent',color:activeTab==='access'?'white':'#666'}} onClick={()=>setActiveTab('access')}>👥 Access Management</button>
-                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='categories'?'#1B5A8E':'transparent',color:activeTab==='categories'?'white':'#666'}} onClick={()=>setActiveTab('categories')}>🏷️ Categories</button>
-                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='products'?'#1B5A8E':'transparent',color:activeTab==='products'?'white':'#666'}} onClick={()=>setActiveTab('products')}>📦 Products</button>
+                        <div className="tab-nav" style={{display:'flex',gap:'0.25rem',marginBottom:'1.5rem',background:'#f1f3f5',padding:'4px',borderRadius:'12px',width:'fit-content'}}>
+                            <button style={{padding:'0.55rem 1.1rem',border:'none',borderRadius:'9px',fontWeight:600,cursor:'pointer',fontSize:'0.875rem',transition:'all 0.15s',background:activeTab==='access'?'white':'transparent',color:activeTab==='access'?'#1B5A8E':'#666',boxShadow:activeTab==='access'?'0 1px 3px rgba(0,0,0,0.12)':'none'}} onClick={()=>setActiveTab('access')}>👥 Access Management</button>
+                            <button style={{padding:'0.55rem 1.1rem',border:'none',borderRadius:'9px',fontWeight:600,cursor:'pointer',fontSize:'0.875rem',transition:'all 0.15s',background:activeTab==='categories'?'white':'transparent',color:activeTab==='categories'?'#1B5A8E':'#666',boxShadow:activeTab==='categories'?'0 1px 3px rgba(0,0,0,0.12)':'none'}} onClick={()=>setActiveTab('categories')}>🏷️ Categories</button>
+                            <button style={{padding:'0.55rem 1.1rem',border:'none',borderRadius:'9px',fontWeight:600,cursor:'pointer',fontSize:'0.875rem',transition:'all 0.15s',background:activeTab==='products'?'white':'transparent',color:activeTab==='products'?'#1B5A8E':'#666',boxShadow:activeTab==='products'?'0 1px 3px rgba(0,0,0,0.12)':'none'}} onClick={()=>setActiveTab('products')}>📦 Products</button>
                         </div>
 
                         {activeTab === 'access' && <AccessManagement session={session} azureUrl={AZURE_FUNCTION_URL} adminPortalUrl={ADMIN_PORTAL_URL} />}
@@ -2335,7 +2337,7 @@
                                             ) : (
                                                 <>
                                                     {!isEmpty && (
-                                                        <span style={{background:'#E6F1FB',color:'#0C447C',padding:'0.2rem 0.7rem',borderRadius:'20px',fontSize:'0.75rem',fontWeight:600}}>In use</span>
+                                                        <span style={{background:'#EBFBEE',color:'#2B8A3E',padding:'0.2rem 0.65rem',borderRadius:'20px',fontSize:'0.72rem',fontWeight:700,letterSpacing:'0.02em',display:'inline-flex',alignItems:'center',gap:'4px'}}><span style={{width:'6px',height:'6px',borderRadius:'50%',background:'#2F9E44',display:'inline-block'}}></span>In use</span>
                                                     )}
                                                     <button
                                                         onClick={function(){handleStartEdit(cat);}}
