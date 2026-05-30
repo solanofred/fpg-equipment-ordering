@@ -35,8 +35,7 @@
   },
   {
     "slug": "monitors",
-    "label": "Monitors",
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Monitor.jpg"
+    "label": "Monitors"
   },
   {
     "slug": "new_location_setup",
@@ -59,8 +58,7 @@
   },
   {
     "slug": "specialty_laptop",
-    "label": "Specialty Laptop",
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Lenovo-P14S.jpg"
+    "label": "Specialty Laptop"
   },
   {
     "slug": "tribucast",
