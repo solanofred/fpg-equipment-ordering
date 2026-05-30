@@ -95,7 +95,51 @@ module.exports = async function (context, req) {
     }
 
     try {
-        // Verify admin
+        const action = req.body?.action || 'publish-products';
+
+        // ── PUBLIC ACTION — no admin auth required ──────────────
+        // Submit order: portal calls this, which forwards to Power Automate
+        if (action === 'submit-order') {
+            const POWER_AUTOMATE_URL = 'https://default98c6bcb2ecac45b48db79976d46784.c4.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/49f8f3edc7024616a09b9a7bdf4ec7f0/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=BFBNWeGCqOfqFORB3CF9QZmJoKIPt2vfhT-wKXGRyOM';
+
+            const orderPayload = req.body;
+            delete orderPayload.action; // remove action field before forwarding
+
+            if (!orderPayload.submitterEmail || !orderPayload.recipientName) {
+                context.res = {
+                    status: 400, headers,
+                    body: JSON.stringify({ error: 'Bad Request', message: 'submitterEmail and recipientName required' })
+                };
+                return;
+            }
+
+            context.log(`Order submission from: ${orderPayload.submitterEmail} for: ${orderPayload.recipientName}`);
+
+            const paResponse = await fetch(POWER_AUTOMATE_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderPayload)
+            });
+
+            if (paResponse.ok) {
+                context.log('Order forwarded to Power Automate successfully');
+                context.res = {
+                    status: 200, headers,
+                    body: JSON.stringify({ success: true, message: 'Order submitted successfully' })
+                };
+            } else {
+                const errText = await paResponse.text();
+                context.log.error('Power Automate error:', paResponse.status, errText);
+                context.res = {
+                    status: 502, headers,
+                    body: JSON.stringify({ error: 'Power Automate error', status: paResponse.status, detail: errText })
+                };
+            }
+            return;
+        }
+        // ────────────────────────────────────────────────────────
+
+        // All other actions require admin auth
         const adminEmail = req.headers['x-admin-email'];
         if (!adminEmail) {
             context.res = { status: 401, headers, body: JSON.stringify({ error: 'Unauthorized', message: 'Admin email required' }) };
@@ -112,9 +156,6 @@ module.exports = async function (context, req) {
         }
 
         context.log(`Authorized admin: ${normalizedEmail}`);
-
-        // Route by action
-        const action = req.body?.action || 'publish-products';
 
         // 1. PUBLISH PRODUCTS (existing workflow - unchanged)
         if (action === 'publish-products') {
@@ -230,57 +271,8 @@ module.exports = async function (context, req) {
             return;
         }
 
-        // 5. ADD CATEGORY
-        if (action === 'add-category') {
-            const { slug, label } = req.body;
-            if (!slug || !label) {
-                context.res = { status: 400, headers, body: JSON.stringify({ error: 'Bad Request', message: 'slug and label required' }) };
-                return;
-            }
-            const { content: cats, sha } = await getGitHubFile('categories.json');
-            const current = cats || [];
-            if (current.find(c => c.slug === slug)) {
-                context.res = { status: 409, headers, body: JSON.stringify({ error: 'Conflict', message: 'Category already exists' }) };
-                return;
-            }
-            const updated = [...current, { slug, label, addedBy: normalizedEmail, addedAt: new Date().toISOString() }];
-            const result = await putGitHubFile('categories.json', updated, sha, `Add category ${slug} by ${normalizedEmail}`);
-            context.res = { status: 200, headers, body: JSON.stringify({ success: true, message: `Category ${label} added`, categories: updated, commitSha: result.commit.sha }) };
-            return;
-        }
-
-        // 6. REMOVE CATEGORY
-        if (action === 'remove-category') {
-            const { slug } = req.body;
-            if (!slug) {
-                context.res = { status: 400, headers, body: JSON.stringify({ error: 'Bad Request', message: 'slug required' }) };
-                return;
-            }
-            const { content: cats, sha } = await getGitHubFile('categories.json');
-            const current = cats || [];
-            const updated = current.filter(c => c.slug !== slug);
-            const result = await putGitHubFile('categories.json', updated, sha, `Remove category ${slug} by ${normalizedEmail}`);
-            context.res = { status: 200, headers, body: JSON.stringify({ success: true, message: `Category removed`, categories: updated, commitSha: result.commit.sha }) };
-            return;
-        }
-
-        // 7. RENAME CATEGORY
-        if (action === 'rename-category') {
-            const { slug, newLabel } = req.body;
-            if (!slug || !newLabel) {
-                context.res = { status: 400, headers, body: JSON.stringify({ error: 'Bad Request', message: 'slug and newLabel required' }) };
-                return;
-            }
-            const { content: cats, sha } = await getGitHubFile('categories.json');
-            const current = cats || [];
-            const updated = current.map(c => c.slug === slug ? { ...c, label: newLabel.trim() } : c);
-            const result = await putGitHubFile('categories.json', updated, sha, `Rename category ${slug} to ${newLabel} by ${normalizedEmail}`);
-            context.res = { status: 200, headers, body: JSON.stringify({ success: true, message: `Category renamed to ${newLabel}`, categories: updated, commitSha: result.commit.sha }) };
-            return;
-        }
-
-        // Unknown action
-        context.res = { status: 400, headers, body: JSON.stringify({ error: 'Bad Request', message: `Unknown action: ${action}` }) };
+        // Route by action
+        const action2 = action;
 
     } catch (error) {
         context.log.error('Function error:', error);
