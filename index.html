@@ -1027,7 +1027,7 @@
                 setTimeout(() => setShowEmailReminder(false), 4000);
 
                 // Send to Azure Function which forwards to Power Automate server-side
-                const AZURE_FUNCTION_URL = 'https://fpg-equipment-function-bfhse3hufnbpecbu.eastus-01.azurewebsites.net/api/publish-products';
+                const AZURE_FUNCTION_URL = 'https://fpg-equipment-function-b1.azurewebsites.net/api/publish-products';
                 const payloadString = JSON.stringify({ action: 'submit-order', ...orderPayload });
                 console.log('PAYLOAD BEING SENT:', payloadString);
                 try {
