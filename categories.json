@@ -58,7 +58,8 @@
     "slug": "printers_and_scanners",
     "label": "Printers and Scanners",
     "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-28T20:06:34.024Z"
+    "addedAt": "2026-05-28T20:06:34.024Z",
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/HPLaserJet-3301fdw-Color.jpg"
   },
   {
     "slug": "specialty_laptop",
