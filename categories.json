@@ -3,7 +3,8 @@
     "slug": "arrangement_rooms",
     "label": "Arrangement Rooms",
     "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-28T20:10:43.070Z"
+    "addedAt": "2026-05-28T20:10:43.070Z",
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/ArrangementRoom.jpg"
   },
   {
     "slug": "audio_visual",
