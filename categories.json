@@ -29,7 +29,8 @@
   },
   {
     "slug": "mobile_devices",
-    "label": "Mobile Devices"
+    "label": "Mobile Devices",
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/MobileDevices.jpg"
   },
   {
     "slug": "monitors",
