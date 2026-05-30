@@ -24,7 +24,8 @@
     "slug": "laptop",
     "label": "Laptop",
     "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-30T06:00:00.000Z"
+    "addedAt": "2026-05-30T06:00:00.000Z",
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/laptop.jpg"
   },
   {
     "slug": "mobile_devices",
