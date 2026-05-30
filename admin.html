@@ -1187,8 +1187,18 @@
                 });
             }, []);
 
+            // UI-only update — updates or inserts in local state, no API call
+            // Used by rename, revert, and any operation that handles its own API call
+            const handleCategoryUpdated = (slug, label) => {
+                setCategories(prev => {
+                    const exists = prev.find(c => c.slug === slug);
+                    if (exists) return prev.map(c => c.slug === slug ? { ...c, label } : c);
+                    return [...prev, { slug, label }];
+                });
+            };
+
             const handleCategoryAdded = async (slug, label) => {
-                // Update or insert — if slug exists update label, otherwise append
+                // Update UI instantly
                 setCategories(prev => {
                     const exists = prev.find(c => c.slug === slug);
                     if (exists) return prev.map(c => c.slug === slug ? { ...c, label } : c);
@@ -1397,7 +1407,7 @@
                         </div>
 
                         {activeTab === 'access' && <AccessManagement session={session} azureUrl={AZURE_FUNCTION_URL} adminPortalUrl={ADMIN_PORTAL_URL} />}
-                        {activeTab === 'categories' && <CategoryManagement session={session} azureUrl={AZURE_FUNCTION_URL} categories={categories} products={products} onCategoryAdded={handleCategoryAdded} onCategoryRemoved={handleCategoryRemoved} />}
+                        {activeTab === 'categories' && <CategoryManagement session={session} azureUrl={AZURE_FUNCTION_URL} categories={categories} products={products} onCategoryAdded={handleCategoryAdded} onCategoryUpdated={handleCategoryUpdated} onCategoryRemoved={handleCategoryRemoved} />}
 
                         {activeTab === 'products' && <div>
                         {draftCount > 0 && (
@@ -2134,7 +2144,7 @@
             );
         }
 
-        function CategoryManagement({ session, azureUrl, categories, products, onCategoryAdded, onCategoryRemoved }) {
+        function CategoryManagement({ session, azureUrl, categories, products, onCategoryAdded, onCategoryUpdated, onCategoryRemoved }) {
             const [newCatName, setNewCatName] = React.useState('');
             const [newCatImageUrl, setNewCatImageUrl] = React.useState('');
             const [saving, setSaving] = React.useState(false);
@@ -2199,11 +2209,11 @@
                     if (!text) throw new Error('Empty response');
                     const data = JSON.parse(text);
                     if (!res.ok) {
-                        onCategoryAdded(slug, label); // revert
+                        onCategoryUpdated(slug, label); // revert UI only
                         setStatus({ type: 'error', text: data.message || 'Failed to remove' });
                     }
                 } catch(e) {
-                    onCategoryAdded(slug, label); // revert
+                    onCategoryUpdated(slug, label); // revert UI only
                     setStatus({ type: 'error', text: e.message });
                 }
             };
@@ -2235,8 +2245,8 @@
                 else if (labelChanged) successText = 'Category renamed to "' + newLabel + '".';
                 else if (imageChanged) successText = 'Image updated for "' + newLabel + '".';
                 else successText = '"' + newLabel + '" saved.';
-                // Update UI instantly
-                onCategoryAdded(slug, newLabel);
+                // Update UI instantly — use onCategoryUpdated (UI only, no API call)
+                onCategoryUpdated(slug, newLabel);
                 setStatus({ type: 'success', text: successText });
                 setEditingSlug(null);
                 setEditLabel('');
@@ -2253,11 +2263,11 @@
                     if (!text) throw new Error('Empty response');
                     const data = JSON.parse(text);
                     if (!res.ok) {
-                        onCategoryAdded(slug, oldLabel); // revert
+                        onCategoryUpdated(slug, oldLabel); // revert UI only
                         setStatus({ type: 'error', text: data.message || 'Failed to rename' });
                     }
                 } catch(e) {
-                    onCategoryAdded(slug, oldLabel); // revert
+                    onCategoryUpdated(slug, oldLabel); // revert UI only
                     setStatus({ type: 'error', text: e.message });
                 }
             };
