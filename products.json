@@ -13,7 +13,9 @@
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-M75q-Gen5.jpg",
-    "categories": []
+    "categories": [
+      "recommended"
+    ]
   },
   {
     "id": 2,
@@ -33,7 +35,9 @@
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-TIO.jpg",
-    "categories": []
+    "categories": [
+      "recommended"
+    ]
   },
   {
     "id": 3,
@@ -72,7 +76,9 @@
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/HPLaserJet-M3101fdw-BW.jpg",
-    "categories": []
+    "categories": [
+      "recommended"
+    ]
   },
   {
     "id": 5,
@@ -88,7 +94,9 @@
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/HPLaserJet-3301fdw-Color.jpg",
-    "categories": []
+    "categories": [
+      "recommended"
+    ]
   },
   {
     "id": 6,
@@ -227,7 +235,10 @@
     "price": 3179.75,
     "recommended": true,
     "available": true,
-    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/laptop-with-dual-monitors-CCR.jpg"
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/laptop-with-dual-monitors-CCR.jpg",
+    "categories": [
+      "recommended"
+    ]
   },
   {
     "id": 11,
@@ -468,7 +479,9 @@
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/AVRack.jpg",
     "id": 23,
-    "categories": []
+    "categories": [
+      "recommended"
+    ]
   },
   {
     "title": "Amcrest Network Video Recorder",
@@ -478,7 +491,10 @@
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/NVR.jpg",
-    "id": 24
+    "id": 24,
+    "categories": [
+      "recommended"
+    ]
   },
   {
     "title": "ThinkVision Monitor - 24\"",
@@ -493,7 +509,10 @@
     "recommended": true,
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo_27inch.jpg",
-    "id": 25
+    "id": 25,
+    "categories": [
+      "recommended"
+    ]
   },
   {
     "title": "Tiny-in-One (TIO) Monitor - 24\"",
