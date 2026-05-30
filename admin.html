@@ -2133,7 +2133,7 @@
             const [status, setStatus] = React.useState(null);
             const [editingSlug, setEditingSlug] = React.useState(null);
             const [editLabel, setEditLabel] = React.useState('');
-
+            const [showAddModal, setShowAddModal] = React.useState(false);
             const getProductCount = function(slug) {
                 return (products || []).filter(function(p) { return p.category === slug; }).length;
             };
@@ -2242,15 +2242,45 @@
 
             return (
                 <div style={{maxWidth:'700px'}}>
+                    {showAddModal && (
+                        <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.45)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={function(e){if(e.target===e.currentTarget){setShowAddModal(false);setNewCatName("");}}}>
+                            <div style={{background:'white',borderRadius:'12px',padding:'1.5rem',width:'420px',maxWidth:'90vw',boxShadow:'0 8px 32px rgba(0,0,0,0.18)'}}>
+                                <h3 style={{fontSize:'1.1rem',fontWeight:600,margin:'0 0 1rem'}}>New category</h3>
+                                <input
+                                    type="text"
+                                    placeholder="e.g. Headsets"
+                                    value={newCatName}
+                                    onChange={function(e){setNewCatName(e.target.value);}}
+                                    onKeyDown={function(e){if(e.key==='Enter') handleAdd();if(e.key==='Escape'){setShowAddModal(false);setNewCatName("");}}}
+                                    autoFocus
+                                    style={{width:'100%',padding:'0.75rem 1rem',border:'1px solid #d1d5db',borderRadius:'8px',fontSize:'0.95rem',outline:'none',boxSizing:'border-box',marginBottom:'1rem'}}
+                                />
+                                {status && showAddModal && (
+                                    <div style={{marginBottom:'1rem',padding:'0.75rem 1rem',borderRadius:'8px',fontSize:'0.875rem',background:status.type==='success'?'#D1FAE5':'#FEE2E2',color:status.type==='success'?'#065F46':'#991B1B'}}>
+                                        {status.type === 'success' ? '✅' : '❌'} {status.text}
+                                    </div>
+                                )}
+                                <div style={{display:'flex',gap:'0.75rem',justifyContent:'flex-end'}}>
+                                    <button onClick={function(){setShowAddModal(false);setNewCatName("");setStatus(null);}} style={{padding:'0.6rem 1.25rem',borderRadius:'8px',border:'1px solid #d1d5db',background:'white',fontSize:'0.95rem',cursor:'pointer'}}>Cancel</button>
+                                    <button onClick={function(){handleAdd();setTimeout(function(){setShowAddModal(false);},300);}} disabled={saving || !newCatName.trim()} className="btn btn-primary" style={{whiteSpace:'nowrap'}}>
+                                        {saving ? 'Saving...' : 'Add category'}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                     <div style={{background:'white',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',overflow:'hidden'}}>
                         <div style={{padding:'1.25rem 1.5rem',borderBottom:'1px solid #f3f4f6',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                             <div>
                                 <h3 style={{fontSize:'1.1rem',fontWeight:600}}>🏷️ Categories</h3>
                                 <p style={{fontSize:'0.85rem',color:'#666',marginTop:'0.2rem'}}>{(categories||[]).length} total · {(categories||[]).filter(function(c){return getProductCount(c.slug)===0;}).length} empty</p>
                             </div>
+                            <button onClick={function(){setShowAddModal(true);setStatus(null);}} className="btn btn-primary" style={{display:'flex',alignItems:'center',gap:'6px',whiteSpace:'nowrap'}}>
+                                + New category
+                            </button>
                         </div>
 
-                        {status && (
+                        {status && !showAddModal && (
                             <div style={{margin:'0.75rem 1.5rem',padding:'0.75rem 1rem',borderRadius:'8px',fontSize:'0.875rem',background:status.type==='success'?'#D1FAE5':'#FEE2E2',color:status.type==='success'?'#065F46':'#991B1B'}}>
                                 {status.type === 'success' ? '✅' : '❌'} {status.text}
                             </div>
@@ -2316,28 +2346,6 @@
                                     </div>
                                 );
                             })}
-                        </div>
-
-                        <div style={{padding:'1.25rem 1.5rem',background:'#f9fafb',borderTop:'1px solid #f3f4f6'}}>
-                            <div style={{fontSize:'0.875rem',fontWeight:600,marginBottom:'0.75rem',color:'#374151'}}>Add new category</div>
-                            <div style={{display:'flex',gap:'0.75rem'}}>
-                                <input
-                                    type="text"
-                                    placeholder="Category name (e.g. Audio Visual)"
-                                    value={newCatName}
-                                    onChange={function(e){setNewCatName(e.target.value);}}
-                                    onKeyDown={function(e){if(e.key==='Enter') handleAdd();}}
-                                    style={{flex:1,padding:'0.75rem 1rem',border:'1px solid #d1d5db',borderRadius:'8px',fontSize:'0.95rem',outline:'none',minWidth:'200px'}}
-                                />
-                                <button
-                                    onClick={handleAdd}
-                                    disabled={saving || !newCatName.trim()}
-                                    className="btn btn-primary"
-                                    style={{whiteSpace:'nowrap'}}
-                                >
-                                    {saving ? 'Saving...' : '+ Add Category'}
-                                </button>
-                            </div>
                         </div>
                     </div>
                 </div>
