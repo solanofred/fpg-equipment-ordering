@@ -1039,7 +1039,7 @@
                 // Close UI immediately — don't wait for network
                 setShowCheckoutForm(false);
                 setCartOpen(false);
-                setSubmittedOrder({ items: [...cart], total: cartTotal.toFixed(2), formData });
+                setSubmittedOrder({ items: [...cart], total: cartTotal.toFixed(2) });
                 setCart([]);
                 setShowEmailReminder(true);
                 setTimeout(() => setShowEmailReminder(false), 4000);
@@ -1166,16 +1166,13 @@
                             </div>
                         ) : filteredProducts.length === 0 ? (
                             <div style={{textAlign:'center',padding:'4rem 2rem'}}>
-                                <div style={{width:'56px',height:'56px',borderRadius:'16px',background:'white',border:'1px solid var(--neutral-200)',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 1rem',fontSize:'1.5rem'}}>🔍</div>
+                                <div style={{width:'56px',height:'56px',borderRadius:'16px',background:'white',border:'1px solid var(--neutral-200)',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 1rem',fontSize:'1.5rem'}}>&#128269;</div>
                                 <div style={{fontSize:'1rem',fontWeight:600,color:'var(--neutral-700)',marginBottom:'0.4rem'}}>
                                     {searchQuery ? `No results for "${searchQuery}"` : 'No products in this category yet'}
                                 </div>
                                 <div style={{fontSize:'0.875rem',color:'var(--neutral-400)',marginBottom:'1rem'}}>
-                                    {searchQuery ? 'This item isn\'t in the catalog. Reach out to IT if you need it.' : 'Check back soon or contact IT.'}
+                                    {searchQuery ? "This item isn't in the catalog. Reach out to IT if you need it." : 'Check back soon or contact IT.'}
                                 </div>
-                                {searchQuery && (
-                                    <button onClick={() => setSearchQuery && setSearchQuery('')} style={{padding:'0.5rem 1.25rem',border:'1px solid var(--neutral-200)',borderRadius:'50px',background:'white',fontSize:'0.8125rem',cursor:'pointer',fontFamily:'inherit',color:'var(--text-primary)'}}>Clear search</button>
-                                )}
                             </div>
                         ) : (
                             <div className="products-grid">
@@ -1221,11 +1218,11 @@
                                                         ${product.price.toFixed(2)}
                                                     </div>
                                                 </div>
-                                                {cart.find(item => item.id === product.id) ? (
+                                                {cart.find(function(item){return item.id===product.id;}) ? (
                                                     <div style={{display:'flex',alignItems:'center',gap:'4px',background:'var(--neutral-100)',borderRadius:'8px',padding:'2px'}}>
-                                                        <button onClick={() => updateQuantity(product.id, -1)} style={{width:'28px',height:'28px',border:'none',background:'transparent',borderRadius:'6px',fontSize:'1rem',cursor:'pointer',color:'var(--text-primary)',fontFamily:'inherit',display:'flex',alignItems:'center',justifyContent:'center'}}>−</button>
-                                                        <span style={{minWidth:'20px',textAlign:'center',fontSize:'0.875rem',fontWeight:600,color:'var(--text-primary)'}}>{cart.find(item => item.id === product.id).quantity}</span>
-                                                        <button onClick={() => addToCart(product)} style={{width:'28px',height:'28px',border:'none',background:'transparent',borderRadius:'6px',fontSize:'1rem',cursor:'pointer',color:'var(--text-primary)',fontFamily:'inherit',display:'flex',alignItems:'center',justifyContent:'center'}}>+</button>
+                                                        <button onClick={function(){updateQuantity(product.id,-1);}} style={{width:'28px',height:'28px',border:'none',background:'transparent',borderRadius:'6px',fontSize:'1rem',cursor:'pointer',color:'var(--text-primary)',fontFamily:'inherit',display:'flex',alignItems:'center',justifyContent:'center'}}>&#8722;</button>
+                                                        <span style={{minWidth:'20px',textAlign:'center',fontSize:'0.875rem',fontWeight:600,color:'var(--text-primary)'}}>{cart.find(function(item){return item.id===product.id;}).quantity}</span>
+                                                        <button onClick={function(){addToCart(product);}} style={{width:'28px',height:'28px',border:'none',background:'transparent',borderRadius:'6px',fontSize:'1rem',cursor:'pointer',color:'var(--text-primary)',fontFamily:'inherit',display:'flex',alignItems:'center',justifyContent:'center'}}>&#43;</button>
                                                     </div>
                                                 ) : (
                                                 <button 
@@ -1382,54 +1379,39 @@
 
                     {/* Order Confirmation Screen */}
                     {showEmailReminder && submittedOrder && (
-                        <div style={{
-                            position: 'fixed',
-                            inset: 0,
-                            zIndex: 2000,
-                            background: 'var(--bg-primary)',
-                            overflowY: 'auto',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            justifyContent: 'flex-start',
-                            padding: '3rem 1.5rem'
-                        }}>
+                        <div style={{position:'fixed',inset:0,zIndex:2000,background:'var(--bg-primary)',overflowY:'auto',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'flex-start',padding:'3rem 1.5rem'}}>
                             <div style={{width:'72px',height:'72px',borderRadius:'50%',background:'rgba(86,137,53,0.1)',display:'flex',alignItems:'center',justifyContent:'center',marginBottom:'1.25rem'}}>
-                                <span style={{fontSize:'2rem'}}>✅</span>
+                                <span style={{fontSize:'2rem'}}>&#10003;</span>
                             </div>
-                            <h2 style={{fontFamily:"Georgia,'Times New Roman',serif",fontSize:'1.75rem',fontWeight:600,color:'var(--text-primary)',marginBottom:'0.5rem',textAlign:'center'}}>
-                                Order submitted
-                            </h2>
+                            <h2 style={{fontFamily:"Georgia,'Times New Roman',serif",fontSize:'1.75rem',fontWeight:600,color:'var(--text-primary)',marginBottom:'0.5rem',textAlign:'center'}}>Order submitted</h2>
                             <p style={{fontSize:'0.9375rem',color:'var(--neutral-500)',lineHeight:1.6,maxWidth:'340px',textAlign:'center',marginBottom:'1.75rem'}}>
                                 Your request has been sent to the IT Help Team. You'll receive a confirmation email shortly.
                             </p>
                             <div style={{background:'var(--bg-secondary)',border:'1px solid var(--neutral-200)',borderRadius:'12px',padding:'1.25rem',width:'100%',maxWidth:'400px',marginBottom:'1.25rem'}}>
                                 <div style={{fontSize:'0.6875rem',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.08em',color:'var(--neutral-500)',marginBottom:'0.875rem'}}>Order summary</div>
-                                {submittedOrder.items.map((item, i) => (
-                                    <div key={i} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'0.5rem 0',borderBottom:i < submittedOrder.items.length - 1 ? '1px solid var(--neutral-100)' : 'none',fontSize:'0.875rem'}}>
-                                        <span style={{color:'var(--text-primary)',fontWeight:500}}>{item.title} × {item.quantity}</span>
-                                        <span style={{color:'var(--neutral-500)'}}>${(item.price * item.quantity).toFixed(2)}</span>
+                                {submittedOrder.items.map(function(item,i){return(
+                                    <div key={i} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'0.5rem 0',borderBottom:i<submittedOrder.items.length-1?'1px solid var(--neutral-100)':'none',fontSize:'0.875rem'}}>
+                                        <span style={{color:'var(--text-primary)',fontWeight:500}}>{item.title} x{item.quantity}</span>
+                                        <span style={{color:'var(--neutral-500)'}}>${(item.price*item.quantity).toFixed(2)}</span>
                                     </div>
-                                ))}
+                                );})}
                                 <div style={{display:'flex',justifyContent:'space-between',marginTop:'0.75rem',paddingTop:'0.75rem',borderTop:'2px solid var(--neutral-200)',fontSize:'0.9375rem'}}>
                                     <span style={{fontWeight:600,color:'var(--text-primary)'}}>Total</span>
                                     <span style={{fontWeight:700,color:'#0A2540'}}>${submittedOrder.total}</span>
                                 </div>
                             </div>
                             <div style={{background:'white',border:'1px solid #568935',borderRadius:'10px',padding:'0.875rem 1rem',width:'100%',maxWidth:'400px',marginBottom:'1.5rem',display:'flex',gap:'0.75rem',alignItems:'flex-start'}}>
-                                <span style={{fontSize:'1.125rem',flexShrink:0}}>🎫</span>
+                                <span style={{fontSize:'1.125rem',flexShrink:0}}>&#127915;</span>
                                 <p style={{fontSize:'0.8125rem',color:'var(--neutral-600)',lineHeight:1.55,margin:0}}>
                                     A <strong style={{color:'var(--text-primary)'}}>ConnectWise ticket</strong> will be created automatically. If you don't hear back within 15 min, contact <strong style={{color:'var(--text-primary)'}}>ithelp@foundationpartners.com</strong>
                                 </p>
                             </div>
                             <div style={{display:'flex',gap:'0.75rem',width:'100%',maxWidth:'400px'}}>
-                                <button onClick={() => { setShowEmailReminder(false); setSubmittedOrder(null); }} style={{flex:1,padding:'0.75rem',border:'1.5px solid var(--neutral-200)',borderRadius:'10px',background:'transparent',fontSize:'0.9375rem',fontFamily:'inherit',color:'var(--text-primary)',cursor:'pointer',fontWeight:500}}>+ New order</button>
-                                <button onClick={() => { setShowEmailReminder(false); setSubmittedOrder(null); }} style={{flex:1,padding:'0.75rem',border:'none',borderRadius:'10px',background:'#0A2540',fontSize:'0.9375rem',fontFamily:'inherit',color:'white',cursor:'pointer',fontWeight:500}}>Back to catalog</button>
+                                <button onClick={function(){setShowEmailReminder(false);setSubmittedOrder(null);}} style={{flex:1,padding:'0.75rem',border:'1.5px solid var(--neutral-200)',borderRadius:'10px',background:'transparent',fontSize:'0.9375rem',fontFamily:'inherit',color:'var(--text-primary)',cursor:'pointer',fontWeight:500}}>+ New order</button>
+                                <button onClick={function(){setShowEmailReminder(false);setSubmittedOrder(null);}} style={{flex:1,padding:'0.75rem',border:'none',borderRadius:'10px',background:'#0A2540',fontSize:'0.9375rem',fontFamily:'inherit',color:'white',cursor:'pointer',fontWeight:500}}>Back to catalog</button>
                             </div>
                         </div>
                     )}
-
-                    {/* Footer */
 
                     {/* Footer */}
                     <footer style={{
