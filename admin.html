@@ -1188,8 +1188,12 @@
             }, []);
 
             const handleCategoryAdded = async (slug, label) => {
-                // Update UI instantly — optimistic
-                setCategories(prev => [...prev, { slug, label }]);
+                // Update or insert — if slug exists update label, otherwise append
+                setCategories(prev => {
+                    const exists = prev.find(c => c.slug === slug);
+                    if (exists) return prev.map(c => c.slug === slug ? { ...c, label } : c);
+                    return [...prev, { slug, label }];
+                });
                 // Sync to GitHub in background
                 try {
                     const res = await fetch(AZURE_FUNCTION_URL, {
