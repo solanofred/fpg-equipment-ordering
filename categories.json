@@ -41,7 +41,8 @@
   },
   {
     "slug": "new_location_setup",
-    "label": "New Location Setup"
+    "label": "New Location Setup",
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/NewLocation.jpg"
   },
   {
     "slug": "peripherals",
