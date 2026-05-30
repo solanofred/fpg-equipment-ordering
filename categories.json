@@ -5,7 +5,8 @@
   },
   {
     "slug": "recommended",
-    "label": "Recommended"
+    "label": "Recommended",
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Recommended.jpg"
   },
   {
     "slug": "arrangement_rooms",
