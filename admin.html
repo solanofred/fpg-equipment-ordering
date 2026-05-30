@@ -253,6 +253,13 @@
             background: var(--primary);
             color: white;
         }
+
+        .btn-compact {
+            width: auto !important;
+            padding: 0.45rem 1rem !important;
+            font-size: 0.875rem !important;
+            border-radius: 8px !important;
+        }
         
         .btn-primary:hover {
             background: var(--primary-dark);
@@ -2275,7 +2282,7 @@
                                 <h3 style={{fontSize:'1.25rem',fontWeight:700,margin:'0 0 0.25rem 0',color:'#1a1a2e'}}>🏷️ Categories</h3>
                                 <p style={{fontSize:'0.8rem',color:'#9ca3af',margin:0,letterSpacing:'0.01em'}}>{(categories||[]).length} total · {(categories||[]).filter(function(c){return getProductCount(c.slug)===0;}).length} empty</p>
                             </div>
-                            <button onClick={function(){setShowAddModal(true);setStatus(null);}} className="btn btn-primary" style={{display:'flex',alignItems:'center',gap:'6px',whiteSpace:'nowrap',marginTop:'0.2rem'}}>
+                            <button onClick={function(){setShowAddModal(true);setStatus(null);}} className="btn btn-primary btn-compact" style={{display:'flex',alignItems:'center',gap:'6px',whiteSpace:'nowrap'}}>
                                 + New category
                             </button>
                         </div>
