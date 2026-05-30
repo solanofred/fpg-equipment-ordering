@@ -1,13 +1,11 @@
 [
   {
     "slug": "all",
-    "label": "All Equipment",
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/AllEquipment.jpg"
+    "label": "All Equipment"
   },
   {
     "slug": "recommended",
-    "label": "Recommended",
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Recommended.jpg"
+    "label": "Recommended"
   },
   {
     "slug": "arrangement_rooms",
@@ -22,12 +20,12 @@
   {
     "slug": "desktop",
     "label": "Desktop",
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Desktop.jpg"
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Dekstop.jpg"
   },
   {
     "slug": "laptop",
     "label": "Laptop",
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Laptop.jpg"
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/laptop.jpg"
   },
   {
     "slug": "mobile_devices",
@@ -35,8 +33,7 @@
   },
   {
     "slug": "monitors",
-    "label": "Monitors",
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Monitor.jpg"
+    "label": "Monitors"
   },
   {
     "slug": "new_location_setup",
@@ -44,8 +41,7 @@
   },
   {
     "slug": "peripherals",
-    "label": "Peripherals",
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Peripherals.jpg"
+    "label": "Peripherals"
   },
   {
     "slug": "phones",
@@ -58,8 +54,7 @@
   },
   {
     "slug": "specialty_laptop",
-    "label": "Specialty Laptop",
-    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Lenovo-P14S.jpg"
+    "label": "Specialty Laptop"
   },
   {
     "slug": "tribucast",
