@@ -2228,9 +2228,16 @@
                 const newLabel = editLabel.trim();
                 const newImageUrl = editImageUrl.trim();
                 const oldLabel = (categories||[]).find(c => c.slug === slug)?.label || slug;
+                const labelChanged = newLabel !== oldLabel;
+                const imageChanged = newImageUrl !== ((categories||[]).find(c => c.slug === slug)?.imageUrl || '');
+                let successText = '';
+                if (labelChanged && imageChanged) successText = 'Category updated — name and image saved.';
+                else if (labelChanged) successText = 'Category renamed to "' + newLabel + '".';
+                else if (imageChanged) successText = 'Image updated for "' + newLabel + '".';
+                else successText = '"' + newLabel + '" saved.';
                 // Update UI instantly
                 onCategoryAdded(slug, newLabel);
-                setStatus({ type: 'success', text: 'Category renamed to "' + newLabel + '".' });
+                setStatus({ type: 'success', text: successText });
                 setEditingSlug(null);
                 setEditLabel('');
                 setEditImageUrl('');
