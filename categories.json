@@ -1,7 +1,8 @@
 [
   {
     "slug": "all",
-    "label": "All Equipment"
+    "label": "All Equipment",
+    "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/AllEquipment.jpg"
   },
   {
     "slug": "recommended",
