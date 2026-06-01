@@ -2564,7 +2564,7 @@
                     setAuditTypeFilter('all');
                     setAuditExpandedRows({});
                     setShowAudit(true);
-                } catch(e) { setStatus({ type: 'error', text: 'Failed to load audit log' }); }
+                } catch(e) { setStatus({ type: 'error', text: 'Failed to load audit log: ' + (e.message || 'Unknown error') + '. Wait 30 seconds and try again.' }); }
             };
 
             const handleStatusChange = async function(order, newStatus) {
