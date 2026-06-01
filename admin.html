@@ -2822,7 +2822,7 @@
                                         </th>
                                         <th style={{padding:'9px 10px',width:'3%',borderBottom:'0.5px solid #E7E5E4'}}></th>
                                         {['Date/Time','Submitted by','Recipient','Location','Ship To','Total','Status','Actions'].map((h,i) => (
-                                            <th key={i} style={{padding:'9px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',
+                                            <th key={i} style={{padding:'9px 10px',textAlign:'left',fontSize:'11px',fontWeight:700,color:'#0A2540',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',
                                                 width: h==='Date/Time'?'10%':h==='Submitted by'?'13%':h==='Recipient'?'10%':h==='Location'?'7%':h==='Ship To'?'15%':h==='Total'?'8%':h==='Status'?'9%':'12%'
                                             }}>{h}</th>
                                         ))}
@@ -2893,53 +2893,89 @@
                                             </tr>
                                             {expandedRows[order.id] && (
                                                 <tr>
-                                                    <td colSpan={10} style={{padding:0,borderBottom:'0.5px solid #E7E5E4',background:'#F8FAFC'}}>
-                                                        <div style={{padding:'16px 20px',display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'16px'}}>
-                                                            <div>
-                                                                <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.06em',color:'#78716C',marginBottom:'6px'}}>Items ordered</div>
+                                                    <td colSpan={10} style={{padding:0,borderBottom:'2px solid #1B5A8E',background:'#F0F4F8'}}>
+                                                        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'0',borderTop:'2px solid #1B5A8E'}}>
+
+                                                            {/* ITEMS ORDERED — blue section */}
+                                                            <div style={{background:'#EEF4FF',borderRight:'1px solid #C7D9F0',padding:'14px 16px'}}>
+                                                                <div style={{display:'flex',alignItems:'center',gap:'6px',marginBottom:'10px',paddingBottom:'8px',borderBottom:'1.5px solid #1B5A8E'}}>
+                                                                    <div style={{width:'3px',height:'14px',background:'#1B5A8E',borderRadius:'2px'}}></div>
+                                                                    <span style={{fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.08em',color:'#1B5A8E'}}>Items Ordered</span>
+                                                                </div>
                                                                 {(order.items||[]).length > 0 ? (
-                                                                    <div style={{border:'0.5px solid #E7E5E4',borderRadius:'6px',overflow:'hidden',background:'white'}}>
+                                                                    <div style={{background:'white',borderRadius:'6px',overflow:'hidden',border:'1px solid #C7D9F0'}}>
                                                                         {(order.items||[]).map((item,i) => (
-                                                                            <div key={i} style={{display:'flex',justifyContent:'space-between',padding:'6px 10px',borderBottom: i < (order.items||[]).length-1 ? '0.5px solid #F5F5F4':'none',fontSize:'11.5px'}}>
-                                                                                <span style={{color:'#292524'}}>{item.title} <span style={{color:'#A8A29E'}}>×{item.quantity||1}</span></span>
-                                                                                <span style={{color:'#57534E',fontWeight:500}}>${((item.price||0)*(item.quantity||1)).toFixed(2)}</span>
+                                                                            <div key={i} style={{display:'flex',justifyContent:'space-between',padding:'7px 10px',borderBottom:i<(order.items||[]).length-1?'0.5px solid #E6F1FB':'none',fontSize:'12px'}}>
+                                                                                <span style={{color:'#0A2540',fontWeight:500}}>{item.title} <span style={{color:'#78716C',fontWeight:400}}>×{item.quantity||1}</span></span>
+                                                                                <span style={{color:'#1B5A8E',fontWeight:600}}>${((item.price||0)*(item.quantity||1)).toFixed(2)}</span>
                                                                             </div>
                                                                         ))}
-                                                                        <div style={{display:'flex',justifyContent:'space-between',padding:'7px 10px',background:'#F5F5F4',fontSize:'12px',fontWeight:500}}>
-                                                                            <span>Total</span>
-                                                                            <span style={{color:'#0A2540'}}>${(order.total||0).toFixed(2)}</span>
+                                                                        <div style={{display:'flex',justifyContent:'space-between',padding:'8px 10px',background:'#1B5A8E',fontSize:'12px',fontWeight:700}}>
+                                                                            <span style={{color:'white'}}>Total</span>
+                                                                            <span style={{color:'white'}}>${(order.total||0).toFixed(2)}</span>
                                                                         </div>
                                                                     </div>
                                                                 ) : <span style={{fontSize:'12px',color:'#A8A29E'}}>No item detail available</span>}
                                                             </div>
-                                                            <div style={{fontSize:'12px'}}>
-                                                                <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.06em',color:'#78716C',marginBottom:'6px'}}>Recipient details</div>
-                                                                <div style={{marginBottom:'3px',fontWeight:500}}>{order.recipientName}</div>
-                                                                {order.recipientEmail && order.recipientEmail !== 'Not provided' && (
-                                                                    <div style={{color:'#57534E',marginBottom:'3px'}}>{order.recipientEmail}</div>
-                                                                )}
-                                                                <div style={{color:'#78716C',marginBottom:'10px'}}>New employee: {order.isNewEmployee === 'yes' ? 'Yes' : 'No'}</div>
-                                                                <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.06em',color:'#78716C',marginBottom:'4px'}}>Date needed</div>
-                                                                <div style={{color:'#292524',marginBottom:'10px'}}>{order.dateNeeded || 'Not specified'}</div>
-                                                                <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.06em',color:'#78716C',marginBottom:'4px'}}>Ship to</div>
-                                                                <div style={{color:'#292524'}}>{order.shipTo}</div>
-                                                            </div>
-                                                            <div style={{fontSize:'12px'}}>
-                                                                <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.06em',color:'#78716C',marginBottom:'4px'}}>Order ID</div>
-                                                                <div style={{fontFamily:'monospace',fontSize:'11px',color:'#57534E',marginBottom:'10px',background:'white',padding:'4px 8px',borderRadius:'4px',border:'0.5px solid #E7E5E4'}}>{order.id}</div>
-                                                                <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.06em',color:'#78716C',marginBottom:'4px'}}>Special instructions</div>
-                                                                <div style={{color:'#292524',marginBottom:'12px'}}>{order.notes && order.notes !== 'None' ? order.notes : <span style={{color:'#A8A29E'}}>None</span>}</div>
-                                                                {order.status === 'Fulfilled' && (
-                                                                    <div style={{marginBottom:'10px'}}>
-                                                                        <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.06em',color:'#78716C',marginBottom:'4px'}}>Fulfilled by</div>
-                                                                        <div style={{color:'#292524'}}>{order.statusUpdatedBy || 'Unknown'}</div>
+
+                                                            {/* RECIPIENT DETAILS — teal section */}
+                                                            <div style={{background:'#F0FBF6',borderRight:'1px solid #A3D9C0',padding:'14px 16px'}}>
+                                                                <div style={{display:'flex',alignItems:'center',gap:'6px',marginBottom:'10px',paddingBottom:'8px',borderBottom:'1.5px solid #0F6E56'}}>
+                                                                    <div style={{width:'3px',height:'14px',background:'#0F6E56',borderRadius:'2px'}}></div>
+                                                                    <span style={{fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.08em',color:'#0F6E56'}}>Recipient Details</span>
+                                                                </div>
+                                                                <div style={{fontSize:'12px'}}>
+                                                                    <div style={{fontWeight:700,fontSize:'13px',color:'#0A2540',marginBottom:'2px'}}>{order.recipientName}</div>
+                                                                    {order.recipientEmail && order.recipientEmail !== 'Not provided' && (
+                                                                        <div style={{color:'#57534E',marginBottom:'8px',fontSize:'11.5px'}}>{order.recipientEmail}</div>
+                                                                    )}
+                                                                    <div style={{display:'inline-block',padding:'2px 8px',borderRadius:'10px',fontSize:'11px',fontWeight:500,marginBottom:'12px',
+                                                                        background:order.isNewEmployee==='yes'?'#D1FAE5':'#F1F5F9',
+                                                                        color:order.isNewEmployee==='yes'?'#065F46':'#475569'}}>
+                                                                        {order.isNewEmployee==='yes' ? '★ New employee' : 'Existing employee'}
                                                                     </div>
-                                                                )}
-                                                                <button onClick={e=>handleExportSingle(e, order)}
-                                                                    style={{padding:'5px 12px',border:'0.5px solid #D6D3D1',borderRadius:'6px',fontSize:'11px',background:'white',cursor:'pointer',fontFamily:'inherit',color:'#57534E'}}>
-                                                                    ⬇ Export this order
-                                                                </button>
+                                                                    <div style={{marginBottom:'8px'}}>
+                                                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',color:'#0F6E56',marginBottom:'2px'}}>Date Needed</div>
+                                                                        <div style={{color:'#0A2540',fontWeight:500}}>{order.dateNeeded || 'Not specified'}</div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',color:'#0F6E56',marginBottom:'2px'}}>Ship To</div>
+                                                                        <div style={{color:'#0A2540',fontWeight:500}}>{order.shipTo}</div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
+
+                                                            {/* ORDER ID + INSTRUCTIONS — amber section */}
+                                                            <div style={{background:'#FFFBF0',padding:'14px 16px'}}>
+                                                                <div style={{display:'flex',alignItems:'center',gap:'6px',marginBottom:'10px',paddingBottom:'8px',borderBottom:'1.5px solid #B45309'}}>
+                                                                    <div style={{width:'3px',height:'14px',background:'#B45309',borderRadius:'2px'}}></div>
+                                                                    <span style={{fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.08em',color:'#B45309'}}>Order Info</span>
+                                                                </div>
+                                                                <div style={{fontSize:'12px'}}>
+                                                                    <div style={{marginBottom:'10px'}}>
+                                                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',color:'#B45309',marginBottom:'4px'}}>Order ID</div>
+                                                                        <div style={{fontFamily:'monospace',fontSize:'11px',color:'#57534E',background:'white',padding:'5px 8px',borderRadius:'4px',border:'1px solid #FDE68A',wordBreak:'break-all'}}>{order.id}</div>
+                                                                    </div>
+                                                                    <div style={{marginBottom:'10px'}}>
+                                                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',color:'#B45309',marginBottom:'4px'}}>Special Instructions</div>
+                                                                        <div style={{color:'#0A2540',fontWeight:order.notes&&order.notes!=='None'?500:400,
+                                                                            padding:'6px 8px',background:'white',borderRadius:'4px',border:'1px solid #FDE68A',fontSize:'12px'}}>
+                                                                            {order.notes && order.notes !== 'None' ? order.notes : <span style={{color:'#A8A29E',fontStyle:'italic'}}>None</span>}
+                                                                        </div>
+                                                                    </div>
+                                                                    {order.status === 'Fulfilled' && (
+                                                                        <div style={{marginBottom:'10px'}}>
+                                                                            <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',color:'#B45309',marginBottom:'4px'}}>Fulfilled By</div>
+                                                                            <div style={{color:'#0A2540',fontWeight:500}}>{order.statusUpdatedBy || 'Unknown'}</div>
+                                                                        </div>
+                                                                    )}
+                                                                    <button onClick={e=>handleExportSingle(e, order)}
+                                                                        style={{padding:'6px 14px',border:'1px solid #D97706',borderRadius:'6px',fontSize:'11px',background:'white',cursor:'pointer',fontFamily:'inherit',color:'#B45309',fontWeight:600}}>
+                                                                        ⬇ Export this order
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                     </td>
                                                 </tr>
