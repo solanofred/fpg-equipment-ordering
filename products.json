@@ -528,15 +528,5 @@
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/TIO_24inch.jpg",
     "id": 26
-  },
-  {
-    "title": "Cisco Switch",
-    "category": "tribucast",
-    "items": [],
-    "price": 0,
-    "recommended": false,
-    "available": true,
-    "imageUrl": "",
-    "id": 27
   }
 ]
