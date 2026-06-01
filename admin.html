@@ -2919,22 +2919,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {paginated.map(order => (
+                                {paginated.map((order, rowIndex) => (
                                         <React.Fragment key={order.id}>
                                             <tr onClick={()=>toggleRow(order.id)}
                                                 style={{cursor:'pointer',opacity:order.status==='Deleted'?0.6:1,
-                                                    background:expandedRows[order.id]?'#F8FAFC':'white'}}>
-                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}} onClick={e=>e.stopPropagation()}>
+                                                    background:expandedRows[order.id]?'#EEF4FF':rowIndex%2===0?'white':'#F5F9FF'}}>
+                                                <td style={{padding:'10px',borderBottom:'0.5px solid #E7E5E4'}} onClick={e=>e.stopPropagation()}>
                                                     <input type="checkbox" checked={!!selectedOrders[order.id]}
                                                         onChange={e=>toggleSelect(e, order.id)}
                                                         style={{cursor:'pointer',accentColor:'#0A2540'}} />
                                                 </td>
-                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',color:'#A8A29E',fontSize:'14px',textAlign:'center'}}>
+                                                <td style={{padding:'10px',borderBottom:'0.5px solid #E7E5E4',color:'#A8A29E',fontSize:'14px',textAlign:'center'}}>
                                                     {expandedRows[order.id] ? '▾' : '▸'}
                                                 </td>
-                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',color:'#78716C',fontSize:'11px'}}>
-                                                    {new Date(order.submittedAt).toLocaleDateString()}<br/>
-                                                    <span style={{fontSize:'10.5px'}}>{new Date(order.submittedAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>
+                                                <td style={{padding:'10px',borderBottom:'0.5px solid #E7E5E4'}}>
+                                                    <div style={{fontWeight:700,fontSize:'12px',color:'#0A2540'}}>{new Date(order.submittedAt).toLocaleDateString()}</div>
+                                                    <div style={{fontWeight:700,fontSize:'11px',color:'#57534E'}}>{new Date(order.submittedAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
                                                 </td>
                                                 <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}}>
                                                     <div style={{fontWeight:500,fontSize:'12px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{order.submitterName}</div>
