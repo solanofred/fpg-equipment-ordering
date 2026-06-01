@@ -2923,7 +2923,7 @@
                                         <React.Fragment key={order.id}>
                                             <tr onClick={()=>toggleRow(order.id)}
                                                 style={{cursor:'pointer',opacity:order.status==='Deleted'?0.6:1,
-                                                    background:expandedRows[order.id]?'#EEF4FF':rowIndex%2===0?'white':'#F5F9FF'}}>
+                                                    background:expandedRows[order.id]?'#DBEAFE':rowIndex%2===0?'white':'#DBEAFE'}}>
                                                 <td style={{padding:'10px',borderBottom:'0.5px solid #E7E5E4'}} onClick={e=>e.stopPropagation()}>
                                                     <input type="checkbox" checked={!!selectedOrders[order.id]}
                                                         onChange={e=>toggleSelect(e, order.id)}
@@ -3329,7 +3329,7 @@
                                                         return (
                                                             <React.Fragment key={entry.id || i}>
                                                                 <tr onClick={expandable ? ()=>setAuditExpandedRows(prev=>({...prev,[entry.id]:!prev[entry.id]})) : undefined}
-                                                                    style={{borderBottom:'0.5px solid #F5F5F4',cursor:expandable?'pointer':'default',background:expanded?'#F8FAFC':'white'}}>
+                                                                    style={{borderBottom:'0.5px solid #E7E5E4',cursor:expandable?'pointer':'default',background:expanded?'#DBEAFE':i%2===0?'white':'#DBEAFE'}}>
                                                                     <td style={{padding:'9px 6px',textAlign:'center',color:'#A8A29E',fontSize:'11px'}}>
                                                                         {expandable ? (expanded ? '▾' : '▸') : ''}
                                                                     </td>
