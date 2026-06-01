@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780338630916",
+    "timestamp": "2026-06-01T18:30:30.916Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  }
+]
