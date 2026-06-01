@@ -2486,6 +2486,8 @@
             const [auditLog, setAuditLog] = React.useState([]);
             const [showAudit, setShowAudit] = React.useState(false);
             const [status, setStatus] = React.useState(null);
+            const [expandedRows, setExpandedRows] = React.useState({});
+            const [selectedOrders, setSelectedOrders] = React.useState({});
             const isSuperAdmin = session && session.email && session.email.toLowerCase() === 'fred.solano@foundationpartners.com';
             const currentYear = new Date().getFullYear();
             const availableYears = [currentYear, currentYear - 1, currentYear - 2];
@@ -2572,18 +2574,65 @@
                 setPermDeleteModal(null); setPermDeleteReason('');
             };
 
-            const handleExportCSV = function(filteredOrders) {
-                const headers = ['Order ID','Date','Submitter','Recipient','Location ID','Ship To','Total','Status'];
-                const rows = filteredOrders.map(o => [
-                    o.id, new Date(o.submittedAt).toLocaleString(), o.submitterName,
-                    o.recipientName, o.locationId, `"${(o.shipTo||'').replace(/"/g,'""')}"`,
-                    o.total?.toFixed(2), o.status
-                ]);
+            const toggleRow = function(orderId) {
+                setExpandedRows(prev => ({ ...prev, [orderId]: !prev[orderId] }));
+            };
+
+            const toggleSelect = function(e, orderId) {
+                e.stopPropagation();
+                setSelectedOrders(prev => ({ ...prev, [orderId]: !prev[orderId] }));
+            };
+
+            const toggleSelectAll = function(e) {
+                if (e.target.checked) {
+                    const all = {};
+                    filtered.forEach(o => { all[o.id] = true; });
+                    setSelectedOrders(all);
+                } else {
+                    setSelectedOrders({});
+                }
+            };
+
+            const exportToCSV = function(ordersToExport, filename) {
+                const headers = ['Order ID','Date','Time','Submitter Name','Submitter Email','Recipient Name','Recipient Email','Location ID','Ship To','Items','Total','Status','Date Needed','Notes'];
+                const rows = ordersToExport.map(o => {
+                    const items = (o.items||[]).map(i => `${i.title} x${i.quantity||1} ($${(i.price||0).toFixed(2)})`).join('; ');
+                    const dt = new Date(o.submittedAt);
+                    return [
+                        o.id,
+                        dt.toLocaleDateString(),
+                        dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),
+                        o.submitterName||'',
+                        o.submitterEmail||'',
+                        o.recipientName||'',
+                        o.recipientEmail||'',
+                        o.locationId||'',
+                        `"${(o.shipTo||'').replace(/"/g,'""')}"`,
+                        `"${items.replace(/"/g,'""')}"`,
+                        (o.total||0).toFixed(2),
+                        o.status||'',
+                        o.dateNeeded||'',
+                        `"${(o.notes||'').replace(/"/g,'""')}"`
+                    ];
+                });
                 const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
                 const blob = new Blob([csv], { type: 'text/csv' });
                 const url = URL.createObjectURL(blob);
-                const a = document.createElement('a'); a.href = url; a.download = `orders-export-${Date.now()}.csv`; a.click();
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename || `orders-export-${Date.now()}.csv`;
+                a.click();
                 URL.revokeObjectURL(url);
+            };
+
+            const handleExportAll = function() { exportToCSV(filtered, `orders-${yearFilter.join('-')}-all.csv`); };
+            const handleExportSelected = function() {
+                const sel = filtered.filter(o => selectedOrders[o.id]);
+                exportToCSV(sel, `orders-selected-${Date.now()}.csv`);
+            };
+            const handleExportSingle = function(e, order) {
+                e.stopPropagation();
+                exportToCSV([order], `order-${order.id}.csv`);
             };
 
             // Filter logic
@@ -2683,9 +2732,9 @@
                                 background:showDeleted?'#FEE2E2':'white',color:showDeleted?'#991B1B':'#57534E'}}>
                             {showDeleted ? '🗑 Hiding deleted' : '🗑 Show deleted'}
                         </button>
-                        <button onClick={()=>handleExportCSV(filtered)}
+                        <button onClick={handleExportAll}
                             style={{padding:'6px 12px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'12px',cursor:'pointer',background:'white',color:'#57534E'}}>
-                            ⬇ Export CSV
+                            ⬇ Export all
                         </button>
                         <button onClick={loadAuditLog}
                             style={{padding:'6px 12px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'12px',cursor:'pointer',background:'white',color:'#57534E'}}>
@@ -2702,69 +2751,150 @@
                         </div>
                     ) : (
                         <div style={{background:'white',borderRadius:'10px',border:'0.5px solid #E7E5E4',overflow:'hidden'}}>
-                            <table style={{width:'100%',borderCollapse:'collapse',fontSize:'12.5px',tableLayout:'fixed'}}>
+                            {Object.values(selectedOrders).some(Boolean) && (
+                                <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'8px 12px',background:'#EEF4FF',borderBottom:'0.5px solid #B5D4F4'}}>
+                                    <span style={{fontSize:'12px',color:'#0C447C',fontWeight:500}}>
+                                        {Object.values(selectedOrders).filter(Boolean).length} order{Object.values(selectedOrders).filter(Boolean).length > 1 ? 's' : ''} selected
+                                    </span>
+                                    <button onClick={handleExportSelected}
+                                        style={{padding:'4px 14px',background:'#0A2540',color:'white',border:'none',borderRadius:'6px',fontSize:'11px',cursor:'pointer',fontFamily:'inherit',fontWeight:500}}>
+                                        ⬇ Export selected
+                                    </button>
+                                </div>
+                            )}
+                            <table style={{width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed'}}>
                                 <thead>
                                     <tr style={{background:'#FAFAF9'}}>
-                                        {['Date/Time','Submitted by','Recipient','Location ID','Ship To','Total','Status','Actions'].map((h,i) => (
-                                            <th key={i} style={{padding:'9px 10px',textAlign:'left',fontSize:'11px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4'}}>{h}</th>
+                                        <th style={{padding:'9px 10px',width:'3%',borderBottom:'0.5px solid #E7E5E4'}}>
+                                            <input type="checkbox" onChange={toggleSelectAll}
+                                                checked={filtered.length > 0 && filtered.every(o => selectedOrders[o.id])}
+                                                style={{cursor:'pointer',accentColor:'#0A2540'}} />
+                                        </th>
+                                        <th style={{padding:'9px 10px',width:'3%',borderBottom:'0.5px solid #E7E5E4'}}></th>
+                                        {['Date/Time','Submitted by','Recipient','Location','Ship To','Total','Status','Actions'].map((h,i) => (
+                                            <th key={i} style={{padding:'9px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',
+                                                width: h==='Date/Time'?'10%':h==='Submitted by'?'13%':h==='Recipient'?'10%':h==='Location'?'7%':h==='Ship To'?'15%':h==='Total'?'8%':h==='Status'?'9%':'12%'
+                                            }}>{h}</th>
                                         ))}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {filtered.map(order => (
-                                        <tr key={order.id} style={{opacity: order.status==='Deleted'?0.6:1}}>
-                                            <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',color:'#78716C',fontSize:'11.5px'}}>
-                                                {new Date(order.submittedAt).toLocaleDateString()}<br/>
-                                                <span style={{fontSize:'10.5px'}}>{new Date(order.submittedAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>
-                                            </td>
-                                            <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}}>
-                                                <div style={{fontWeight:500,fontSize:'12px'}}>{order.submitterName}</div>
-                                                <div style={{fontSize:'10.5px',color:'#78716C'}}>{order.submitterEmail}</div>
-                                            </td>
-                                            <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontSize:'12px'}}>{order.recipientName}</td>
-                                            <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}}>
-                                                <div style={{fontWeight:600,fontSize:'12px',color:'#1B5A8E'}}>{order.locationId}</div>
-                                            </td>
-                                            <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontSize:'11px',color:'#57534E'}}>{order.shipTo}</td>
-                                            <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontWeight:500,fontSize:'12px',color:'#0A2540'}}>${(order.total||0).toFixed(2)}</td>
-                                            <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}}>
-                                                {order.status === 'Deleted' ? (
-                                                    <span style={badgeStyle('Deleted')}>Deleted</span>
-                                                ) : (
-                                                    <select value={order.status} onChange={e=>handleStatusChange(order, e.target.value)}
-                                                        style={{fontSize:'11px',padding:'3px 6px',border:'0.5px solid #D6D3D1',borderRadius:'6px',background:'white',cursor:'pointer'}}>
-                                                        <option>New</option>
-                                                        <option>In Progress</option>
-                                                        <option>Fulfilled</option>
-                                                    </select>
-                                                )}
-                                                {order.status === 'Deleted' && order.deleteReason && (
-                                                    <div style={{fontSize:'10px',color:'#78716C',marginTop:'2px'}}>Reason: {order.deleteReason}</div>
-                                                )}
-                                            </td>
-                                            <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}}>
-                                                <div style={{display:'flex',gap:'4px',flexWrap:'wrap'}}>
-                                                    {order.status !== 'Deleted' && (
-                                                        <button onClick={()=>{ setDeleteModal(order); setDeleteReason(''); }}
-                                                            style={{padding:'3px 8px',border:'0.5px solid #FCA5A5',borderRadius:'5px',fontSize:'11px',background:'white',color:'#DC2626',cursor:'pointer'}}>
-                                                            Delete
-                                                        </button>
+                                        <React.Fragment key={order.id}>
+                                            <tr onClick={()=>toggleRow(order.id)}
+                                                style={{cursor:'pointer',opacity:order.status==='Deleted'?0.6:1,
+                                                    background:expandedRows[order.id]?'#F8FAFC':'white'}}>
+                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}} onClick={e=>e.stopPropagation()}>
+                                                    <input type="checkbox" checked={!!selectedOrders[order.id]}
+                                                        onChange={e=>toggleSelect(e, order.id)}
+                                                        style={{cursor:'pointer',accentColor:'#0A2540'}} />
+                                                </td>
+                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',color:'#A8A29E',fontSize:'14px',textAlign:'center'}}>
+                                                    {expandedRows[order.id] ? '▾' : '▸'}
+                                                </td>
+                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',color:'#78716C',fontSize:'11px'}}>
+                                                    {new Date(order.submittedAt).toLocaleDateString()}<br/>
+                                                    <span style={{fontSize:'10.5px'}}>{new Date(order.submittedAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>
+                                                </td>
+                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}}>
+                                                    <div style={{fontWeight:500,fontSize:'12px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{order.submitterName}</div>
+                                                    <div style={{fontSize:'10px',color:'#78716C',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{order.submitterEmail}</div>
+                                                </td>
+                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontSize:'12px',fontWeight:500,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{order.recipientName}</td>
+                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}}>
+                                                    <div style={{fontWeight:600,fontSize:'12px',color:'#1B5A8E'}}>{order.locationId}</div>
+                                                </td>
+                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontSize:'11px',color:'#57534E',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{order.shipTo}</td>
+                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontWeight:500,fontSize:'12px',color:'#0A2540'}}>${(order.total||0).toFixed(2)}</td>
+                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}} onClick={e=>e.stopPropagation()}>
+                                                    {order.status === 'Deleted' ? (
+                                                        <span style={badgeStyle('Deleted')}>Deleted</span>
+                                                    ) : (
+                                                        <select value={order.status} onChange={e=>handleStatusChange(order, e.target.value)}
+                                                            style={{fontSize:'11px',padding:'3px 6px',border:'0.5px solid #D6D3D1',borderRadius:'6px',background:'white',cursor:'pointer'}}>
+                                                            <option>New</option>
+                                                            <option>In Progress</option>
+                                                            <option>Fulfilled</option>
+                                                        </select>
                                                     )}
-                                                    {order.status === 'Deleted' && (
-                                                        <button onClick={()=>setRestoreModal(order)}
-                                                            style={{padding:'3px 8px',border:'0.5px solid #6EE7B7',borderRadius:'5px',fontSize:'11px',background:'white',color:'#065F46',cursor:'pointer'}}>
-                                                            Restore
-                                                        </button>
-                                                    )}
-                                                    {order.status === 'Deleted' && isSuperAdmin && (
-                                                        <button onClick={()=>{ setPermDeleteModal(order); setPermDeleteReason(''); }}
-                                                            style={{padding:'3px 8px',border:'0.5px solid #DC2626',borderRadius:'5px',fontSize:'11px',background:'#FEE2E2',color:'#DC2626',cursor:'pointer',fontWeight:500}}>
-                                                            Perm. Delete
-                                                        </button>
-                                                    )}
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}} onClick={e=>e.stopPropagation()}>
+                                                    <div style={{display:'flex',gap:'4px',flexWrap:'wrap'}}>
+                                                        {order.status !== 'Deleted' && (
+                                                            <button onClick={()=>{ setDeleteModal(order); setDeleteReason(''); }}
+                                                                style={{padding:'3px 8px',border:'0.5px solid #FCA5A5',borderRadius:'5px',fontSize:'11px',background:'white',color:'#DC2626',cursor:'pointer'}}>
+                                                                Delete
+                                                            </button>
+                                                        )}
+                                                        {order.status === 'Deleted' && (
+                                                            <button onClick={()=>setRestoreModal(order)}
+                                                                style={{padding:'3px 8px',border:'0.5px solid #6EE7B7',borderRadius:'5px',fontSize:'11px',background:'white',color:'#065F46',cursor:'pointer'}}>
+                                                                Restore
+                                                            </button>
+                                                        )}
+                                                        {order.status === 'Deleted' && isSuperAdmin && (
+                                                            <button onClick={()=>{ setPermDeleteModal(order); setPermDeleteReason(''); }}
+                                                                style={{padding:'3px 8px',border:'0.5px solid #DC2626',borderRadius:'5px',fontSize:'11px',background:'#FEE2E2',color:'#DC2626',cursor:'pointer',fontWeight:500}}>
+                                                                Perm. Delete
+                                                            </button>
+                                                        )}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {expandedRows[order.id] && (
+                                                <tr>
+                                                    <td colSpan={10} style={{padding:0,borderBottom:'0.5px solid #E7E5E4',background:'#F8FAFC'}}>
+                                                        <div style={{padding:'16px 20px',display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'16px'}}>
+                                                            <div>
+                                                                <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.06em',color:'#78716C',marginBottom:'6px'}}>Items ordered</div>
+                                                                {(order.items||[]).length > 0 ? (
+                                                                    <div style={{border:'0.5px solid #E7E5E4',borderRadius:'6px',overflow:'hidden',background:'white'}}>
+                                                                        {(order.items||[]).map((item,i) => (
+                                                                            <div key={i} style={{display:'flex',justifyContent:'space-between',padding:'6px 10px',borderBottom: i < (order.items||[]).length-1 ? '0.5px solid #F5F5F4':'none',fontSize:'11.5px'}}>
+                                                                                <span style={{color:'#292524'}}>{item.title} <span style={{color:'#A8A29E'}}>×{item.quantity||1}</span></span>
+                                                                                <span style={{color:'#57534E',fontWeight:500}}>${((item.price||0)*(item.quantity||1)).toFixed(2)}</span>
+                                                                            </div>
+                                                                        ))}
+                                                                        <div style={{display:'flex',justifyContent:'space-between',padding:'7px 10px',background:'#F5F5F4',fontSize:'12px',fontWeight:500}}>
+                                                                            <span>Total</span>
+                                                                            <span style={{color:'#0A2540'}}>${(order.total||0).toFixed(2)}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                ) : <span style={{fontSize:'12px',color:'#A8A29E'}}>No item detail available</span>}
+                                                            </div>
+                                                            <div style={{fontSize:'12px'}}>
+                                                                <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.06em',color:'#78716C',marginBottom:'6px'}}>Recipient details</div>
+                                                                <div style={{marginBottom:'3px',fontWeight:500}}>{order.recipientName}</div>
+                                                                {order.recipientEmail && order.recipientEmail !== 'Not provided' && (
+                                                                    <div style={{color:'#57534E',marginBottom:'3px'}}>{order.recipientEmail}</div>
+                                                                )}
+                                                                <div style={{color:'#78716C',marginBottom:'10px'}}>New employee: {order.isNewEmployee === 'yes' ? 'Yes' : 'No'}</div>
+                                                                <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.06em',color:'#78716C',marginBottom:'4px'}}>Date needed</div>
+                                                                <div style={{color:'#292524',marginBottom:'10px'}}>{order.dateNeeded || 'Not specified'}</div>
+                                                                <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.06em',color:'#78716C',marginBottom:'4px'}}>Ship to</div>
+                                                                <div style={{color:'#292524'}}>{order.shipTo}</div>
+                                                            </div>
+                                                            <div style={{fontSize:'12px'}}>
+                                                                <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.06em',color:'#78716C',marginBottom:'4px'}}>Order ID</div>
+                                                                <div style={{fontFamily:'monospace',fontSize:'11px',color:'#57534E',marginBottom:'10px',background:'white',padding:'4px 8px',borderRadius:'4px',border:'0.5px solid #E7E5E4'}}>{order.id}</div>
+                                                                <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.06em',color:'#78716C',marginBottom:'4px'}}>Special instructions</div>
+                                                                <div style={{color:'#292524',marginBottom:'12px'}}>{order.notes && order.notes !== 'None' ? order.notes : <span style={{color:'#A8A29E'}}>None</span>}</div>
+                                                                {order.status === 'Fulfilled' && (
+                                                                    <div style={{marginBottom:'10px'}}>
+                                                                        <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.06em',color:'#78716C',marginBottom:'4px'}}>Fulfilled by</div>
+                                                                        <div style={{color:'#292524'}}>{order.statusUpdatedBy || 'Unknown'}</div>
+                                                                    </div>
+                                                                )}
+                                                                <button onClick={e=>handleExportSingle(e, order)}
+                                                                    style={{padding:'5px 12px',border:'0.5px solid #D6D3D1',borderRadius:'6px',fontSize:'11px',background:'white',cursor:'pointer',fontFamily:'inherit',color:'#57534E'}}>
+                                                                    ⬇ Export this order
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            )}
+                                        </React.Fragment>
                                     ))}
                                 </tbody>
                             </table>
