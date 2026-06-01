@@ -1165,7 +1165,48 @@
             const [draftCount, setDraftCount] = useState(DraftService.getDraftCount());
             const [activeTab, setActiveTab] = useState('products');
             const [categories, setCategories] = useState([]);
+            const [inactivityWarning, setInactivityWarning] = useState(false);
             const session = AuthService.getSession();
+            const INACTIVE_LIMIT = 60 * 60 * 1000; // 60 minutes
+            const WARNING_AT = 50 * 60 * 1000;     // 50 minutes
+
+            // Auto-logoff after 60 minutes inactivity
+            useEffect(() => {
+                let lastActivity = Date.now();
+                const resetTimer = () => { lastActivity = Date.now(); setInactivityWarning(false); };
+                const events = ['mousemove','keydown','click','scroll','touchstart'];
+                events.forEach(e => window.addEventListener(e, resetTimer, { passive: true }));
+
+                const checkInterval = setInterval(() => {
+                    const idle = Date.now() - lastActivity;
+                    if (idle >= INACTIVE_LIMIT) {
+                        clearInterval(checkInterval);
+                        // Log the auto-logoff
+                        fetch(AZURE_FUNCTION_URL, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
+                            body: JSON.stringify({ action: 'log-action', logEntry: { action: 'auth.auto_logoff', detail: { reason: 'inactivity_timeout', lastActivity: new Date(lastActivity).toISOString() }, result: 'success' }})
+                        }).catch(() => {}).finally(() => {
+                            AuthService.logout();
+                            onLogout();
+                        });
+                    } else if (idle >= WARNING_AT) {
+                        setInactivityWarning(true);
+                    }
+                }, 60000);
+
+                // Log login
+                fetch(AZURE_FUNCTION_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
+                    body: JSON.stringify({ action: 'log-action', logEntry: { action: 'auth.login', detail: { browser: navigator.userAgent.substring(0,80) }, result: 'success' }})
+                }).catch(() => {});
+
+                return () => {
+                    clearInterval(checkInterval);
+                    events.forEach(e => window.removeEventListener(e, resetTimer));
+                };
+            }, []);
             
             useEffect(() => {
                 ProductService.loadProducts().then(function(prods) {
@@ -1387,6 +1428,12 @@
             
             return (
                 <div>
+                    {inactivityWarning && (
+                        <div style={{background:'#DB802E',color:'white',padding:'10px 20px',textAlign:'center',fontSize:'13px',fontWeight:500,display:'flex',alignItems:'center',justifyContent:'center',gap:'12px'}}>
+                            ⚠️ You'll be automatically logged out in 10 minutes due to inactivity.
+                            <button onClick={() => setInactivityWarning(false)} style={{background:'rgba(255,255,255,0.2)',border:'none',color:'white',padding:'4px 12px',borderRadius:'6px',cursor:'pointer',fontSize:'12px',fontFamily:'inherit'}}>Dismiss</button>
+                        </div>
+                    )}
                     <header className="admin-header">
                         <div className="admin-header-content">
                             <h1>🛠️ Equipment Admin Panel</h1>
@@ -1404,10 +1451,12 @@
                             <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='access'?'#1B5A8E':'transparent',color:activeTab==='access'?'white':'#666'}} onClick={()=>setActiveTab('access')}>👥 Access Management</button>
                             <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='categories'?'#1B5A8E':'transparent',color:activeTab==='categories'?'white':'#666'}} onClick={()=>setActiveTab('categories')}>🏷️ Categories</button>
                             <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='products'?'#1B5A8E':'transparent',color:activeTab==='products'?'white':'#666'}} onClick={()=>setActiveTab('products')}>📦 Products</button>
+                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='orders'?'#1B5A8E':'transparent',color:activeTab==='orders'?'white':'#666'}} onClick={()=>setActiveTab('orders')}>📋 Orders</button>
                         </div>
 
                         {activeTab === 'access' && <AccessManagement session={session} azureUrl={AZURE_FUNCTION_URL} adminPortalUrl={ADMIN_PORTAL_URL} />}
                         {activeTab === 'categories' && <CategoryManagement session={session} azureUrl={AZURE_FUNCTION_URL} categories={categories} products={products} onCategoryAdded={handleCategoryAdded} onCategoryUpdated={handleCategoryUpdated} onCategoryRemoved={handleCategoryRemoved} />}
+                        {activeTab === 'orders' && <OrdersDashboard session={session} azureUrl={AZURE_FUNCTION_URL} />}
 
                         {activeTab === 'products' && <div>
                         {draftCount > 0 && (
@@ -2417,6 +2466,408 @@
                             })}
                         </div>
                     </div>
+                </div>
+            );
+        }
+
+        // ─── ORDERS DASHBOARD ────────────────────────────────────────────
+        function OrdersDashboard({ session, azureUrl }) {
+            const [orders, setOrders] = React.useState([]);
+            const [loading, setLoading] = React.useState(true);
+            const [searchQuery, setSearchQuery] = React.useState('');
+            const [statusFilter, setStatusFilter] = React.useState('all');
+            const [yearFilter, setYearFilter] = React.useState([new Date().getFullYear()]);
+            const [showDeleted, setShowDeleted] = React.useState(false);
+            const [deleteModal, setDeleteModal] = React.useState(null);
+            const [deleteReason, setDeleteReason] = React.useState('');
+            const [restoreModal, setRestoreModal] = React.useState(null);
+            const [permDeleteModal, setPermDeleteModal] = React.useState(null);
+            const [permDeleteReason, setPermDeleteReason] = React.useState('');
+            const [auditLog, setAuditLog] = React.useState([]);
+            const [showAudit, setShowAudit] = React.useState(false);
+            const [status, setStatus] = React.useState(null);
+            const isSuperAdmin = session && session.email && session.email.toLowerCase() === 'fred.solano@foundationpartners.com';
+            const currentYear = new Date().getFullYear();
+            const availableYears = [currentYear, currentYear - 1, currentYear - 2];
+
+            React.useEffect(() => { loadOrders(); }, [yearFilter]);
+
+            const loadOrders = async function() {
+                setLoading(true);
+                try {
+                    const res = await fetch(azureUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
+                        body: JSON.stringify({ action: 'get-orders', years: yearFilter })
+                    });
+                    const data = await res.json();
+                    setOrders(data.orders || []);
+                } catch(e) { setStatus({ type: 'error', text: 'Failed to load orders' }); }
+                setLoading(false);
+            };
+
+            const loadAuditLog = async function() {
+                try {
+                    const res = await fetch(azureUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
+                        body: JSON.stringify({ action: 'get-audit-log', year: currentYear })
+                    });
+                    const data = await res.json();
+                    setAuditLog(data.log || []);
+                    setShowAudit(true);
+                } catch(e) { setStatus({ type: 'error', text: 'Failed to load audit log' }); }
+            };
+
+            const handleStatusChange = async function(order, newStatus) {
+                try {
+                    await fetch(azureUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
+                        body: JSON.stringify({ action: 'update-order-status', orderId: order.id, newStatus, year: order.year })
+                    });
+                    setOrders(prev => prev.map(o => o.id === order.id ? { ...o, status: newStatus } : o));
+                    setStatus({ type: 'success', text: `Order status updated to "${newStatus}"` });
+                } catch(e) { setStatus({ type: 'error', text: 'Failed to update status' }); }
+            };
+
+            const handleSoftDelete = async function() {
+                if (!deleteReason.trim()) return;
+                try {
+                    await fetch(azureUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
+                        body: JSON.stringify({ action: 'delete-order', orderId: deleteModal.id, year: deleteModal.year, reason: deleteReason.trim() })
+                    });
+                    setOrders(prev => prev.map(o => o.id === deleteModal.id ? { ...o, status: 'Deleted', deletedBy: session.email, deleteReason: deleteReason.trim() } : o));
+                    setStatus({ type: 'success', text: 'Order deleted' });
+                } catch(e) { setStatus({ type: 'error', text: 'Failed to delete order' }); }
+                setDeleteModal(null); setDeleteReason('');
+            };
+
+            const handleRestore = async function() {
+                try {
+                    await fetch(azureUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
+                        body: JSON.stringify({ action: 'restore-order', orderId: restoreModal.id, year: restoreModal.year })
+                    });
+                    setOrders(prev => prev.map(o => o.id === restoreModal.id ? { ...o, status: 'New', deletedBy: undefined, deletedAt: undefined, deleteReason: undefined } : o));
+                    setStatus({ type: 'success', text: 'Order restored' });
+                } catch(e) { setStatus({ type: 'error', text: 'Failed to restore order' }); }
+                setRestoreModal(null);
+            };
+
+            const handlePermDelete = async function() {
+                if (!permDeleteReason.trim()) return;
+                try {
+                    await fetch(azureUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
+                        body: JSON.stringify({ action: 'permanent-delete-order', orderId: permDeleteModal.id, year: permDeleteModal.year, reason: permDeleteReason.trim() })
+                    });
+                    setOrders(prev => prev.filter(o => o.id !== permDeleteModal.id));
+                    setStatus({ type: 'success', text: 'Order permanently deleted' });
+                } catch(e) { setStatus({ type: 'error', text: 'Failed to permanently delete order' }); }
+                setPermDeleteModal(null); setPermDeleteReason('');
+            };
+
+            const handleExportCSV = function(filteredOrders) {
+                const headers = ['Order ID','Date','Submitter','Recipient','Location ID','Ship To','Total','Status'];
+                const rows = filteredOrders.map(o => [
+                    o.id, new Date(o.submittedAt).toLocaleString(), o.submitterName,
+                    o.recipientName, o.locationId, `"${(o.shipTo||'').replace(/"/g,'""')}"`,
+                    o.total?.toFixed(2), o.status
+                ]);
+                const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a'); a.href = url; a.download = `orders-export-${Date.now()}.csv`; a.click();
+                URL.revokeObjectURL(url);
+            };
+
+            // Filter logic
+            const filtered = orders.filter(o => {
+                if (!showDeleted && o.status === 'Deleted') return false;
+                if (showDeleted && statusFilter !== 'all' && o.status !== statusFilter) return false;
+                if (!showDeleted && statusFilter !== 'all' && o.status !== statusFilter) return false;
+                if (searchQuery.trim()) {
+                    const q = searchQuery.trim().toLowerCase();
+                    return (o.submitterName||'').toLowerCase().includes(q) ||
+                           (o.submitterEmail||'').toLowerCase().includes(q) ||
+                           (o.recipientName||'').toLowerCase().includes(q) ||
+                           (o.locationId||'').toLowerCase().includes(q) ||
+                           (o.id||'').toLowerCase().includes(q);
+                }
+                return true;
+            });
+
+            const stats = {
+                total: orders.filter(o => o.status !== 'Deleted').length,
+                newOrders: orders.filter(o => o.status === 'New').length,
+                inProgress: orders.filter(o => o.status === 'In Progress').length,
+                totalValue: orders.filter(o => o.status !== 'Deleted').reduce((s, o) => s + (o.total || 0), 0)
+            };
+
+            const badgeStyle = (status) => {
+                if (status === 'New') return { background:'#E6F1FB', color:'#0C447C', padding:'2px 10px', borderRadius:'20px', fontSize:'11px', fontWeight:500 };
+                if (status === 'In Progress') return { background:'#FEF3C7', color:'#92400E', padding:'2px 10px', borderRadius:'20px', fontSize:'11px', fontWeight:500 };
+                if (status === 'Fulfilled') return { background:'#D1FAE5', color:'#065F46', padding:'2px 10px', borderRadius:'20px', fontSize:'11px', fontWeight:500 };
+                if (status === 'Deleted') return { background:'#FEE2E2', color:'#991B1B', padding:'2px 10px', borderRadius:'20px', fontSize:'11px', fontWeight:500 };
+                return { padding:'2px 10px', borderRadius:'20px', fontSize:'11px', fontWeight:500 };
+            };
+
+            const actionLabel = (action) => {
+                const map = {
+                    'auth.login': '🔐 Login', 'auth.auto_logoff': '⏱ Auto-logout', 'auth.logout': '🚪 Logout',
+                    'order.status_change': '🔄 Status changed', 'order.soft_delete': '🗑 Order deleted',
+                    'order.restore': '↩️ Order restored', 'order.permanent_delete': '❌ Permanently deleted',
+                    'order.permanent_delete_attempt': '🚫 Perm. delete denied',
+                    'access.admin_added': '➕ Admin added', 'access.admin_removed': '➖ Admin removed',
+                };
+                return map[action] || action;
+            };
+
+            return (
+                <div style={{padding:'1.5rem'}}>
+                    {status && (
+                        <div style={{padding:'10px 16px',borderRadius:'8px',marginBottom:'1rem',fontSize:'13px',fontWeight:500,
+                            background: status.type==='success'?'#D1FAE5':'#FEE2E2',
+                            color: status.type==='success'?'#065F46':'#991B1B'}}>
+                            {status.type==='success'?'✅':'❌'} {status.text}
+                            <button onClick={()=>setStatus(null)} style={{float:'right',background:'none',border:'none',cursor:'pointer',fontSize:'14px'}}>✕</button>
+                        </div>
+                    )}
+
+                    {/* Stats */}
+                    <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'12px',marginBottom:'20px'}}>
+                        {[
+                            {label:'Total orders', value: stats.total, sub:'All time', color:'#0A2540'},
+                            {label:'New · Awaiting action', value: stats.newOrders, sub:'Pending IT review', color:'#185FA5'},
+                            {label:'In progress · Being fulfilled', value: stats.inProgress, sub:'Equipment being sourced', color:'#92400E'},
+                            {label:'Total value · This year', value: '$'+stats.totalValue.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}), sub:`Year ${currentYear}`, color:'#0A2540'},
+                        ].map((s,i) => (
+                            <div key={i} style={{background:'white',border:'0.5px solid #E7E5E4',borderRadius:'10px',padding:'14px 16px'}}>
+                                <div style={{fontSize:'11px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:'6px'}}>{s.label}</div>
+                                <div style={{fontSize:'24px',fontWeight:500,color:s.color}}>{s.value}</div>
+                                <div style={{fontSize:'11px',color:'#A8A29E',marginTop:'3px'}}>{s.sub}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Toolbar */}
+                    <div style={{display:'flex',gap:'8px',marginBottom:'14px',flexWrap:'wrap',alignItems:'center'}}>
+                        <input type="text" placeholder="Search by name, email, or location ID..." value={searchQuery}
+                            onChange={e=>setSearchQuery(e.target.value)}
+                            style={{flex:1,minWidth:'200px',padding:'7px 10px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'13px'}} />
+                        <select value={statusFilter} onChange={e=>setStatusFilter(e.target.value)}
+                            style={{padding:'7px 10px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'13px'}}>
+                            <option value="all">All statuses</option>
+                            <option value="New">New</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Fulfilled">Fulfilled</option>
+                            {showDeleted && <option value="Deleted">Deleted</option>}
+                        </select>
+                        <div style={{display:'flex',gap:'4px'}}>
+                            {availableYears.map(y => (
+                                <button key={y} onClick={()=>setYearFilter(prev => prev.includes(y) ? prev.filter(x=>x!==y) : [...prev,y])}
+                                    style={{padding:'6px 12px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'12px',fontWeight:500,cursor:'pointer',
+                                        background:yearFilter.includes(y)?'#0A2540':'white',
+                                        color:yearFilter.includes(y)?'white':'#57534E'}}>
+                                    {y}
+                                </button>
+                            ))}
+                        </div>
+                        <button onClick={()=>setShowDeleted(p=>!p)}
+                            style={{padding:'6px 12px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'12px',cursor:'pointer',
+                                background:showDeleted?'#FEE2E2':'white',color:showDeleted?'#991B1B':'#57534E'}}>
+                            {showDeleted ? '🗑 Hiding deleted' : '🗑 Show deleted'}
+                        </button>
+                        <button onClick={()=>handleExportCSV(filtered)}
+                            style={{padding:'6px 12px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'12px',cursor:'pointer',background:'white',color:'#57534E'}}>
+                            ⬇ Export CSV
+                        </button>
+                        <button onClick={loadAuditLog}
+                            style={{padding:'6px 12px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'12px',cursor:'pointer',background:'white',color:'#57534E'}}>
+                            📋 Audit Log
+                        </button>
+                    </div>
+
+                    {/* Orders Table */}
+                    {loading ? (
+                        <div style={{textAlign:'center',padding:'3rem',color:'#A8A29E'}}>Loading orders...</div>
+                    ) : filtered.length === 0 ? (
+                        <div style={{textAlign:'center',padding:'3rem',color:'#A8A29E',background:'white',borderRadius:'10px',border:'0.5px solid #E7E5E4'}}>
+                            {orders.length === 0 ? 'No orders yet.' : 'No orders match your filters.'}
+                        </div>
+                    ) : (
+                        <div style={{background:'white',borderRadius:'10px',border:'0.5px solid #E7E5E4',overflow:'hidden'}}>
+                            <table style={{width:'100%',borderCollapse:'collapse',fontSize:'12.5px',tableLayout:'fixed'}}>
+                                <thead>
+                                    <tr style={{background:'#FAFAF9'}}>
+                                        {['Date/Time','Submitted by','Recipient','Location ID','Ship To','Total','Status','Actions'].map((h,i) => (
+                                            <th key={i} style={{padding:'9px 10px',textAlign:'left',fontSize:'11px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4'}}>{h}</th>
+                                        ))}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {filtered.map(order => (
+                                        <tr key={order.id} style={{opacity: order.status==='Deleted'?0.6:1}}>
+                                            <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',color:'#78716C',fontSize:'11.5px'}}>
+                                                {new Date(order.submittedAt).toLocaleDateString()}<br/>
+                                                <span style={{fontSize:'10.5px'}}>{new Date(order.submittedAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>
+                                            </td>
+                                            <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}}>
+                                                <div style={{fontWeight:500,fontSize:'12px'}}>{order.submitterName}</div>
+                                                <div style={{fontSize:'10.5px',color:'#78716C'}}>{order.submitterEmail}</div>
+                                            </td>
+                                            <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontSize:'12px'}}>{order.recipientName}</td>
+                                            <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}}>
+                                                <div style={{fontWeight:600,fontSize:'12px',color:'#1B5A8E'}}>{order.locationId}</div>
+                                            </td>
+                                            <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontSize:'11px',color:'#57534E'}}>{order.shipTo}</td>
+                                            <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontWeight:500,fontSize:'12px',color:'#0A2540'}}>${(order.total||0).toFixed(2)}</td>
+                                            <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}}>
+                                                {order.status === 'Deleted' ? (
+                                                    <span style={badgeStyle('Deleted')}>Deleted</span>
+                                                ) : (
+                                                    <select value={order.status} onChange={e=>handleStatusChange(order, e.target.value)}
+                                                        style={{fontSize:'11px',padding:'3px 6px',border:'0.5px solid #D6D3D1',borderRadius:'6px',background:'white',cursor:'pointer'}}>
+                                                        <option>New</option>
+                                                        <option>In Progress</option>
+                                                        <option>Fulfilled</option>
+                                                    </select>
+                                                )}
+                                                {order.status === 'Deleted' && order.deleteReason && (
+                                                    <div style={{fontSize:'10px',color:'#78716C',marginTop:'2px'}}>Reason: {order.deleteReason}</div>
+                                                )}
+                                            </td>
+                                            <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}}>
+                                                <div style={{display:'flex',gap:'4px',flexWrap:'wrap'}}>
+                                                    {order.status !== 'Deleted' && (
+                                                        <button onClick={()=>{ setDeleteModal(order); setDeleteReason(''); }}
+                                                            style={{padding:'3px 8px',border:'0.5px solid #FCA5A5',borderRadius:'5px',fontSize:'11px',background:'white',color:'#DC2626',cursor:'pointer'}}>
+                                                            Delete
+                                                        </button>
+                                                    )}
+                                                    {order.status === 'Deleted' && (
+                                                        <button onClick={()=>setRestoreModal(order)}
+                                                            style={{padding:'3px 8px',border:'0.5px solid #6EE7B7',borderRadius:'5px',fontSize:'11px',background:'white',color:'#065F46',cursor:'pointer'}}>
+                                                            Restore
+                                                        </button>
+                                                    )}
+                                                    {order.status === 'Deleted' && isSuperAdmin && (
+                                                        <button onClick={()=>{ setPermDeleteModal(order); setPermDeleteReason(''); }}
+                                                            style={{padding:'3px 8px',border:'0.5px solid #DC2626',borderRadius:'5px',fontSize:'11px',background:'#FEE2E2',color:'#DC2626',cursor:'pointer',fontWeight:500}}>
+                                                            Perm. Delete
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
+
+                    {/* Soft Delete Modal */}
+                    {deleteModal && (
+                        <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.45)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center'}}>
+                            <div style={{background:'white',borderRadius:'12px',padding:'1.5rem',width:'420px',maxWidth:'90vw',boxShadow:'0 8px 32px rgba(0,0,0,0.18)'}}>
+                                <h3 style={{fontSize:'1.1rem',fontWeight:600,marginBottom:'0.75rem',color:'#DC2626'}}>Delete Order</h3>
+                                <p style={{fontSize:'13px',color:'#57534E',marginBottom:'1rem'}}>
+                                    Order <strong>{deleteModal.id}</strong> for <strong>{deleteModal.recipientName}</strong> will be soft-deleted and hidden from the dashboard. You can restore it later.
+                                </p>
+                                <label style={{fontSize:'13px',fontWeight:500,display:'block',marginBottom:'6px'}}>Reason for deletion <span style={{color:'#DC2626'}}>*</span></label>
+                                <input type="text" placeholder="e.g. Duplicate entry, Test order, Submitted in error..."
+                                    value={deleteReason} onChange={e=>setDeleteReason(e.target.value)}
+                                    style={{width:'100%',padding:'8px 10px',border:'1px solid #D6D3D1',borderRadius:'8px',fontSize:'13px',marginBottom:'1rem'}} />
+                                <div style={{display:'flex',gap:'8px',justifyContent:'flex-end'}}>
+                                    <button onClick={()=>setDeleteModal(null)} style={{padding:'7px 16px',border:'0.5px solid #D6D3D1',borderRadius:'8px',background:'white',cursor:'pointer',fontSize:'13px'}}>Cancel</button>
+                                    <button onClick={handleSoftDelete} disabled={!deleteReason.trim()}
+                                        style={{padding:'7px 16px',border:'none',borderRadius:'8px',background: deleteReason.trim()?'#DC2626':'#FCA5A5',color:'white',cursor:'pointer',fontSize:'13px',fontWeight:500}}>
+                                        Delete Order
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Restore Modal */}
+                    {restoreModal && (
+                        <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.45)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center'}}>
+                            <div style={{background:'white',borderRadius:'12px',padding:'1.5rem',width:'380px',maxWidth:'90vw',boxShadow:'0 8px 32px rgba(0,0,0,0.18)'}}>
+                                <h3 style={{fontSize:'1.1rem',fontWeight:600,marginBottom:'0.75rem',color:'#065F46'}}>Restore Order</h3>
+                                <p style={{fontSize:'13px',color:'#57534E',marginBottom:'1rem'}}>
+                                    Restore order <strong>{restoreModal.id}</strong> for <strong>{restoreModal.recipientName}</strong>? Status will be set back to "New".
+                                </p>
+                                <div style={{display:'flex',gap:'8px',justifyContent:'flex-end'}}>
+                                    <button onClick={()=>setRestoreModal(null)} style={{padding:'7px 16px',border:'0.5px solid #D6D3D1',borderRadius:'8px',background:'white',cursor:'pointer',fontSize:'13px'}}>Cancel</button>
+                                    <button onClick={handleRestore} style={{padding:'7px 16px',border:'none',borderRadius:'8px',background:'#059669',color:'white',cursor:'pointer',fontSize:'13px',fontWeight:500}}>Restore</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Permanent Delete Modal — superadmin only */}
+                    {permDeleteModal && isSuperAdmin && (
+                        <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.55)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center'}}>
+                            <div style={{background:'white',borderRadius:'12px',padding:'1.5rem',width:'440px',maxWidth:'90vw',boxShadow:'0 8px 32px rgba(0,0,0,0.25)',border:'2px solid #DC2626'}}>
+                                <h3 style={{fontSize:'1.1rem',fontWeight:600,marginBottom:'0.75rem',color:'#DC2626'}}>⚠️ Permanently Delete Order</h3>
+                                <p style={{fontSize:'13px',color:'#57534E',marginBottom:'0.5rem'}}>
+                                    This will <strong>permanently and irreversibly</strong> remove order <strong>{permDeleteModal.id}</strong> from the system. This action cannot be undone.
+                                </p>
+                                <p style={{fontSize:'12px',color:'#78716C',marginBottom:'1rem'}}>A full snapshot will be preserved in the audit log.</p>
+                                <label style={{fontSize:'13px',fontWeight:500,display:'block',marginBottom:'6px'}}>Reason <span style={{color:'#DC2626'}}>*</span></label>
+                                <input type="text" placeholder="e.g. Test data cleanup before production launch..."
+                                    value={permDeleteReason} onChange={e=>setPermDeleteReason(e.target.value)}
+                                    style={{width:'100%',padding:'8px 10px',border:'1px solid #DC2626',borderRadius:'8px',fontSize:'13px',marginBottom:'1rem'}} />
+                                <div style={{display:'flex',gap:'8px',justifyContent:'flex-end'}}>
+                                    <button onClick={()=>setPermDeleteModal(null)} style={{padding:'7px 16px',border:'0.5px solid #D6D3D1',borderRadius:'8px',background:'white',cursor:'pointer',fontSize:'13px'}}>Cancel</button>
+                                    <button onClick={handlePermDelete} disabled={!permDeleteReason.trim()}
+                                        style={{padding:'7px 16px',border:'none',borderRadius:'8px',background:permDeleteReason.trim()?'#DC2626':'#FCA5A5',color:'white',cursor:'pointer',fontSize:'13px',fontWeight:600}}>
+                                        Permanently Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Audit Log Modal */}
+                    {showAudit && (
+                        <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.45)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center',padding:'20px'}}>
+                            <div style={{background:'white',borderRadius:'12px',padding:'1.5rem',width:'700px',maxWidth:'95vw',maxHeight:'80vh',overflow:'hidden',display:'flex',flexDirection:'column',boxShadow:'0 8px 32px rgba(0,0,0,0.18)'}}>
+                                <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'1rem'}}>
+                                    <h3 style={{fontSize:'1.1rem',fontWeight:600}}>📋 Audit Log — {currentYear}</h3>
+                                    <button onClick={()=>setShowAudit(false)} style={{background:'none',border:'none',fontSize:'18px',cursor:'pointer',color:'#78716C'}}>✕</button>
+                                </div>
+                                <div style={{overflowY:'auto',flex:1}}>
+                                    {auditLog.length === 0 ? (
+                                        <p style={{color:'#A8A29E',textAlign:'center',padding:'2rem'}}>No audit entries yet.</p>
+                                    ) : auditLog.map((entry, i) => (
+                                        <div key={i} style={{padding:'10px 12px',borderBottom:'0.5px solid #F5F5F4',fontSize:'12.5px'}}>
+                                            <div style={{display:'flex',justifyContent:'space-between',marginBottom:'2px'}}>
+                                                <span style={{fontWeight:500}}>{actionLabel(entry.action)}</span>
+                                                <span style={{color:'#A8A29E',fontSize:'11px'}}>{new Date(entry.timestamp).toLocaleString()}</span>
+                                            </div>
+                                            <div style={{color:'#57534E',fontSize:'11.5px'}}>
+                                                By: <strong>{entry.adminEmail}</strong>
+                                                {entry.target && <span> · Target: <code style={{background:'#F5F5F4',padding:'1px 4px',borderRadius:'3px'}}>{entry.target}</code></span>}
+                                                {entry.detail?.reason && <span> · Reason: {entry.detail.reason}</span>}
+                                                {entry.detail?.oldStatus && <span> · {entry.detail.oldStatus} → {entry.detail.newStatus}</span>}
+                                            </div>
+                                            <span style={{fontSize:'10px',padding:'1px 6px',borderRadius:'10px',marginTop:'3px',display:'inline-block',
+                                                background:entry.result==='success'?'#D1FAE5':entry.result==='denied'?'#FEE2E2':'#F5F5F4',
+                                                color:entry.result==='success'?'#065F46':entry.result==='denied'?'#991B1B':'#78716C'}}>
+                                                {entry.result}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             );
         }

@@ -2,42 +2,49 @@
   {
     "email": "fred.solano@foundationpartners.com",
     "name": "Fred Solano",
+    "role": "superadmin",
     "addedBy": "system",
     "addedAt": "2025-01-01T00:00:00.000Z"
   },
   {
     "email": "matthew.ritchotte@foundationpartners.com",
     "name": "Matthew Ritchotte",
+    "role": "admin",
     "addedBy": "system",
     "addedAt": "2025-01-01T00:00:00.000Z"
   },
   {
     "email": "joe.choss@foundationpartners.com",
     "name": "Joe Choss",
+    "role": "admin",
     "addedBy": "system",
     "addedAt": "2025-01-01T00:00:00.000Z"
   },
   {
     "email": "chezarae.carter@foundationpartners.com",
     "name": "Chezarae Carter",
+    "role": "admin",
     "addedBy": "system",
     "addedAt": "2025-01-01T00:00:00.000Z"
   },
   {
     "email": "mateo.escobar@foundationpartners.com",
     "name": "Mateo Escobar",
+    "role": "admin",
     "addedBy": "fred.solano@foundationpartners.com",
     "addedAt": "2026-05-22T15:55:51.639Z"
   },
   {
     "email": "michael.benjamin@foundationpartners.com",
     "name": "Michael Benjamin",
+    "role": "admin",
     "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-05-22T17:49:44.232Z"
+    "addedAt": "2026-05-22T17:49:44.392Z"
   },
   {
     "email": "doni.perry@foundationpartners.com",
     "name": "Doni Perry",
+    "role": "admin",
     "addedBy": "fred.solano@foundationpartners.com",
     "addedAt": "2026-06-01T17:34:44.472Z"
   }
