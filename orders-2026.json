@@ -1,1 +1,2822 @@
-[]
+[
+  {
+    "id": "ORD-2026-TEST045",
+    "status": "In Progress",
+    "submittedAt": "2026-05-31T16:09:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Nicole Rivera",
+    "recipientEmail": "nicole.rivera@foundationpartners.com",
+    "locationId": "FLTLT",
+    "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 2
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 1
+      }
+    ],
+    "total": 2730,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-06-14",
+    "notes": "Urgent \u2014 location opening soon."
+  },
+  {
+    "id": "ORD-2026-TEST035",
+    "status": "In Progress",
+    "submittedAt": "2026-05-30T17:02:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "Marcus Williams",
+    "recipientEmail": "marcus.williams@foundationpartners.com",
+    "locationId": "FLLFM",
+    "shipTo": "1 Memorial Blvd, Fort Myers, FL 33905",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 2280,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-06-13",
+    "notes": "Please deliver before 9am."
+  },
+  {
+    "id": "ORD-2026-TEST052",
+    "status": "In Progress",
+    "submittedAt": "2026-05-30T12:02:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Maria Garcia",
+    "recipientEmail": "maria.garcia@foundationpartners.com",
+    "locationId": "WAFAT",
+    "shipTo": "31919 6th Ave S, Suite 200, Federal Way, WA 98003",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 2
+      }
+    ],
+    "total": 4200,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-06-13",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST096",
+    "status": "Deleted",
+    "submittedAt": "2026-05-29T17:01:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Sarah Thompson",
+    "recipientEmail": "sarah.thompson@foundationpartners.com",
+    "locationId": "WAFAC",
+    "shipTo": "407 N Pearl St, Centralia, WA 98531",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "Color MFP",
+        "price": 450,
+        "quantity": 1
+      }
+    ],
+    "total": 2300,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-06-12",
+    "notes": "Please deliver before 9am.",
+    "deletedBy": "fred.solano@foundationpartners.com",
+    "deletedAt": "2026-05-30T17:01:00Z",
+    "deleteReason": "Test order"
+  },
+  {
+    "id": "ORD-2026-TEST067",
+    "status": "Fulfilled",
+    "submittedAt": "2026-05-29T14:30:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "Lisa Anderson",
+    "recipientEmail": "lisa.anderson@foundationpartners.com",
+    "locationId": "FLLFM",
+    "shipTo": "1 Memorial Blvd, Fort Myers, FL 33905",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 2280,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-06-12",
+    "notes": "None",
+    "statusUpdatedBy": "chezarae.carter@foundationpartners.com",
+    "statusUpdatedAt": "2026-06-05T14:30:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST007",
+    "status": "New",
+    "submittedAt": "2026-05-29T11:45:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Amanda Foster",
+    "recipientEmail": "amanda.foster@foundationpartners.com",
+    "locationId": "FLTLT",
+    "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 2280,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-06-12",
+    "notes": "Urgent \u2014 location opening soon."
+  },
+  {
+    "id": "ORD-2026-TEST094",
+    "status": "Fulfilled",
+    "submittedAt": "2026-05-27T12:28:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Jennifer Davis",
+    "recipientEmail": "jennifer.davis@foundationpartners.com",
+    "locationId": "FLTLT",
+    "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 2
+      }
+    ],
+    "total": 4200,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-06-10",
+    "notes": "None",
+    "statusUpdatedBy": "mateo.escobar@foundationpartners.com",
+    "statusUpdatedAt": "2026-06-03T12:28:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST040",
+    "status": "In Progress",
+    "submittedAt": "2026-05-23T12:59:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Brian Scott",
+    "recipientEmail": "brian.scott@foundationpartners.com",
+    "locationId": "AZLGC",
+    "shipTo": "1374 N Arizona Ave, Chandler, AZ 85225",
+    "items": [
+      {
+        "title": "Executive Laptop",
+        "price": 4500,
+        "quantity": 1
+      }
+    ],
+    "total": 4500,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-06-06",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST091",
+    "status": "Fulfilled",
+    "submittedAt": "2026-05-23T09:10:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Jennifer Davis",
+    "recipientEmail": "jennifer.davis@foundationpartners.com",
+    "locationId": "WAFAW",
+    "shipTo": "455 North St. SE, Tumwater, WA 98501",
+    "items": [
+      {
+        "title": "Arrangement Room 55\" TV Setup",
+        "price": 1450,
+        "quantity": 1
+      },
+      {
+        "title": "Tribucast Unit",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 1750,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-06-06",
+    "notes": "None",
+    "statusUpdatedBy": "mateo.escobar@foundationpartners.com",
+    "statusUpdatedAt": "2026-06-02T09:10:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST003",
+    "status": "New",
+    "submittedAt": "2026-05-21T14:14:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Sarah Thompson",
+    "recipientEmail": "sarah.thompson@foundationpartners.com",
+    "locationId": "AZLGC",
+    "shipTo": "1374 N Arizona Ave, Chandler, AZ 85225",
+    "items": [
+      {
+        "title": "Executive Laptop",
+        "price": 4500,
+        "quantity": 1
+      }
+    ],
+    "total": 4500,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-06-04",
+    "notes": "Please deliver before 9am."
+  },
+  {
+    "id": "ORD-2026-TEST028",
+    "status": "New",
+    "submittedAt": "2026-05-19T15:08:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Robert Chen",
+    "recipientEmail": "robert.chen@foundationpartners.com",
+    "locationId": "AZFLC",
+    "shipTo": "251 W Juniper Ave, Gilbert, AZ 85233",
+    "items": [
+      {
+        "title": "Arrangement Room 55\" TV Setup",
+        "price": 1450,
+        "quantity": 1
+      },
+      {
+        "title": "Tribucast Unit",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 1750,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-06-02",
+    "notes": "Please deliver before 9am."
+  },
+  {
+    "id": "ORD-2026-TEST006",
+    "status": "New",
+    "submittedAt": "2026-05-19T09:59:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Stephanie Kim",
+    "recipientEmail": "stephanie.kim@foundationpartners.com",
+    "locationId": "WAFAC",
+    "shipTo": "407 N Pearl St, Centralia, WA 98531",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 2
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 1
+      }
+    ],
+    "total": 2730,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-06-02",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST021",
+    "status": "New",
+    "submittedAt": "2026-05-17T17:27:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "Nicole Rivera",
+    "recipientEmail": "nicole.rivera@foundationpartners.com",
+    "locationId": "AZADD",
+    "shipTo": "1050 N. Dodge Blvd., Tucson, AZ 85716",
+    "items": [
+      {
+        "title": "Specialty Laptop",
+        "price": 3200,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 3380,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-31",
+    "notes": "New hire starting next month."
+  },
+  {
+    "id": "ORD-2026-TEST054",
+    "status": "In Progress",
+    "submittedAt": "2026-05-15T16:43:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Carlos Gutierrez",
+    "recipientEmail": "carlos.gutierrez@foundationpartners.com",
+    "locationId": "WAFAW",
+    "shipTo": "455 North St. SE, Tumwater, WA 98501",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 2150,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-29",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST097",
+    "status": "Deleted",
+    "submittedAt": "2026-05-14T15:58:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Stephanie Kim",
+    "recipientEmail": "stephanie.kim@foundationpartners.com",
+    "locationId": "WAFAC",
+    "shipTo": "407 N Pearl St, Centralia, WA 98531",
+    "items": [
+      {
+        "title": "Specialty Laptop",
+        "price": 3200,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 3380,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-28",
+    "notes": "None",
+    "deletedBy": "fred.solano@foundationpartners.com",
+    "deletedAt": "2026-05-15T15:58:00Z",
+    "deleteReason": "Test order"
+  },
+  {
+    "id": "ORD-2026-TEST051",
+    "status": "In Progress",
+    "submittedAt": "2026-05-12T14:43:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Stephanie Kim",
+    "recipientEmail": "stephanie.kim@foundationpartners.com",
+    "locationId": "WAFAW",
+    "shipTo": "455 North St. SE, Tumwater, WA 98501",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 2
+      }
+    ],
+    "total": 4200,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-26",
+    "notes": "Urgent \u2014 location opening soon."
+  },
+  {
+    "id": "ORD-2026-TEST053",
+    "status": "In Progress",
+    "submittedAt": "2026-05-12T09:24:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "David Martinez",
+    "recipientEmail": "david.martinez@foundationpartners.com",
+    "locationId": "WAFAC",
+    "shipTo": "407 N Pearl St, Centralia, WA 98531",
+    "items": [
+      {
+        "title": "Monochrome MFP",
+        "price": 380,
+        "quantity": 1
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 2
+      }
+    ],
+    "total": 440,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-26",
+    "notes": "Ship to home address."
+  },
+  {
+    "id": "ORD-2026-TEST076",
+    "status": "Fulfilled",
+    "submittedAt": "2026-05-11T13:00:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Lisa Anderson",
+    "recipientEmail": "lisa.anderson@foundationpartners.com",
+    "locationId": "AZFLC",
+    "shipTo": "251 W Juniper Ave, Gilbert, AZ 85233",
+    "items": [
+      {
+        "title": "Monochrome MFP",
+        "price": 380,
+        "quantity": 1
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 2
+      }
+    ],
+    "total": 440,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-25",
+    "notes": "None",
+    "statusUpdatedBy": "mateo.escobar@foundationpartners.com",
+    "statusUpdatedAt": "2026-05-15T13:00:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST081",
+    "status": "Fulfilled",
+    "submittedAt": "2026-05-07T16:48:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Marcus Williams",
+    "recipientEmail": "marcus.williams@foundationpartners.com",
+    "locationId": "AZLGC",
+    "shipTo": "1374 N Arizona Ave, Chandler, AZ 85225",
+    "items": [
+      {
+        "title": "Arrangement Room 55\" TV Setup",
+        "price": 1450,
+        "quantity": 1
+      },
+      {
+        "title": "Tribucast Unit",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 1750,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-21",
+    "notes": "Ship to home address.",
+    "statusUpdatedBy": "mateo.escobar@foundationpartners.com",
+    "statusUpdatedAt": "2026-05-17T16:48:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST042",
+    "status": "In Progress",
+    "submittedAt": "2026-05-07T12:57:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Tanya Moore",
+    "recipientEmail": "tanya.moore@foundationpartners.com",
+    "locationId": "AZFLC",
+    "shipTo": "251 W Juniper Ave, Gilbert, AZ 85233",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 2
+      }
+    ],
+    "total": 4200,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-05-21",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST025",
+    "status": "New",
+    "submittedAt": "2026-05-06T11:34:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Nicole Rivera",
+    "recipientEmail": "nicole.rivera@foundationpartners.com",
+    "locationId": "AZFLC",
+    "shipTo": "251 W Juniper Ave, Gilbert, AZ 85233",
+    "items": [
+      {
+        "title": "Arrangement Room 55\" TV Setup",
+        "price": 1450,
+        "quantity": 1
+      },
+      {
+        "title": "Tribucast Unit",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 1750,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-20",
+    "notes": "New hire starting next month."
+  },
+  {
+    "id": "ORD-2026-TEST087",
+    "status": "Fulfilled",
+    "submittedAt": "2026-05-04T09:52:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Jennifer Davis",
+    "recipientEmail": "jennifer.davis@foundationpartners.com",
+    "locationId": "FLLTA",
+    "shipTo": "5503 N Armenia Ave, Tampa, FL 33603",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 2
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 1
+      }
+    ],
+    "total": 2730,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-05-18",
+    "notes": "New hire starting next month.",
+    "statusUpdatedBy": "mateo.escobar@foundationpartners.com",
+    "statusUpdatedAt": "2026-05-14T09:52:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST060",
+    "status": "Fulfilled",
+    "submittedAt": "2026-05-03T17:54:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Sarah Thompson",
+    "recipientEmail": "sarah.thompson@foundationpartners.com",
+    "locationId": "FLLFM",
+    "shipTo": "1 Memorial Blvd, Fort Myers, FL 33905",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 2
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 1
+      }
+    ],
+    "total": 2730,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-05-17",
+    "notes": "Please deliver before 9am.",
+    "statusUpdatedBy": "mateo.escobar@foundationpartners.com",
+    "statusUpdatedAt": "2026-05-12T17:54:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST098",
+    "status": "Deleted",
+    "submittedAt": "2026-05-02T13:26:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Lisa Anderson",
+    "recipientEmail": "lisa.anderson@foundationpartners.com",
+    "locationId": "AZADD",
+    "shipTo": "1050 N. Dodge Blvd., Tucson, AZ 85716",
+    "items": [
+      {
+        "title": "Amcrest NVR",
+        "price": 300,
+        "quantity": 1
+      },
+      {
+        "title": "Surveillance Camera",
+        "price": 120,
+        "quantity": 4
+      }
+    ],
+    "total": 780,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-16",
+    "notes": "None",
+    "deletedBy": "fred.solano@foundationpartners.com",
+    "deletedAt": "2026-05-03T13:26:00Z",
+    "deleteReason": "Test order"
+  },
+  {
+    "id": "ORD-2026-TEST015",
+    "status": "New",
+    "submittedAt": "2026-05-01T16:16:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Marcus Williams",
+    "recipientEmail": "marcus.williams@foundationpartners.com",
+    "locationId": "WITLP",
+    "shipTo": "1008 Madison Ave, Fort Atkinson, WI 53538",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 2150,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-05-15",
+    "notes": "Ship to home address."
+  },
+  {
+    "id": "ORD-2026-TEST069",
+    "status": "Fulfilled",
+    "submittedAt": "2026-05-01T10:39:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "David Martinez",
+    "recipientEmail": "david.martinez@foundationpartners.com",
+    "locationId": "WAFAT",
+    "shipTo": "31919 6th Ave S, Suite 200, Federal Way, WA 98003",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 2150,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-05-15",
+    "notes": "None",
+    "statusUpdatedBy": "mateo.escobar@foundationpartners.com",
+    "statusUpdatedAt": "2026-05-04T10:39:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST010",
+    "status": "New",
+    "submittedAt": "2026-04-30T14:17:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Nicole Rivera",
+    "recipientEmail": "nicole.rivera@foundationpartners.com",
+    "locationId": "WAFAC",
+    "shipTo": "407 N Pearl St, Centralia, WA 98531",
+    "items": [
+      {
+        "title": "Arrangement Room 55\" TV Setup",
+        "price": 1450,
+        "quantity": 1
+      },
+      {
+        "title": "Tribucast Unit",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 1750,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-14",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST037",
+    "status": "In Progress",
+    "submittedAt": "2026-04-29T13:59:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Lisa Anderson",
+    "recipientEmail": "lisa.anderson@foundationpartners.com",
+    "locationId": "FLLFM",
+    "shipTo": "1 Memorial Blvd, Fort Myers, FL 33905",
+    "items": [
+      {
+        "title": "Specialty Laptop",
+        "price": 3200,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 3380,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-05-13",
+    "notes": "New hire starting next month."
+  },
+  {
+    "id": "ORD-2026-TEST012",
+    "status": "New",
+    "submittedAt": "2026-04-29T10:16:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Robert Chen",
+    "recipientEmail": "robert.chen@foundationpartners.com",
+    "locationId": "WAFAC",
+    "shipTo": "407 N Pearl St, Centralia, WA 98531",
+    "items": [
+      {
+        "title": "Amcrest NVR",
+        "price": 300,
+        "quantity": 1
+      },
+      {
+        "title": "Surveillance Camera",
+        "price": 120,
+        "quantity": 4
+      }
+    ],
+    "total": 780,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-13",
+    "notes": "Ship to home address."
+  },
+  {
+    "id": "ORD-2026-TEST063",
+    "status": "Fulfilled",
+    "submittedAt": "2026-04-25T17:52:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Nicole Rivera",
+    "recipientEmail": "nicole.rivera@foundationpartners.com",
+    "locationId": "FLLTA",
+    "shipTo": "5503 N Armenia Ave, Tampa, FL 33603",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 2280,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-09",
+    "notes": "Urgent \u2014 location opening soon.",
+    "statusUpdatedBy": "joe.choss@foundationpartners.com",
+    "statusUpdatedAt": "2026-05-05T17:52:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST029",
+    "status": "New",
+    "submittedAt": "2026-04-25T16:06:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Kevin Park",
+    "recipientEmail": "kevin.park@foundationpartners.com",
+    "locationId": "AZADD",
+    "shipTo": "1050 N. Dodge Blvd., Tucson, AZ 85716",
+    "items": [
+      {
+        "title": "Arrangement Room 55\" TV Setup",
+        "price": 1450,
+        "quantity": 1
+      },
+      {
+        "title": "Tribucast Unit",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 1750,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-05-09",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST095",
+    "status": "Fulfilled",
+    "submittedAt": "2026-04-24T09:38:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Nicole Rivera",
+    "recipientEmail": "nicole.rivera@foundationpartners.com",
+    "locationId": "WITLP",
+    "shipTo": "1008 Madison Ave, Fort Atkinson, WI 53538",
+    "items": [
+      {
+        "title": "Executive Laptop",
+        "price": 4500,
+        "quantity": 1
+      }
+    ],
+    "total": 4500,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-05-08",
+    "notes": "None",
+    "statusUpdatedBy": "mateo.escobar@foundationpartners.com",
+    "statusUpdatedAt": "2026-05-02T09:38:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST077",
+    "status": "Fulfilled",
+    "submittedAt": "2026-04-23T10:46:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Tanya Moore",
+    "recipientEmail": "tanya.moore@foundationpartners.com",
+    "locationId": "WITLP",
+    "shipTo": "1008 Madison Ave, Fort Atkinson, WI 53538",
+    "items": [
+      {
+        "title": "Amcrest NVR",
+        "price": 300,
+        "quantity": 1
+      },
+      {
+        "title": "Surveillance Camera",
+        "price": 120,
+        "quantity": 4
+      }
+    ],
+    "total": 780,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-07",
+    "notes": "None",
+    "statusUpdatedBy": "joe.choss@foundationpartners.com",
+    "statusUpdatedAt": "2026-05-03T10:46:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST013",
+    "status": "New",
+    "submittedAt": "2026-04-21T17:25:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Nicole Rivera",
+    "recipientEmail": "nicole.rivera@foundationpartners.com",
+    "locationId": "FLLFM",
+    "shipTo": "1 Memorial Blvd, Fort Myers, FL 33905",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 2
+      }
+    ],
+    "total": 4200,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-05",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST044",
+    "status": "In Progress",
+    "submittedAt": "2026-04-21T16:00:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Carlos Gutierrez",
+    "recipientEmail": "carlos.gutierrez@foundationpartners.com",
+    "locationId": "WAFAW",
+    "shipTo": "455 North St. SE, Tumwater, WA 98501",
+    "items": [
+      {
+        "title": "Amcrest NVR",
+        "price": 300,
+        "quantity": 1
+      },
+      {
+        "title": "Surveillance Camera",
+        "price": 120,
+        "quantity": 4
+      }
+    ],
+    "total": 780,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-05-05",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST004",
+    "status": "New",
+    "submittedAt": "2026-04-20T13:17:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Stephanie Kim",
+    "recipientEmail": "stephanie.kim@foundationpartners.com",
+    "locationId": "WAFAC",
+    "shipTo": "407 N Pearl St, Centralia, WA 98531",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 2
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 1
+      }
+    ],
+    "total": 2730,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-04",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST071",
+    "status": "Fulfilled",
+    "submittedAt": "2026-04-19T12:53:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Stephanie Kim",
+    "recipientEmail": "stephanie.kim@foundationpartners.com",
+    "locationId": "AZFLC",
+    "shipTo": "251 W Juniper Ave, Gilbert, AZ 85233",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 2150,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-05-03",
+    "notes": "New hire starting next month.",
+    "statusUpdatedBy": "mateo.escobar@foundationpartners.com",
+    "statusUpdatedAt": "2026-04-22T12:53:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST066",
+    "status": "Fulfilled",
+    "submittedAt": "2026-04-18T14:21:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Carlos Gutierrez",
+    "recipientEmail": "carlos.gutierrez@foundationpartners.com",
+    "locationId": "WITLP",
+    "shipTo": "1008 Madison Ave, Fort Atkinson, WI 53538",
+    "items": [
+      {
+        "title": "Arrangement Room 55\" TV Setup",
+        "price": 1450,
+        "quantity": 1
+      },
+      {
+        "title": "Tribucast Unit",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 1750,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-02",
+    "notes": "None",
+    "statusUpdatedBy": "mateo.escobar@foundationpartners.com",
+    "statusUpdatedAt": "2026-04-21T14:21:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST099",
+    "status": "Deleted",
+    "submittedAt": "2026-04-17T15:18:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "James Wilson",
+    "recipientEmail": "james.wilson@foundationpartners.com",
+    "locationId": "AZFLC",
+    "shipTo": "251 W Juniper Ave, Gilbert, AZ 85233",
+    "items": [
+      {
+        "title": "Specialty Laptop",
+        "price": 3200,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 3380,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-01",
+    "notes": "Urgent \u2014 location opening soon.",
+    "deletedBy": "fred.solano@foundationpartners.com",
+    "deletedAt": "2026-04-18T15:18:00Z",
+    "deleteReason": "Test order"
+  },
+  {
+    "id": "ORD-2026-TEST048",
+    "status": "In Progress",
+    "submittedAt": "2026-04-17T11:17:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "Sarah Thompson",
+    "recipientEmail": "sarah.thompson@foundationpartners.com",
+    "locationId": "AZADD",
+    "shipTo": "1050 N. Dodge Blvd., Tucson, AZ 85716",
+    "items": [
+      {
+        "title": "Specialty Laptop",
+        "price": 3200,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 3380,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-05-01",
+    "notes": "Urgent \u2014 location opening soon."
+  },
+  {
+    "id": "ORD-2026-TEST030",
+    "status": "New",
+    "submittedAt": "2026-04-16T15:30:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Marcus Williams",
+    "recipientEmail": "marcus.williams@foundationpartners.com",
+    "locationId": "AZLGC",
+    "shipTo": "1374 N Arizona Ave, Chandler, AZ 85225",
+    "items": [
+      {
+        "title": "Arrangement Room 55\" TV Setup",
+        "price": 1450,
+        "quantity": 1
+      },
+      {
+        "title": "Tribucast Unit",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 1750,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-04-30",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST026",
+    "status": "New",
+    "submittedAt": "2026-04-16T11:06:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Kevin Park",
+    "recipientEmail": "kevin.park@foundationpartners.com",
+    "locationId": "WAFAC",
+    "shipTo": "407 N Pearl St, Centralia, WA 98531",
+    "items": [
+      {
+        "title": "Arrangement Room 55\" TV Setup",
+        "price": 1450,
+        "quantity": 1
+      },
+      {
+        "title": "Tribucast Unit",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 1750,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-04-30",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST057",
+    "status": "Fulfilled",
+    "submittedAt": "2026-04-15T16:53:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Brian Scott",
+    "recipientEmail": "brian.scott@foundationpartners.com",
+    "locationId": "WITLP",
+    "shipTo": "1008 Madison Ave, Fort Atkinson, WI 53538",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 2280,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-04-29",
+    "notes": "New hire starting next month.",
+    "statusUpdatedBy": "chezarae.carter@foundationpartners.com",
+    "statusUpdatedAt": "2026-04-22T16:53:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST056",
+    "status": "Fulfilled",
+    "submittedAt": "2026-04-15T12:35:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Tanya Moore",
+    "recipientEmail": "tanya.moore@foundationpartners.com",
+    "locationId": "AZLGC",
+    "shipTo": "1374 N Arizona Ave, Chandler, AZ 85225",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 2150,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-04-29",
+    "notes": "Urgent \u2014 location opening soon.",
+    "statusUpdatedBy": "matthew.ritchotte@foundationpartners.com",
+    "statusUpdatedAt": "2026-04-24T12:35:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST082",
+    "status": "Fulfilled",
+    "submittedAt": "2026-04-15T11:19:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Marcus Williams",
+    "recipientEmail": "marcus.williams@foundationpartners.com",
+    "locationId": "FLLTA",
+    "shipTo": "5503 N Armenia Ave, Tampa, FL 33603",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 2
+      }
+    ],
+    "total": 4200,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-04-29",
+    "notes": "Please deliver before 9am.",
+    "statusUpdatedBy": "mateo.escobar@foundationpartners.com",
+    "statusUpdatedAt": "2026-04-23T11:19:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST011",
+    "status": "New",
+    "submittedAt": "2026-04-14T12:04:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Robert Chen",
+    "recipientEmail": "robert.chen@foundationpartners.com",
+    "locationId": "AZFLC",
+    "shipTo": "251 W Juniper Ave, Gilbert, AZ 85233",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 2
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 1
+      }
+    ],
+    "total": 2730,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-04-28",
+    "notes": "Urgent \u2014 location opening soon."
+  },
+  {
+    "id": "ORD-2026-TEST061",
+    "status": "Fulfilled",
+    "submittedAt": "2026-04-14T11:09:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Carlos Gutierrez",
+    "recipientEmail": "carlos.gutierrez@foundationpartners.com",
+    "locationId": "WAFAC",
+    "shipTo": "407 N Pearl St, Centralia, WA 98531",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 2150,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-04-28",
+    "notes": "None",
+    "statusUpdatedBy": "fred.solano@foundationpartners.com",
+    "statusUpdatedAt": "2026-04-23T11:09:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST031",
+    "status": "In Progress",
+    "submittedAt": "2026-04-11T12:59:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Jennifer Davis",
+    "recipientEmail": "jennifer.davis@foundationpartners.com",
+    "locationId": "WITLP",
+    "shipTo": "1008 Madison Ave, Fort Atkinson, WI 53538",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 2150,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-04-25",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST022",
+    "status": "New",
+    "submittedAt": "2026-04-07T15:57:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Carlos Gutierrez",
+    "recipientEmail": "carlos.gutierrez@foundationpartners.com",
+    "locationId": "AZLGC",
+    "shipTo": "1374 N Arizona Ave, Chandler, AZ 85225",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 2
+      }
+    ],
+    "total": 4200,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-04-21",
+    "notes": "Ship to home address."
+  },
+  {
+    "id": "ORD-2026-TEST018",
+    "status": "New",
+    "submittedAt": "2026-04-07T10:34:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Brian Scott",
+    "recipientEmail": "brian.scott@foundationpartners.com",
+    "locationId": "WAFAW",
+    "shipTo": "455 North St. SE, Tumwater, WA 98501",
+    "items": [
+      {
+        "title": "Arrangement Room 55\" TV Setup",
+        "price": 1450,
+        "quantity": 1
+      },
+      {
+        "title": "Tribucast Unit",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 1750,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-04-21",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST039",
+    "status": "In Progress",
+    "submittedAt": "2026-04-06T12:10:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Maria Garcia",
+    "recipientEmail": "maria.garcia@foundationpartners.com",
+    "locationId": "AZADD",
+    "shipTo": "1050 N. Dodge Blvd., Tucson, AZ 85716",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "Color MFP",
+        "price": 450,
+        "quantity": 1
+      }
+    ],
+    "total": 2300,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-04-20",
+    "notes": "Please deliver before 9am."
+  },
+  {
+    "id": "ORD-2026-TEST019",
+    "status": "New",
+    "submittedAt": "2026-04-04T12:15:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Kevin Park",
+    "recipientEmail": "kevin.park@foundationpartners.com",
+    "locationId": "WAFAC",
+    "shipTo": "407 N Pearl St, Centralia, WA 98531",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 2
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 1
+      }
+    ],
+    "total": 2730,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-04-18",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST046",
+    "status": "In Progress",
+    "submittedAt": "2026-04-03T11:43:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Amanda Foster",
+    "recipientEmail": "amanda.foster@foundationpartners.com",
+    "locationId": "AZADD",
+    "shipTo": "1050 N. Dodge Blvd., Tucson, AZ 85716",
+    "items": [
+      {
+        "title": "Monochrome MFP",
+        "price": 380,
+        "quantity": 1
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 2
+      }
+    ],
+    "total": 440,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-04-17",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST079",
+    "status": "Fulfilled",
+    "submittedAt": "2026-03-29T08:31:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "Brian Scott",
+    "recipientEmail": "brian.scott@foundationpartners.com",
+    "locationId": "FLLFM",
+    "shipTo": "1 Memorial Blvd, Fort Myers, FL 33905",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 2280,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-04-12",
+    "notes": "Ship to home address.",
+    "statusUpdatedBy": "matthew.ritchotte@foundationpartners.com",
+    "statusUpdatedAt": "2026-04-08T08:31:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST059",
+    "status": "Fulfilled",
+    "submittedAt": "2026-03-28T09:52:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Amanda Foster",
+    "recipientEmail": "amanda.foster@foundationpartners.com",
+    "locationId": "AZADD",
+    "shipTo": "1050 N. Dodge Blvd., Tucson, AZ 85716",
+    "items": [
+      {
+        "title": "Executive Laptop",
+        "price": 4500,
+        "quantity": 1
+      }
+    ],
+    "total": 4500,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-04-11",
+    "notes": "None",
+    "statusUpdatedBy": "chezarae.carter@foundationpartners.com",
+    "statusUpdatedAt": "2026-04-03T09:52:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST058",
+    "status": "Fulfilled",
+    "submittedAt": "2026-03-25T15:28:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "Stephanie Kim",
+    "recipientEmail": "stephanie.kim@foundationpartners.com",
+    "locationId": "FLLFM",
+    "shipTo": "1 Memorial Blvd, Fort Myers, FL 33905",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 2280,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-04-08",
+    "notes": "None",
+    "statusUpdatedBy": "matthew.ritchotte@foundationpartners.com",
+    "statusUpdatedAt": "2026-04-04T15:28:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST078",
+    "status": "Fulfilled",
+    "submittedAt": "2026-03-25T11:53:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "James Wilson",
+    "recipientEmail": "james.wilson@foundationpartners.com",
+    "locationId": "FLLTA",
+    "shipTo": "5503 N Armenia Ave, Tampa, FL 33603",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 2280,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-04-08",
+    "notes": "New hire starting next month.",
+    "statusUpdatedBy": "chezarae.carter@foundationpartners.com",
+    "statusUpdatedAt": "2026-04-04T11:53:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST065",
+    "status": "Fulfilled",
+    "submittedAt": "2026-03-24T16:05:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Robert Chen",
+    "recipientEmail": "robert.chen@foundationpartners.com",
+    "locationId": "FLTLT",
+    "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 2
+      }
+    ],
+    "total": 4200,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-04-07",
+    "notes": "Urgent \u2014 location opening soon.",
+    "statusUpdatedBy": "matthew.ritchotte@foundationpartners.com",
+    "statusUpdatedAt": "2026-03-30T16:05:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST055",
+    "status": "In Progress",
+    "submittedAt": "2026-03-23T09:46:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "Marcus Williams",
+    "recipientEmail": "marcus.williams@foundationpartners.com",
+    "locationId": "AZFLC",
+    "shipTo": "251 W Juniper Ave, Gilbert, AZ 85233",
+    "items": [
+      {
+        "title": "Monochrome MFP",
+        "price": 380,
+        "quantity": 1
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 2
+      }
+    ],
+    "total": 440,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-04-06",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST033",
+    "status": "In Progress",
+    "submittedAt": "2026-03-23T08:03:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Carlos Gutierrez",
+    "recipientEmail": "carlos.gutierrez@foundationpartners.com",
+    "locationId": "WAFAT",
+    "shipTo": "31919 6th Ave S, Suite 200, Federal Way, WA 98003",
+    "items": [
+      {
+        "title": "Executive Laptop",
+        "price": 4500,
+        "quantity": 1
+      }
+    ],
+    "total": 4500,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-04-06",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST074",
+    "status": "Fulfilled",
+    "submittedAt": "2026-03-22T09:37:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Carlos Gutierrez",
+    "recipientEmail": "carlos.gutierrez@foundationpartners.com",
+    "locationId": "WAFAC",
+    "shipTo": "407 N Pearl St, Centralia, WA 98531",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "Color MFP",
+        "price": 450,
+        "quantity": 1
+      }
+    ],
+    "total": 2300,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-04-05",
+    "notes": "None",
+    "statusUpdatedBy": "chezarae.carter@foundationpartners.com",
+    "statusUpdatedAt": "2026-03-31T09:37:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST092",
+    "status": "Fulfilled",
+    "submittedAt": "2026-03-16T12:44:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "Amanda Foster",
+    "recipientEmail": "amanda.foster@foundationpartners.com",
+    "locationId": "WAFAC",
+    "shipTo": "407 N Pearl St, Centralia, WA 98531",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 2
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 1
+      }
+    ],
+    "total": 2730,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-03-30",
+    "notes": "Please deliver before 9am.",
+    "statusUpdatedBy": "fred.solano@foundationpartners.com",
+    "statusUpdatedAt": "2026-03-22T12:44:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST080",
+    "status": "Fulfilled",
+    "submittedAt": "2026-03-14T17:44:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Stephanie Kim",
+    "recipientEmail": "stephanie.kim@foundationpartners.com",
+    "locationId": "FLLFM",
+    "shipTo": "1 Memorial Blvd, Fort Myers, FL 33905",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 2
+      }
+    ],
+    "total": 4200,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-03-28",
+    "notes": "Urgent \u2014 location opening soon.",
+    "statusUpdatedBy": "joe.choss@foundationpartners.com",
+    "statusUpdatedAt": "2026-03-17T17:44:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST064",
+    "status": "Fulfilled",
+    "submittedAt": "2026-03-13T16:31:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "Kevin Park",
+    "recipientEmail": "kevin.park@foundationpartners.com",
+    "locationId": "AZADD",
+    "shipTo": "1050 N. Dodge Blvd., Tucson, AZ 85716",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 2
+      }
+    ],
+    "total": 4200,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-03-27",
+    "notes": "Please deliver before 9am.",
+    "statusUpdatedBy": "chezarae.carter@foundationpartners.com",
+    "statusUpdatedAt": "2026-03-23T16:31:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST083",
+    "status": "Fulfilled",
+    "submittedAt": "2026-03-12T12:16:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "David Martinez",
+    "recipientEmail": "david.martinez@foundationpartners.com",
+    "locationId": "WITLP",
+    "shipTo": "1008 Madison Ave, Fort Atkinson, WI 53538",
+    "items": [
+      {
+        "title": "Monochrome MFP",
+        "price": 380,
+        "quantity": 1
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 2
+      }
+    ],
+    "total": 440,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-03-26",
+    "notes": "None",
+    "statusUpdatedBy": "fred.solano@foundationpartners.com",
+    "statusUpdatedAt": "2026-03-18T12:16:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST036",
+    "status": "In Progress",
+    "submittedAt": "2026-03-09T11:42:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Brian Scott",
+    "recipientEmail": "brian.scott@foundationpartners.com",
+    "locationId": "WITLP",
+    "shipTo": "1008 Madison Ave, Fort Atkinson, WI 53538",
+    "items": [
+      {
+        "title": "Executive Laptop",
+        "price": 4500,
+        "quantity": 1
+      }
+    ],
+    "total": 4500,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-03-23",
+    "notes": "Urgent \u2014 location opening soon."
+  },
+  {
+    "id": "ORD-2026-TEST100",
+    "status": "Deleted",
+    "submittedAt": "2026-03-07T13:07:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Kevin Park",
+    "recipientEmail": "kevin.park@foundationpartners.com",
+    "locationId": "AZLGC",
+    "shipTo": "1374 N Arizona Ave, Chandler, AZ 85225",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "Color MFP",
+        "price": 450,
+        "quantity": 1
+      }
+    ],
+    "total": 2300,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-03-21",
+    "notes": "Urgent \u2014 location opening soon.",
+    "deletedBy": "fred.solano@foundationpartners.com",
+    "deletedAt": "2026-03-08T13:07:00Z",
+    "deleteReason": "Test order"
+  },
+  {
+    "id": "ORD-2026-TEST008",
+    "status": "New",
+    "submittedAt": "2026-03-02T09:24:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Stephanie Kim",
+    "recipientEmail": "stephanie.kim@foundationpartners.com",
+    "locationId": "WAFAT",
+    "shipTo": "31919 6th Ave S, Suite 200, Federal Way, WA 98003",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 2
+      }
+    ],
+    "total": 4200,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-03-16",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST024",
+    "status": "New",
+    "submittedAt": "2026-03-01T09:57:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Sarah Thompson",
+    "recipientEmail": "sarah.thompson@foundationpartners.com",
+    "locationId": "WAFAC",
+    "shipTo": "407 N Pearl St, Centralia, WA 98531",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "Color MFP",
+        "price": 450,
+        "quantity": 1
+      }
+    ],
+    "total": 2300,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-03-15",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST089",
+    "status": "Fulfilled",
+    "submittedAt": "2026-02-28T16:24:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "Brian Scott",
+    "recipientEmail": "brian.scott@foundationpartners.com",
+    "locationId": "AZLGC",
+    "shipTo": "1374 N Arizona Ave, Chandler, AZ 85225",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 2280,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-03-14",
+    "notes": "None",
+    "statusUpdatedBy": "mateo.escobar@foundationpartners.com",
+    "statusUpdatedAt": "2026-03-07T16:24:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST001",
+    "status": "New",
+    "submittedAt": "2026-02-28T10:47:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Carlos Gutierrez",
+    "recipientEmail": "carlos.gutierrez@foundationpartners.com",
+    "locationId": "FLTLT",
+    "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 2
+      }
+    ],
+    "total": 4200,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-03-14",
+    "notes": "Please deliver before 9am."
+  },
+  {
+    "id": "ORD-2026-TEST068",
+    "status": "Fulfilled",
+    "submittedAt": "2026-02-27T15:14:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "Nicole Rivera",
+    "recipientEmail": "nicole.rivera@foundationpartners.com",
+    "locationId": "WITLP",
+    "shipTo": "1008 Madison Ave, Fort Atkinson, WI 53538",
+    "items": [
+      {
+        "title": "Executive Laptop",
+        "price": 4500,
+        "quantity": 1
+      }
+    ],
+    "total": 4500,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-03-13",
+    "notes": "None",
+    "statusUpdatedBy": "mateo.escobar@foundationpartners.com",
+    "statusUpdatedAt": "2026-03-09T15:14:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST049",
+    "status": "In Progress",
+    "submittedAt": "2026-02-27T11:52:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "James Wilson",
+    "recipientEmail": "james.wilson@foundationpartners.com",
+    "locationId": "FLTLT",
+    "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 2
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 1
+      }
+    ],
+    "total": 2730,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-03-13",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST073",
+    "status": "Fulfilled",
+    "submittedAt": "2026-02-26T15:44:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Kevin Park",
+    "recipientEmail": "kevin.park@foundationpartners.com",
+    "locationId": "FLLFM",
+    "shipTo": "1 Memorial Blvd, Fort Myers, FL 33905",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "Color MFP",
+        "price": 450,
+        "quantity": 1
+      }
+    ],
+    "total": 2300,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-03-12",
+    "notes": "None",
+    "statusUpdatedBy": "chezarae.carter@foundationpartners.com",
+    "statusUpdatedAt": "2026-03-03T15:44:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST009",
+    "status": "New",
+    "submittedAt": "2026-02-24T12:44:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Jennifer Davis",
+    "recipientEmail": "jennifer.davis@foundationpartners.com",
+    "locationId": "FLLTA",
+    "shipTo": "5503 N Armenia Ave, Tampa, FL 33603",
+    "items": [
+      {
+        "title": "Monochrome MFP",
+        "price": 380,
+        "quantity": 1
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 2
+      }
+    ],
+    "total": 440,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-03-10",
+    "notes": "Urgent \u2014 location opening soon."
+  },
+  {
+    "id": "ORD-2026-TEST084",
+    "status": "Fulfilled",
+    "submittedAt": "2026-02-20T11:47:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Carlos Gutierrez",
+    "recipientEmail": "carlos.gutierrez@foundationpartners.com",
+    "locationId": "AZFLC",
+    "shipTo": "251 W Juniper Ave, Gilbert, AZ 85233",
+    "items": [
+      {
+        "title": "Executive Laptop",
+        "price": 4500,
+        "quantity": 1
+      }
+    ],
+    "total": 4500,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-03-06",
+    "notes": "None",
+    "statusUpdatedBy": "chezarae.carter@foundationpartners.com",
+    "statusUpdatedAt": "2026-02-27T11:47:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST017",
+    "status": "New",
+    "submittedAt": "2026-02-16T16:58:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Carlos Gutierrez",
+    "recipientEmail": "carlos.gutierrez@foundationpartners.com",
+    "locationId": "FLLTA",
+    "shipTo": "5503 N Armenia Ave, Tampa, FL 33603",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 2
+      }
+    ],
+    "total": 4200,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-03-02",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST085",
+    "status": "Fulfilled",
+    "submittedAt": "2026-02-16T12:00:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Amanda Foster",
+    "recipientEmail": "amanda.foster@foundationpartners.com",
+    "locationId": "FLTLT",
+    "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
+    "items": [
+      {
+        "title": "Arrangement Room 55\" TV Setup",
+        "price": 1450,
+        "quantity": 1
+      },
+      {
+        "title": "Tribucast Unit",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 1750,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-03-02",
+    "notes": "Urgent \u2014 location opening soon.",
+    "statusUpdatedBy": "chezarae.carter@foundationpartners.com",
+    "statusUpdatedAt": "2026-02-19T12:00:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST041",
+    "status": "In Progress",
+    "submittedAt": "2026-02-10T12:18:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Marcus Williams",
+    "recipientEmail": "marcus.williams@foundationpartners.com",
+    "locationId": "AZADD",
+    "shipTo": "1050 N. Dodge Blvd., Tucson, AZ 85716",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "Color MFP",
+        "price": 450,
+        "quantity": 1
+      }
+    ],
+    "total": 2300,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-02-24",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST047",
+    "status": "In Progress",
+    "submittedAt": "2026-02-10T11:55:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Stephanie Kim",
+    "recipientEmail": "stephanie.kim@foundationpartners.com",
+    "locationId": "FLTLT",
+    "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
+    "items": [
+      {
+        "title": "Executive Laptop",
+        "price": 4500,
+        "quantity": 1
+      }
+    ],
+    "total": 4500,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-02-24",
+    "notes": "Ship to home address."
+  },
+  {
+    "id": "ORD-2026-TEST032",
+    "status": "In Progress",
+    "submittedAt": "2026-02-10T11:18:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "Carlos Gutierrez",
+    "recipientEmail": "carlos.gutierrez@foundationpartners.com",
+    "locationId": "WAFAW",
+    "shipTo": "455 North St. SE, Tumwater, WA 98501",
+    "items": [
+      {
+        "title": "Executive Laptop",
+        "price": 4500,
+        "quantity": 1
+      }
+    ],
+    "total": 4500,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-02-24",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST088",
+    "status": "Fulfilled",
+    "submittedAt": "2026-02-09T17:19:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Tanya Moore",
+    "recipientEmail": "tanya.moore@foundationpartners.com",
+    "locationId": "FLTLT",
+    "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 2
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 1
+      }
+    ],
+    "total": 2730,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-02-23",
+    "notes": "None",
+    "statusUpdatedBy": "matthew.ritchotte@foundationpartners.com",
+    "statusUpdatedAt": "2026-02-13T17:19:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST093",
+    "status": "Fulfilled",
+    "submittedAt": "2026-01-31T16:14:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Tanya Moore",
+    "recipientEmail": "tanya.moore@foundationpartners.com",
+    "locationId": "WAFAW",
+    "shipTo": "455 North St. SE, Tumwater, WA 98501",
+    "items": [
+      {
+        "title": "Arrangement Room 55\" TV Setup",
+        "price": 1450,
+        "quantity": 1
+      },
+      {
+        "title": "Tribucast Unit",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 1750,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-02-14",
+    "notes": "Ship to home address.",
+    "statusUpdatedBy": "chezarae.carter@foundationpartners.com",
+    "statusUpdatedAt": "2026-02-05T16:14:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST016",
+    "status": "New",
+    "submittedAt": "2026-01-30T12:27:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Stephanie Kim",
+    "recipientEmail": "stephanie.kim@foundationpartners.com",
+    "locationId": "FLTLT",
+    "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 2
+      }
+    ],
+    "total": 4200,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-02-13",
+    "notes": "Urgent \u2014 location opening soon."
+  },
+  {
+    "id": "ORD-2026-TEST075",
+    "status": "Fulfilled",
+    "submittedAt": "2026-01-28T12:54:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Marcus Williams",
+    "recipientEmail": "marcus.williams@foundationpartners.com",
+    "locationId": "WITLP",
+    "shipTo": "1008 Madison Ave, Fort Atkinson, WI 53538",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 2280,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-02-11",
+    "notes": "Please deliver before 9am.",
+    "statusUpdatedBy": "joe.choss@foundationpartners.com",
+    "statusUpdatedAt": "2026-01-31T12:54:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST086",
+    "status": "Fulfilled",
+    "submittedAt": "2026-01-28T08:36:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Amanda Foster",
+    "recipientEmail": "amanda.foster@foundationpartners.com",
+    "locationId": "WAFAT",
+    "shipTo": "31919 6th Ave S, Suite 200, Federal Way, WA 98003",
+    "items": [
+      {
+        "title": "Specialty Laptop",
+        "price": 3200,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 3380,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-02-11",
+    "notes": "None",
+    "statusUpdatedBy": "mateo.escobar@foundationpartners.com",
+    "statusUpdatedAt": "2026-02-07T08:36:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST005",
+    "status": "New",
+    "submittedAt": "2026-01-26T13:54:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Marcus Williams",
+    "recipientEmail": "marcus.williams@foundationpartners.com",
+    "locationId": "FLLFM",
+    "shipTo": "1 Memorial Blvd, Fort Myers, FL 33905",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "Color MFP",
+        "price": 450,
+        "quantity": 1
+      }
+    ],
+    "total": 2300,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-02-09",
+    "notes": "Ship to home address."
+  },
+  {
+    "id": "ORD-2026-TEST034",
+    "status": "In Progress",
+    "submittedAt": "2026-01-22T10:04:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Jennifer Davis",
+    "recipientEmail": "jennifer.davis@foundationpartners.com",
+    "locationId": "AZLGC",
+    "shipTo": "1374 N Arizona Ave, Chandler, AZ 85225",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 2
+      },
+      {
+        "title": "Logitech MK270",
+        "price": 30,
+        "quantity": 1
+      }
+    ],
+    "total": 2730,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-02-05",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST038",
+    "status": "In Progress",
+    "submittedAt": "2026-01-20T16:13:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "Brian Scott",
+    "recipientEmail": "brian.scott@foundationpartners.com",
+    "locationId": "WAFAT",
+    "shipTo": "31919 6th Ave S, Suite 200, Federal Way, WA 98003",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 2280,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-02-03",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST020",
+    "status": "New",
+    "submittedAt": "2026-01-19T16:49:00Z",
+    "year": 2026,
+    "submitterName": "Joe Choss",
+    "submitterEmail": "joe.choss@foundationpartners.com",
+    "recipientName": "Marcus Williams",
+    "recipientEmail": "marcus.williams@foundationpartners.com",
+    "locationId": "FLLFM",
+    "shipTo": "1 Memorial Blvd, Fort Myers, FL 33905",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "Color MFP",
+        "price": 450,
+        "quantity": 1
+      }
+    ],
+    "total": 2300,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-02-02",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST090",
+    "status": "Fulfilled",
+    "submittedAt": "2026-01-17T17:47:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "Amanda Foster",
+    "recipientEmail": "amanda.foster@foundationpartners.com",
+    "locationId": "WAFAC",
+    "shipTo": "407 N Pearl St, Centralia, WA 98531",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1
+      },
+      {
+        "title": "Docking Station",
+        "price": 180,
+        "quantity": 1
+      }
+    ],
+    "total": 2280,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-01-31",
+    "notes": "None",
+    "statusUpdatedBy": "matthew.ritchotte@foundationpartners.com",
+    "statusUpdatedAt": "2026-01-23T17:47:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST027",
+    "status": "New",
+    "submittedAt": "2026-01-15T09:03:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "Lisa Anderson",
+    "recipientEmail": "lisa.anderson@foundationpartners.com",
+    "locationId": "WITLP",
+    "shipTo": "1008 Madison Ave, Fort Atkinson, WI 53538",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 2150,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-01-29",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST062",
+    "status": "Fulfilled",
+    "submittedAt": "2026-01-14T16:15:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Stephanie Kim",
+    "recipientEmail": "stephanie.kim@foundationpartners.com",
+    "locationId": "FLLFM",
+    "shipTo": "1 Memorial Blvd, Fort Myers, FL 33905",
+    "items": [
+      {
+        "title": "Executive Laptop",
+        "price": 4500,
+        "quantity": 1
+      }
+    ],
+    "total": 4500,
+    "isNewEmployee": "yes",
+    "dateNeeded": "2026-01-28",
+    "notes": "None",
+    "statusUpdatedBy": "mateo.escobar@foundationpartners.com",
+    "statusUpdatedAt": "2026-01-19T16:15:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST070",
+    "status": "Fulfilled",
+    "submittedAt": "2026-01-14T12:24:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "Jennifer Davis",
+    "recipientEmail": "jennifer.davis@foundationpartners.com",
+    "locationId": "FLTLT",
+    "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
+    "items": [
+      {
+        "title": "Amcrest NVR",
+        "price": 300,
+        "quantity": 1
+      },
+      {
+        "title": "Surveillance Camera",
+        "price": 120,
+        "quantity": 4
+      }
+    ],
+    "total": 780,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-01-28",
+    "notes": "None",
+    "statusUpdatedBy": "matthew.ritchotte@foundationpartners.com",
+    "statusUpdatedAt": "2026-01-24T12:24:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST014",
+    "status": "New",
+    "submittedAt": "2026-01-14T09:09:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Nicole Rivera",
+    "recipientEmail": "nicole.rivera@foundationpartners.com",
+    "locationId": "FLLFM",
+    "shipTo": "1 Memorial Blvd, Fort Myers, FL 33905",
+    "items": [
+      {
+        "title": "Amcrest NVR",
+        "price": 300,
+        "quantity": 1
+      },
+      {
+        "title": "Surveillance Camera",
+        "price": 120,
+        "quantity": 4
+      }
+    ],
+    "total": 780,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-01-28",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST072",
+    "status": "Fulfilled",
+    "submittedAt": "2026-01-12T08:15:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "David Martinez",
+    "recipientEmail": "david.martinez@foundationpartners.com",
+    "locationId": "AZLGC",
+    "shipTo": "1374 N Arizona Ave, Chandler, AZ 85225",
+    "items": [
+      {
+        "title": "Arrangement Room 55\" TV Setup",
+        "price": 1450,
+        "quantity": 1
+      },
+      {
+        "title": "Tribucast Unit",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 1750,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-01-26",
+    "notes": "None",
+    "statusUpdatedBy": "fred.solano@foundationpartners.com",
+    "statusUpdatedAt": "2026-01-17T08:15:00Z"
+  },
+  {
+    "id": "ORD-2026-TEST002",
+    "status": "New",
+    "submittedAt": "2026-01-09T09:13:00Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Brian Scott",
+    "recipientEmail": "brian.scott@foundationpartners.com",
+    "locationId": "AZLGC",
+    "shipTo": "1374 N Arizona Ave, Chandler, AZ 85225",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "ThinkVision Monitor 24\"",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 2150,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-01-23",
+    "notes": "None"
+  },
+  {
+    "id": "ORD-2026-TEST050",
+    "status": "In Progress",
+    "submittedAt": "2026-01-08T11:25:00Z",
+    "year": 2026,
+    "submitterName": "Chezarae Carter",
+    "submitterEmail": "chezarae.carter@foundationpartners.com",
+    "recipientName": "James Wilson",
+    "recipientEmail": "james.wilson@foundationpartners.com",
+    "locationId": "AZFLC",
+    "shipTo": "251 W Juniper Ave, Gilbert, AZ 85233",
+    "items": [
+      {
+        "title": "Arrangement Room 55\" TV Setup",
+        "price": 1450,
+        "quantity": 1
+      },
+      {
+        "title": "Tribucast Unit",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "total": 1750,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-01-22",
+    "notes": "Please deliver before 9am."
+  },
+  {
+    "id": "ORD-2026-TEST023",
+    "status": "New",
+    "submittedAt": "2026-01-07T17:35:00Z",
+    "year": 2026,
+    "submitterName": "Matthew Ritchotte",
+    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+    "recipientName": "Robert Chen",
+    "recipientEmail": "robert.chen@foundationpartners.com",
+    "locationId": "FLTLT",
+    "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
+    "items": [
+      {
+        "title": "Desktop TIO",
+        "price": 1850,
+        "quantity": 1
+      },
+      {
+        "title": "Color MFP",
+        "price": 450,
+        "quantity": 1
+      }
+    ],
+    "total": 2300,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-01-21",
+    "notes": "Urgent \u2014 location opening soon."
+  },
+  {
+    "id": "ORD-2026-TEST043",
+    "status": "In Progress",
+    "submittedAt": "2026-01-02T13:49:00Z",
+    "year": 2026,
+    "submitterName": "Mateo Escobar",
+    "submitterEmail": "mateo.escobar@foundationpartners.com",
+    "recipientName": "James Wilson",
+    "recipientEmail": "james.wilson@foundationpartners.com",
+    "locationId": "FLTLT",
+    "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
+    "items": [
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 2
+      }
+    ],
+    "total": 4200,
+    "isNewEmployee": "no",
+    "dateNeeded": "2026-01-16",
+    "notes": "None"
+  }
+]
