@@ -333,7 +333,10 @@
     "price": 488.75,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Poly-CS510-Wireless-Headset.jpg"
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Poly-CS510-Wireless-Headset.jpg",
+    "categories": [
+      "video_surveillance"
+    ]
   },
   {
     "id": 17,
