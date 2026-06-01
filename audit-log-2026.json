@@ -154,5 +154,84 @@
     "id": "LOG-1780342032060",
     "timestamp": "2026-06-01T19:27:12.060Z",
     "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "id": "LOG-1780342184551",
+    "timestamp": "2026-06-01T19:29:44.551Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.permanent_delete",
+    "target": "ORD-2026-1780338756063",
+    "detail": {
+      "orderId": "ORD-2026-1780338756063",
+      "reason": "Deleted due to Testing",
+      "orderSnapshot": {
+        "id": "ORD-2026-1780338756063",
+        "status": "Deleted",
+        "submittedAt": "2026-06-01T18:32:36.063Z",
+        "year": 2026,
+        "submitterName": "Fred Solano",
+        "submitterEmail": "fred.solano@foundationpartners.com",
+        "recipientName": "Matthew Ritchotte",
+        "recipientEmail": "Matthew.Ritchotte@foundationpartners.com",
+        "locationId": "WAFAT",
+        "shipTo": "31919 6th Avenue S, Suite 200, Federal Way, WA 98003",
+        "items": [
+          {
+            "title": "Document Scanner",
+            "price": 460,
+            "quantity": 1,
+            "total": 460,
+            "components": [
+              {
+                "name": "Epson DS-530 II Color Duplex Scanner",
+                "price": 400
+              }
+            ]
+          },
+          {
+            "title": "Audio Visual Stardard Setup with 2 Audio Zones - 4 Ceiling Speakers",
+            "price": 10000,
+            "quantity": 1,
+            "total": 10000,
+            "components": [
+              {
+                "name": "AV System - 2 Zones - 4 Ceiling Speakers",
+                "price": 10000
+              }
+            ]
+          },
+          {
+            "title": "Color MFP",
+            "price": 715,
+            "quantity": 1,
+            "total": 715,
+            "components": [
+              {
+                "name": "HP LaserJet Pro 3301fdw",
+                "price": 650
+              }
+            ]
+          },
+          {
+            "title": "Executive Laptop",
+            "price": 4500,
+            "quantity": 1,
+            "total": 4500,
+            "components": [
+              {
+                "name": "Lenovo P14s - 64GB/2TB/I-U7",
+                "price": 4000
+              }
+            ]
+          }
+        ],
+        "total": 15675,
+        "notes": "None",
+        "deletedBy": "fred.solano@foundationpartners.com",
+        "deletedAt": "2026-06-01T19:04:41.300Z",
+        "deleteReason": "Test Order"
+      }
+    },
+    "result": "success"
   }
 ]
