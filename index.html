@@ -1138,10 +1138,13 @@
                     instructions: formData.instructions || 'None',
                     submittedAt: new Date().toLocaleString(),
                     totalCost: cartTotal.toFixed(2),
-                    items: cart.map(item => {
-                        const componentLines = item.items.map(i => `&nbsp;&nbsp;- ${i.name}: $${i.price.toFixed(2)}`).join('<br>');
-                        return `<b>${item.title} (Qty: ${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}</b><br>${componentLines}`;
-                    }).join('<br><br>')
+                    items: cart.map(item => ({
+                        title: item.title,
+                        price: item.price,
+                        quantity: item.quantity || 1,
+                        total: (item.price * (item.quantity || 1)),
+                        components: (item.items || []).map(i => ({ name: i.name, price: i.price }))
+                    }))
                 };
 
                 // Close UI immediately — don't wait for network
