@@ -1,236 +1,1169 @@
 [
   {
-    "action": "auth.login",
+    "id": "LOG-TEST1053",
+    "timestamp": "2026-05-31T20:01:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
     "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+      "reason": "inactivity_timeout",
+      "lastActivity": "2026-05-31T20:01:00Z"
     },
-    "result": "success",
-    "id": "LOG-1780338630916",
-    "timestamp": "2026-06-01T18:30:30.916Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
+    "result": "success"
   },
   {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780338820661",
-    "timestamp": "2026-06-01T18:33:40.661Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780339975051",
-    "timestamp": "2026-06-01T18:52:55.051Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "id": "LOG-1780340683173",
-    "timestamp": "2026-06-01T19:04:43.174Z",
-    "adminEmail": "fred.solano@foundationpartners.com",
+    "id": "LOG-TEST1038",
+    "timestamp": "2026-05-29T00:56:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
     "action": "order.soft_delete",
-    "target": "ORD-2026-1780338756063",
+    "target": "ORD-2026-TEST010",
     "detail": {
-      "orderId": "ORD-2026-1780338756063",
-      "reason": "Test Order",
+      "orderId": "ORD-2026-TEST010",
+      "reason": "Submitted in error",
       "orderSnapshot": {
-        "id": "ORD-2026-1780338756063",
-        "status": "New",
-        "submittedAt": "2026-06-01T18:32:36.063Z",
-        "year": 2026,
+        "id": "ORD-2026-TEST010",
         "submitterName": "Fred Solano",
         "submitterEmail": "fred.solano@foundationpartners.com",
-        "recipientName": "Matthew Ritchotte",
-        "recipientEmail": "Matthew.Ritchotte@foundationpartners.com",
-        "locationId": "WAFAT",
-        "shipTo": "31919 6th Avenue S, Suite 200, Federal Way, WA 98003",
+        "recipientName": "Marcus Williams",
+        "locationId": "WAFAW",
+        "shipTo": "123 Main St, Tampa, FL 33601",
         "items": [
           {
-            "title": "Document Scanner",
-            "price": 460,
-            "quantity": 1,
-            "total": 460,
-            "components": [
-              {
-                "name": "Epson DS-530 II Color Duplex Scanner",
-                "price": 400
-              }
-            ]
-          },
-          {
-            "title": "Audio Visual Stardard Setup with 2 Audio Zones - 4 Ceiling Speakers",
-            "price": 10000,
-            "quantity": 1,
-            "total": 10000,
-            "components": [
-              {
-                "name": "AV System - 2 Zones - 4 Ceiling Speakers",
-                "price": 10000
-              }
-            ]
+            "title": "Desktop TIO",
+            "price": 1850,
+            "quantity": 1
           },
           {
             "title": "Color MFP",
-            "price": 715,
-            "quantity": 1,
-            "total": 715,
-            "components": [
-              {
-                "name": "HP LaserJet Pro 3301fdw",
-                "price": 650
-              }
-            ]
-          },
-          {
-            "title": "Executive Laptop",
-            "price": 4500,
-            "quantity": 1,
-            "total": 4500,
-            "components": [
-              {
-                "name": "Lenovo P14s - 64GB/2TB/I-U7",
-                "price": 4000
-              }
-            ]
+            "price": 450,
+            "quantity": 1
           }
         ],
-        "total": 15675,
-        "notes": "None"
+        "total": 2300
       }
     },
     "result": "success"
   },
   {
-    "action": "auth.login",
+    "id": "LOG-TEST1040",
+    "timestamp": "2026-05-28T00:34:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-TEST075",
     "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780341728119",
-    "timestamp": "2026-06-01T19:22:08.119Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780341729950",
-    "timestamp": "2026-06-01T19:22:09.950Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780341731778",
-    "timestamp": "2026-06-01T19:22:11.778Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780341733136",
-    "timestamp": "2026-06-01T19:22:13.136Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780342032060",
-    "timestamp": "2026-06-01T19:27:12.060Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "id": "LOG-1780342184551",
-    "timestamp": "2026-06-01T19:29:44.551Z",
-    "adminEmail": "fred.solano@foundationpartners.com",
-    "action": "order.permanent_delete",
-    "target": "ORD-2026-1780338756063",
-    "detail": {
-      "orderId": "ORD-2026-1780338756063",
-      "reason": "Deleted due to Testing",
+      "orderId": "ORD-2026-TEST075",
+      "reason": "Test order",
       "orderSnapshot": {
-        "id": "ORD-2026-1780338756063",
-        "status": "Deleted",
-        "submittedAt": "2026-06-01T18:32:36.063Z",
-        "year": 2026,
+        "id": "ORD-2026-TEST075",
         "submitterName": "Fred Solano",
         "submitterEmail": "fred.solano@foundationpartners.com",
-        "recipientName": "Matthew Ritchotte",
-        "recipientEmail": "Matthew.Ritchotte@foundationpartners.com",
-        "locationId": "WAFAT",
-        "shipTo": "31919 6th Avenue S, Suite 200, Federal Way, WA 98003",
+        "recipientName": "Robert Chen",
+        "locationId": "AZADD",
+        "shipTo": "123 Main St, Tampa, FL 33601",
         "items": [
           {
-            "title": "Document Scanner",
-            "price": 460,
-            "quantity": 1,
-            "total": 460,
-            "components": [
-              {
-                "name": "Epson DS-530 II Color Duplex Scanner",
-                "price": 400
-              }
-            ]
-          },
-          {
-            "title": "Audio Visual Stardard Setup with 2 Audio Zones - 4 Ceiling Speakers",
-            "price": 10000,
-            "quantity": 1,
-            "total": 10000,
-            "components": [
-              {
-                "name": "AV System - 2 Zones - 4 Ceiling Speakers",
-                "price": 10000
-              }
-            ]
+            "title": "Desktop TIO",
+            "price": 1850,
+            "quantity": 1
           },
           {
             "title": "Color MFP",
-            "price": 715,
-            "quantity": 1,
-            "total": 715,
-            "components": [
-              {
-                "name": "HP LaserJet Pro 3301fdw",
-                "price": 650
-              }
-            ]
-          },
-          {
-            "title": "Executive Laptop",
-            "price": 4500,
-            "quantity": 1,
-            "total": 4500,
-            "components": [
-              {
-                "name": "Lenovo P14s - 64GB/2TB/I-U7",
-                "price": 4000
-              }
-            ]
+            "price": 450,
+            "quantity": 1
           }
         ],
-        "total": 15675,
-        "notes": "None",
-        "deletedBy": "fred.solano@foundationpartners.com",
-        "deletedAt": "2026-06-01T19:04:41.300Z",
-        "deleteReason": "Test Order"
+        "total": 2300
       }
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1005",
+    "timestamp": "2026-05-27T19:05:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST052",
+    "detail": {
+      "orderId": "ORD-2026-TEST052",
+      "oldStatus": "New",
+      "newStatus": "In Progress"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1070",
+    "timestamp": "2026-05-26T19:31:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1080",
+    "timestamp": "2026-05-26T00:16:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.permanent_delete",
+    "target": "ORD-2026-TEST015",
+    "detail": {
+      "orderId": "ORD-2026-TEST015",
+      "reason": "Test data cleanup before production",
+      "orderSnapshot": {
+        "id": "ORD-2026-TEST015",
+        "submitterName": "Fred Solano",
+        "submitterEmail": "fred.solano@foundationpartners.com",
+        "recipientName": "Marcus Williams",
+        "locationId": "AZADD",
+        "shipTo": "456 Oak Ave, Tucson, AZ 85716",
+        "items": [
+          {
+            "title": "Specialty Laptop",
+            "price": 3200,
+            "quantity": 1
+          }
+        ],
+        "total": 3200
+      }
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1016",
+    "timestamp": "2026-05-25T19:49:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "access.admin_added",
+    "target": "new.admin@fpg.com",
+    "detail": {
+      "newEmail": "new.admin@fpg.com",
+      "newName": "New Admin",
+      "role": "admin"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1042",
+    "timestamp": "2026-05-12T17:35:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Firefox on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1063",
+    "timestamp": "2026-05-10T20:59:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1018",
+    "timestamp": "2026-05-10T18:00:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Firefox on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1003",
+    "timestamp": "2026-05-07T17:26:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "access.admin_added",
+    "target": "new.admin@fpg.com",
+    "detail": {
+      "newEmail": "new.admin@fpg.com",
+      "newName": "New Admin",
+      "role": "admin"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1037",
+    "timestamp": "2026-04-30T23:54:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Firefox on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1007",
+    "timestamp": "2026-04-30T22:57:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-TEST007",
+    "detail": {
+      "orderId": "ORD-2026-TEST007",
+      "reason": "Submitted in error",
+      "orderSnapshot": {
+        "id": "ORD-2026-TEST007",
+        "submitterName": "Fred Solano",
+        "submitterEmail": "fred.solano@foundationpartners.com",
+        "recipientName": "Marcus Williams",
+        "locationId": "AZADD",
+        "shipTo": "123 Main St, Tampa, FL 33601",
+        "items": [
+          {
+            "title": "Accounting Laptop",
+            "price": 2100,
+            "quantity": 1
+          },
+          {
+            "title": "ThinkVision Monitor 24\"",
+            "price": 300,
+            "quantity": 1
+          }
+        ],
+        "total": 2400
+      }
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1035",
+    "timestamp": "2026-04-29T19:08:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {
+      "reason": "inactivity_timeout",
+      "lastActivity": "2026-04-29T19:08:00Z"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1023",
+    "timestamp": "2026-04-24T20:58:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Edge on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1060",
+    "timestamp": "2026-04-23T14:36:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {
+      "reason": "inactivity_timeout",
+      "lastActivity": "2026-04-23T14:36:00Z"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1010",
+    "timestamp": "2026-04-21T00:05:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1069",
+    "timestamp": "2026-04-19T20:33:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Edge on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1028",
+    "timestamp": "2026-04-19T01:48:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST045",
+    "detail": {
+      "orderId": "ORD-2026-TEST045",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1001",
+    "timestamp": "2026-04-15T20:12:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1058",
+    "timestamp": "2026-04-14T20:32:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Firefox on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1019",
+    "timestamp": "2026-04-14T19:52:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST048",
+    "detail": {
+      "orderId": "ORD-2026-TEST048",
+      "oldStatus": "New",
+      "newStatus": "In Progress"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1036",
+    "timestamp": "2026-04-11T20:35:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST027",
+    "detail": {
+      "orderId": "ORD-2026-TEST027",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1011",
+    "timestamp": "2026-04-09T19:08:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1048",
+    "timestamp": "2026-04-09T16:22:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-TEST098",
+    "detail": {
+      "orderId": "ORD-2026-TEST098",
+      "reason": "Test order",
+      "orderSnapshot": {
+        "id": "ORD-2026-TEST098",
+        "submitterName": "Fred Solano",
+        "submitterEmail": "fred.solano@foundationpartners.com",
+        "recipientName": "Marcus Williams",
+        "locationId": "WAFAW",
+        "shipTo": "123 Main St, Tampa, FL 33601",
+        "items": [
+          {
+            "title": "Desktop TIO",
+            "price": 1850,
+            "quantity": 1
+          },
+          {
+            "title": "Color MFP",
+            "price": 450,
+            "quantity": 1
+          }
+        ],
+        "total": 2300
+      }
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1004",
+    "timestamp": "2026-04-07T20:55:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1056",
+    "timestamp": "2026-04-02T16:38:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {
+      "reason": "inactivity_timeout",
+      "lastActivity": "2026-04-02T16:38:00Z"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1049",
+    "timestamp": "2026-03-31T00:27:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1064",
+    "timestamp": "2026-03-30T20:08:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {
+      "reason": "inactivity_timeout",
+      "lastActivity": "2026-03-30T20:08:00Z"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1057",
+    "timestamp": "2026-03-26T14:24:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-TEST071",
+    "detail": {
+      "orderId": "ORD-2026-TEST071",
+      "reason": "Submitted in error",
+      "orderSnapshot": {
+        "id": "ORD-2026-TEST071",
+        "submitterName": "Fred Solano",
+        "submitterEmail": "fred.solano@foundationpartners.com",
+        "recipientName": "Sarah Thompson",
+        "locationId": "FLTLT",
+        "shipTo": "123 Main St, Tampa, FL 33601",
+        "items": [
+          {
+            "title": "Desktop TIO",
+            "price": 1850,
+            "quantity": 1
+          },
+          {
+            "title": "Color MFP",
+            "price": 450,
+            "quantity": 1
+          }
+        ],
+        "total": 2300
+      }
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1024",
+    "timestamp": "2026-03-25T21:34:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {
+      "reason": "inactivity_timeout",
+      "lastActivity": "2026-03-25T21:34:00Z"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1021",
+    "timestamp": "2026-03-23T00:14:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Edge on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1055",
+    "timestamp": "2026-03-18T18:07:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST010",
+    "detail": {
+      "orderId": "ORD-2026-TEST010",
+      "oldStatus": "New",
+      "newStatus": "In Progress"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1015",
+    "timestamp": "2026-03-18T16:11:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1072",
+    "timestamp": "2026-03-17T16:17:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Edge on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1026",
+    "timestamp": "2026-03-15T20:43:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Edge on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1006",
+    "timestamp": "2026-03-11T22:00:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1031",
+    "timestamp": "2026-03-11T01:54:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST068",
+    "detail": {
+      "orderId": "ORD-2026-TEST068",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1025",
+    "timestamp": "2026-03-08T20:56:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST085",
+    "detail": {
+      "orderId": "ORD-2026-TEST085",
+      "oldStatus": "New",
+      "newStatus": "In Progress"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1017",
+    "timestamp": "2026-03-08T15:54:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1076",
+    "timestamp": "2026-03-05T22:09:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1051",
+    "timestamp": "2026-03-03T23:28:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {
+      "reason": "inactivity_timeout",
+      "lastActivity": "2026-03-03T23:28:00Z"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1022",
+    "timestamp": "2026-02-27T01:43:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST057",
+    "detail": {
+      "orderId": "ORD-2026-TEST057",
+      "oldStatus": "New",
+      "newStatus": "In Progress"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1012",
+    "timestamp": "2026-02-25T21:16:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {
+      "reason": "inactivity_timeout",
+      "lastActivity": "2026-02-25T21:16:00Z"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1077",
+    "timestamp": "2026-02-25T17:21:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "access.admin_added",
+    "target": "new.admin@fpg.com",
+    "detail": {
+      "newEmail": "new.admin@fpg.com",
+      "newName": "New Admin",
+      "role": "admin"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1066",
+    "timestamp": "2026-02-25T01:54:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST026",
+    "detail": {
+      "orderId": "ORD-2026-TEST026",
+      "oldStatus": "New",
+      "newStatus": "In Progress"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1032",
+    "timestamp": "2026-02-23T01:01:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {
+      "reason": "inactivity_timeout",
+      "lastActivity": "2026-02-23T01:01:00Z"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1073",
+    "timestamp": "2026-02-22T01:23:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Firefox on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1027",
+    "timestamp": "2026-02-21T19:00:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-TEST025",
+    "detail": {
+      "orderId": "ORD-2026-TEST025",
+      "reason": "Duplicate entry",
+      "orderSnapshot": {
+        "id": "ORD-2026-TEST025",
+        "submitterName": "Fred Solano",
+        "submitterEmail": "fred.solano@foundationpartners.com",
+        "recipientName": "Marcus Williams",
+        "locationId": "AZFLC",
+        "shipTo": "123 Main St, Tampa, FL 33601",
+        "items": [
+          {
+            "title": "Specialty Laptop",
+            "price": 3200,
+            "quantity": 1
+          }
+        ],
+        "total": 3200
+      }
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1034",
+    "timestamp": "2026-02-20T15:55:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST023",
+    "detail": {
+      "orderId": "ORD-2026-TEST023",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1062",
+    "timestamp": "2026-02-17T23:48:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1020",
+    "timestamp": "2026-02-17T14:59:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.permanent_delete",
+    "target": "ORD-2026-TEST052",
+    "detail": {
+      "orderId": "ORD-2026-TEST052",
+      "reason": "Test data cleanup before production",
+      "orderSnapshot": {
+        "id": "ORD-2026-TEST052",
+        "submitterName": "Fred Solano",
+        "submitterEmail": "fred.solano@foundationpartners.com",
+        "recipientName": "Marcus Williams",
+        "locationId": "WITLP",
+        "shipTo": "456 Oak Ave, Tucson, AZ 85716",
+        "items": [
+          {
+            "title": "Desktop TIO",
+            "price": 1850,
+            "quantity": 1
+          },
+          {
+            "title": "Color MFP",
+            "price": 450,
+            "quantity": 1
+          }
+        ],
+        "total": 2300
+      }
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1046",
+    "timestamp": "2026-02-16T01:22:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.permanent_delete",
+    "target": "ORD-2026-TEST015",
+    "detail": {
+      "orderId": "ORD-2026-TEST015",
+      "reason": "Test data cleanup before production",
+      "orderSnapshot": {
+        "id": "ORD-2026-TEST015",
+        "submitterName": "Fred Solano",
+        "submitterEmail": "fred.solano@foundationpartners.com",
+        "recipientName": "Marcus Williams",
+        "locationId": "AZFLC",
+        "shipTo": "456 Oak Ave, Tucson, AZ 85716",
+        "items": [
+          {
+            "title": "Accounting Laptop",
+            "price": 2100,
+            "quantity": 1
+          },
+          {
+            "title": "ThinkVision Monitor 24\"",
+            "price": 300,
+            "quantity": 1
+          }
+        ],
+        "total": 2400
+      }
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1068",
+    "timestamp": "2026-02-14T00:33:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1030",
+    "timestamp": "2026-02-13T22:50:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {
+      "reason": "inactivity_timeout",
+      "lastActivity": "2026-02-13T22:50:00Z"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1008",
+    "timestamp": "2026-02-13T01:50:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST023",
+    "detail": {
+      "orderId": "ORD-2026-TEST023",
+      "oldStatus": "New",
+      "newStatus": "In Progress"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1052",
+    "timestamp": "2026-02-12T16:49:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST041",
+    "detail": {
+      "orderId": "ORD-2026-TEST041",
+      "oldStatus": "New",
+      "newStatus": "In Progress"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1047",
+    "timestamp": "2026-02-09T22:05:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "access.admin_added",
+    "target": "new.admin@fpg.com",
+    "detail": {
+      "newEmail": "new.admin@fpg.com",
+      "newName": "New Admin",
+      "role": "admin"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1050",
+    "timestamp": "2026-02-08T21:41:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1074",
+    "timestamp": "2026-02-08T01:19:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1041",
+    "timestamp": "2026-02-05T23:58:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST007",
+    "detail": {
+      "orderId": "ORD-2026-TEST007",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1067",
+    "timestamp": "2026-02-05T21:47:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Edge on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1014",
+    "timestamp": "2026-02-05T01:55:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-TEST053",
+    "detail": {
+      "orderId": "ORD-2026-TEST053",
+      "reason": "Test order",
+      "orderSnapshot": {
+        "id": "ORD-2026-TEST053",
+        "submitterName": "Fred Solano",
+        "submitterEmail": "fred.solano@foundationpartners.com",
+        "recipientName": "Sarah Thompson",
+        "locationId": "WAFAT",
+        "shipTo": "123 Main St, Tampa, FL 33601",
+        "items": [
+          {
+            "title": "Accounting Laptop",
+            "price": 2100,
+            "quantity": 1
+          },
+          {
+            "title": "ThinkVision Monitor 24\"",
+            "price": 300,
+            "quantity": 1
+          }
+        ],
+        "total": 2400
+      }
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1061",
+    "timestamp": "2026-02-04T16:40:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Edge on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1054",
+    "timestamp": "2026-02-04T14:56:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {
+      "reason": "inactivity_timeout",
+      "lastActivity": "2026-02-04T14:56:00Z"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1013",
+    "timestamp": "2026-02-03T19:44:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {
+      "reason": "inactivity_timeout",
+      "lastActivity": "2026-02-03T19:44:00Z"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1044",
+    "timestamp": "2026-01-31T21:10:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Edge on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1065",
+    "timestamp": "2026-01-25T19:32:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Firefox on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1002",
+    "timestamp": "2026-01-24T18:46:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST090",
+    "detail": {
+      "orderId": "ORD-2026-TEST090",
+      "oldStatus": "New",
+      "newStatus": "In Progress"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1079",
+    "timestamp": "2026-01-23T01:54:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST072",
+    "detail": {
+      "orderId": "ORD-2026-TEST072",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1033",
+    "timestamp": "2026-01-21T23:02:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST048",
+    "detail": {
+      "orderId": "ORD-2026-TEST048",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1078",
+    "timestamp": "2026-01-21T00:00:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Firefox on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1045",
+    "timestamp": "2026-01-20T22:58:00Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "access.admin_added",
+    "target": "new.admin@fpg.com",
+    "detail": {
+      "newEmail": "new.admin@fpg.com",
+      "newName": "New Admin",
+      "role": "admin"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1043",
+    "timestamp": "2026-01-17T01:49:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1059",
+    "timestamp": "2026-01-15T17:15:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1071",
+    "timestamp": "2026-01-11T20:03:00Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1009",
+    "timestamp": "2026-01-11T15:01:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-TEST054",
+    "detail": {
+      "orderId": "ORD-2026-TEST054",
+      "oldStatus": "New",
+      "newStatus": "In Progress"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1075",
+    "timestamp": "2026-01-08T19:14:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-TEST049",
+    "detail": {
+      "orderId": "ORD-2026-TEST049",
+      "reason": "Duplicate entry",
+      "orderSnapshot": {
+        "id": "ORD-2026-TEST049",
+        "submitterName": "Fred Solano",
+        "submitterEmail": "fred.solano@foundationpartners.com",
+        "recipientName": "Jennifer Davis",
+        "locationId": "WAFAT",
+        "shipTo": "123 Main St, Tampa, FL 33601",
+        "items": [
+          {
+            "title": "Desktop TIO",
+            "price": 1850,
+            "quantity": 1
+          },
+          {
+            "title": "Color MFP",
+            "price": 450,
+            "quantity": 1
+          }
+        ],
+        "total": 2300
+      }
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1039",
+    "timestamp": "2026-01-05T15:21:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-TEST1029",
+    "timestamp": "2026-01-02T15:32:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Edge on Windows 11"
     },
     "result": "success"
   }
