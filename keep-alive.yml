@@ -16,7 +16,7 @@ jobs:
             -H "Content-Type: application/json" \
             -H "x-admin-email: fred.solano@foundationpartners.com" \
             -d '{"action":"get-admins"}' \
-            "https://fpg-equipment-function-bfhse3hufnbpecbu.eastus-01.azurewebsites.net/api/publish-products")
+            "https://fpg-equipment-function-b1.azurewebsites.net/api/publish-products")
           echo "Response code: $response"
           if [ "$response" = "200" ]; then
             echo "✅ Azure Function is alive"
