@@ -1,41 +1,5 @@
 [
   {
-    "id": "ORD-2026-TEST045",
-    "status": "Deleted",
-    "submittedAt": "2026-05-31T16:09:00Z",
-    "year": 2026,
-    "submitterName": "Matthew Ritchotte",
-    "submitterEmail": "matthew.ritchotte@foundationpartners.com",
-    "recipientName": "Nicole Rivera",
-    "recipientEmail": "nicole.rivera@foundationpartners.com",
-    "locationId": "FLTLT",
-    "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
-    "items": [
-      {
-        "title": "Accounting Laptop",
-        "price": 2100,
-        "quantity": 1
-      },
-      {
-        "title": "ThinkVision Monitor 24\"",
-        "price": 300,
-        "quantity": 2
-      },
-      {
-        "title": "Logitech MK270",
-        "price": 30,
-        "quantity": 1
-      }
-    ],
-    "total": 2730,
-    "isNewEmployee": "no",
-    "dateNeeded": "2026-06-14",
-    "notes": "Urgent — location opening soon.",
-    "deletedBy": "fred.solano@foundationpartners.com",
-    "deletedAt": "2026-06-01T20:26:07.235Z",
-    "deleteReason": "Testing"
-  },
-  {
     "id": "ORD-2026-TEST035",
     "status": "In Progress",
     "submittedAt": "2026-05-30T17:02:00Z",
