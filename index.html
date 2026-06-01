@@ -1572,6 +1572,7 @@
                                 onSubmit={handleSubmitOrder}
                                 onClose={() => setShowCheckoutForm(false)}
                                 onSignIn={(user) => setSubmitter(user)}
+                                locationData={locationData}
                             />
                         </>
                     )}
@@ -1636,7 +1637,7 @@
         }
         
         // Checkout Form Component
-        function CheckoutForm({ cart, cartTotal, submitter, onSubmit, onClose, onSignIn }) {
+        function CheckoutForm({ cart, cartTotal, submitter, onSubmit, onClose, onSignIn, locationData }) {
             const [formData, setFormData] = React.useState({
                 recipientName: '',
                 recipientEmail: '',
