@@ -1154,7 +1154,7 @@
                 setCart([]);
                 try { localStorage.removeItem('fpg_cart'); } catch(e) {}
                 setShowEmailReminder(true);
-                setTimeout(() => setShowEmailReminder(false), 4000);
+                setTimeout(() => setShowEmailReminder(false), 8000);
 
                 // Send to Azure Function which forwards to Power Automate server-side
                 const AZURE_FUNCTION_URL = 'https://fpg-equipment-function-b1.azurewebsites.net/api/publish-products';
@@ -1593,7 +1593,7 @@
                             <div style={{background:'white',border:'1px solid #568935',borderRadius:'10px',padding:'0.875rem 1rem',width:'100%',maxWidth:'400px',marginBottom:'1.5rem',display:'flex',gap:'0.75rem',alignItems:'flex-start'}}>
                                 <span style={{fontSize:'1.125rem',flexShrink:0}}>&#127915;</span>
                                 <p style={{fontSize:'0.8125rem',color:'var(--neutral-600)',lineHeight:1.55,margin:0}}>
-                                    A <strong style={{color:'var(--text-primary)'}}>ConnectWise ticket</strong> will be created automatically. If you don't hear back within 15 min, contact <strong style={{color:'var(--text-primary)'}}>ithelp@foundationpartners.com</strong>
+                                    A <strong style={{color:'var(--text-primary)'}}>ITHelp ticket</strong> will be created automatically. If you don't hear back within 15 min, contact <strong style={{color:'var(--text-primary)'}}>ithelp@foundationpartners.com</strong>
                                 </p>
                             </div>
                             <div style={{display:'flex',gap:'0.75rem',width:'100%',maxWidth:'400px'}}>
