@@ -73,5 +73,11 @@
     "slug": "video_surveillance",
     "label": "Video Surveillance",
     "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Video_Surveillance.jpg"
+  },
+  {
+    "slug": "stuff",
+    "label": "STUFF",
+    "addedBy": "fred.solano@foundationpartners.com",
+    "addedAt": "2026-06-01T20:18:43.751Z"
   }
 ]
