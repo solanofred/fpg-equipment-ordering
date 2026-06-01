@@ -957,6 +957,7 @@
             const [products, setProducts] = useState([]);
             const [filteredProducts, setFilteredProducts] = useState([]);
             const [categoryData, setCategoryData] = useState([]);
+            const [locationData, setLocationData] = useState([]);
             const [selectedCategory, setSelectedCategory] = useState('all');
             const [searchQuery, setSearchQuery] = useState('');
             const [showSuggestions, setShowSuggestions] = useState(false);
@@ -1024,6 +1025,14 @@
                 fetch('categories.json?v=' + Date.now())
                     .then(res => res.ok ? res.json() : [])
                     .then(data => { setCategoryData(data || []); })
+                    .catch(() => {});
+            }, []);
+
+            // Fetch locations.json for the location typeahead
+            useEffect(() => {
+                fetch('locations.json?v=' + Date.now())
+                    .then(res => res.ok ? res.json() : [])
+                    .then(data => { setLocationData(data || []); })
                     .catch(() => {});
             }, []);
             
@@ -1633,6 +1642,8 @@
                 recipientEmail: '',
                 isNewEmployee: 'no',
                 location: '',
+                locationSuggestions: false,
+                selectedLocation: null,
                 dateNeeded: '',
                 shipTo: '',
                 instructions: ''
@@ -1784,9 +1795,63 @@
                                     <span>📦</span> Delivery details
                                 </div>
                                 <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem'}}>
-                                    <div>
+                                    <div style={{position: 'relative'}}>
                                         <label style={labelStyle}>Location / Cost Center <span style={{color: '#dc2626'}}>*</span></label>
-                                        <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="e.g., 12345 - Tampa Office" required style={inputStyle} />
+                                        <input
+                                            type="text"
+                                            name="location"
+                                            value={formData.location}
+                                            onChange={e => {
+                                                handleChange(e);
+                                                setFormData(prev => ({...prev, locationSuggestions: true}));
+                                            }}
+                                            onFocus={() => setFormData(prev => ({...prev, locationSuggestions: true}))}
+                                            onBlur={() => setTimeout(() => setFormData(prev => ({...prev, locationSuggestions: false})), 200)}
+                                            placeholder="Type ID or location name..."
+                                            required
+                                            autoComplete="off"
+                                            style={inputStyle}
+                                        />
+                                        {formData.locationSuggestions && formData.location && locationData.length > 0 && (() => {
+                                            const q = formData.location.toLowerCase();
+                                            const matches = locationData.filter(l =>
+                                                l.id.toLowerCase().includes(q) ||
+                                                l.name.toLowerCase().includes(q) ||
+                                                l.city.toLowerCase().includes(q)
+                                            ).slice(0, 8);
+                                            if (!matches.length) return null;
+                                            return (
+                                                <div style={{position:'absolute',top:'100%',left:0,right:0,zIndex:100,background:'white',border:'1px solid #e2e8f0',borderRadius:'8px',boxShadow:'0 8px 24px rgba(0,0,0,0.12)',maxHeight:'280px',overflowY:'auto',marginTop:'4px'}}>
+                                                    {matches.map(loc => (
+                                                        <div
+                                                            key={loc.id}
+                                                            onMouseDown={() => {
+                                                                const shipAddr = `${loc.address}, ${loc.city}, ${loc.state} ${loc.zip}`;
+                                                                setFormData(prev => ({
+                                                                    ...prev,
+                                                                    location: loc.id,
+                                                                    shipTo: prev.shipTo ? prev.shipTo : shipAddr,
+                                                                    locationSuggestions: false,
+                                                                    selectedLocation: loc
+                                                                }));
+                                                            }}
+                                                            style={{padding:'10px 12px',cursor:'pointer',borderBottom:'1px solid #f1f5f9'}}
+                                                            onMouseEnter={e => e.currentTarget.style.background='#f8fafc'}
+                                                            onMouseLeave={e => e.currentTarget.style.background='white'}
+                                                        >
+                                                            <div style={{fontSize:'12px',fontWeight:600,color:'#1B5A8E'}}>{loc.id}</div>
+                                                            <div style={{fontSize:'12.5px',color:'var(--text-primary)',marginTop:'1px'}}>{loc.name}</div>
+                                                            <div style={{fontSize:'11px',color:'var(--neutral-500)',marginTop:'1px'}}>{loc.address}, {loc.city}, {loc.state} {loc.zip}</div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            );
+                                        })()}
+                                        {formData.selectedLocation && formData.location === formData.selectedLocation.id && (
+                                            <div style={{fontSize:'11px',color:'#3B6D11',marginTop:'4px',display:'flex',alignItems:'center',gap:'4px'}}>
+                                                ✓ {formData.selectedLocation.name}
+                                            </div>
+                                        )}
                                     </div>
                                     <div>
                                         <label style={labelStyle}>Date Needed <span style={{color: '#dc2626'}}>*</span></label>
@@ -1796,6 +1861,11 @@
                                 <div style={{marginBottom: '1rem'}}>
                                     <label style={labelStyle}>Ship To Address <span style={{color: '#dc2626'}}>*</span></label>
                                     <textarea name="shipTo" value={formData.shipTo} onChange={handleChange} placeholder="Full shipping address" required rows="3" style={{...inputStyle, resize: 'vertical'}} />
+                                    {formData.selectedLocation && formData.location === formData.selectedLocation.id && (
+                                        <div style={{fontSize:'11px',color:'#3B6D11',marginTop:'4px'}}>
+                                            ✓ Auto-filled from {formData.selectedLocation.id} — edit if shipping elsewhere
+                                        </div>
+                                    )}
                                 </div>
                                 <div>
                                     <label style={labelStyle}>Special Instructions <span style={{fontSize: '0.8125rem', fontWeight: 400, color: 'var(--neutral-500)'}}>(optional)</span></label>
