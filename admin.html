@@ -2520,6 +2520,9 @@
             const [permDeleteReason, setPermDeleteReason] = React.useState('');
             const [auditLog, setAuditLog] = React.useState([]);
             const [showAudit, setShowAudit] = React.useState(false);
+            const [auditYears, setAuditYears] = React.useState([new Date().getFullYear()]);
+            const [auditTypeFilter, setAuditTypeFilter] = React.useState('all');
+            const [auditExpandedRows, setAuditExpandedRows] = React.useState({});
             const [status, setStatus] = React.useState(null);
             const [expandedRows, setExpandedRows] = React.useState({});
             const [selectedOrders, setSelectedOrders] = React.useState({});
@@ -2543,15 +2546,23 @@
                 setLoading(false);
             };
 
-            const loadAuditLog = async function() {
+            const loadAuditLog = async function(years) {
+                const yearsToLoad = years || auditYears;
                 try {
-                    const res = await fetch(azureUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
-                        body: JSON.stringify({ action: 'get-audit-log', year: currentYear })
-                    });
-                    const data = await res.json();
-                    setAuditLog(data.log || []);
+                    let allEntries = [];
+                    for (const year of yearsToLoad) {
+                        const res = await fetch(azureUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
+                            body: JSON.stringify({ action: 'get-audit-log', year })
+                        });
+                        const data = await res.json();
+                        allEntries = allEntries.concat(data.log || []);
+                    }
+                    allEntries.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+                    setAuditLog(allEntries);
+                    setAuditTypeFilter('all');
+                    setAuditExpandedRows({});
                     setShowAudit(true);
                 } catch(e) { setStatus({ type: 'error', text: 'Failed to load audit log' }); }
             };
@@ -3004,94 +3015,219 @@
                     )}
 
                     {/* Audit Log Modal */}
-                    {showAudit && (
-                        <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.45)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center',padding:'20px'}}>
-                            <div style={{background:'white',borderRadius:'12px',padding:'1.5rem',width:'800px',maxWidth:'95vw',maxHeight:'85vh',overflow:'hidden',display:'flex',flexDirection:'column',boxShadow:'0 8px 32px rgba(0,0,0,0.18)'}}>
-                                <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'1rem'}}>
-                                    <h3 style={{fontSize:'1.1rem',fontWeight:600}}>📋 Audit Log — {currentYear}</h3>
+                    {showAudit && (() => {
+                        const actionMeta = {
+                            'auth.login':          { label: 'Login',          bg:'#E6F1FB', color:'#0C447C' },
+                            'auth.logout':         { label: 'Logout',         bg:'#F1EFE8', color:'#5F5E5A' },
+                            'auth.auto_logoff':    { label: 'Auto-logout',    bg:'#F1EFE8', color:'#5F5E5A' },
+                            'order.soft_delete':   { label: 'Order deleted',  bg:'#FEE2E2', color:'#991B1B' },
+                            'order.permanent_delete':{ label:'Perm. deleted', bg:'#FCA5A5', color:'#7F1D1D' },
+                            'order.permanent_delete_attempt':{ label:'Perm. denied', bg:'#FCA5A5', color:'#7F1D1D' },
+                            'order.restore':       { label: 'Restored',       bg:'#D1FAE5', color:'#065F46' },
+                            'order.status_change': { label: 'Status change',  bg:'#FEF3C7', color:'#92400E' },
+                            'access.admin_added':  { label: 'Admin added',    bg:'#E1F5EE', color:'#085041' },
+                            'access.admin_removed':{ label: 'Admin removed',  bg:'#FEE2E2', color:'#991B1B' },
+                            'access.role_changed': { label: 'Role changed',   bg:'#FAEEDA', color:'#633806' },
+                        };
+                        const getMeta = (action) => actionMeta[action] || { label: action, bg:'#F1F5F9', color:'#475569' };
+
+                        // Build type counts
+                        const typeCounts = {};
+                        auditLog.forEach(e => {
+                            const key = e.action;
+                            typeCounts[key] = (typeCounts[key]||0) + 1;
+                        });
+
+                        // Filtered entries
+                        const filtered = auditTypeFilter === 'all' ? auditLog : auditLog.filter(e => e.action === auditTypeFilter);
+
+                        const isExpandable = (action) => action === 'order.soft_delete' || action === 'order.permanent_delete';
+
+                        const exportAuditCSV = () => {
+                            const headers = ['Log ID','Timestamp','Admin Email','Action','Target','Reason','Status Change','Order Recipient','Location ID','Total','Ship To','Items','Result'];
+                            const rows = filtered.map(e => {
+                                const s = e.detail?.orderSnapshot || {};
+                                const items = (s.items||[]).map(i => `${i.title} x${i.quantity||1}`).join('; ');
+                                return [
+                                    e.id, new Date(e.timestamp).toLocaleString(), e.adminEmail, e.action,
+                                    e.target||'',
+                                    e.detail?.reason||'',
+                                    e.detail?.oldStatus ? `${e.detail.oldStatus} -> ${e.detail.newStatus}` : '',
+                                    s.recipientName||'', s.locationId||'',
+                                    s.total ? `$${s.total.toFixed(2)}` : '',
+                                    `"${(s.shipTo||'').replace(/"/g,'""')}"`,
+                                    `"${items.replace(/"/g,'""')}"`,
+                                    e.result
+                                ];
+                            });
+                            const csv = [headers,...rows].map(r=>r.join(',')).join('\n');
+                            const blob = new Blob([csv],{type:'text/csv'});
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement('a'); a.href=url; a.download=`audit-log-${auditYears.join('-')}.csv`; a.click();
+                            URL.revokeObjectURL(url);
+                        };
+
+                        const toggleAuditYear = (year) => {
+                            const next = auditYears.includes(year) ? auditYears.filter(y=>y!==year) : [...auditYears,year];
+                            if (next.length === 0) return;
+                            setAuditYears(next);
+                            loadAuditLog(next);
+                        };
+
+                        return (
+                        <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.5)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center',padding:'16px'}}>
+                            <div style={{background:'white',borderRadius:'12px',width:'960px',maxWidth:'98vw',maxHeight:'90vh',overflow:'hidden',display:'flex',flexDirection:'column',boxShadow:'0 12px 40px rgba(0,0,0,0.2)'}}>
+
+                                {/* Header */}
+                                <div style={{padding:'14px 18px',borderBottom:'0.5px solid #E7E5E4',display:'flex',justifyContent:'space-between',alignItems:'center',background:'#FAFAF9'}}>
+                                    <div style={{display:'flex',alignItems:'center',gap:'12px'}}>
+                                        <span style={{fontSize:'15px',fontWeight:500}}>📋 Audit Log</span>
+                                        <div style={{display:'flex',gap:'5px'}}>
+                                            {availableYears.map(y => (
+                                                <button key={y} onClick={()=>toggleAuditYear(y)}
+                                                    style={{padding:'3px 10px',border:'0.5px solid',borderRadius:'20px',fontSize:'11px',cursor:'pointer',fontFamily:'inherit',fontWeight:500,
+                                                        borderColor: auditYears.includes(y)?'#0A2540':'#D6D3D1',
+                                                        background: auditYears.includes(y)?'#0A2540':'white',
+                                                        color: auditYears.includes(y)?'white':'#57534E'}}>
+                                                    {y}
+                                                </button>
+                                            ))}
+                                        </div>
+                                        <span style={{fontSize:'11px',color:'#A8A29E'}}>{filtered.length} entries</span>
+                                    </div>
                                     <div style={{display:'flex',gap:'8px',alignItems:'center'}}>
-                                        <button onClick={()=>{
-                                            const headers = ['Log ID','Timestamp','Admin','Action','Target','Detail','Result'];
-                                            const rows = auditLog.map(e => {
-                                                let detail = '';
-                                                if (e.detail?.reason) detail += 'Reason: ' + e.detail.reason + ' ';
-                                                if (e.detail?.oldStatus) detail += e.detail.oldStatus + ' -> ' + e.detail.newStatus + ' ';
-                                                if (e.detail?.newEmail) detail += 'Added: ' + e.detail.newEmail + ' ';
-                                                if (e.detail?.removedEmail) detail += 'Removed: ' + e.detail.removedEmail + ' ';
-                                                if (e.detail?.orderSnapshot) {
-                                                    const s = e.detail.orderSnapshot;
-                                                    detail += `Order for ${s.recipientName} | Location: ${s.locationId} | Total: $${s.total} | Submitter: ${s.submitterName}`;
-                                                }
-                                                if (e.detail?.browser) detail += 'Browser: ' + e.detail.browser;
-                                                return [e.id, new Date(e.timestamp).toLocaleString(), e.adminEmail, e.action, e.target||'', `"${detail.trim().replace(/"/g,'""')}"`, e.result];
-                                            });
-                                            const csv = [headers,...rows].map(r=>r.join(',')).join('\n');
-                                            const blob = new Blob([csv],{type:'text/csv'});
-                                            const url = URL.createObjectURL(blob);
-                                            const a = document.createElement('a'); a.href=url; a.download=`audit-log-${currentYear}.csv`; a.click();
-                                            URL.revokeObjectURL(url);
-                                        }} style={{padding:'5px 14px',background:'#0A2540',color:'white',border:'none',borderRadius:'6px',fontSize:'12px',cursor:'pointer',fontFamily:'inherit'}}>
+                                        <button onClick={exportAuditCSV}
+                                            style={{padding:'5px 14px',background:'#0A2540',color:'white',border:'none',borderRadius:'6px',fontSize:'12px',cursor:'pointer',fontFamily:'inherit',fontWeight:500}}>
                                             ⬇ Export CSV
                                         </button>
-                                        <button onClick={()=>setShowAudit(false)} style={{background:'none',border:'none',fontSize:'18px',cursor:'pointer',color:'#78716C'}}>✕</button>
+                                        <button onClick={()=>setShowAudit(false)} style={{background:'none',border:'none',fontSize:'20px',cursor:'pointer',color:'#A8A29E',lineHeight:1}}>✕</button>
                                     </div>
                                 </div>
-                                <div style={{overflowY:'auto',flex:1}}>
-                                    {auditLog.length === 0 ? (
-                                        <p style={{color:'#A8A29E',textAlign:'center',padding:'2rem'}}>No audit entries yet.</p>
-                                    ) : auditLog.map((entry, i) => (
-                                        <div key={i} style={{padding:'12px 14px',borderBottom:'0.5px solid #F5F5F4',fontSize:'12.5px'}}>
-                                            <div style={{display:'flex',justifyContent:'space-between',marginBottom:'4px'}}>
-                                                <span style={{fontWeight:500,fontSize:'13px'}}>{actionLabel(entry.action)}</span>
-                                                <span style={{color:'#A8A29E',fontSize:'11px'}}>{new Date(entry.timestamp).toLocaleString()}</span>
-                                            </div>
-                                            <div style={{color:'#57534E',fontSize:'11.5px',marginBottom:'4px'}}>
-                                                By: <strong>{entry.adminEmail}</strong>
-                                                {entry.target && <span> · Order: <code style={{background:'#F5F5F4',padding:'1px 4px',borderRadius:'3px',fontSize:'10.5px'}}>{entry.target}</code></span>}
-                                            </div>
-                                            {entry.detail?.reason && (
-                                                <div style={{fontSize:'11.5px',color:'#57534E',marginBottom:'3px'}}>📝 Reason: <strong>{entry.detail.reason}</strong></div>
-                                            )}
-                                            {entry.detail?.oldStatus && (
-                                                <div style={{fontSize:'11.5px',color:'#57534E',marginBottom:'3px'}}>🔄 Status: <strong>{entry.detail.oldStatus}</strong> → <strong>{entry.detail.newStatus}</strong></div>
-                                            )}
-                                            {entry.detail?.newEmail && (
-                                                <div style={{fontSize:'11.5px',color:'#57534E',marginBottom:'3px'}}>➕ Added: <strong>{entry.detail.newEmail}</strong> ({entry.detail.role})</div>
-                                            )}
-                                            {entry.detail?.removedEmail && (
-                                                <div style={{fontSize:'11.5px',color:'#57534E',marginBottom:'3px'}}>➖ Removed: <strong>{entry.detail.removedEmail}</strong></div>
-                                            )}
-                                            {entry.detail?.browser && (
-                                                <div style={{fontSize:'10.5px',color:'#A8A29E',marginBottom:'3px'}}>🌐 {entry.detail.browser.substring(0,80)}</div>
-                                            )}
-                                            {entry.detail?.orderSnapshot && (
-                                                <div style={{marginTop:'6px',padding:'8px 10px',background:'#F8FAFC',borderRadius:'6px',border:'0.5px solid #E7E5E4'}}>
-                                                    <div style={{fontSize:'11px',fontWeight:500,color:'#78716C',marginBottom:'4px',textTransform:'uppercase',letterSpacing:'0.05em'}}>Order details at time of action</div>
-                                                    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'4px',fontSize:'11.5px'}}>
-                                                        <div><span style={{color:'#A8A29E'}}>Submitter:</span> {entry.detail.orderSnapshot.submitterName} ({entry.detail.orderSnapshot.submitterEmail})</div>
-                                                        <div><span style={{color:'#A8A29E'}}>Recipient:</span> {entry.detail.orderSnapshot.recipientName}</div>
-                                                        <div><span style={{color:'#A8A29E'}}>Location:</span> <strong style={{color:'#1B5A8E'}}>{entry.detail.orderSnapshot.locationId}</strong></div>
-                                                        <div><span style={{color:'#A8A29E'}}>Total:</span> <strong>${(entry.detail.orderSnapshot.total||0).toFixed(2)}</strong></div>
-                                                        <div style={{gridColumn:'1/-1'}}><span style={{color:'#A8A29E'}}>Ship to:</span> {entry.detail.orderSnapshot.shipTo}</div>
-                                                        {(entry.detail.orderSnapshot.items||[]).length > 0 && (
-                                                            <div style={{gridColumn:'1/-1'}}>
-                                                                <span style={{color:'#A8A29E'}}>Items:</span> {entry.detail.orderSnapshot.items.map(item => `${item.title} ×${item.quantity||1} ($${((item.price||0)*(item.quantity||1)).toFixed(2)})`).join(', ')}
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            )}
-                                            <span style={{fontSize:'10px',padding:'1px 6px',borderRadius:'10px',marginTop:'5px',display:'inline-block',
-                                                background:entry.result==='success'?'#D1FAE5':entry.result==='denied'?'#FEE2E2':'#F5F5F4',
-                                                color:entry.result==='success'?'#065F46':entry.result==='denied'?'#991B1B':'#78716C'}}>
-                                                {entry.result}
-                                            </span>
+
+                                {/* Body — sidebar + table */}
+                                <div style={{display:'flex',flex:1,overflow:'hidden'}}>
+
+                                    {/* Sidebar */}
+                                    <div style={{width:'170px',flexShrink:0,borderRight:'0.5px solid #E7E5E4',padding:'12px 10px',overflowY:'auto'}}>
+                                        <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.08em',color:'#A8A29E',marginBottom:'8px'}}>Filter by type</div>
+                                        <div onClick={()=>setAuditTypeFilter('all')}
+                                            style={{padding:'6px 8px',borderRadius:'6px',fontSize:'12px',cursor:'pointer',marginBottom:'3px',display:'flex',justifyContent:'space-between',alignItems:'center',
+                                                background:auditTypeFilter==='all'?'#0A2540':'transparent',
+                                                color:auditTypeFilter==='all'?'white':'#57534E'}}>
+                                            <span>All actions</span>
+                                            <span style={{fontSize:'11px',opacity:0.7}}>{auditLog.length}</span>
                                         </div>
-                                    ))}
+                                        {Object.entries(typeCounts).sort((a,b)=>b[1]-a[1]).map(([action, count]) => {
+                                            const m = getMeta(action);
+                                            const isActive = auditTypeFilter === action;
+                                            return (
+                                                <div key={action} onClick={()=>setAuditTypeFilter(action)}
+                                                    style={{padding:'5px 8px',borderRadius:'6px',fontSize:'11px',cursor:'pointer',marginBottom:'3px',display:'flex',justifyContent:'space-between',alignItems:'center',
+                                                        background:isActive?'#F1F5F9':'transparent'}}>
+                                                    <span style={{display:'inline-block',padding:'2px 7px',borderRadius:'4px',background:m.bg,color:m.color,fontWeight:500,fontSize:'10.5px'}}>{m.label}</span>
+                                                    <span style={{fontSize:'11px',color:'#A8A29E'}}>{count}</span>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+
+                                    {/* Table */}
+                                    <div style={{flex:1,overflowY:'auto'}}>
+                                        {filtered.length === 0 ? (
+                                            <div style={{textAlign:'center',padding:'3rem',color:'#A8A29E'}}>No entries for this filter.</div>
+                                        ) : (
+                                            <table style={{width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed'}}>
+                                                <thead style={{position:'sticky',top:0,zIndex:1}}>
+                                                    <tr style={{background:'#F5F5F4'}}>
+                                                        <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'3%'}}></th>
+                                                        <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'14%'}}>Date/Time</th>
+                                                        <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'17%'}}>Admin</th>
+                                                        <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'14%'}}>Action</th>
+                                                        <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'12%'}}>Target</th>
+                                                        <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'32%'}}>Detail</th>
+                                                        <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'8%'}}>Result</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {filtered.map((entry, i) => {
+                                                        const m = getMeta(entry.action);
+                                                        const expandable = isExpandable(entry.action);
+                                                        const expanded = auditExpandedRows[entry.id];
+                                                        const s = entry.detail?.orderSnapshot;
+                                                        const dt = new Date(entry.timestamp);
+                                                        return (
+                                                            <React.Fragment key={entry.id || i}>
+                                                                <tr onClick={expandable ? ()=>setAuditExpandedRows(prev=>({...prev,[entry.id]:!prev[entry.id]})) : undefined}
+                                                                    style={{borderBottom:'0.5px solid #F5F5F4',cursor:expandable?'pointer':'default',background:expanded?'#F8FAFC':'white'}}>
+                                                                    <td style={{padding:'9px 6px',textAlign:'center',color:'#A8A29E',fontSize:'11px'}}>
+                                                                        {expandable ? (expanded ? '▾' : '▸') : ''}
+                                                                    </td>
+                                                                    <td style={{padding:'9px 10px',color:'#78716C',fontSize:'11px'}}>
+                                                                        {dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}<br/>
+                                                                        <span style={{fontSize:'10.5px'}}>{dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>
+                                                                    </td>
+                                                                    <td style={{padding:'9px 10px'}}>
+                                                                        <div style={{fontWeight:500,fontSize:'11.5px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{entry.adminEmail?.split('@')[0].replace('.',' ').replace(/\b\w/g,c=>c.toUpperCase())}</div>
+                                                                        <div style={{fontSize:'10px',color:'#A8A29E',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{entry.adminEmail}</div>
+                                                                    </td>
+                                                                    <td style={{padding:'9px 10px'}}>
+                                                                        <span style={{display:'inline-block',padding:'2px 8px',borderRadius:'4px',background:m.bg,color:m.color,fontWeight:500,fontSize:'10.5px',whiteSpace:'nowrap'}}>{m.label}</span>
+                                                                    </td>
+                                                                    <td style={{padding:'9px 10px',fontSize:'11px',fontFamily:'monospace',color:'#185FA5',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
+                                                                        {entry.target || '—'}
+                                                                    </td>
+                                                                    <td style={{padding:'9px 10px',fontSize:'11px',color:'#57534E'}}>
+                                                                        {entry.detail?.reason && <span><span style={{color:'#A8A29E'}}>Reason:</span> {entry.detail.reason} · </span>}
+                                                                        {entry.detail?.oldStatus && <span>{entry.detail.oldStatus} → <strong>{entry.detail.newStatus}</strong> · </span>}
+                                                                        {entry.detail?.newEmail && <span><span style={{color:'#A8A29E'}}>Added:</span> {entry.detail.newEmail} ({entry.detail.role}) · </span>}
+                                                                        {entry.detail?.removedEmail && <span><span style={{color:'#A8A29E'}}>Removed:</span> {entry.detail.removedEmail} · </span>}
+                                                                        {s && <span><span style={{color:'#A8A29E'}}>For:</span> {s.recipientName} · <span style={{color:'#1B5A8E',fontWeight:500}}>{s.locationId}</span> · ${(s.total||0).toFixed(2)}</span>}
+                                                                        {entry.detail?.browser && <span style={{color:'#A8A29E'}}>{entry.detail.browser.substring(0,60)}</span>}
+                                                                    </td>
+                                                                    <td style={{padding:'9px 10px'}}>
+                                                                        <span style={{fontSize:'10px',padding:'2px 7px',borderRadius:'10px',fontWeight:500,
+                                                                            background:entry.result==='success'?'#D1FAE5':entry.result==='denied'?'#FEE2E2':'#F5F5F4',
+                                                                            color:entry.result==='success'?'#065F46':entry.result==='denied'?'#991B1B':'#78716C'}}>
+                                                                            {entry.result}
+                                                                        </span>
+                                                                    </td>
+                                                                </tr>
+                                                                {expandable && expanded && s && (
+                                                                    <tr style={{background:'#F8FAFC'}}>
+                                                                        <td colSpan={7} style={{padding:'0 10px 12px 32px',borderBottom:'0.5px solid #E7E5E4'}}>
+                                                                            <div style={{padding:'12px 14px',background:'white',borderRadius:'8px',border:'0.5px solid #E7E5E4',fontSize:'11.5px'}}>
+                                                                                <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.06em',color:'#A8A29E',marginBottom:'8px'}}>Order snapshot at time of action</div>
+                                                                                <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'8px'}}>
+                                                                                    <div><span style={{color:'#A8A29E'}}>Submitter:</span> {s.submitterName}</div>
+                                                                                    <div><span style={{color:'#A8A29E'}}>Recipient:</span> {s.recipientName}</div>
+                                                                                    <div><span style={{color:'#A8A29E'}}>Location:</span> <strong style={{color:'#185FA5'}}>{s.locationId}</strong></div>
+                                                                                    <div><span style={{color:'#A8A29E'}}>Total:</span> <strong>${(s.total||0).toFixed(2)}</strong></div>
+                                                                                    <div style={{gridColumn:'2/-1'}}><span style={{color:'#A8A29E'}}>Ship to:</span> {s.shipTo}</div>
+                                                                                    {(s.items||[]).length > 0 && (
+                                                                                        <div style={{gridColumn:'1/-1'}}>
+                                                                                            <span style={{color:'#A8A29E'}}>Items:</span>{' '}
+                                                                                            {s.items.map((item,j) => (
+                                                                                                <span key={j} style={{marginRight:'10px'}}>{item.title} ×{item.quantity||1} <span style={{color:'#A8A29E'}}>${((item.price||0)*(item.quantity||1)).toFixed(2)}</span></span>
+                                                                                            ))}
+                                                                                        </div>
+                                                                                    )}
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                )}
+                                                            </React.Fragment>
+                                                        );
+                                                    })}
+                                                </tbody>
+                                            </table>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    )}
+                        );
+                    })()}
                 </div>
             );
         }
