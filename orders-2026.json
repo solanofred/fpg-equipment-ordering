@@ -1,7 +1,7 @@
 [
   {
     "id": "ORD-2026-1780338756063",
-    "status": "New",
+    "status": "Deleted",
     "submittedAt": "2026-06-01T18:32:36.063Z",
     "year": 2026,
     "submitterName": "Fred Solano",
@@ -61,6 +61,9 @@
       }
     ],
     "total": 15675,
-    "notes": "None"
+    "notes": "None",
+    "deletedBy": "fred.solano@foundationpartners.com",
+    "deletedAt": "2026-06-01T19:04:41.300Z",
+    "deleteReason": "Test Order"
   }
 ]
