@@ -7141,5 +7141,17 @@
       "newRole": "superadmin"
     },
     "result": "success"
+  },
+  {
+    "id": "LOG-1780432373950",
+    "timestamp": "2026-06-02T20:32:53.950Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "access.role_changed",
+    "target": "joe.choss@foundationpartners.com",
+    "detail": {
+      "targetEmail": "joe.choss@foundationpartners.com",
+      "newRole": "superadmin"
+    },
+    "result": "success"
   }
 ]
