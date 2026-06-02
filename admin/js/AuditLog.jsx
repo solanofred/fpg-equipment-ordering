@@ -169,14 +169,14 @@ setEntries(allEntries);
                 <span style={{background:'#EEF2FF',color:'#4C3BAF',borderRadius:'20px',padding:'3px 11px',fontSize:'11.5px',fontWeight:700,marginLeft:'auto',whiteSpace:'nowrap'}}>{filtered.length} {filtered.length===1?'entry':'entries'}</span>
             </div>
             <div style={{flex:1,overflowY:'auto',background:'white',minWidth:0}}>
-                <table id="tbl-auditlog" style={{width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed'}}>
+                <table id="tbl-auditlog" style={{width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed',maxWidth:'1400px'}}>
                     <thead>
                         <tr style={{background:'#D97706'}}>
                             <th style={{padding:'10px 12px',textAlign:'left',color:'white',fontSize:'10.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'12%',position:'relative'}}>Date / Time</th>
                             <th style={{padding:'10px 12px',textAlign:'left',color:'white',fontSize:'10.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'11%',position:'relative'}}>Admin</th>
                             <th style={{padding:'10px 12px',textAlign:'left',color:'white',fontSize:'10.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'12%',position:'relative'}}>Action</th>
                             <th style={{padding:'10px 12px',textAlign:'left',color:'white',fontSize:'10.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'13%',position:'relative'}}>Reference</th>
-                            <th style={{padding:'10px 12px',textAlign:'left',color:'white',fontSize:'10.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',position:'relative'}}>Summary</th>
+                            <th style={{padding:'10px 12px',textAlign:'left',color:'white',fontSize:'10.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'44%',position:'relative'}}>Summary</th>
                             <th style={{padding:'10px 12px',textAlign:'center',color:'white',fontSize:'10.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'8%',position:'relative'}}>Result</th>
                         </tr>
                     </thead>
