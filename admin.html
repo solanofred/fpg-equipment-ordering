@@ -1621,13 +1621,13 @@
                             </div>
                         </div>
 
-                        <div style={{display:'grid',gridTemplateColumns:'repeat(6,1fr)',gap:'12px',maxWidth:'1200px'}}>
+                        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'20px',maxWidth:'1100px'}}>
                             {[...products].sort((a, b) => a.title.localeCompare(b.title)).map(product => {
                                 const isDraft = DraftService.isDraftProduct(product.id);
                                 const catLabel = (categories||[]).find(c=>c.slug===product.category);
                                 return (
                                     <div key={product.id} style={{background:'white',borderRadius:'12px',border:isDraft?'2px solid #F59E0B':'0.5px solid #E2E8F0',overflow:'hidden',display:'flex',flexDirection:'column'}}>
-                                        <div style={{height:'130px',overflow:'hidden',background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',flexShrink:0}}>
+                                        <div style={{height:'160px',overflow:'hidden',background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',flexShrink:0}}>
                                             {product.imageUrl
                                                 ? <img src={product.imageUrl} alt={product.title} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.innerHTML='<span style="font-size:32px">📦</span>';}} />
                                                 : <span style={{fontSize:'32px'}}>📦</span>}
@@ -1636,21 +1636,21 @@
                                                 <button className={`status-badge ${product.available?'status-active':'status-inactive'}`} onClick={()=>handleToggleStatus(product.id)} style={{cursor:'pointer',border:'none',fontSize:'9px',padding:'2px 8px',borderRadius:'20px'}}>{product.available?'Published':'Draft'}</button>
                                             </div>
                                         </div>
-                                        <div style={{padding:'12px',flex:1,display:'flex',flexDirection:'column'}}>
-                                            <div style={{fontWeight:700,fontSize:'13px',color:'#0F172A',overflow:'hidden',display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical',lineHeight:'1.4',minHeight:'36px',marginBottom:'4px'}}>{product.title}</div>
-                                            <div style={{fontSize:'15px',fontWeight:700,color:'#4C3BAF',fontFamily:'Georgia,serif',marginBottom:'3px'}}>${product.price.toLocaleString()}</div>
+                                        <div style={{padding:'16px',flex:1,display:'flex',flexDirection:'column'}}>
+                                            <div style={{fontWeight:700,fontSize:'14px',color:'#0F172A',overflow:'hidden',display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical',lineHeight:'1.4',minHeight:'36px',marginBottom:'4px'}}>{product.title}</div>
+                                            <div style={{fontSize:'18px',fontWeight:700,color:'#4C3BAF',fontFamily:'Georgia,serif',marginBottom:'4px'}}>${product.price.toLocaleString()}</div>
                                             <div style={{fontSize:'11px',color:'#94A3B8',marginBottom:'12px'}}>{catLabel?catLabel.label:product.category}{product.recommended?' · ⭐':''}</div>
                                             <div style={{display:'flex',gap:'6px',marginTop:'auto'}}>
-                                                <button onClick={()=>{setEditingProduct(product);setShowModal(true);}} style={{flex:1,padding:'6px',border:'1.5px solid #E2E8F0',borderRadius:'7px',fontSize:'11.5px',fontWeight:600,background:'white',color:'#1E3A5F',cursor:'pointer'}}>Edit</button>
-                                                <button onClick={()=>handleDelete(product.id)} style={{flex:1,padding:'6px',border:'1.5px solid #FCA5A5',borderRadius:'7px',fontSize:'11.5px',fontWeight:600,background:'white',color:'#DC2626',cursor:'pointer'}}>Delete</button>
+                                                <button onClick={()=>{setEditingProduct(product);setShowModal(true);}} style={{flex:1,padding:'9px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12.5px',fontWeight:600,background:'white',color:'#1E3A5F',cursor:'pointer'}}>Edit</button>
+                                                <button onClick={()=>handleDelete(product.id)} style={{flex:1,padding:'9px',border:'1.5px solid #FCA5A5',borderRadius:'8px',fontSize:'12.5px',fontWeight:600,background:'white',color:'#DC2626',cursor:'pointer'}}>Delete</button>
                                             </div>
                                         </div>
                                     </div>
                                 );
                             })}
-                            <div onClick={()=>{setEditingProduct({title:'',category:'desktop',items:[],price:0,recommended:false,available:true,imageUrl:''});setShowModal(true);}} style={{background:'white',borderRadius:'12px',border:'2px dashed #C4B5FD',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',minHeight:'230px',cursor:'pointer',gap:'8px'}}>
-                                <div style={{width:'40px',height:'40px',background:'#EDE9FE',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',color:'#4C3BAF',fontSize:'22px',fontWeight:700}}>+</div>
-                                <div style={{fontSize:'12px',fontWeight:600,color:'#4C3BAF'}}>Add Product</div>
+                            <div onClick={()=>{setEditingProduct({title:'',category:'desktop',items:[],price:0,recommended:false,available:true,imageUrl:''});setShowModal(true);}} style={{background:'white',borderRadius:'12px',border:'2px dashed #C4B5FD',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',minHeight:'280px',cursor:'pointer',gap:'10px'}}>
+                                <div style={{width:'48px',height:'48px',background:'#EDE9FE',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',color:'#4C3BAF',fontSize:'26px',fontWeight:700}}>+</div>
+                                <div style={{fontSize:'14px',fontWeight:600,color:'#4C3BAF'}}>Add Product</div>
                             </div>
                         </div>
                         </div>}
@@ -2214,17 +2214,16 @@
             const formatDate = (iso) => iso ? new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
 
             return (
-                <div>
-                    <div style={{background:'white',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',marginBottom:'1.5rem',overflow:'hidden'}}>
-                        <div style={{padding:'1rem 1.5rem',borderBottom:'1px solid #EDE9FE',background:'#F5F3FF',display:'flex',alignItems:'center',gap:'10px'}}>
-                            <div style={{width:'30px',height:'30px',background:'linear-gradient(135deg,#4C3BAF,#6366F1)',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'14px'}}>👥</div>
-                            <div>
-                                <h3 style={{fontSize:'1rem',fontWeight:700,color:'#0F172A',margin:0}}>Current Admins</h3>
-                                <p style={{fontSize:'0.8rem',color:'#64748B',marginTop:'1px'}}>{loading ? 'Loading...' : admins.length + ' authorized user' + (admins.length !== 1 ? 's' : '')}</p>
-                            </div>
+                <div style={{maxWidth:'760px'}}>
+                    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'16px'}}>
+                        <div>
+                            <span style={{fontSize:'16px',fontWeight:700,color:'#0F172A'}}>Current Admins</span>
+                            <span style={{fontSize:'13px',fontWeight:400,color:'#64748B',marginLeft:'8px'}}>{loading ? 'Loading...' : admins.length + ' authorized user' + (admins.length !== 1 ? 's' : '')}</span>
                         </div>
+                    </div>
+                    <div style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',marginBottom:'24px',overflow:'hidden'}}>
                         {status && (
-                            <div style={{margin:'0.75rem 1.5rem',padding:'0.75rem 1rem',borderRadius:'8px',fontSize:'0.875rem',background:status.type==='success'?'#D1FAE5':'#FEE2E2',color:status.type==='success'?'#065F46':'#991B1B'}}>
+                            <div style={{margin:'0 0 12px',padding:'10px 14px',borderRadius:'8px',fontSize:'13px',background:status.type==='success'?'#DCFCE7':'#FEE2E2',color:status.type==='success'?'#166534':'#991B1B',border:status.type==='success'?'1px solid #86EFAC':'1px solid #FECACA'}}>
                                 {status.type === 'success' ? '✅' : '❌'} {status.message}
                             </div>
                         )}
@@ -2234,7 +2233,7 @@
                                 const isYou = admin.email.toLowerCase() === session.email.toLowerCase();
                                 const adminIsSuperAdmin = admin.role === 'superadmin';
                                 return (
-                                    <div key={i} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'0.875rem 1.5rem',borderBottom:'1px solid #f3f4f6'}}>
+                                    <div key={i} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'12px 16px',borderBottom:'0.5px solid #F1F5F9'}}>
                                         <div style={{display:'flex',alignItems:'center',gap:'0.875rem'}}>
                                             <div style={{width:'40px',height:'40px',background:'linear-gradient(135deg,#4C3BAF,#1E3A5F)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontWeight:700,fontSize:'0.9rem',flexShrink:0}}>{getInitials(admin.name)}</div>
                                             <div>
@@ -2266,15 +2265,12 @@
                         </div>
                     </div>
 
-                    <div style={{background:'white',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',overflow:'hidden'}}>
-                        <div style={{padding:'1rem 1.5rem',borderBottom:'1px solid #EDE9FE',background:'#F5F3FF',display:'flex',alignItems:'center',gap:'10px'}}>
-                            <div style={{width:'30px',height:'30px',background:'linear-gradient(135deg,#1E3A5F,#4C3BAF)',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'14px'}}>➕</div>
-                            <div>
-                                <h3 style={{fontSize:'1rem',fontWeight:700,color:'#0F172A',margin:0}}>Add New Admin</h3>
-                                <p style={{fontSize:'0.8rem',color:'#64748B',marginTop:'1px'}}>They will receive an email invitation with the portal link</p>
-                            </div>
+                    <div style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',overflow:'hidden'}}>
+                        <div style={{padding:'14px 16px',borderBottom:'0.5px solid #F1F5F9'}}>
+                            <div style={{fontSize:'15px',fontWeight:700,color:'#0F172A'}}>Add New Admin</div>
+                            <div style={{fontSize:'12px',color:'#94A3B8',marginTop:'2px'}}>They will receive an email invitation with the portal link</div>
                         </div>
-                        <div style={{padding:'1.5rem',display:'flex',flexDirection:'column',gap:'1rem'}}>
+                        <div style={{padding:'16px',display:'flex',flexDirection:'column',gap:'12px'}}>
                             <div style={{display:'flex',gap:'0.75rem'}}>
                                 <input type="text" className="form-input" placeholder="Full Name" value={newName} onChange={(e)=>setNewName(e.target.value)} style={{flex:1}} />
                                 <input type="email" className="form-input" placeholder="email@foundationpartners.com" value={newEmail} onChange={(e)=>setNewEmail(e.target.value)} style={{flex:1}} />
@@ -2486,20 +2482,20 @@
                             </div>
                         )}
 
-                        <div style={{display:'grid',gridTemplateColumns:'repeat(6,1fr)',gap:'12px',maxWidth:'1200px'}}>
+                        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'20px',maxWidth:'1100px'}}>
                             {(categories || []).slice().sort((a,b) => a.label.localeCompare(b.label)).map(function(cat, i) {
                                 const count = getProductCount(cat.slug);
                                 const isEmpty = count === 0;
                                 const isEditing = editingSlug === cat.slug;
                                 return (
                                     <div key={i} style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',overflow:'hidden',display:'flex',flexDirection:'column'}}>
-                                        <div style={{height:'110px',overflow:'hidden',background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',flexShrink:0}}>
+                                        <div style={{height:'140px',overflow:'hidden',background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',flexShrink:0}}>
                                             {cat.imageUrl
                                                 ? <img src={cat.imageUrl} alt={cat.label} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.innerHTML='<span style="font-size:32px">🏷️</span>';}} />
                                                 : <span style={{fontSize:'32px'}}>🏷️</span>}
                                             {!isEmpty && <span style={{position:'absolute',top:'7px',right:'7px',background:'#4C3BAF',color:'white',padding:'2px 8px',borderRadius:'10px',fontSize:'9px',fontWeight:700}}>In use</span>}
                                         </div>
-                                        <div style={{padding:'12px',flex:1,display:'flex',flexDirection:'column'}}>
+                                        <div style={{padding:'16px',flex:1,display:'flex',flexDirection:'column'}}>
                                         {isEditing ? (
                                             <div style={{display:'flex',flexDirection:'column',gap:'6px'}}>
                                                 <input
@@ -2525,11 +2521,11 @@
                                             </div>
                                         ) : (
                                             <>
-                                                <div style={{fontWeight:700,fontSize:'13px',color:'#0F172A',marginBottom:'3px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{cat.label}</div>
+                                                <div style={{fontWeight:700,fontSize:'14px',color:'#0F172A',marginBottom:'4px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{cat.label}</div>
                                                 <div style={{fontSize:'11px',color:'#94A3B8',marginBottom:'12px'}}>{count} product{count!==1?'s':''}</div>
                                                 <div style={{display:'flex',gap:'6px',marginTop:'auto'}}>
-                                                    <button onClick={function(){handleStartEdit(cat);}} disabled={saving} style={{flex:1,padding:'6px',border:'1.5px solid #E2E8F0',borderRadius:'7px',fontSize:'11.5px',fontWeight:600,background:'white',color:'#1E3A5F',cursor:'pointer'}}>Edit</button>
-                                                    <button onClick={function(){handleRemove(cat.slug,cat.label);}} disabled={saving} style={{flex:1,padding:'6px',border:'1.5px solid #FCA5A5',borderRadius:'7px',fontSize:'11.5px',fontWeight:600,background:'white',color:'#DC2626',cursor:'pointer'}}>Remove</button>
+                                                    <button onClick={function(){handleStartEdit(cat);}} disabled={saving} style={{flex:1,padding:'9px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12.5px',fontWeight:600,background:'white',color:'#1E3A5F',cursor:'pointer'}}>Edit</button>
+                                                    <button onClick={function(){handleRemove(cat.slug,cat.label);}} disabled={saving} style={{flex:1,padding:'9px',border:'1.5px solid #FCA5A5',borderRadius:'8px',fontSize:'12.5px',fontWeight:600,background:'white',color:'#DC2626',cursor:'pointer'}}>Remove</button>
                                                 </div>
                                             </>
                                         )}
@@ -2537,9 +2533,9 @@
                                     </div>
                                 );
                             })}
-                            <div onClick={function(){setShowAddModal(true);setStatus(null);}} style={{background:'white',borderRadius:'12px',border:'2px dashed #C4B5FD',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',minHeight:'210px',cursor:'pointer',gap:'8px'}}>
-                                <div style={{width:'40px',height:'40px',background:'#EDE9FE',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',color:'#4C3BAF',fontSize:'22px',fontWeight:700}}>+</div>
-                                <div style={{fontSize:'12px',fontWeight:600,color:'#4C3BAF'}}>Add Category</div>
+                            <div onClick={function(){setShowAddModal(true);setStatus(null);}} style={{background:'white',borderRadius:'12px',border:'2px dashed #C4B5FD',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',minHeight:'250px',cursor:'pointer',gap:'10px'}}>
+                                <div style={{width:'48px',height:'48px',background:'#EDE9FE',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',color:'#4C3BAF',fontSize:'26px',fontWeight:700}}>+</div>
+                                <div style={{fontSize:'14px',fontWeight:600,color:'#4C3BAF'}}>Add Category</div>
                             </div>
                         </div>
                     </div>
