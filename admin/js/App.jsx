@@ -1,5 +1,6 @@
 // ─── App shell and LoginScreen
 
+const { useState } = React;
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(AuthService.isAuthenticated());
     
