@@ -2975,56 +2975,61 @@ document.getElementById("sc-status").textContent=stat;
                         </div>
                     )}
                     <div style={{height:'3px',background:'linear-gradient(90deg,#DB802E,#EFA855,#DB802E)',borderRadius:'2px',marginBottom:'16px'}}></div>
-                    <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:'12px',marginBottom:'20px'}}>
-                        <div style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',padding:'16px',borderTop:'3px solid #6366F1'}}>
-                            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'12px'}}>
-                                <span style={{fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.08em',color:'#64748B'}}>Total Orders</span>
-                                <div style={{width:'30px',height:'30px',background:'#EEF2FF',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                                    <i className="ti ti-shopping-cart" style={{fontSize:'15px',color:'#6366F1'}}></i>
+                    <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:'14px',marginBottom:'20px'}}>
+                        <div style={{background:'linear-gradient(135deg,#4F46E5 0%,#6366F1 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden'}}>
+                            <div style={{position:'absolute',top:'-10px',right:'-10px',width:'70px',height:'70px',background:'rgba(255,255,255,0.1)',borderRadius:'50%'}}></div>
+                            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'16px'}}>
+                                <div style={{width:'36px',height:'36px',background:'rgba(255,255,255,0.2)',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                                    <i className="ti ti-shopping-cart" style={{fontSize:'18px',color:'white'}}></i>
                                 </div>
                             </div>
-                            <div style={{fontSize:'28px',fontWeight:800,color:'#0F172A',letterSpacing:'-0.5px',lineHeight:1}}>{stats.total}</div>
-                            <div style={{fontSize:'11px',color:'#94A3B8',marginTop:'6px',fontWeight:500}}>All time</div>
+                            <div style={{fontSize:'36px',fontWeight:800,color:'white',lineHeight:1,letterSpacing:'-1px',fontFamily:"'Inter',-apple-system,sans-serif"}}>{stats.total}</div>
+                            <div style={{fontSize:'13px',color:'rgba(255,255,255,0.75)',marginTop:'8px',fontWeight:500}}>Total Orders</div>
+                            <div style={{fontSize:'11px',color:'rgba(255,255,255,0.5)',marginTop:'2px'}}>All time</div>
                         </div>
-                        <div style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',padding:'16px',borderTop:'3px solid #3B82F6'}}>
-                            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'12px'}}>
-                                <span style={{fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.08em',color:'#64748B'}}>New · Awaiting</span>
-                                <div style={{width:'30px',height:'30px',background:'#EFF6FF',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                                    <i className="ti ti-clock" style={{fontSize:'15px',color:'#3B82F6'}}></i>
+                        <div style={{background:'linear-gradient(135deg,#0EA5E9 0%,#38BDF8 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden'}}>
+                            <div style={{position:'absolute',top:'-10px',right:'-10px',width:'70px',height:'70px',background:'rgba(255,255,255,0.1)',borderRadius:'50%'}}></div>
+                            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'16px'}}>
+                                <div style={{width:'36px',height:'36px',background:'rgba(255,255,255,0.2)',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                                    <i className="ti ti-clock" style={{fontSize:'18px',color:'white'}}></i>
                                 </div>
                             </div>
-                            <div style={{fontSize:'28px',fontWeight:800,color:'#3B82F6',letterSpacing:'-0.5px',lineHeight:1}}>{stats.newOrders}</div>
-                            <div style={{fontSize:'11px',color:'#94A3B8',marginTop:'6px',fontWeight:500}}>Pending review</div>
+                            <div style={{fontSize:'36px',fontWeight:800,color:'white',lineHeight:1,letterSpacing:'-1px',fontFamily:"'Inter',-apple-system,sans-serif"}}>{stats.newOrders}</div>
+                            <div style={{fontSize:'13px',color:'rgba(255,255,255,0.75)',marginTop:'8px',fontWeight:500}}>New · Awaiting</div>
+                            <div style={{fontSize:'11px',color:'rgba(255,255,255,0.5)',marginTop:'2px'}}>Pending review</div>
                         </div>
-                        <div style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',padding:'16px',borderTop:'3px solid #F59E0B'}}>
-                            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'12px'}}>
-                                <span style={{fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.08em',color:'#64748B'}}>In Progress</span>
-                                <div style={{width:'30px',height:'30px',background:'#FFFBEB',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                                    <i className="ti ti-loader" style={{fontSize:'15px',color:'#F59E0B'}}></i>
+                        <div style={{background:'linear-gradient(135deg,#F59E0B 0%,#FBBF24 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden'}}>
+                            <div style={{position:'absolute',top:'-10px',right:'-10px',width:'70px',height:'70px',background:'rgba(255,255,255,0.1)',borderRadius:'50%'}}></div>
+                            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'16px'}}>
+                                <div style={{width:'36px',height:'36px',background:'rgba(255,255,255,0.2)',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                                    <i className="ti ti-loader" style={{fontSize:'18px',color:'white'}}></i>
                                 </div>
                             </div>
-                            <div style={{fontSize:'28px',fontWeight:800,color:'#F59E0B',letterSpacing:'-0.5px',lineHeight:1}}>{stats.inProgress}</div>
-                            <div style={{fontSize:'11px',color:'#94A3B8',marginTop:'6px',fontWeight:500}}>Being sourced</div>
+                            <div style={{fontSize:'36px',fontWeight:800,color:'white',lineHeight:1,letterSpacing:'-1px',fontFamily:"'Inter',-apple-system,sans-serif"}}>{stats.inProgress}</div>
+                            <div style={{fontSize:'13px',color:'rgba(255,255,255,0.75)',marginTop:'8px',fontWeight:500}}>In Progress</div>
+                            <div style={{fontSize:'11px',color:'rgba(255,255,255,0.5)',marginTop:'2px'}}>Being sourced</div>
                         </div>
-                        <div style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',padding:'16px',borderTop:'3px solid #10B981'}}>
-                            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'12px'}}>
-                                <span style={{fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.08em',color:'#64748B'}}>Total Value</span>
-                                <div style={{width:'30px',height:'30px',background:'#ECFDF5',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                                    <i className="ti ti-currency-dollar" style={{fontSize:'15px',color:'#10B981'}}></i>
+                        <div style={{background:'linear-gradient(135deg,#10B981 0%,#34D399 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden'}}>
+                            <div style={{position:'absolute',top:'-10px',right:'-10px',width:'70px',height:'70px',background:'rgba(255,255,255,0.1)',borderRadius:'50%'}}></div>
+                            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'16px'}}>
+                                <div style={{width:'36px',height:'36px',background:'rgba(255,255,255,0.2)',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                                    <i className="ti ti-currency-dollar" style={{fontSize:'18px',color:'white'}}></i>
                                 </div>
                             </div>
-                            <div style={{fontSize:'28px',fontWeight:800,color:'#10B981',letterSpacing:'-0.5px',lineHeight:1}}>${stats.totalValue>=1000?Math.round(stats.totalValue/1000)+'K':stats.totalValue.toLocaleString()}</div>
-                            <div style={{fontSize:'11px',color:'#94A3B8',marginTop:'6px',fontWeight:500}}>Year {currentYear}</div>
+                            <div style={{fontSize:'36px',fontWeight:800,color:'white',lineHeight:1,letterSpacing:'-1px',fontFamily:"'Inter',-apple-system,sans-serif"}}>{(v => v>=1000000 ? '$'+(v/1000000).toFixed(2).replace(/\.?0+$/,'')+'M' : v>=1000 ? '$'+Math.round(v/1000)+'K' : '$'+v.toLocaleString())(stats.totalValue)}</div>
+                            <div style={{fontSize:'13px',color:'rgba(255,255,255,0.75)',marginTop:'8px',fontWeight:500}}>Total Value</div>
+                            <div style={{fontSize:'11px',color:'rgba(255,255,255,0.5)',marginTop:'2px'}}>Year {currentYear}</div>
                         </div>
-                        <div onClick={stats.deleted>0?()=>setShowDeleted(true):undefined} style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',padding:'16px',borderTop:stats.deleted>0?'3px solid #EF4444':'3px solid #E2E8F0',cursor:stats.deleted>0?'pointer':'default'}}>
-                            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'12px'}}>
-                                <span style={{fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.08em',color:'#64748B'}}>Soft Deleted</span>
-                                <div style={{width:'30px',height:'30px',background:stats.deleted>0?'#FEF2F2':'#F8FAFC',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                                    <i className="ti ti-trash" style={{fontSize:'15px',color:stats.deleted>0?'#EF4444':'#94A3B8'}}></i>
+                        <div onClick={stats.deleted>0?()=>setShowDeleted(true):undefined} style={{background:stats.deleted>0?'linear-gradient(135deg,#EF4444 0%,#F87171 100%)':'linear-gradient(135deg,#94A3B8 0%,#CBD5E1 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden',cursor:stats.deleted>0?'pointer':'default'}}>
+                            <div style={{position:'absolute',top:'-10px',right:'-10px',width:'70px',height:'70px',background:'rgba(255,255,255,0.1)',borderRadius:'50%'}}></div>
+                            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'16px'}}>
+                                <div style={{width:'36px',height:'36px',background:'rgba(255,255,255,0.2)',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                                    <i className="ti ti-trash" style={{fontSize:'18px',color:'white'}}></i>
                                 </div>
                             </div>
-                            <div style={{fontSize:'28px',fontWeight:800,color:stats.deleted>0?'#EF4444':'#94A3B8',letterSpacing:'-0.5px',lineHeight:1}}>{stats.deleted}</div>
-                            <div style={{fontSize:'11px',color:'#94A3B8',marginTop:'6px',fontWeight:500}}>{stats.deleted>0?'Click to view':'None'}</div>
+                            <div style={{fontSize:'36px',fontWeight:800,color:'white',lineHeight:1,letterSpacing:'-1px',fontFamily:"'Inter',-apple-system,sans-serif"}}>{stats.deleted}</div>
+                            <div style={{fontSize:'13px',color:'rgba(255,255,255,0.75)',marginTop:'8px',fontWeight:500}}>Soft Deleted</div>
+                            <div style={{fontSize:'11px',color:'rgba(255,255,255,0.5)',marginTop:'2px'}}>{stats.deleted>0?'Click to view':'None'}</div>
                         </div>
                     </div>
                     <div style={{display:'flex',gap:'8px',marginBottom:'8px',flexWrap:'wrap',alignItems:'center'}}>
