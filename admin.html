@@ -1626,7 +1626,7 @@
                                 const isDraft = DraftService.isDraftProduct(product.id);
                                 const catLabel = (categories||[]).find(c=>c.slug===product.category);
                                 return (
-                                    <div key={product.id} style={{background:'white',borderRadius:'12px',border:isDraft?'2px solid #F59E0B':'0.5px solid #E2E8F0',overflow:'hidden',display:'flex',flexDirection:'column'}}>
+                                    <div key={product.id} style={{background:'white',borderRadius:'12px',border:isDraft?'2px solid #F59E0B':'1.5px solid #D1D5DB',overflow:'hidden',display:'flex',flexDirection:'column'}}>
                                         <div style={{height:'160px',overflow:'hidden',background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',flexShrink:0}}>
                                             {product.imageUrl
                                                 ? <img src={product.imageUrl} alt={product.title} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.innerHTML='<span style="font-size:32px">📦</span>';}} />
@@ -2488,7 +2488,7 @@
                                 const isEmpty = count === 0;
                                 const isEditing = editingSlug === cat.slug;
                                 return (
-                                    <div key={i} style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',overflow:'hidden',display:'flex',flexDirection:'column'}}>
+                                    <div key={i} style={{background:'white',borderRadius:'12px',border:'1.5px solid #D1D5DB',overflow:'hidden',display:'flex',flexDirection:'column'}}>
                                         <div style={{height:'140px',overflow:'hidden',background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',flexShrink:0}}>
                                             {cat.imageUrl
                                                 ? <img src={cat.imageUrl} alt={cat.label} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.innerHTML='<span style="font-size:32px">🏷️</span>';}} />
@@ -2677,7 +2677,7 @@ body{background:#F3F4F6;height:100vh;display:flex;flex-direction:column;overflow
 .stat-box:last-child{border-right:none}
 .stat-num{font-size:22px;font-weight:700;font-family:Georgia,serif;line-height:1.1}
 .stat-lbl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.45);margin-top:4px}
-.layout{display:flex;flex:1;overflow:hidden}
+.layout{display:flex;flex:1;overflow:hidden;max-width:1400px;width:100%;margin:0 auto}
 .sidebar{width:170px;flex-shrink:0;background:#141C3A;padding:14px 10px;overflow-y:auto;border-right:1px solid rgba(99,102,241,0.15)}
 .sb-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6366F1;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(99,102,241,0.2)}
 .filter-row{padding:7px 9px;border-radius:8px;cursor:pointer;margin-bottom:3px;display:flex;justify-content:space-between;align-items:center;transition:background 0.15s}
@@ -2726,11 +2726,11 @@ tr:hover td{filter:brightness(0.97)}
     <div class="search-bar"><input type="text" id="search-input" placeholder="Search by admin, action, target, or detail..." oninput="applyFilters()"><span class="count-info">Showing <strong id="vc">${allEntries.length}</strong> of <strong>${allEntries.length}</strong> entries</span></div>
     <div class="table-scroll"><table><thead><tr>
       <th style="width:3%"><input type="checkbox" id="select-all" onchange="toggleSelectAll(this)" style="cursor:pointer;accent-color:#4C3BAF"></th>
-      <th style="width:10%">Date / Time</th>
-      <th style="width:15%">Admin</th>
-      <th style="width:11%">Action</th>
+      <th style="width:11%">Date / Time</th>
+      <th style="width:16%">Admin</th>
+      <th style="width:12%">Action</th>
       <th style="width:13%">Target</th>
-      <th style="width:42%">Detail</th>
+      <th style="width:39%">Detail</th>
       <th style="width:6%">Result</th>
     </tr></thead><tbody id="ab">${rowsHtml}</tbody></table></div>
   </div>
@@ -3685,7 +3685,7 @@ body{background:#F3F4F6;height:100vh;display:flex;flex-direction:column;overflow
 .stat-box:last-child{border-right:none}
 .stat-num{font-size:22px;font-weight:700;font-family:Georgia,serif;line-height:1.1}
 .stat-lbl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.45);margin-top:4px}
-.layout{display:flex;flex:1;overflow:hidden}
+.layout{display:flex;flex:1;overflow:hidden;max-width:1400px;width:100%;margin:0 auto}
 .sidebar{width:170px;flex-shrink:0;background:#141C3A;padding:14px 10px;overflow-y:auto;border-right:1px solid rgba(99,102,241,0.15)}
 .sb-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6366F1;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(99,102,241,0.2)}
 .filter-row{padding:7px 9px;border-radius:8px;cursor:pointer;margin-bottom:3px;display:flex;justify-content:space-between;align-items:center;transition:background 0.15s}
@@ -3734,11 +3734,11 @@ tr:hover td{filter:brightness(0.97)}
     <div class="search-bar"><input type="text" id="search-input" placeholder="Search by admin, action, target, or detail..." oninput="applyFilters()"><span class="count-info">Showing <strong id="vc">${allEntries.length}</strong> of <strong>${allEntries.length}</strong> entries</span></div>
     <div class="table-scroll"><table><thead><tr>
       <th style="width:3%"><input type="checkbox" id="select-all" onchange="toggleSelectAll(this)" style="cursor:pointer;accent-color:#4C3BAF"></th>
-      <th style="width:10%">Date / Time</th>
-      <th style="width:15%">Admin</th>
-      <th style="width:11%">Action</th>
+      <th style="width:11%">Date / Time</th>
+      <th style="width:16%">Admin</th>
+      <th style="width:12%">Action</th>
       <th style="width:13%">Target</th>
-      <th style="width:42%">Detail</th>
+      <th style="width:39%">Detail</th>
       <th style="width:6%">Result</th>
     </tr></thead><tbody id="ab">${rowsHtml}</tbody></table></div>
   </div>
