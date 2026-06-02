@@ -2720,9 +2720,9 @@ body{background:#F1F5F9;height:100vh;display:flex;flex-direction:column;overflow
 .sc-card:hover{opacity:0.9}
 .sc-circle{position:absolute;top:-12px;right:-12px;width:70px;height:70px;background:rgba(255,255,255,0.12);border-radius:50%;pointer-events:none}
 .sc-icon{width:34px;height:34px;background:rgba(255,255,255,0.2);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:12px}
-.sc-num{font-size:34px;font-weight:800;color:rgba(255,255,255,0.92);letter-spacing:-1px;line-height:1}
-.sc-lbl{font-size:12px;color:rgba(255,255,255,0.72);margin-top:6px;font-weight:600}
-.sc-sub{font-size:10.5px;color:rgba(255,255,255,0.50);margin-top:2px}
+.sc-num{font-size:34px;font-weight:800;color:white;letter-spacing:-1px;line-height:1}
+.sc-lbl{font-size:12px;color:white;margin-top:6px;font-weight:600}
+.sc-sub{font-size:10.5px;color:rgba(255,255,255,0.8);margin-top:2px}
 /* ── Filter toolbar ── */
 .toolbar{padding:10px 20px;background:white;border-top:0.5px solid #F1F5F9;border-bottom:0.5px solid #E2E8F0;display:flex;gap:8px;align-items:center;flex-shrink:0;flex-wrap:wrap}
 .search-wrap{position:relative;flex:1;min-width:220px}
@@ -3301,9 +3301,9 @@ window.onload=function(){
                                     <i className="ti ti-shopping-cart" style={{fontSize:'18px',color:'white'}}></i>
                                 </div>
                             </div>
-                            <div style={{fontSize:'36px',fontWeight:800,color:'rgba(255,255,255,0.88)',lineHeight:1,letterSpacing:'-1px',fontFamily:"'Inter',-apple-system,sans-serif"}}>{stats.total}</div>
-                            <div style={{fontSize:'13px',color:'rgba(255,255,255,0.75)',marginTop:'8px',fontWeight:500}}>Total Orders</div>
-                            <div style={{fontSize:'11px',color:'rgba(255,255,255,0.5)',marginTop:'2px'}}>All time</div>
+                            <div style={{fontSize:'36px',fontWeight:800,color:'white',lineHeight:1,letterSpacing:'-1px',fontFamily:"'Inter',-apple-system,sans-serif"}}>{stats.total}</div>
+                            <div style={{fontSize:'13px',color:'white',marginTop:'8px',fontWeight:600}}>Total Orders</div>
+                            <div style={{fontSize:'11px',color:'rgba(255,255,255,0.85)',marginTop:'2px'}}>All time</div>
                         </div>
                         <div onClick={()=>setDrilldown('new')} style={{cursor:'pointer',background:'linear-gradient(135deg,#0EA5E9 0%,#38BDF8 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden'}}>
                             <div style={{position:'absolute',top:'-10px',right:'-10px',width:'70px',height:'70px',background:'rgba(255,255,255,0.1)',borderRadius:'50%'}}></div>
@@ -3312,9 +3312,9 @@ window.onload=function(){
                                     <i className="ti ti-clock" style={{fontSize:'18px',color:'white'}}></i>
                                 </div>
                             </div>
-                            <div style={{fontSize:'36px',fontWeight:800,color:'rgba(255,255,255,0.88)',lineHeight:1,letterSpacing:'-1px',fontFamily:"'Inter',-apple-system,sans-serif"}}>{stats.newOrders}</div>
-                            <div style={{fontSize:'13px',color:'rgba(255,255,255,0.75)',marginTop:'8px',fontWeight:500}}>New · Awaiting</div>
-                            <div style={{fontSize:'11px',color:'rgba(255,255,255,0.5)',marginTop:'2px'}}>Pending review</div>
+                            <div style={{fontSize:'36px',fontWeight:800,color:'white',lineHeight:1,letterSpacing:'-1px',fontFamily:"'Inter',-apple-system,sans-serif"}}>{stats.newOrders}</div>
+                            <div style={{fontSize:'13px',color:'white',marginTop:'8px',fontWeight:600}}>New · Awaiting</div>
+                            <div style={{fontSize:'11px',color:'rgba(255,255,255,0.85)',marginTop:'2px'}}>Pending review</div>
                         </div>
                         <div onClick={()=>setDrilldown('inprogress')} style={{cursor:'pointer',background:'linear-gradient(135deg,#F59E0B 0%,#FBBF24 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden'}}>
                             <div style={{position:'absolute',top:'-10px',right:'-10px',width:'70px',height:'70px',background:'rgba(255,255,255,0.1)',borderRadius:'50%'}}></div>
@@ -3323,9 +3323,9 @@ window.onload=function(){
                                     <i className="ti ti-loader" style={{fontSize:'18px',color:'white'}}></i>
                                 </div>
                             </div>
-                            <div style={{fontSize:'36px',fontWeight:800,color:'rgba(255,255,255,0.88)',lineHeight:1,letterSpacing:'-1px',fontFamily:"'Inter',-apple-system,sans-serif"}}>{stats.inProgress}</div>
-                            <div style={{fontSize:'13px',color:'rgba(255,255,255,0.75)',marginTop:'8px',fontWeight:500}}>In Progress</div>
-                            <div style={{fontSize:'11px',color:'rgba(255,255,255,0.5)',marginTop:'2px'}}>Being sourced</div>
+                            <div style={{fontSize:'36px',fontWeight:800,color:'white',lineHeight:1,letterSpacing:'-1px',fontFamily:"'Inter',-apple-system,sans-serif"}}>{stats.inProgress}</div>
+                            <div style={{fontSize:'13px',color:'white',marginTop:'8px',fontWeight:600}}>In Progress</div>
+                            <div style={{fontSize:'11px',color:'rgba(255,255,255,0.85)',marginTop:'2px'}}>Being sourced</div>
                         </div>
                         <div onClick={()=>setDrilldown('value')} style={{cursor:'pointer',background:'linear-gradient(135deg,#10B981 0%,#34D399 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden'}}>
                             <div style={{position:'absolute',top:'-10px',right:'-10px',width:'70px',height:'70px',background:'rgba(255,255,255,0.1)',borderRadius:'50%'}}></div>
@@ -3334,9 +3334,9 @@ window.onload=function(){
                                     <i className="ti ti-currency-dollar" style={{fontSize:'18px',color:'white'}}></i>
                                 </div>
                             </div>
-                            <div style={{fontSize:'36px',fontWeight:800,color:'rgba(255,255,255,0.88)',lineHeight:1,letterSpacing:'-1px',fontFamily:"'Inter',-apple-system,sans-serif"}}>{(v => v>=1000000 ? '$'+(v/1000000).toFixed(2).replace(/\.?0+$/,'')+'M' : v>=1000 ? '$'+Math.round(v/1000)+'K' : '$'+v.toLocaleString())(stats.totalValue)}</div>
-                            <div style={{fontSize:'13px',color:'rgba(255,255,255,0.75)',marginTop:'8px',fontWeight:500}}>Total Value</div>
-                            <div style={{fontSize:'11px',color:'rgba(255,255,255,0.5)',marginTop:'2px'}}>Year {currentYear}</div>
+                            <div style={{fontSize:'36px',fontWeight:800,color:'white',lineHeight:1,letterSpacing:'-1px',fontFamily:"'Inter',-apple-system,sans-serif"}}>{(v => v>=1000000 ? '$'+(v/1000000).toFixed(2).replace(/\.?0+$/,'')+'M' : v>=1000 ? '$'+Math.round(v/1000)+'K' : '$'+v.toLocaleString())(stats.totalValue)}</div>
+                            <div style={{fontSize:'13px',color:'white',marginTop:'8px',fontWeight:600}}>Total Value</div>
+                            <div style={{fontSize:'11px',color:'rgba(255,255,255,0.85)',marginTop:'2px'}}>Year {currentYear}</div>
                         </div>
                         <div onClick={stats.deleted>0?()=>setShowDeleted(true):undefined} style={{background:stats.deleted>0?'linear-gradient(135deg,#EF4444 0%,#F87171 100%)':'linear-gradient(135deg,#94A3B8 0%,#CBD5E1 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden',cursor:stats.deleted>0?'pointer':'default'}}>
                             <div style={{position:'absolute',top:'-10px',right:'-10px',width:'70px',height:'70px',background:'rgba(255,255,255,0.1)',borderRadius:'50%'}}></div>
@@ -3345,9 +3345,9 @@ window.onload=function(){
                                     <i className="ti ti-trash" style={{fontSize:'18px',color:'white'}}></i>
                                 </div>
                             </div>
-                            <div style={{fontSize:'36px',fontWeight:800,color:'rgba(255,255,255,0.88)',lineHeight:1,letterSpacing:'-1px',fontFamily:"'Inter',-apple-system,sans-serif"}}>{stats.deleted}</div>
-                            <div style={{fontSize:'13px',color:'rgba(255,255,255,0.75)',marginTop:'8px',fontWeight:500}}>Soft Deleted</div>
-                            <div style={{fontSize:'11px',color:'rgba(255,255,255,0.5)',marginTop:'2px'}}>{stats.deleted>0?'Click to view':'None'}</div>
+                            <div style={{fontSize:'36px',fontWeight:800,color:'white',lineHeight:1,letterSpacing:'-1px',fontFamily:"'Inter',-apple-system,sans-serif"}}>{stats.deleted}</div>
+                            <div style={{fontSize:'13px',color:'white',marginTop:'8px',fontWeight:600}}>Soft Deleted</div>
+                            <div style={{fontSize:'11px',color:'rgba(255,255,255,0.85)',marginTop:'2px'}}>{stats.deleted>0?'Click to view':'None'}</div>
                         </div>
                     </div>
                     <div style={{display:'flex',gap:'8px',marginBottom:'8px',flexWrap:'wrap',alignItems:'center'}}>
@@ -4185,9 +4185,9 @@ body{background:#F1F5F9;height:100vh;display:flex;flex-direction:column;overflow
 .sc-card:hover{opacity:0.9}
 .sc-circle{position:absolute;top:-12px;right:-12px;width:70px;height:70px;background:rgba(255,255,255,0.12);border-radius:50%;pointer-events:none}
 .sc-icon{width:34px;height:34px;background:rgba(255,255,255,0.2);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:12px}
-.sc-num{font-size:34px;font-weight:800;color:rgba(255,255,255,0.92);letter-spacing:-1px;line-height:1}
-.sc-lbl{font-size:12px;color:rgba(255,255,255,0.72);margin-top:6px;font-weight:600}
-.sc-sub{font-size:10.5px;color:rgba(255,255,255,0.50);margin-top:2px}
+.sc-num{font-size:34px;font-weight:800;color:white;letter-spacing:-1px;line-height:1}
+.sc-lbl{font-size:12px;color:white;margin-top:6px;font-weight:600}
+.sc-sub{font-size:10.5px;color:rgba(255,255,255,0.8);margin-top:2px}
 /* ── Filter toolbar ── */
 .toolbar{padding:10px 20px;background:white;border-top:0.5px solid #F1F5F9;border-bottom:0.5px solid #E2E8F0;display:flex;gap:8px;align-items:center;flex-shrink:0;flex-wrap:wrap}
 .search-wrap{position:relative;flex:1;min-width:220px}
