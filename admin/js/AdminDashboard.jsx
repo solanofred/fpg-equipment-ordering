@@ -1,5 +1,6 @@
 // ─── AdminDashboard: sidebar, routing, top-level state
 
+const { useState, useEffect } = React;
 function AdminDashboard({ onLogout }) {
     const [products, setProducts] = useState([]);
     const [editingProduct, setEditingProduct] = useState(null);
