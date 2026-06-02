@@ -710,7 +710,7 @@ function OrdersDashboard({ session, azureUrl, onNavigate }) {
             )}
             {drilldown && (
                 <div onClick={()=>setDrilldown(null)} style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(15,23,42,0.55)',zIndex:200,display:'flex',alignItems:'center',justifyContent:'center'}}>
-                    <div onClick={e=>e.stopPropagation()} style={{background:'white',borderRadius:'14px',width:'580px',maxWidth:'95vw',maxHeight:'80vh',overflow:'auto',padding:'24px',boxShadow:'0 20px 60px rgba(0,0,0,0.2)'}}>
+                    <div onClick={e=>e.stopPropagation()} style={{background:'white',borderRadius:'14px',width:'640px',maxWidth:'95vw',padding:'24px',boxShadow:'0 20px 60px rgba(0,0,0,0.2)'}}>
                         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'20px'}}>
                             <div>
                                 <div style={{fontSize:'16px',fontWeight:700,color:'#0F172A'}}>
@@ -749,8 +749,9 @@ function OrdersDashboard({ session, azureUrl, onNavigate }) {
                             return (
                                 <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'24px'}}>
                                     <div>
-                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>{isValue?'By Location ($ value)':'By Location'}</div>
-                                        {locRows.slice(0,10).map(([loc,data])=>(
+                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'8px'}}>{isValue?'By Location ($ value)':'By Location'}</div>
+                                        <div style={{maxHeight:'340px',overflowY:'auto',paddingRight:'6px'}}>
+                                        {locRows.map(([loc,data])=>(
                                             <div key={loc} style={{marginBottom:'9px'}}>
                                                 <div style={{display:'flex',justifyContent:'space-between',fontSize:'12px',marginBottom:'3px'}}>
                                                     <span style={{fontWeight:600,color:'#0F172A'}}>{loc}</span>
@@ -761,10 +762,12 @@ function OrdersDashboard({ session, azureUrl, onNavigate }) {
                                                 </div>
                                             </div>
                                         ))}
+                                        </div>
                                     </div>
                                     <div>
-                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>{isValue?'By Submitter ($ value)':'By Submitter'}</div>
-                                        {subRows.slice(0,10).map(([name,data])=>(
+                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'8px'}}>{isValue?'By Submitter ($ value)':'By Submitter'}</div>
+                                        <div style={{maxHeight:'340px',overflowY:'auto',paddingRight:'6px'}}>
+                                        {subRows.map(([name,data])=>(
                                             <div key={name} style={{marginBottom:'9px'}}>
                                                 <div style={{display:'flex',justifyContent:'space-between',fontSize:'12px',marginBottom:'3px'}}>
                                                     <span style={{fontWeight:600,color:'#0F172A'}}>{name}</span>
@@ -775,6 +778,7 @@ function OrdersDashboard({ session, azureUrl, onNavigate }) {
                                                 </div>
                                             </div>
                                         ))}
+                                        </div>
                                     </div>
                                 </div>
                             );
