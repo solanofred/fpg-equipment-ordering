@@ -590,7 +590,7 @@
         "total": 2730,
         "isNewEmployee": "no",
         "dateNeeded": "2026-06-14",
-        "notes": "Urgent \u2014 location opening soon.",
+        "notes": "Urgent — location opening soon.",
         "deletedBy": "fred.solano@foundationpartners.com",
         "deletedAt": "2026-06-01T20:26:07.235Z",
         "deleteReason": "Testing"
@@ -638,7 +638,7 @@
         "total": 2730,
         "isNewEmployee": "no",
         "dateNeeded": "2026-06-14",
-        "notes": "Urgent \u2014 location opening soon."
+        "notes": "Urgent — location opening soon."
       }
     },
     "result": "success"
@@ -6449,5 +6449,15 @@
     "target": "",
     "detail": {},
     "result": "success"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780372279658",
+    "timestamp": "2026-06-02T03:51:19.658Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
   }
 ]
