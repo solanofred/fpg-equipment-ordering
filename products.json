@@ -437,7 +437,10 @@
     "price": 2200,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/iPad.jpg"
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/iPad.jpg",
+    "categories": [
+      "mobile_devices"
+    ]
   },
   {
     "id": 22,
