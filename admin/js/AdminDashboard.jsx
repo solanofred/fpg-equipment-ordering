@@ -394,23 +394,23 @@ function AdminDashboard({ onLogout }) {
                     </div>
                 )}
                 
-                <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'4px'}}>
-                    <div>
-                        <span style={{fontSize:'15px',fontWeight:700,color:'#0F172A'}}>Products</span>
-                        <span style={{fontSize:'13px',fontWeight:400,color:'#64748B',marginLeft:'8px'}}>{products.length} items</span>
-                    </div>
-                    <div style={{display:'flex',gap:'8px'}}>
-                        {draftCount > 0 && (
-                            <button onClick={()=>setShowReviewModal(true)} style={{padding:'8px 14px',background:'white',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12px',fontWeight:600,color:'#475569',cursor:'pointer'}}>
-                                {draftCount} unsaved change{draftCount!==1?'s':''}
-                            </button>
-                        )}
-                        <button onClick={()=>{setEditingProduct({title:'',category:'desktop',items:[],price:0,recommended:false,available:true,imageUrl:''});setShowModal(true);}} style={{padding:'8px 18px',background:'#4C3BAF',border:'none',borderRadius:'8px',fontSize:'12px',fontWeight:700,color:'white',cursor:'pointer'}}>
-                            + Add Product
-                        </button>
-                    </div>
-                </div>
                 <div style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',overflow:'hidden',maxWidth:'1200px'}}>
+                    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'12px 16px',borderBottom:'0.5px solid #F1F5F9'}}>
+                        <div>
+                            <span style={{fontSize:'15px',fontWeight:700,color:'#0F172A'}}>Products</span>
+                            <span style={{fontSize:'13px',fontWeight:400,color:'#64748B',marginLeft:'8px'}}>{products.length} items</span>
+                        </div>
+                        <div style={{display:'flex',gap:'8px'}}>
+                            {draftCount > 0 && (
+                                <button onClick={()=>setShowReviewModal(true)} style={{padding:'7px 14px',background:'white',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12px',fontWeight:600,color:'#475569',cursor:'pointer'}}>
+                                    {draftCount} unsaved change{draftCount!==1?'s':''}
+                                </button>
+                            )}
+                            <button onClick={()=>{setEditingProduct({title:'',category:'desktop',items:[],price:0,recommended:false,available:true,imageUrl:''});setShowModal(true);}} style={{padding:'7px 16px',background:'linear-gradient(135deg,#15803D,#16A34A)',color:'white',border:'none',borderRadius:'8px',fontSize:'13px',fontWeight:600,cursor:'pointer'}}>
+                                + Add Product
+                            </button>
+                        </div>
+                    </div>
                     <table id="tbl-products" className="resizable-table" style={{width:'100%',borderCollapse:'collapse',fontSize:'13px',tableLayout:'fixed'}}>
                         <thead>
                             <tr style={{background:'#D97706'}}>

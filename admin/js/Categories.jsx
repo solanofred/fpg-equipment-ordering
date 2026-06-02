@@ -173,16 +173,6 @@ function CategoryManagement({ session, azureUrl, categories, products, onCategor
                 </div>
             )}
             <div>
-                <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'4px'}}>
-                    <div>
-                        <span style={{fontSize:'15px',fontWeight:700,color:'#0F172A'}}>Categories</span>
-                        <span style={{fontSize:'13px',fontWeight:400,color:'#64748B',marginLeft:'8px'}}>{(categories||[]).length} total · {(categories||[]).filter(function(c){return getProductCount(c.slug)===0;}).length} empty</span>
-                    </div>
-                    <button onClick={function(){setShowAddModal(true);setStatus(null);}} style={{padding:'8px 18px',background:'#4C3BAF',border:'none',borderRadius:'8px',fontSize:'12px',fontWeight:700,color:'white',cursor:'pointer'}}>
-                        + New category
-                    </button>
-                </div>
-
                 {status && !showAddModal && (
                     <div style={{padding:'10px 14px',borderRadius:'8px',fontSize:'13px',marginBottom:'14px',background:status.type==='success'?'#DCFCE7':'#FEE2E2',color:status.type==='success'?'#166534':'#991B1B',border:status.type==='success'?'1px solid #86EFAC':'1px solid #FECACA'}}>
                         {status.type === 'success' ? '✅' : '❌'} {status.text}
@@ -190,6 +180,15 @@ function CategoryManagement({ session, azureUrl, categories, products, onCategor
                 )}
 
                 <div style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',overflow:'hidden',maxWidth:'1200px'}}>
+                    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'12px 16px',borderBottom:'0.5px solid #F1F5F9'}}>
+                        <div>
+                            <span style={{fontSize:'15px',fontWeight:700,color:'#0F172A'}}>Categories</span>
+                            <span style={{fontSize:'13px',fontWeight:400,color:'#64748B',marginLeft:'8px'}}>{(categories||[]).length} total · {(categories||[]).filter(function(c){return getProductCount(c.slug)===0;}).length} empty</span>
+                        </div>
+                        <button onClick={function(){setShowAddModal(true);setStatus(null);}} style={{padding:'7px 16px',background:'linear-gradient(135deg,#15803D,#16A34A)',color:'white',border:'none',borderRadius:'8px',fontSize:'13px',fontWeight:600,cursor:'pointer'}}>
+                            + New category
+                        </button>
+                    </div>
                     <table id="tbl-categories" className="resizable-table" style={{tableLayout:'fixed',width:'100%',borderCollapse:'collapse',fontSize:'13px'}}>
                         <thead>
                             <tr style={{background:'#D97706'}}>
