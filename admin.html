@@ -2968,8 +2968,8 @@
                                         ].map((h,i) => (
                                             <th key={i} onClick={h.col ? ()=>handleSort(h.col) : undefined}
                                                 style={{padding:'9px 10px',textAlign:'left',fontSize:'11px',fontWeight:700,color:'#0A2540',textTransform:'uppercase',
-                                                    letterSpacing:'0.05em',borderBottom:'2px solid #DB802E',width:h.w,
-                                                    cursor:h.col?'pointer':'default',userSelect:'none',background:'#FEF5EC'}}>
+                                                    letterSpacing:'0.05em',borderBottom:'3px solid #DB802E',width:h.w,
+                                                    cursor:h.col?'pointer':'default',userSelect:'none',background:'#0A2540',color:'white'}}>
                                                 {h.label}
                                                 {h.col && <span style={{marginLeft:'4px',fontSize:'10px',opacity:sortCol===h.col?1:0.35,color:sortCol===h.col?'#1B5A8E':'#78716C'}}>
                                                     {sortCol===h.col ? (sortDir==='asc'?'▲':'▼') : '⇅'}
@@ -3004,7 +3004,7 @@
                                                 <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}}>
                                                     <div style={{fontWeight:600,fontSize:'12px',color:'#1B5A8E'}}>{order.locationId}</div>
                                                 </td>
-                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontSize:'11px',color:'#57534E',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{order.shipTo}</td>
+                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontSize:'11.5px',fontWeight:700,color:'#0A2540',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{order.shipTo}</td>
                                                 <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontWeight:500,fontSize:'12px',color:'#0A2540'}}>${(order.total||0).toFixed(2)}</td>
                                                 <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}} onClick={e=>e.stopPropagation()}>
                                                     {order.status === 'Deleted' ? (
@@ -3043,7 +3043,7 @@
                                             </tr>
                                             {expandedRows[order.id] && (
                                                 <tr>
-                                                    <td colSpan={10} style={{padding:0,borderBottom:'2px solid #DB802E',background:'#FEF5EC'}}>
+                                                    <td colSpan={10} style={{padding:0,borderBottom:'3px solid #DB802E',background:'#F0F4F8'}}>
                                                         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'0',borderTop:'2px solid #1B5A8E'}}>
 
                                                             {/* ITEMS ORDERED — blue section */}
@@ -3369,7 +3369,7 @@
                                         ) : (
                                             <table style={{width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed'}}>
                                                 <thead style={{position:'sticky',top:0,zIndex:1}}>
-                                                    <tr style={{background:'#FEF5EC'}}>
+                                                    <tr style={{background:'#0A2540'}}>
                                                         <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'3%'}}></th>
                                                         <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'14%'}}>Date/Time</th>
                                                         <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'17%'}}>Admin</th>
