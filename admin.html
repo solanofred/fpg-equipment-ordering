@@ -277,34 +277,39 @@
         }
         
         /* Admin Dashboard */
-        .admin-header {
-            background: linear-gradient(135deg,#1E3A5F 0%,#4C3BAF 100%);
-            color: white;
-            padding: 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        /* ── SIDEBAR LAYOUT ── */
+        html, body { height: 100%; margin: 0; }
+        #root { height: 100%; }
+        .app-shell {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            background: #F1F5F9;
         }
-        .admin-header-gold-bar {
+        .sidebar {
+            width: 220px;
+            flex-shrink: 0;
+            background: #0F172A;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .sidebar-gold-bar {
             height: 4px;
             background: linear-gradient(90deg,#DB802E,#EFA855,#DB802E);
+            flex-shrink: 0;
         }
-        .admin-header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 13px 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .admin-header-left {
+        .sidebar-brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            padding: 16px 14px 14px;
+            border-bottom: 0.5px solid rgba(255,255,255,0.07);
+            flex-shrink: 0;
         }
-        .admin-logomark {
-            width: 36px;
-            height: 36px;
+        .sidebar-logomark {
+            width: 34px;
+            height: 34px;
             background: linear-gradient(135deg,#4C3BAF,#6366F1);
             border-radius: 9px;
             display: flex;
@@ -316,45 +321,128 @@
             font-family: Georgia, serif;
             flex-shrink: 0;
         }
-        .admin-header h1 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: white;
-            margin: 0;
+        .sidebar-brand-title { font-size: 12px; font-weight: 700; color: white; line-height: 1.2; }
+        .sidebar-brand-sub { font-size: 10px; color: rgba(255,255,255,0.38); margin-top: 1px; }
+        .sidebar-nav { flex: 1; overflow-y: auto; padding: 8px; }
+        .sidebar-section-label {
+            font-size: 9.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.28);
+            padding: 12px 8px 4px;
         }
-        .admin-header-sub {
-            font-size: 11px;
-            color: rgba(255,255,255,0.5);
-            margin-top: 1px;
-        }
-        .admin-user {
+        .sidebar-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-        }
-        .admin-user-email {
-            color: rgba(255,255,255,0.6);
-            font-size: 12px;
-        }
-        .btn-logout {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 7px 16px;
-            border: none;
+            gap: 9px;
+            padding: 9px 10px;
             border-radius: 8px;
+            font-size: 12.5px;
+            font-weight: 500;
+            cursor: pointer;
+            color: rgba(255,255,255,0.55);
+            transition: all 0.15s;
+            margin-bottom: 1px;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
+        }
+        .sidebar-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.85); }
+        .sidebar-item.active { background: #4C3BAF; color: white; }
+        .sidebar-item-icon { font-size: 15px; flex-shrink: 0; opacity: 0.8; }
+        .sidebar-item.active .sidebar-item-icon { opacity: 1; }
+        .sidebar-badge {
+            margin-left: auto;
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 1px 6px;
+            border-radius: 10px;
+        }
+        .sidebar-item.active .sidebar-badge { background: rgba(255,255,255,0.2); color: white; }
+        .sidebar-footer {
+            padding: 10px;
+            border-top: 0.5px solid rgba(255,255,255,0.07);
+            flex-shrink: 0;
+        }
+        .sidebar-user {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+        }
+        .sidebar-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #4C3BAF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .sidebar-user-info { flex: 1; min-width: 0; }
+        .sidebar-user-email { font-size: 10px; color: rgba(255,255,255,0.45); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .sidebar-user-role { font-size: 9.5px; color: rgba(255,255,255,0.28); margin-top: 1px; }
+        .btn-logout {
+            background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.55);
+            border: none;
+            border-radius: 6px;
+            padding: 5px 8px;
             cursor: pointer;
             font-size: 12px;
             font-weight: 600;
-            transition: background 0.2s;
+            transition: background 0.15s;
+            flex-shrink: 0;
         }
-        .btn-logout:hover {
-            background: rgba(255,255,255,0.3);
+        .btn-logout:hover { background: rgba(255,255,255,0.15); color: white; }
+        .main-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-width: 0;
         }
-        
-        .admin-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
+        .topbar {
+            background: white;
+            border-bottom: 0.5px solid #E2E8F0;
+            padding: 13px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .topbar-title { font-size: 15px; font-weight: 700; color: #0F172A; }
+        .topbar-sub { font-size: 11px; color: #94A3B8; margin-top: 2px; }
+        .topbar-actions { display: flex; align-items: center; gap: 8px; }
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+        .admin-container { max-width: none; margin: 0; padding: 0; }
+        .inactivity-bar {
+            background: #4C3BAF;
+            color: white;
+            padding: 9px 20px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-shrink: 0;
         }
         
         .admin-toolbar {
@@ -1396,59 +1484,104 @@
                 ProductService.loadProducts().then(setProducts);
             };
             
+            const initials = (session.email || '').split('@')[0].split('.').map(p => p[0] ? p[0].toUpperCase() : '').join('').slice(0,2);
+            const isSuperAdmin = session.role === 'superadmin';
+            const sectionTitles = {
+                access: 'Access Management',
+                categories: 'Categories',
+                products: 'Products',
+                orders: 'Orders',
+                auditlog: 'Audit Log',
+                versions: 'Version Control',
+            };
+            const sectionSubs = {
+                access: 'Manage admin accounts and permissions',
+                categories: 'Organize equipment into categories',
+                products: 'Equipment packages and pricing',
+                orders: 'View and manage submitted orders',
+                auditlog: 'Full activity log for all admins',
+                versions: 'Portal version history — superadmin only',
+            };
+
             return (
-                <div>
-                    {inactivityWarning && (
-                        <div style={{background:'#6366F1',color:'white',padding:'10px 20px',textAlign:'center',fontSize:'13px',fontWeight:500,display:'flex',alignItems:'center',justifyContent:'center',gap:'12px'}}>
-                            ⚠️ You'll be automatically logged out in 10 minutes due to inactivity.
-                            <button onClick={() => setInactivityWarning(false)} style={{background:'rgba(255,255,255,0.2)',border:'none',color:'white',padding:'4px 12px',borderRadius:'6px',cursor:'pointer',fontSize:'12px',fontFamily:'inherit'}}>Dismiss</button>
+                <div className="app-shell">
+
+                    {/* ── SIDEBAR ── */}
+                    <div className="sidebar">
+                        <div className="sidebar-gold-bar"></div>
+                        <div className="sidebar-brand">
+                            <div className="sidebar-logomark">F</div>
+                            <div>
+                                <div className="sidebar-brand-title">Equipment Admin</div>
+                                <div className="sidebar-brand-sub">Foundation Partners Group</div>
+                            </div>
                         </div>
-                    )}
-                    <header className="admin-header">
-                        <div className="admin-header-gold-bar"></div>
-                        <div className="admin-header-content">
-                            <div className="admin-header-left">
-                                <div className="admin-logomark">F</div>
-                                <div>
-                                    <h1>Equipment Admin Panel</h1>
-                                    <div className="admin-header-sub">Foundation Partners Group · Technology</div>
+                        <nav className="sidebar-nav">
+                            <div className="sidebar-section-label">Main</div>
+                            <button className={`sidebar-item ${activeTab==='orders'?'active':''}`} onClick={()=>setActiveTab('orders')}>
+                                <span className="sidebar-item-icon">📋</span> Orders
+                            </button>
+                            <button className={`sidebar-item ${activeTab==='products'?'active':''}`} onClick={()=>setActiveTab('products')}>
+                                <span className="sidebar-item-icon">📦</span> Products
+                            </button>
+                            <button className={`sidebar-item ${activeTab==='categories'?'active':''}`} onClick={()=>setActiveTab('categories')}>
+                                <span className="sidebar-item-icon">🏷️</span> Categories
+                            </button>
+                            <div className="sidebar-section-label">Settings</div>
+                            <button className={`sidebar-item ${activeTab==='access'?'active':''}`} onClick={()=>setActiveTab('access')}>
+                                <span className="sidebar-item-icon">👥</span> Admins
+                            </button>
+                            <button className={`sidebar-item ${activeTab==='auditlog'?'active':''}`} onClick={()=>{ loadAuditLog(session, AZURE_FUNCTION_URL); }}>
+                                <span className="sidebar-item-icon">📜</span> Audit Log
+                            </button>
+                            {isSuperAdmin && (
+                                <button className={`sidebar-item ${activeTab==='versions'?'active':''}`} onClick={()=>setActiveTab('versions')}>
+                                    <span className="sidebar-item-icon">🔖</span> Version Control
+                                </button>
+                            )}
+                        </nav>
+                        <div className="sidebar-footer">
+                            <div className="sidebar-user">
+                                <div className="sidebar-avatar">{initials}</div>
+                                <div className="sidebar-user-info">
+                                    <div className="sidebar-user-email">{session.email}</div>
+                                    <div className="sidebar-user-role">{isSuperAdmin ? 'Superadmin' : 'Admin'}</div>
                                 </div>
-                            </div>
-                            <div className="admin-user">
-                                <span className="admin-user-email">{session.email}</span>
-                                <button className="btn-logout" onClick={onLogout}>Logout →</button>
+                                <button className="btn-logout" onClick={onLogout}>→</button>
                             </div>
                         </div>
-                    </header>
-                    
-                    <div className="admin-container">
-                        <div style={{display:'flex',gap:'4px',marginBottom:'1.5rem',background:'white',padding:'6px',borderRadius:'12px',border:'0.5px solid #E2E8F0',width:'fit-content',boxShadow:'0 1px 4px rgba(0,0,0,0.06)'}}>
-                            {[
-                                {key:'access', label:'Access Management', icon:'👥'},
-                                {key:'categories', label:'Categories', icon:'🏷️'},
-                                {key:'products', label:'Products', icon:'📦'},
-                                {key:'orders', label:'Orders', icon:'📋'},
-                            ].map(tab => (
-                                <button key={tab.key} onClick={()=>setActiveTab(tab.key)} style={{
-                                    padding:'8px 16px',
-                                    border: activeTab===tab.key ? '1.5px solid #4C3BAF' : '1.5px solid transparent',
-                                    borderRadius:'8px',
-                                    fontWeight:600,
-                                    cursor:'pointer',
-                                    fontSize:'13px',
-                                    background: activeTab===tab.key ? '#1E3A5F' : 'transparent',
-                                    color: activeTab===tab.key ? 'white' : '#475569',
-                                    transition:'all 0.15s',
-                                    display:'flex',
-                                    alignItems:'center',
-                                    gap:'6px',
-                                }}>{tab.icon} {tab.label}</button>
-                            ))}
+                    </div>
+
+                    {/* ── MAIN AREA ── */}
+                    <div className="main-area">
+                        {inactivityWarning && (
+                            <div className="inactivity-bar">
+                                ⚠️ You'll be automatically logged out in 10 minutes due to inactivity.
+                                <button onClick={() => setInactivityWarning(false)} style={{background:'rgba(255,255,255,0.2)',border:'none',color:'white',padding:'4px 12px',borderRadius:'6px',cursor:'pointer',fontSize:'12px',fontFamily:'inherit'}}>Dismiss</button>
+                            </div>
+                        )}
+                        <div className="topbar">
+                            <div>
+                                <div className="topbar-title">{sectionTitles[activeTab] || 'Dashboard'}</div>
+                                <div className="topbar-sub">{sectionSubs[activeTab] || ''}</div>
+                            </div>
+                            <div className="topbar-actions">
+                                {activeTab === 'products' && draftCount > 0 && (
+                                    <button className="btn btn-primary" style={{fontSize:'12px',padding:'6px 14px'}} onClick={() => setShowReviewModal(true)}>
+                                        {draftCount} Unsaved Change{draftCount !== 1 ? 's' : ''}
+                                    </button>
+                                )}
+                            </div>
                         </div>
+
+                        <div className="main-content">
+                        <div className="admin-container">
 
                         {activeTab === 'access' && <AccessManagement session={session} azureUrl={AZURE_FUNCTION_URL} adminPortalUrl={ADMIN_PORTAL_URL} />}
                         {activeTab === 'categories' && <CategoryManagement session={session} azureUrl={AZURE_FUNCTION_URL} categories={categories} products={products} onCategoryAdded={handleCategoryAdded} onCategoryUpdated={handleCategoryUpdated} onCategoryRemoved={handleCategoryRemoved} />}
                         {activeTab === 'orders' && <OrdersDashboard session={session} azureUrl={AZURE_FUNCTION_URL} />}
+                        {activeTab === 'auditlog' && <div style={{color:'#64748B',padding:'2rem',textAlign:'center'}}>Opening audit log in new tab...</div>}
+                        {activeTab === 'versions' && isSuperAdmin && <VersionControl session={session} azureUrl={AZURE_FUNCTION_URL} />}
 
                         {activeTab === 'products' && <div>
                         {draftCount > 0 && (
@@ -1539,49 +1672,51 @@
                         </div>
                         </div>}
 
-                    </div>
-                    
-                    {showModal && (
-                        <ProductModal
-                            product={editingProduct}
-                            categories={categories}
-                            onCategoryAdded={handleCategoryAdded}
-                            onCategoryRemoved={handleCategoryRemoved}
-                            session={session}
-                            azureUrl={AZURE_FUNCTION_URL}
-                            onSave={handleSave}
-                            onClose={() => {
-                                setShowModal(false);
-                                setEditingProduct(null);
-                            }}
+                        </div>{/* admin-container */}
+                        </div>{/* main-content */}
+
+                        {showModal && (
+                            <ProductModal
+                                product={editingProduct}
+                                categories={categories}
+                                onCategoryAdded={handleCategoryAdded}
+                                onCategoryRemoved={handleCategoryRemoved}
+                                session={session}
+                                azureUrl={AZURE_FUNCTION_URL}
+                                onSave={handleSave}
+                                onClose={() => {
+                                    setShowModal(false);
+                                    setEditingProduct(null);
+                                }}
+                            />
+                        )}
+                        
+                        {showReviewModal && (
+                            <ReviewChangesModal
+                                drafts={DraftService.getDrafts()}
+                                products={products}
+                                onClose={() => setShowReviewModal(false)}
+                            />
+                        )}
+                        
+                        <ConfirmModal
+                            isOpen={showConfirmModal}
+                            title="Ready to Publish?"
+                            message={`${confirmData.count || 0} product ${confirmData.updates || 'updates'} will be published to the live site.`}
+                            detail="Your changes will appear in 2-3 minutes."
+                            onConfirm={handleConfirmPublish}
+                            onCancel={() => setShowConfirmModal(false)}
                         />
-                    )}
-                    
-                    {showReviewModal && (
-                        <ReviewChangesModal
-                            drafts={DraftService.getDrafts()}
-                            products={products}
-                            onClose={() => setShowReviewModal(false)}
+                        
+                        <SuccessModal
+                            isOpen={showSuccessModal}
+                            title="Successfully Published!"
+                            message={`${successData.count || 0} products have been published to GitHub.`}
+                            detail={successData.commitSha ? `Commit: ${successData.commitSha}\nYour changes will be live in 2-3 minutes.` : "Your changes will be live in 2-3 minutes."}
+                            onClose={() => setShowSuccessModal(false)}
                         />
-                    )}
-                    
-                    <ConfirmModal
-                        isOpen={showConfirmModal}
-                        title="Ready to Publish?"
-                        message={`${confirmData.count || 0} product ${confirmData.updates || 'updates'} will be published to the live site.`}
-                        detail="Your changes will appear in 2-3 minutes."
-                        onConfirm={handleConfirmPublish}
-                        onCancel={() => setShowConfirmModal(false)}
-                    />
-                    
-                    <SuccessModal
-                        isOpen={showSuccessModal}
-                        title="Successfully Published!"
-                        message={`${successData.count || 0} products have been published to GitHub.`}
-                        detail={successData.commitSha ? `Commit: ${successData.commitSha}\nYour changes will be live in 2-3 minutes.` : "Your changes will be live in 2-3 minutes."}
-                        onClose={() => setShowSuccessModal(false)}
-                    />
-                </div>
+                    </div>{/* main-area */}
+                </div>{/* app-shell */}
             );
         }
         
@@ -2096,7 +2231,7 @@
             const formatDate = (iso) => iso ? new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
 
             return (
-                <div style={{maxWidth:'700px'}}>
+                <div>
                     <div style={{background:'white',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',marginBottom:'1.5rem',overflow:'hidden'}}>
                         <div style={{padding:'1rem 1.5rem',borderBottom:'1px solid #EDE9FE',background:'#F5F3FF',display:'flex',alignItems:'center',gap:'10px'}}>
                             <div style={{width:'30px',height:'30px',background:'linear-gradient(135deg,#4C3BAF,#6366F1)',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'14px'}}>👥</div>
@@ -3511,6 +3646,132 @@ document.getElementById("sc-status").textContent=stat;
                         </div>
                         );
                     })()}
+                </div>
+            );
+        }
+
+
+        // ─── VERSION CONTROL — SUPERADMIN ONLY ──────────────────────────
+        function VersionControl({ session, azureUrl }) {
+            const [versions, setVersions] = React.useState([]);
+            const [loading, setLoading] = React.useState(true);
+            const [status, setStatus] = React.useState(null);
+
+            React.useEffect(() => {
+                // Load version history from audit log entries with action portal.version
+                fetch('./audit-log-' + new Date().getFullYear() + '.json?' + Date.now())
+                    .then(r => r.json())
+                    .then(data => {
+                        const versionEntries = (data || [])
+                            .filter(e => e.action && e.action.startsWith('portal.'))
+                            .sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+                        setVersions(versionEntries);
+                        setLoading(false);
+                    })
+                    .catch(() => setLoading(false));
+            }, []);
+
+            if (session.role !== 'superadmin') {
+                return (
+                    <div style={{textAlign:'center',padding:'3rem',color:'#94A3B8'}}>
+                        <div style={{fontSize:'2rem',marginBottom:'12px'}}>🔒</div>
+                        <div style={{fontWeight:600,color:'#475569'}}>Superadmin access required</div>
+                        <div style={{fontSize:'13px',marginTop:'6px'}}>Version control is restricted to superadmins only.</div>
+                    </div>
+                );
+            }
+
+            return (
+                <div>
+                    <div style={{background:'#FEF9C3',border:'1.5px solid #FDE68A',borderRadius:'12px',padding:'14px 18px',marginBottom:'20px',display:'flex',alignItems:'flex-start',gap:'12px'}}>
+                        <span style={{fontSize:'20px',flexShrink:0}}>⚠️</span>
+                        <div>
+                            <div style={{fontWeight:700,fontSize:'13px',color:'#854D0E',marginBottom:'4px'}}>Superadmin only — Version Control</div>
+                            <div style={{fontSize:'12px',color:'#92400E',lineHeight:1.5}}>
+                                This section logs every update to <strong>admin.html</strong> and <strong>index.html</strong>. 
+                                All changes are recorded in the Audit Log automatically when products are published 
+                                or when portal files are updated via the Azure Function.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',overflow:'hidden'}}>
+                        <div style={{padding:'14px 18px',borderBottom:'0.5px solid #E2E8F0',background:'#F5F3FF',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                            <div>
+                                <div style={{fontWeight:700,fontSize:'14px',color:'#1E3A5F'}}>🔖 Portal Version History</div>
+                                <div style={{fontSize:'11px',color:'#64748B',marginTop:'2px'}}>admin.html · index.html · Recorded automatically</div>
+                            </div>
+                            <div style={{fontSize:'12px',color:'#4C3BAF',fontWeight:600,background:'#EDE9FE',padding:'4px 12px',borderRadius:'20px'}}>
+                                {versions.length} change{versions.length !== 1 ? 's' : ''} logged
+                            </div>
+                        </div>
+
+                        {loading ? (
+                            <div style={{padding:'2rem',textAlign:'center',color:'#94A3B8'}}>Loading version history...</div>
+                        ) : versions.length === 0 ? (
+                            <div style={{padding:'2rem',textAlign:'center',color:'#94A3B8'}}>
+                                <div style={{fontSize:'1.5rem',marginBottom:'8px'}}>📋</div>
+                                No portal changes recorded yet this year.<br/>
+                                <span style={{fontSize:'12px'}}>Changes are logged automatically when you publish products or update portal files.</span>
+                            </div>
+                        ) : (
+                            <table style={{width:'100%',borderCollapse:'collapse',fontSize:'12px'}}>
+                                <thead>
+                                    <tr style={{background:'#1E3A5F'}}>
+                                        <th style={{padding:'10px 14px',textAlign:'left',color:'white',fontWeight:700,fontSize:'11px',textTransform:'uppercase',letterSpacing:'0.06em',width:'16%'}}>Date / Time</th>
+                                        <th style={{padding:'10px 14px',textAlign:'left',color:'white',fontWeight:700,fontSize:'11px',textTransform:'uppercase',letterSpacing:'0.06em',width:'16%'}}>Admin</th>
+                                        <th style={{padding:'10px 14px',textAlign:'left',color:'white',fontWeight:700,fontSize:'11px',textTransform:'uppercase',letterSpacing:'0.06em',width:'14%'}}>Action</th>
+                                        <th style={{padding:'10px 14px',textAlign:'left',color:'white',fontWeight:700,fontSize:'11px',textTransform:'uppercase',letterSpacing:'0.06em',width:'14%'}}>File</th>
+                                        <th style={{padding:'10px 14px',textAlign:'left',color:'white',fontWeight:700,fontSize:'11px',textTransform:'uppercase',letterSpacing:'0.06em'}}>Detail</th>
+                                        <th style={{padding:'10px 14px',textAlign:'left',color:'white',fontWeight:700,fontSize:'11px',textTransform:'uppercase',letterSpacing:'0.06em',width:'10%'}}>Commit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {versions.map((v, i) => {
+                                        const dt = new Date(v.timestamp);
+                                        const detail = v.detail || {};
+                                        const actionLabel = {
+                                            'portal.products_published': 'Products published',
+                                            'portal.admin_updated': 'Admin portal updated',
+                                            'portal.ordering_updated': 'Ordering portal updated',
+                                        }[v.action] || v.action;
+                                        const fileBadgeColor = v.action === 'portal.products_published' ? '#EEF2FF' : '#F0FDF4';
+                                        const fileBadgeText = v.action === 'portal.products_published' ? '#4C3BAF' : '#166534';
+                                        const fileName = detail.file || (v.action === 'portal.products_published' ? 'products.json' : 'portal file');
+                                        return (
+                                            <tr key={i} style={{background: i % 2 === 0 ? 'white' : '#F5F3FF', borderBottom:'0.5px solid #F1F5F9'}}>
+                                                <td style={{padding:'10px 14px',color:'#1E3A5F',fontWeight:600}}>
+                                                    {dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}
+                                                    <br/><span style={{fontSize:'10.5px',color:'#64748B',fontWeight:400}}>{dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>
+                                                </td>
+                                                <td style={{padding:'10px 14px',color:'#0F172A'}}>
+                                                    <div style={{fontWeight:500}}>{(v.adminEmail||'').split('@')[0]}</div>
+                                                    <div style={{fontSize:'10px',color:'#94A3B8',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',maxWidth:'140px'}}>{v.adminEmail}</div>
+                                                </td>
+                                                <td style={{padding:'10px 14px'}}>
+                                                    <span style={{background:'#EDE9FE',color:'#4C3BAF',padding:'2px 8px',borderRadius:'20px',fontWeight:600,fontSize:'11px'}}>{actionLabel}</span>
+                                                </td>
+                                                <td style={{padding:'10px 14px'}}>
+                                                    <span style={{background:fileBadgeColor,color:fileBadgeText,padding:'2px 8px',borderRadius:'20px',fontWeight:600,fontSize:'11px',fontFamily:'monospace'}}>{fileName}</span>
+                                                </td>
+                                                <td style={{padding:'10px 14px',color:'#475569',fontSize:'11px'}}>
+                                                    {detail.productsCount ? `${detail.productsCount} products` : ''}
+                                                    {detail.message || ''}
+                                                </td>
+                                                <td style={{padding:'10px 14px'}}>
+                                                    {detail.commitSha ? (
+                                                        <span style={{fontFamily:'monospace',fontSize:'11px',color:'#4C3BAF',background:'#EDE9FE',padding:'2px 6px',borderRadius:'4px'}}>
+                                                            {detail.commitSha.slice(0,7)}
+                                                        </span>
+                                                    ) : <span style={{color:'#94A3B8'}}>—</span>}
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        )}
+                    </div>
                 </div>
             );
         }
