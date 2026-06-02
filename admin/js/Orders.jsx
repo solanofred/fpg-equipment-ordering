@@ -427,13 +427,13 @@ function OrdersDashboard({ session, azureUrl, onNavigate }) {
                     )}
                     <table id="tbl-orders" className="resizable-table" style={{tableLayout:'fixed',width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed'}}>
                         <thead>
-                            <tr style={{background:'#FAFAF9'}}>
-                                <th style={{padding:'9px 10px',width:'3%',borderBottom:'0.5px solid #E7E5E4'}}>
+                            <tr style={{background:'#D97706'}}>
+                                <th style={{padding:'9px 10px',width:'3%',textAlign:'center'}}>
                                     <input type="checkbox" onChange={toggleSelectAll}
                                         checked={filtered.length > 0 && filtered.every(o => selectedOrders[o.id])}
-                                        style={{cursor:'pointer',accentColor:'#1E3A5F'}} />
+                                        style={{cursor:'pointer',accentColor:'white'}} />
                                 </th>
-                                <th style={{padding:'9px 10px',width:'3%',borderBottom:'0.5px solid #E7E5E4'}}></th>
+                                <th style={{padding:'9px 10px',width:'3%'}}></th>
                                 {[
                                     {label:'Date/Time', col:'submittedAt', w:'10%'},
                                     {label:'Submitted by', col:'submitterName', w:'13%'},
@@ -447,7 +447,7 @@ function OrdersDashboard({ session, azureUrl, onNavigate }) {
                                     <th key={i} onClick={h.col ? ()=>handleSort(h.col) : undefined}
                                         style={{padding:'9px 10px',textAlign:'left',fontSize:'11px',fontWeight:700,color:'#1E3A5F',textTransform:'uppercase',
                                             letterSpacing:'0.05em',borderBottom:'3px solid #6366F1',width:h.w,
-                                            cursor:h.col?'pointer':'default',userSelect:'none',background:'#D97706',color:'white'}}>
+                                            cursor:h.col?'pointer':'default',userSelect:'none',color:'white'}}>
                                         {h.label}
                                         {h.col && <span style={{marginLeft:'4px',fontSize:'10px',opacity:sortCol===h.col?1:0.35,color:sortCol===h.col?'#4C3BAF':'#78716C'}}>
                                             {sortCol===h.col ? (sortDir==='asc'?'▲':'▼') : '⇅'}
@@ -717,47 +717,61 @@ function OrdersDashboard({ session, azureUrl, onNavigate }) {
                                     {drilldown==='total'?'All Active Orders':drilldown==='new'?'New — Awaiting Review':drilldown==='inprogress'?'In Progress':'Total Value Breakdown'}
                                 </div>
                                 <div style={{fontSize:'12px',color:'#64748B',marginTop:'3px'}}>
-                                    {drilldown==='total'?stats.total+' orders':drilldown==='new'?stats.newOrders+' orders':drilldown==='inprogress'?stats.inProgress+' orders':'$'+stats.totalValue.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})+' total'}
+                                    {drilldown==='total'?stats.total+' orders · $'+orders.filter(o=>o.status!=='Deleted').reduce(function(s,o){return s+(parseFloat(o.total)||0);},0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})+' total':drilldown==='new'?stats.newOrders+' orders · $'+orders.filter(o=>o.status==='New').reduce(function(s,o){return s+(parseFloat(o.total)||0);},0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})+' total':drilldown==='inprogress'?stats.inProgress+' orders · $'+orders.filter(o=>o.status==='In Progress').reduce(function(s,o){return s+(parseFloat(o.total)||0);},0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})+' total':'$'+stats.totalValue.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})+' · '+orders.filter(o=>o.status!=='Deleted').length+' active orders'}
                                 </div>
                             </div>
                             <button onClick={()=>setDrilldown(null)} style={{background:'none',border:'none',fontSize:'20px',color:'#94A3B8',cursor:'pointer',lineHeight:1}}>✕</button>
                         </div>
                         {(()=>{
-                            const subset = drilldown==='total'?orders.filter(o=>o.status!=='Deleted'):drilldown==='new'?orders.filter(o=>o.status==='New'):drilldown==='inprogress'?orders.filter(o=>o.status==='In Progress'):orders.filter(o=>o.status!=='Deleted');
+                            const isValue = drilldown==='value';
+                            const subset = drilldown==='total'?orders.filter(o=>o.status!=='Deleted'):drilldown==='new'?orders.filter(o=>o.status==='New'):drilldown==='inprogress'?orders.filter(o=>o.status==='In Progress'):drilldown==='value'?orders.filter(o=>o.status!=='Deleted'):orders.filter(o=>o.status==='Deleted');
                             const byLoc={};
-                            subset.forEach(o=>{ const k=o.locationId||'Unknown'; byLoc[k]=(byLoc[k]||0)+1; });
-                            const locRows=Object.entries(byLoc).sort((a,b)=>b[1]-a[1]);
-                            const maxL=locRows.length?locRows[0][1]:1;
+                            subset.forEach(o=>{
+                                const k=o.locationId||'Unknown';
+                                if(!byLoc[k]) byLoc[k]={count:0,value:0};
+                                byLoc[k].count+=1;
+                                byLoc[k].value+=(parseFloat(o.total)||0);
+                            });
+                            const locRows=Object.entries(byLoc).sort((a,b)=>isValue?b[1].value-a[1].value:b[1].count-a[1].count);
+                            const maxL=locRows.length?(isValue?locRows[0][1].value:locRows[0][1].count):1;
                             const bySub={};
-                            subset.forEach(o=>{ const k=o.submitterName||o.submitterEmail||'Unknown'; bySub[k]=(bySub[k]||0)+1; });
-                            const subRows=Object.entries(bySub).sort((a,b)=>b[1]-a[1]);
-                            const maxS=subRows.length?subRows[0][1]:1;
+                            subset.forEach(o=>{
+                                const k=o.submitterName||o.submitterEmail||'Unknown';
+                                if(!bySub[k]) bySub[k]={count:0,value:0};
+                                bySub[k].count+=1;
+                                bySub[k].value+=(parseFloat(o.total)||0);
+                            });
+                            const subRows=Object.entries(bySub).sort((a,b)=>isValue?b[1].value-a[1].value:b[1].count-a[1].count);
+                            const maxS=subRows.length?(isValue?subRows[0][1].value:subRows[0][1].count):1;
+                            const fmtVal=function(v){return v>=1000000?'$'+(v/1000000).toFixed(2)+'M':v>=1000?'$'+(v/1000).toFixed(1)+'K':'$'+v.toFixed(0);};
+                            const locColor=isValue?'#10B981':'#6366F1';
+                            const subColor=isValue?'#10B981':'#0EA5E9';
                             return (
                                 <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'24px'}}>
                                     <div>
-                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>By Location</div>
-                                        {locRows.slice(0,10).map(([loc,count])=>(
+                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>{isValue?'By Location ($ value)':'By Location'}</div>
+                                        {locRows.slice(0,10).map(([loc,data])=>(
                                             <div key={loc} style={{marginBottom:'9px'}}>
                                                 <div style={{display:'flex',justifyContent:'space-between',fontSize:'12px',marginBottom:'3px'}}>
                                                     <span style={{fontWeight:600,color:'#0F172A'}}>{loc}</span>
-                                                    <span style={{color:'#64748B'}}>{count}</span>
+                                                    <span style={{color:'#64748B'}}>{isValue?fmtVal(data.value):data.count+' · '+fmtVal(data.value)}</span>
                                                 </div>
                                                 <div style={{height:'5px',background:'#F1F5F9',borderRadius:'3px'}}>
-                                                    <div style={{height:'100%',background:'#6366F1',borderRadius:'3px',width:Math.max(4,Math.round(count/maxL*100))+'%'}}></div>
+                                                    <div style={{height:'100%',background:locColor,borderRadius:'3px',width:Math.max(4,Math.round((isValue?data.value:data.count)/maxL*100))+'%'}}></div>
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
                                     <div>
-                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>By Submitter</div>
-                                        {subRows.slice(0,10).map(([name,count])=>(
+                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>{isValue?'By Submitter ($ value)':'By Submitter'}</div>
+                                        {subRows.slice(0,10).map(([name,data])=>(
                                             <div key={name} style={{marginBottom:'9px'}}>
                                                 <div style={{display:'flex',justifyContent:'space-between',fontSize:'12px',marginBottom:'3px'}}>
                                                     <span style={{fontWeight:600,color:'#0F172A'}}>{name}</span>
-                                                    <span style={{color:'#64748B'}}>{count}</span>
+                                                    <span style={{color:'#64748B'}}>{isValue?fmtVal(data.value):data.count+' · '+fmtVal(data.value)}</span>
                                                 </div>
                                                 <div style={{height:'5px',background:'#F1F5F9',borderRadius:'3px'}}>
-                                                    <div style={{height:'100%',background:'#0EA5E9',borderRadius:'3px',width:Math.max(4,Math.round(count/maxS*100))+'%'}}></div>
+                                                    <div style={{height:'100%',background:subColor,borderRadius:'3px',width:Math.max(4,Math.round((isValue?data.value:data.count)/maxS*100))+'%'}}></div>
                                                 </div>
                                             </div>
                                         ))}
