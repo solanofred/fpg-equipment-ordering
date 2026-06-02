@@ -2832,11 +2832,11 @@
                     {/* Stats - navy boxes with gold numbers */}
                     <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:'0',marginBottom:'20px',borderRadius:'10px',overflow:'hidden',border:'1px solid #0A2540'}}>
                         {[
-                            {label:'Total orders', value: stats.total, sub:'All time', color:'#EFA855'},
-                            {label:'New · Awaiting action', value: stats.newOrders, sub:'Pending IT review', color:'#93C5FD'},
-                            {label:'In progress · Fulfilled', value: stats.inProgress, sub:'Being sourced', color:'#FCD34D'},
-                            {label:'Total value · This year', value: '$'+stats.totalValue.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}), sub:`Year ${currentYear}`, color:'#EFA855'},
-                            {label:'Soft deleted', value: stats.deleted, sub: stats.deleted > 0 ? 'Click to view' : 'None', color: stats.deleted > 0 ? '#FCA5A5' : 'rgba(255,255,255,0.4)', clickable: stats.deleted > 0},
+                            {label:'Total orders', value: stats.total, sub:'All time', color:'#FFFFFF'},
+                            {label:'New · Awaiting action', value: stats.newOrders, sub:'Pending IT review', color:'#60B4FF'},
+                            {label:'In progress · Fulfilled', value: stats.inProgress, sub:'Being sourced', color:'#FFD966'},
+                            {label:'Total value · This year', value: '$'+stats.totalValue.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}), sub:`Year ${currentYear}`, color:'#4ADE80'},
+                            {label:'Soft deleted', value: stats.deleted, sub: stats.deleted > 0 ? 'Click to view' : 'None', color: stats.deleted > 0 ? '#FF8585' : 'rgba(255,255,255,0.35)', clickable: stats.deleted > 0},
                         ].map((s,i) => (
                             <div key={i}
                                 onClick={s.clickable ? ()=>setShowDeleted(true) : undefined}
