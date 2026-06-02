@@ -2850,15 +2850,15 @@
 
 
                     {/* Toolbar Row 1 — Search + Dropdowns */}
-                    <div style={{display:'flex',gap:'8px',marginBottom:'6px',flexWrap:'wrap',alignItems:'center'}}>
-                        <div style={{flex:1,minWidth:'220px',position:'relative'}}>
-                            <span style={{position:'absolute',left:'9px',top:'50%',transform:'translateY(-50%)',color:'#A8A29E',fontSize:'14px'}}>🔍</span>
+                    <div style={{display:'flex',gap:'8px',marginBottom:'8px',flexWrap:'wrap',alignItems:'center'}}>
+                        <div style={{flex:1,minWidth:'260px',position:'relative'}}>
+                            <span style={{position:'absolute',left:'10px',top:'50%',transform:'translateY(-50%)',color:'#1B5A8E',fontSize:'15px'}}>🔍</span>
                             <input type="text" placeholder="Search name, email, location, recipient, address..." value={searchQuery}
                                 onChange={handleFilterChange(setSearchQuery)}
-                                style={{width:'100%',padding:'7px 10px 7px 30px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'12px'}} />
+                                style={{width:'100%',padding:'9px 12px 9px 34px',border:'1.5px solid #1B5A8E',borderRadius:'8px',fontSize:'13px',background:'white',color:'#0A2540'}} />
                         </div>
                         <select value={statusFilter} onChange={handleFilterChange(setStatusFilter)}
-                            style={{padding:'7px 10px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'12px',minWidth:'130px'}}>
+                            style={{padding:'9px 12px',border:'1.5px solid #1B5A8E',borderRadius:'8px',fontSize:'13px',minWidth:'140px',background:'white',color:'#0A2540',fontWeight:500}}>
                             <option value="all">All statuses</option>
                             <option value="New">New</option>
                             <option value="In Progress">In Progress</option>
@@ -2866,14 +2866,14 @@
                             {showDeleted && <option value="Deleted">Deleted</option>}
                         </select>
                         <select value={submitterFilter} onChange={handleFilterChange(setSubmitterFilter)}
-                            style={{padding:'7px 10px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'12px',minWidth:'140px'}}>
+                            style={{padding:'9px 12px',border:'1.5px solid #1B5A8E',borderRadius:'8px',fontSize:'13px',minWidth:'155px',background:'white',color:'#0A2540',fontWeight:500}}>
                             <option value="all">All submitters</option>
                             {uniqueSubmitters.map(([email, name]) => (
                                 <option key={email} value={email}>{name}</option>
                             ))}
                         </select>
                         <select value={locationFilter} onChange={handleFilterChange(setLocationFilter)}
-                            style={{padding:'7px 10px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'12px',minWidth:'130px'}}>
+                            style={{padding:'9px 12px',border:'1.5px solid #1B5A8E',borderRadius:'8px',fontSize:'13px',minWidth:'145px',background:'white',color:'#0A2540',fontWeight:500}}>
                             <option value="all">All locations</option>
                             {uniqueLocations.map(loc => (
                                 <option key={loc} value={loc}>{loc}</option>
@@ -2882,45 +2882,47 @@
                     </div>
 
                     {/* Toolbar Row 2 — Date Range + Total Range + Year Pills + Actions */}
-                    <div style={{display:'flex',gap:'6px',marginBottom:'14px',flexWrap:'wrap',alignItems:'center'}}>
-                        <span style={{fontSize:'11.5px',color:'#78716C',fontWeight:500}}>Date:</span>
+                    <div style={{display:'flex',gap:'7px',marginBottom:'16px',flexWrap:'wrap',alignItems:'center',background:'#F0F4F8',padding:'10px 12px',borderRadius:'8px',border:'0.5px solid #C7D9F0'}}>
+                        <span style={{fontSize:'12px',color:'#1B5A8E',fontWeight:700}}>Date:</span>
                         <input type="date" value={dateFrom} onChange={handleFilterChange(setDateFrom)}
-                            style={{padding:'5px 8px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'11.5px'}} />
-                        <span style={{fontSize:'11px',color:'#A8A29E'}}>to</span>
+                            style={{padding:'6px 9px',border:'1.5px solid #1B5A8E',borderRadius:'7px',fontSize:'12px',background:'white',color:'#0A2540'}} />
+                        <span style={{fontSize:'12px',color:'#78716C',fontWeight:500}}>to</span>
                         <input type="date" value={dateTo} onChange={handleFilterChange(setDateTo)}
-                            style={{padding:'5px 8px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'11.5px'}} />
-                        <div style={{width:'1px',height:'18px',background:'#D6D3D1',margin:'0 2px'}}></div>
-                        <span style={{fontSize:'11.5px',color:'#78716C',fontWeight:500}}>$</span>
+                            style={{padding:'6px 9px',border:'1.5px solid #1B5A8E',borderRadius:'7px',fontSize:'12px',background:'white',color:'#0A2540'}} />
+                        <div style={{width:'1px',height:'20px',background:'#C7D9F0',margin:'0 4px'}}></div>
+                        <span style={{fontSize:'12px',color:'#1B5A8E',fontWeight:700}}>$ Total:</span>
                         <input type="number" placeholder="Min" value={minTotal} onChange={handleFilterChange(setMinTotal)}
-                            style={{width:'70px',padding:'5px 8px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'11.5px'}} />
-                        <span style={{fontSize:'11px',color:'#A8A29E'}}>to</span>
+                            style={{width:'75px',padding:'6px 9px',border:'1.5px solid #1B5A8E',borderRadius:'7px',fontSize:'12px',background:'white',color:'#0A2540'}} />
+                        <span style={{fontSize:'12px',color:'#78716C',fontWeight:500}}>to</span>
                         <input type="number" placeholder="Max" value={maxTotal} onChange={handleFilterChange(setMaxTotal)}
-                            style={{width:'70px',padding:'5px 8px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'11.5px'}} />
-                        <div style={{width:'1px',height:'18px',background:'#D6D3D1',margin:'0 2px'}}></div>
+                            style={{width:'75px',padding:'6px 9px',border:'1.5px solid #1B5A8E',borderRadius:'7px',fontSize:'12px',background:'white',color:'#0A2540'}} />
+                        <div style={{width:'1px',height:'20px',background:'#C7D9F0',margin:'0 4px'}}></div>
                         {availableYears.map(y => (
                             <button key={y} onClick={()=>{setYearFilter(prev=>prev.includes(y)?prev.filter(x=>x!==y):[...prev,y]);setCurrentPage(1);}}
-                                style={{padding:'4px 10px',border:'0.5px solid #D6D3D1',borderRadius:'20px',fontSize:'11.5px',fontWeight:500,cursor:'pointer',
-                                    background:yearFilter.includes(y)?'#0A2540':'white',
-                                    color:yearFilter.includes(y)?'white':'#57534E'}}>
+                                style={{padding:'5px 14px',border:'1.5px solid #1B5A8E',borderRadius:'20px',fontSize:'12px',fontWeight:700,cursor:'pointer',
+                                    background:yearFilter.includes(y)?'#1B5A8E':'white',
+                                    color:yearFilter.includes(y)?'white':'#1B5A8E'}}>
                                 {y}
                             </button>
                         ))}
-                        <span style={{fontSize:'11.5px',color:'#78716C',marginLeft:'4px'}}>
-                            Showing <strong style={{color:'#0A2540'}}>{filtered.length}</strong> of <strong style={{color:'#0A2540'}}>{orders.filter(o=>showDeleted||o.status!=='Deleted').length}</strong> orders
+                        <span style={{fontSize:'12px',color:'#1B5A8E',fontWeight:500,marginLeft:'4px'}}>
+                            Showing <strong style={{color:'#0A2540'}}>{filtered.length}</strong> of <strong style={{color:'#0A2540'}}>{orders.filter(o=>showDeleted||o.status!=="Deleted").length}</strong> orders
                         </span>
                         <div style={{marginLeft:'auto',display:'flex',gap:'6px'}}>
                             <button onClick={()=>setShowDeleted(p=>!p)}
-                                style={{padding:'5px 10px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'11.5px',cursor:'pointer',
-                                    background:showDeleted?'#FEE2E2':'white',color:showDeleted?'#991B1B':'#57534E'}}>
-                                🗑 {showDeleted?'Hide deleted':'Show deleted'}
+                                style={{padding:'6px 12px',border:'1.5px solid',borderRadius:'8px',fontSize:'12px',fontWeight:500,cursor:'pointer',
+                                    borderColor:showDeleted?'#DC2626':'#1B5A8E',
+                                    background:showDeleted?'#FEE2E2':'white',
+                                    color:showDeleted?'#DC2626':'#1B5A8E'}}>
+                                {showDeleted?'Hide deleted':'Show deleted'}
                             </button>
                             <button onClick={handleExportAll}
-                                style={{padding:'5px 10px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'11.5px',cursor:'pointer',background:'white',color:'#57534E'}}>
-                                ⬇ Export
+                                style={{padding:'6px 12px',border:'1.5px solid #1B5A8E',borderRadius:'8px',fontSize:'12px',fontWeight:500,cursor:'pointer',background:'white',color:'#1B5A8E'}}>
+                                Export
                             </button>
                             <button onClick={()=>loadAuditLog()}
-                                style={{padding:'5px 10px',border:'0.5px solid #D6D3D1',borderRadius:'8px',fontSize:'11.5px',cursor:'pointer',background:'white',color:'#57534E'}}>
-                                📋 Audit log
+                                style={{padding:'6px 12px',border:'none',borderRadius:'8px',fontSize:'12px',fontWeight:600,cursor:'pointer',background:'#1B5A8E',color:'white'}}>
+                                Audit log
                             </button>
                         </div>
                     </div>
