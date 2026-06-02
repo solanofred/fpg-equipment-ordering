@@ -6509,5 +6509,48 @@
     "id": "LOG-1780373791346",
     "timestamp": "2026-06-02T04:16:31.346Z",
     "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "id": "LOG-1780373986480",
+    "timestamp": "2026-06-02T04:19:46.480Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.permanent_delete",
+    "target": "ORD-2026-TEST096",
+    "detail": {
+      "orderId": "ORD-2026-TEST096",
+      "reason": "Testing",
+      "orderSnapshot": {
+        "id": "ORD-2026-TEST096",
+        "status": "Deleted",
+        "submittedAt": "2026-05-29T17:01:00Z",
+        "year": 2026,
+        "submitterName": "Chezarae Carter",
+        "submitterEmail": "chezarae.carter@foundationpartners.com",
+        "recipientName": "Sarah Thompson",
+        "recipientEmail": "sarah.thompson@foundationpartners.com",
+        "locationId": "WAFAC",
+        "shipTo": "407 N Pearl St, Centralia, WA 98531",
+        "items": [
+          {
+            "title": "Desktop TIO",
+            "price": 1850,
+            "quantity": 1
+          },
+          {
+            "title": "Color MFP",
+            "price": 450,
+            "quantity": 1
+          }
+        ],
+        "total": 2300,
+        "isNewEmployee": "no",
+        "dateNeeded": "2026-06-12",
+        "notes": "Please deliver before 9am.",
+        "deletedBy": "fred.solano@foundationpartners.com",
+        "deletedAt": "2026-05-30T17:01:00Z",
+        "deleteReason": "Test order"
+      }
+    },
+    "result": "success"
   }
 ]
