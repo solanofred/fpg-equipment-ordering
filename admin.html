@@ -1502,19 +1502,19 @@
                             </button>
                         </div>
                         
-                        <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'12px'}}>
+                        <div style={{display:'grid',gridTemplateColumns:'repeat(4,minmax(0,1fr))',gap:'14px'}}>
                             {[...products].sort((a, b) => a.title.localeCompare(b.title)).map(product => {
                                 const isDraft = DraftService.isDraftProduct(product.id);
                                 return (
                                     <div key={product.id} style={{background:'white',borderRadius:'12px',border: isDraft ? '2px solid #F59E0B' : '0.5px solid #E2E8F0',overflow:'hidden',transition:'box-shadow 0.15s'}}>
-                                        <div style={{width:'100%',height:'80px',overflow:'hidden',background:'#F5F3FF',borderBottom:'1.5px solid #EDE9FE',display:'flex',alignItems:'center',justifyContent:'center',position:'relative'}}>
+                                        <div style={{width:'100%',height:'72px',overflow:'hidden',background:'#F5F3FF',borderBottom:'1.5px solid #EDE9FE',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',flexShrink:0}}>
                                             {product.imageUrl
                                                 ? <img src={product.imageUrl} alt={product.title} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.innerHTML='<span style="font-size:28px">📦</span>';}} />
                                                 : <span style={{fontSize:'28px'}}>📦</span>}
                                             {isDraft && <span style={{position:'absolute',top:'5px',right:'5px',background:'#F59E0B',color:'white',padding:'1px 6px',borderRadius:'6px',fontSize:'9px',fontWeight:700}}>EDITED</span>}
                                         </div>
-                                        <div style={{padding:'11px 12px'}}>
-                                            <div style={{fontWeight:700,fontSize:'12px',color:'#0F172A',marginBottom:'2px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{product.title}</div>
+                                        <div style={{padding:'10px 12px'}}>
+                                            <div style={{fontWeight:700,fontSize:'12px',color:'#0F172A',marginBottom:'2px',overflow:'hidden',display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical',lineHeight:'1.35',minHeight:'32px'}}>{product.title}</div>
                                             <div style={{fontSize:'15px',fontWeight:700,color:'#4C3BAF',fontFamily:'Georgia,serif',marginBottom:'2px'}}>${product.price.toLocaleString()}</div>
                                             <div style={{fontSize:'10px',color:'#64748B',marginBottom:'6px'}}>{product.category}{product.recommended ? ' · ⭐' : ''}</div>
                                             <div style={{marginBottom:'8px'}}>
@@ -2309,7 +2309,7 @@
             };
 
             return (
-                <div style={{maxWidth:'700px'}}>
+                <div>
                     {showAddModal && (
                         <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.45)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={function(e){if(e.target===e.currentTarget){setShowAddModal(false);setNewCatName("");}}}>
                             <div style={{background:'white',borderRadius:'12px',padding:'1.5rem',width:'420px',maxWidth:'90vw',boxShadow:'0 8px 32px rgba(0,0,0,0.18)'}}>
@@ -2370,13 +2370,13 @@
                             </div>
                         )}
 
-                        <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'12px',padding:'16px'}}>
+                        <div style={{display:'grid',gridTemplateColumns:'repeat(4,minmax(0,1fr))',gap:'14px',padding:'16px'}}>
                             {(categories || []).slice().sort((a,b) => a.label.localeCompare(b.label)).map(function(cat, i) {
                                 const count = getProductCount(cat.slug);
                                 const isEmpty = count === 0;
                                 const isEditing = editingSlug === cat.slug;
                                 return (
-                                    <div key={i} style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',padding:'14px',textAlign:'center',position:'relative',transition:'box-shadow 0.15s'}}>
+                                    <div key={i} style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',padding:'16px',textAlign:'center',position:'relative',transition:'box-shadow 0.15s',boxSizing:'border-box'}}>
                                         {!isEmpty && (
                                             <span style={{position:'absolute',top:'8px',right:'8px',background:'#EDE9FE',color:'#4C3BAF',padding:'1px 7px',borderRadius:'10px',fontSize:'9px',fontWeight:700}}>In use</span>
                                         )}
@@ -2408,12 +2408,12 @@
                                             </div>
                                         ) : (
                                             <>
-                                                <div style={{width:'64px',height:'64px',borderRadius:'12px',overflow:'hidden',margin:'0 auto 10px',border:'2px solid #C4B5FD',boxShadow:'0 0 0 3px #EDE9FE',background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                                                <div style={{width:'80px',height:'80px',borderRadius:'12px',overflow:'hidden',margin:'0 auto 12px',border:'2px solid #C4B5FD',boxShadow:'0 0 0 3px #EDE9FE',background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center'}}>
                                                     {cat.imageUrl
                                                         ? <img src={cat.imageUrl} alt={cat.label} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.style.background='#EDE9FE';e.target.parentNode.innerHTML='🏷️';}} />
                                                         : <span style={{fontSize:'24px'}}>🏷️</span>}
                                                 </div>
-                                                <div style={{fontWeight:600,fontSize:'12px',color:'#0F172A',marginBottom:'2px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{cat.label}</div>
+                                                <div style={{fontWeight:700,fontSize:'13px',color:'#0F172A',marginBottom:'3px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{cat.label}</div>
                                                 <div style={{fontSize:'11px',color:'#64748B',marginBottom:'10px'}}>{count} product{count !== 1 ? 's' : ''}</div>
                                                 <div style={{display:'flex',gap:'5px',justifyContent:'center'}}>
                                                     <button onClick={function(){handleStartEdit(cat);}} disabled={saving} style={{flex:1,padding:'5px 8px',border:'1.5px solid #4C3BAF',borderRadius:'7px',fontSize:'11px',background:'white',color:'#4C3BAF',cursor:'pointer',fontWeight:600}}>Edit</button>
