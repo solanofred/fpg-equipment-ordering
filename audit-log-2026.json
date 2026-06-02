@@ -1,5 +1,740 @@
 [
   {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780371982381",
+    "timestamp": "2026-06-02T03:46:22.381Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780371937559",
+    "timestamp": "2026-06-02T03:45:37.559Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780371922833",
+    "timestamp": "2026-06-02T03:45:22.833Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780371504969",
+    "timestamp": "2026-06-02T03:38:24.987Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780370839144",
+    "timestamp": "2026-06-02T03:27:19.144Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780370821025",
+    "timestamp": "2026-06-02T03:27:01.026Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780370536093",
+    "timestamp": "2026-06-02T03:22:16.093Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780370109202",
+    "timestamp": "2026-06-02T03:15:09.202Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780369716493",
+    "timestamp": "2026-06-02T03:08:36.494Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780369214233",
+    "timestamp": "2026-06-02T03:00:14.233Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780369194105",
+    "timestamp": "2026-06-02T02:59:54.105Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780368654907",
+    "timestamp": "2026-06-02T02:50:54.907Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780368647513",
+    "timestamp": "2026-06-02T02:50:47.513Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780368630824",
+    "timestamp": "2026-06-02T02:50:30.824Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780368627875",
+    "timestamp": "2026-06-02T02:50:27.875Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780367356187",
+    "timestamp": "2026-06-02T02:29:16.187Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780366948395",
+    "timestamp": "2026-06-02T02:22:28.395Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780366929637",
+    "timestamp": "2026-06-02T02:22:09.637Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780366906648",
+    "timestamp": "2026-06-02T02:21:46.648Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780365932823",
+    "timestamp": "2026-06-02T02:05:32.823Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780364855468",
+    "timestamp": "2026-06-02T01:47:35.471Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780364100856",
+    "timestamp": "2026-06-02T01:35:00.856Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780364078159",
+    "timestamp": "2026-06-02T01:34:38.159Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780363091467",
+    "timestamp": "2026-06-02T01:18:11.467Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780363090040",
+    "timestamp": "2026-06-02T01:18:10.040Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780363087560",
+    "timestamp": "2026-06-02T01:18:07.560Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780363057055",
+    "timestamp": "2026-06-02T01:17:37.056Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780361684456",
+    "timestamp": "2026-06-02T00:54:44.456Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780361543729",
+    "timestamp": "2026-06-02T00:52:23.729Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780361253467",
+    "timestamp": "2026-06-02T00:47:33.467Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780361064630",
+    "timestamp": "2026-06-02T00:44:24.639Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780360352407",
+    "timestamp": "2026-06-02T00:32:32.407Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780360026713",
+    "timestamp": "2026-06-02T00:27:06.713Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780359426138",
+    "timestamp": "2026-06-02T00:17:06.138Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780358103596",
+    "timestamp": "2026-06-01T23:55:03.615Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780357760455",
+    "timestamp": "2026-06-01T23:49:20.455Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780357474256",
+    "timestamp": "2026-06-01T23:44:34.273Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780355514737",
+    "timestamp": "2026-06-01T23:11:54.737Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780355512028",
+    "timestamp": "2026-06-01T23:11:52.028Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780355510374",
+    "timestamp": "2026-06-01T23:11:50.374Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780355443399",
+    "timestamp": "2026-06-01T23:10:43.399Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780354977424",
+    "timestamp": "2026-06-01T23:02:57.424Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780354956499",
+    "timestamp": "2026-06-01T23:02:36.499Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.auto_logoff",
+    "detail": {
+      "reason": "inactivity_timeout",
+      "lastActivity": "2026-06-01T20:50:10.841Z"
+    },
+    "result": "success",
+    "id": "LOG-1780350644666",
+    "timestamp": "2026-06-01T21:50:44.666Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780346959394",
+    "timestamp": "2026-06-01T20:49:19.394Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780346942095",
+    "timestamp": "2026-06-01T20:49:02.095Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780346578367",
+    "timestamp": "2026-06-01T20:42:58.367Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780346024151",
+    "timestamp": "2026-06-01T20:33:44.151Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780346021807",
+    "timestamp": "2026-06-01T20:33:41.807Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780346020411",
+    "timestamp": "2026-06-01T20:33:40.411Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780346008399",
+    "timestamp": "2026-06-01T20:33:28.399Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780345983267",
+    "timestamp": "2026-06-01T20:33:03.267Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780345980697",
+    "timestamp": "2026-06-01T20:33:00.697Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780345978137",
+    "timestamp": "2026-06-01T20:32:58.137Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780345826175",
+    "timestamp": "2026-06-01T20:30:26.175Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "id": "LOG-1780345607035",
+    "timestamp": "2026-06-01T20:26:47.035Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.permanent_delete",
+    "target": "ORD-2026-TEST045",
+    "detail": {
+      "orderId": "ORD-2026-TEST045",
+      "reason": "Test",
+      "orderSnapshot": {
+        "id": "ORD-2026-TEST045",
+        "status": "Deleted",
+        "submittedAt": "2026-05-31T16:09:00Z",
+        "year": 2026,
+        "submitterName": "Matthew Ritchotte",
+        "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+        "recipientName": "Nicole Rivera",
+        "recipientEmail": "nicole.rivera@foundationpartners.com",
+        "locationId": "FLTLT",
+        "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
+        "items": [
+          {
+            "title": "Accounting Laptop",
+            "price": 2100,
+            "quantity": 1
+          },
+          {
+            "title": "ThinkVision Monitor 24\"",
+            "price": 300,
+            "quantity": 2
+          },
+          {
+            "title": "Logitech MK270",
+            "price": 30,
+            "quantity": 1
+          }
+        ],
+        "total": 2730,
+        "isNewEmployee": "no",
+        "dateNeeded": "2026-06-14",
+        "notes": "Urgent \u2014 location opening soon.",
+        "deletedBy": "fred.solano@foundationpartners.com",
+        "deletedAt": "2026-06-01T20:26:07.235Z",
+        "deleteReason": "Testing"
+      }
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1780345569180",
+    "timestamp": "2026-06-01T20:26:09.180Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-TEST045",
+    "detail": {
+      "orderId": "ORD-2026-TEST045",
+      "reason": "Testing",
+      "orderSnapshot": {
+        "id": "ORD-2026-TEST045",
+        "status": "In Progress",
+        "submittedAt": "2026-05-31T16:09:00Z",
+        "year": 2026,
+        "submitterName": "Matthew Ritchotte",
+        "submitterEmail": "matthew.ritchotte@foundationpartners.com",
+        "recipientName": "Nicole Rivera",
+        "recipientEmail": "nicole.rivera@foundationpartners.com",
+        "locationId": "FLTLT",
+        "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
+        "items": [
+          {
+            "title": "Accounting Laptop",
+            "price": 2100,
+            "quantity": 1
+          },
+          {
+            "title": "ThinkVision Monitor 24\"",
+            "price": 300,
+            "quantity": 2
+          },
+          {
+            "title": "Logitech MK270",
+            "price": 30,
+            "quantity": 1
+          }
+        ],
+        "total": 2730,
+        "isNewEmployee": "no",
+        "dateNeeded": "2026-06-14",
+        "notes": "Urgent \u2014 location opening soon."
+      }
+    },
+    "result": "success"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780345172546",
+    "timestamp": "2026-06-01T20:19:32.546Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780345132757",
+    "timestamp": "2026-06-01T20:18:52.757Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780345086851",
+    "timestamp": "2026-06-01T20:18:06.851Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780345070067",
+    "timestamp": "2026-06-01T20:17:50.069Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780344409011",
+    "timestamp": "2026-06-01T20:06:49.011Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780343804521",
+    "timestamp": "2026-06-01T19:56:44.521Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780343542390",
+    "timestamp": "2026-06-01T19:52:22.390Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780343289136",
+    "timestamp": "2026-06-01T19:48:09.137Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "id": "LOG-1780266625106",
+    "timestamp": "2026-05-31T22:30:25Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1053",
     "timestamp": "2026-05-31T20:01:00Z",
     "adminEmail": "chezarae.carter@foundationpartners.com",
@@ -9,6 +744,107 @@
       "reason": "inactivity_timeout",
       "lastActivity": "2026-05-31T20:01:00Z"
     },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1780206023455",
+    "timestamp": "2026-05-31T05:40:23Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1780203861560",
+    "timestamp": "2026-05-31T05:04:21Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "category.updated",
+    "target": "peripherals",
+    "detail": {
+      "slug": "peripherals",
+      "newLabel": "Peripherals"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1780153534046",
+    "timestamp": "2026-05-30T15:05:34Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "category.updated",
+    "target": "monitors",
+    "detail": {
+      "slug": "monitors",
+      "newLabel": "Monitors"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1780126729721",
+    "timestamp": "2026-05-30T07:38:49Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1780063428097",
+    "timestamp": "2026-05-29T14:03:48Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-5745487585491",
+    "detail": {
+      "orderId": "ORD-2026-5745487585491",
+      "oldStatus": "Fulfilled",
+      "newStatus": "New",
+      "locationId": "CAOAK"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1780047657459",
+    "timestamp": "2026-05-29T09:40:57Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1780044789949",
+    "timestamp": "2026-05-29T08:53:09Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "category.updated",
+    "target": "laptop",
+    "detail": {
+      "slug": "laptop",
+      "newLabel": "Laptop"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1780035967377",
+    "timestamp": "2026-05-29T06:26:07Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1780032568262",
+    "timestamp": "2026-05-29T05:29:28Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
     "result": "success"
   },
   {
@@ -41,6 +877,17 @@
         ],
         "total": 2300
       }
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779944755498",
+    "timestamp": "2026-05-28T05:05:55Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "order.restore",
+    "target": "ORD-2026-9813343708898",
+    "detail": {
+      "orderId": "ORD-2026-9813343708898"
     },
     "result": "success"
   },
@@ -78,6 +925,17 @@
     "result": "success"
   },
   {
+    "id": "LOG-1779917095845",
+    "timestamp": "2026-05-27T21:24:55Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1005",
     "timestamp": "2026-05-27T19:05:00Z",
     "adminEmail": "fred.solano@foundationpartners.com",
@@ -91,6 +949,40 @@
     "result": "success"
   },
   {
+    "id": "LOG-1779871397909",
+    "timestamp": "2026-05-27T08:43:17Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779854833328",
+    "timestamp": "2026-05-27T04:07:13Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779830063592",
+    "timestamp": "2026-05-26T21:14:23Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-5938759388462",
+    "detail": {
+      "orderId": "ORD-2026-5938759388462",
+      "oldStatus": "New",
+      "newStatus": "Fulfilled",
+      "locationId": "GAATL"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1070",
     "timestamp": "2026-05-26T19:31:00Z",
     "adminEmail": "matthew.ritchotte@foundationpartners.com",
@@ -98,6 +990,40 @@
     "target": "",
     "detail": {
       "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779809171762",
+    "timestamp": "2026-05-26T15:26:11Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779776811652",
+    "timestamp": "2026-05-26T06:26:51Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779765205915",
+    "timestamp": "2026-05-26T03:13:25Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-3885995359981",
+    "detail": {
+      "orderId": "ORD-2026-3885995359981",
+      "oldStatus": "Fulfilled",
+      "newStatus": "In Progress",
+      "locationId": "FLLFM"
     },
     "result": "success"
   },
@@ -130,6 +1056,18 @@
     "result": "success"
   },
   {
+    "id": "LOG-1779751451305",
+    "timestamp": "2026-05-25T23:24:11Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "category.updated",
+    "target": "monitors",
+    "detail": {
+      "slug": "monitors",
+      "newLabel": "Monitors"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1016",
     "timestamp": "2026-05-25T19:49:00Z",
     "adminEmail": "fred.solano@foundationpartners.com",
@@ -143,6 +1081,301 @@
     "result": "success"
   },
   {
+    "id": "LOG-1779733751872",
+    "timestamp": "2026-05-25T18:29:11Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779728453748",
+    "timestamp": "2026-05-25T17:00:53Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-2933310624815",
+    "detail": {
+      "orderId": "ORD-2026-2933310624815",
+      "oldStatus": "New",
+      "newStatus": "In Progress",
+      "locationId": "AZLGC"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779619394961",
+    "timestamp": "2026-05-24T10:43:14Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779601164124",
+    "timestamp": "2026-05-24T05:39:24Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779542897537",
+    "timestamp": "2026-05-23T13:28:17Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-5418901875789",
+    "detail": {
+      "orderId": "ORD-2026-5418901875789",
+      "oldStatus": "Fulfilled",
+      "newStatus": "New",
+      "locationId": "AZLGC"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779520026607",
+    "timestamp": "2026-05-23T07:07:06Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-4195735928741",
+    "detail": {
+      "orderId": "ORD-2026-4195735928741",
+      "oldStatus": "Fulfilled",
+      "newStatus": "New",
+      "locationId": "TXTWO"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779469667938",
+    "timestamp": "2026-05-22T17:07:47Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "category.updated",
+    "target": "desktop",
+    "detail": {
+      "slug": "desktop",
+      "newLabel": "Desktop"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779448515944",
+    "timestamp": "2026-05-22T11:15:15Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779405754979",
+    "timestamp": "2026-05-21T23:22:34Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779387807451",
+    "timestamp": "2026-05-21T18:23:27Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779383208906",
+    "timestamp": "2026-05-21T17:06:48Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779301349057",
+    "timestamp": "2026-05-20T18:22:29Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779258743100",
+    "timestamp": "2026-05-20T06:32:23Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-5032602827790",
+    "detail": {
+      "orderId": "ORD-2026-5032602827790",
+      "reason": "Equipment no longer needed"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779257934189",
+    "timestamp": "2026-05-20T06:18:54Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779192718056",
+    "timestamp": "2026-05-19T12:11:58Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779101897915",
+    "timestamp": "2026-05-18T10:58:17Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779078795570",
+    "timestamp": "2026-05-18T04:33:15Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779040526130",
+    "timestamp": "2026-05-17T17:55:26Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779027823321",
+    "timestamp": "2026-05-17T14:23:43Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1779026324680",
+    "timestamp": "2026-05-17T13:58:44Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-6766335341461",
+    "detail": {
+      "orderId": "ORD-2026-6766335341461",
+      "oldStatus": "Fulfilled",
+      "newStatus": "In Progress",
+      "locationId": "FLLFM"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778990788571",
+    "timestamp": "2026-05-17T04:06:28Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778859854499",
+    "timestamp": "2026-05-15T15:44:14Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778829166201",
+    "timestamp": "2026-05-15T07:12:46Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778709345472",
+    "timestamp": "2026-05-13T21:55:45Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-3480816611220",
+    "detail": {
+      "orderId": "ORD-2026-3480816611220",
+      "oldStatus": "New",
+      "newStatus": "Fulfilled",
+      "locationId": "AZLGC"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778628640425",
+    "timestamp": "2026-05-12T23:30:40Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778617117060",
+    "timestamp": "2026-05-12T20:18:37Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1042",
     "timestamp": "2026-05-12T17:35:00Z",
     "adminEmail": "chezarae.carter@foundationpartners.com",
@@ -150,6 +1383,54 @@
     "target": "",
     "detail": {
       "browser": "Firefox on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778601700306",
+    "timestamp": "2026-05-12T16:01:40Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778594039197",
+    "timestamp": "2026-05-12T13:53:59Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778483079113",
+    "timestamp": "2026-05-11T07:04:39Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "access.admin_added",
+    "target": "matthew.ritchotte@foundationpartners.com",
+    "detail": {
+      "newEmail": "matthew.ritchotte@foundationpartners.com",
+      "role": "admin"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778467941567",
+    "timestamp": "2026-05-11T02:52:21Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-4044851236915",
+    "detail": {
+      "orderId": "ORD-2026-4044851236915",
+      "oldStatus": "Fulfilled",
+      "newStatus": "In Progress",
+      "locationId": "WAFAT"
     },
     "result": "success"
   },
@@ -176,6 +1457,79 @@
     "result": "success"
   },
   {
+    "id": "LOG-1778417982577",
+    "timestamp": "2026-05-10T12:59:42Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-2284026347656",
+    "detail": {
+      "orderId": "ORD-2026-2284026347656",
+      "reason": "Equipment no longer needed"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778366269694",
+    "timestamp": "2026-05-09T22:37:49Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-9148815120504",
+    "detail": {
+      "orderId": "ORD-2026-9148815120504",
+      "reason": "Test entry"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778305837913",
+    "timestamp": "2026-05-09T05:50:37Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "category.added",
+    "target": "keyboards",
+    "detail": {
+      "slug": "keyboards",
+      "label": "Keyboards"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778250159470",
+    "timestamp": "2026-05-08T14:22:39Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-3520707476054",
+    "detail": {
+      "orderId": "ORD-2026-3520707476054",
+      "oldStatus": "New",
+      "newStatus": "Fulfilled",
+      "locationId": "GAATL"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778241717640",
+    "timestamp": "2026-05-08T12:01:57Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "portal.products_published",
+    "target": "products.json",
+    "detail": {
+      "productsCount": 24,
+      "commitSha": "9db984585232aa137e77c07d8eb5617f8c263326",
+      "file": "products.json",
+      "message": "24 products published"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778233953735",
+    "timestamp": "2026-05-08T09:52:33Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1003",
     "timestamp": "2026-05-07T17:26:00Z",
     "adminEmail": "fred.solano@foundationpartners.com",
@@ -185,6 +1539,224 @@
       "newEmail": "new.admin@fpg.com",
       "newName": "New Admin",
       "role": "admin"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778163610621",
+    "timestamp": "2026-05-07T14:20:10Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778115904164",
+    "timestamp": "2026-05-07T01:05:04Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "portal.products_published",
+    "target": "products.json",
+    "detail": {
+      "productsCount": 21,
+      "commitSha": "534eda47626f92ce743bf3c2196fcae5a1f97a29",
+      "file": "products.json",
+      "message": "21 products published"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778100418880",
+    "timestamp": "2026-05-06T20:46:58Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778097201291",
+    "timestamp": "2026-05-06T19:53:21Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-9232123445936",
+    "detail": {
+      "orderId": "ORD-2026-9232123445936",
+      "oldStatus": "Fulfilled",
+      "newStatus": "In Progress",
+      "locationId": "NYNEW"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778021261780",
+    "timestamp": "2026-05-05T22:47:41Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.restore",
+    "target": "ORD-2026-5842721226148",
+    "detail": {
+      "orderId": "ORD-2026-5842721226148"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1778020408919",
+    "timestamp": "2026-05-05T22:33:28Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777975039756",
+    "timestamp": "2026-05-05T09:57:19Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777973586536",
+    "timestamp": "2026-05-05T09:33:06Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777931507938",
+    "timestamp": "2026-05-04T21:51:47Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777926776319",
+    "timestamp": "2026-05-04T20:32:56Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777900801819",
+    "timestamp": "2026-05-04T13:20:01Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777837764275",
+    "timestamp": "2026-05-03T19:49:24Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777802272742",
+    "timestamp": "2026-05-03T09:57:52Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-3717761590381",
+    "detail": {
+      "orderId": "ORD-2026-3717761590381",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "AZLGC"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777797576282",
+    "timestamp": "2026-05-03T08:39:36Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.restore",
+    "target": "ORD-2026-4935836321090",
+    "detail": {
+      "orderId": "ORD-2026-4935836321090"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777793683681",
+    "timestamp": "2026-05-03T07:34:43Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-6553757178757",
+    "detail": {
+      "orderId": "ORD-2026-6553757178757",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "AZLGC"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777781155314",
+    "timestamp": "2026-05-03T04:05:55Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777709052681",
+    "timestamp": "2026-05-02T08:04:12Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.restore",
+    "target": "ORD-2026-1593691613527",
+    "detail": {
+      "orderId": "ORD-2026-1593691613527"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777698178414",
+    "timestamp": "2026-05-02T05:02:58Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777632463864",
+    "timestamp": "2026-05-01T10:47:43Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-2366091575350",
+    "detail": {
+      "orderId": "ORD-2026-2366091575350",
+      "oldStatus": "Fulfilled",
+      "newStatus": "In Progress",
+      "locationId": "TXTWO"
     },
     "result": "success"
   },
@@ -233,6 +1805,37 @@
     "result": "success"
   },
   {
+    "id": "LOG-1777566298027",
+    "timestamp": "2026-04-30T16:24:58Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777527217583",
+    "timestamp": "2026-04-30T05:33:37Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777523811113",
+    "timestamp": "2026-04-30T04:36:51Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1035",
     "timestamp": "2026-04-29T19:08:00Z",
     "adminEmail": "matthew.ritchotte@foundationpartners.com",
@@ -245,6 +1848,158 @@
     "result": "success"
   },
   {
+    "id": "LOG-1777441625831",
+    "timestamp": "2026-04-29T05:47:05Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777440002103",
+    "timestamp": "2026-04-29T05:20:02Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777439971823",
+    "timestamp": "2026-04-29T05:19:31Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777369698553",
+    "timestamp": "2026-04-28T09:48:18Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-4596773279514",
+    "detail": {
+      "orderId": "ORD-2026-4596773279514",
+      "oldStatus": "Fulfilled",
+      "newStatus": "New",
+      "locationId": "TXTWO"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777369177747",
+    "timestamp": "2026-04-28T09:39:37Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "portal.products_published",
+    "target": "products.json",
+    "detail": {
+      "productsCount": 26,
+      "commitSha": "797e7938011aefc0c49e0b0aff982ba5c79eb2e1",
+      "file": "products.json",
+      "message": "26 products published"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777338827457",
+    "timestamp": "2026-04-28T01:13:47Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-9043068868739",
+    "detail": {
+      "orderId": "ORD-2026-9043068868739",
+      "oldStatus": "New",
+      "newStatus": "In Progress",
+      "locationId": "TXTWO"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777309980187",
+    "timestamp": "2026-04-27T17:13:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777280654417",
+    "timestamp": "2026-04-27T09:04:14Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777226712022",
+    "timestamp": "2026-04-26T18:05:12Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777197764212",
+    "timestamp": "2026-04-26T10:02:44Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777130203207",
+    "timestamp": "2026-04-25T15:16:43Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "category.updated",
+    "target": "monitors",
+    "detail": {
+      "slug": "monitors",
+      "newLabel": "Monitors"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777119280073",
+    "timestamp": "2026-04-25T12:14:40Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777098345461",
+    "timestamp": "2026-04-25T06:25:45Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-2933942571768",
+    "detail": {
+      "orderId": "ORD-2026-2933942571768",
+      "oldStatus": "Fulfilled",
+      "newStatus": "New",
+      "locationId": "FLTLT"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1023",
     "timestamp": "2026-04-24T20:58:00Z",
     "adminEmail": "chezarae.carter@foundationpartners.com",
@@ -252,6 +2007,51 @@
     "target": "",
     "detail": {
       "browser": "Edge on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777045938856",
+    "timestamp": "2026-04-24T15:52:18Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777041685528",
+    "timestamp": "2026-04-24T14:41:25Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777019229075",
+    "timestamp": "2026-04-24T08:27:09Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-5930244054105",
+    "detail": {
+      "orderId": "ORD-2026-5930244054105",
+      "oldStatus": "In Progress",
+      "newStatus": "New",
+      "locationId": "FLLFM"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1777000396584",
+    "timestamp": "2026-04-24T03:13:16Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
     },
     "result": "success"
   },
@@ -268,6 +2068,61 @@
     "result": "success"
   },
   {
+    "id": "LOG-1776925892452",
+    "timestamp": "2026-04-23T06:31:32Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "access.role_changed",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1776824340645",
+    "timestamp": "2026-04-22T02:19:00Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "category.added",
+    "target": "webcams",
+    "detail": {
+      "slug": "webcams",
+      "label": "Webcams"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1776784291213",
+    "timestamp": "2026-04-21T15:11:31Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-6826423895497",
+    "detail": {
+      "orderId": "ORD-2026-6826423895497",
+      "reason": "Test entry"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1776765237901",
+    "timestamp": "2026-04-21T09:53:57Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1776758064776",
+    "timestamp": "2026-04-21T07:54:24Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1010",
     "timestamp": "2026-04-21T00:05:00Z",
     "adminEmail": "matthew.ritchotte@foundationpartners.com",
@@ -279,6 +2134,42 @@
     "result": "success"
   },
   {
+    "id": "LOG-1776688738754",
+    "timestamp": "2026-04-20T12:38:58Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1776667889527",
+    "timestamp": "2026-04-20T06:51:29Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1776633835311",
+    "timestamp": "2026-04-19T21:23:55Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "portal.products_published",
+    "target": "products.json",
+    "detail": {
+      "productsCount": 23,
+      "commitSha": "609520dff368ba3094ef73c3ee06946d4215c31a",
+      "file": "products.json",
+      "message": "23 products published"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1069",
     "timestamp": "2026-04-19T20:33:00Z",
     "adminEmail": "fred.solano@foundationpartners.com",
@@ -286,6 +2177,17 @@
     "target": "",
     "detail": {
       "browser": "Edge on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1776602930121",
+    "timestamp": "2026-04-19T12:48:50Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
     },
     "result": "success"
   },
@@ -303,6 +2205,83 @@
     "result": "success"
   },
   {
+    "id": "LOG-1776536168127",
+    "timestamp": "2026-04-18T18:16:08Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "category.added",
+    "target": "phones",
+    "detail": {
+      "slug": "phones",
+      "label": "Phones"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1776501492715",
+    "timestamp": "2026-04-18T08:38:12Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1776485996373",
+    "timestamp": "2026-04-18T04:19:56Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1776459782407",
+    "timestamp": "2026-04-17T21:03:02Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1776367032698",
+    "timestamp": "2026-04-16T19:17:12Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1776302424619",
+    "timestamp": "2026-04-16T01:20:24Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1776284705995",
+    "timestamp": "2026-04-15T20:25:05Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-9626825611771",
+    "detail": {
+      "orderId": "ORD-2026-9626825611771",
+      "oldStatus": "Fulfilled",
+      "newStatus": "In Progress",
+      "locationId": "WAFAT"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1001",
     "timestamp": "2026-04-15T20:12:00Z",
     "adminEmail": "matthew.ritchotte@foundationpartners.com",
@@ -310,6 +2289,17 @@
     "target": "",
     "detail": {
       "browser": "Chrome on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1776215104152",
+    "timestamp": "2026-04-15T01:05:04Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.restore",
+    "target": "ORD-2026-2647125737435",
+    "detail": {
+      "orderId": "ORD-2026-2647125737435"
     },
     "result": "success"
   },
@@ -338,6 +2328,60 @@
     "result": "success"
   },
   {
+    "id": "LOG-1776133584555",
+    "timestamp": "2026-04-14T02:26:24Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1776066128177",
+    "timestamp": "2026-04-13T07:42:08Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775979023356",
+    "timestamp": "2026-04-12T07:30:23Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775961314931",
+    "timestamp": "2026-04-12T02:35:14Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-6925581813706",
+    "detail": {
+      "orderId": "ORD-2026-6925581813706",
+      "oldStatus": "In Progress",
+      "newStatus": "New",
+      "locationId": "AZLGC"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775950039617",
+    "timestamp": "2026-04-11T23:27:19Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1036",
     "timestamp": "2026-04-11T20:35:00Z",
     "adminEmail": "matthew.ritchotte@foundationpartners.com",
@@ -347,6 +2391,125 @@
       "orderId": "ORD-2026-TEST027",
       "oldStatus": "In Progress",
       "newStatus": "Fulfilled"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775938081286",
+    "timestamp": "2026-04-11T20:08:01Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775907340547",
+    "timestamp": "2026-04-11T11:35:40Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775894288155",
+    "timestamp": "2026-04-11T07:58:08Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "category.added",
+    "target": "keyboards",
+    "detail": {
+      "slug": "keyboards",
+      "label": "Keyboards"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775865221227",
+    "timestamp": "2026-04-10T23:53:41Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-7838963169815",
+    "detail": {
+      "orderId": "ORD-2026-7838963169815",
+      "reason": "Wrong location"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775854740861",
+    "timestamp": "2026-04-10T20:59:00Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775831187229",
+    "timestamp": "2026-04-10T14:26:27Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "portal.products_published",
+    "target": "products.json",
+    "detail": {
+      "productsCount": 20,
+      "commitSha": "299ab2cfb9d8e1bab2f145be070e4f424615d053",
+      "file": "products.json",
+      "message": "20 products published"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775829721712",
+    "timestamp": "2026-04-10T14:02:01Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775785203555",
+    "timestamp": "2026-04-10T01:40:03Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-2987178576150",
+    "detail": {
+      "orderId": "ORD-2026-2987178576150",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "TXTWO"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775782053310",
+    "timestamp": "2026-04-10T00:47:33Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-7754070431240",
+    "detail": {
+      "orderId": "ORD-2026-7754070431240",
+      "oldStatus": "Fulfilled",
+      "newStatus": "New",
+      "locationId": "CAOAK"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775766071082",
+    "timestamp": "2026-04-09T20:21:11Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
     },
     "result": "success"
   },
@@ -395,6 +2558,40 @@
     "result": "success"
   },
   {
+    "id": "LOG-1775729291591",
+    "timestamp": "2026-04-09T10:08:11Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775723813781",
+    "timestamp": "2026-04-09T08:36:53Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775664930123",
+    "timestamp": "2026-04-08T16:15:30Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-5318676806626",
+    "detail": {
+      "orderId": "ORD-2026-5318676806626",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "FLLFM"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1004",
     "timestamp": "2026-04-07T20:55:00Z",
     "adminEmail": "matthew.ritchotte@foundationpartners.com",
@@ -402,6 +2599,148 @@
     "target": "",
     "detail": {
       "browser": "Chrome on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775559796064",
+    "timestamp": "2026-04-07T11:03:16Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775553703524",
+    "timestamp": "2026-04-07T09:21:43Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-6020651379889",
+    "detail": {
+      "orderId": "ORD-2026-6020651379889",
+      "oldStatus": "Fulfilled",
+      "newStatus": "New",
+      "locationId": "AZLGC"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775533815525",
+    "timestamp": "2026-04-07T03:50:15Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775489064271",
+    "timestamp": "2026-04-06T15:24:24Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775485571736",
+    "timestamp": "2026-04-06T14:26:11Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775432466619",
+    "timestamp": "2026-04-05T23:41:06Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.restore",
+    "target": "ORD-2026-1023166428041",
+    "detail": {
+      "orderId": "ORD-2026-1023166428041"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775413274684",
+    "timestamp": "2026-04-05T18:21:14Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775371791831",
+    "timestamp": "2026-04-05T06:49:51Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775299449316",
+    "timestamp": "2026-04-04T10:44:09Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775273125280",
+    "timestamp": "2026-04-04T03:25:25Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775253536094",
+    "timestamp": "2026-04-03T21:58:56Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775245792286",
+    "timestamp": "2026-04-03T19:49:52Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775195822418",
+    "timestamp": "2026-04-03T05:57:02Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
     },
     "result": "success"
   },
@@ -418,6 +2757,64 @@
     "result": "success"
   },
   {
+    "id": "LOG-1775108079034",
+    "timestamp": "2026-04-02T05:34:39Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-7225788884321",
+    "detail": {
+      "orderId": "ORD-2026-7225788884321",
+      "oldStatus": "New",
+      "newStatus": "Fulfilled",
+      "locationId": "TXTWO"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775074988035",
+    "timestamp": "2026-04-01T20:23:08Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775041257189",
+    "timestamp": "2026-04-01T11:00:57Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1775039421431",
+    "timestamp": "2026-04-01T10:30:21Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774962660194",
+    "timestamp": "2026-03-31T13:11:00Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1049",
     "timestamp": "2026-03-31T00:27:00Z",
     "adminEmail": "matthew.ritchotte@foundationpartners.com",
@@ -425,6 +2822,20 @@
     "target": "",
     "detail": {
       "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774905536556",
+    "timestamp": "2026-03-30T21:18:56Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-4673541407442",
+    "detail": {
+      "orderId": "ORD-2026-4673541407442",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "CAOAK"
     },
     "result": "success"
   },
@@ -437,6 +2848,97 @@
     "detail": {
       "reason": "inactivity_timeout",
       "lastActivity": "2026-03-30T20:08:00Z"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774824523405",
+    "timestamp": "2026-03-29T22:48:43Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774798436496",
+    "timestamp": "2026-03-29T15:33:56Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774778872423",
+    "timestamp": "2026-03-29T10:07:52Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774658693704",
+    "timestamp": "2026-03-28T00:44:53Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-9316271690520",
+    "detail": {
+      "orderId": "ORD-2026-9316271690520",
+      "oldStatus": "Fulfilled",
+      "newStatus": "New",
+      "locationId": "TXTWO"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774633440918",
+    "timestamp": "2026-03-27T17:44:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-6319669714172",
+    "detail": {
+      "orderId": "ORD-2026-6319669714172",
+      "oldStatus": "New",
+      "newStatus": "Fulfilled",
+      "locationId": "NYNEW"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774631014015",
+    "timestamp": "2026-03-27T17:03:34Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-9684889036291",
+    "detail": {
+      "orderId": "ORD-2026-9684889036291",
+      "reason": "Wrong location"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774610529843",
+    "timestamp": "2026-03-27T11:22:09Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774601603823",
+    "timestamp": "2026-03-27T08:53:23Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
     },
     "result": "success"
   },
@@ -474,6 +2976,26 @@
     "result": "success"
   },
   {
+    "id": "LOG-1774531597522",
+    "timestamp": "2026-03-26T13:26:37Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774493570075",
+    "timestamp": "2026-03-26T02:52:50Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1024",
     "timestamp": "2026-03-25T21:34:00Z",
     "adminEmail": "matthew.ritchotte@foundationpartners.com",
@@ -486,6 +3008,122 @@
     "result": "success"
   },
   {
+    "id": "LOG-1774472925748",
+    "timestamp": "2026-03-25T21:08:45Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774403842234",
+    "timestamp": "2026-03-25T01:57:22Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-1392250382058",
+    "detail": {
+      "orderId": "ORD-2026-1392250382058",
+      "oldStatus": "New",
+      "newStatus": "Fulfilled",
+      "locationId": "TXTWO"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774399359707",
+    "timestamp": "2026-03-25T00:42:39Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774356097434",
+    "timestamp": "2026-03-24T12:41:37Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774336728633",
+    "timestamp": "2026-03-24T07:18:48Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774336140700",
+    "timestamp": "2026-03-24T07:09:00Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774326026556",
+    "timestamp": "2026-03-24T04:20:26Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-1652030800390",
+    "detail": {
+      "orderId": "ORD-2026-1652030800390",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "WAFAT"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774288233059",
+    "timestamp": "2026-03-23T17:50:33Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "category.updated",
+    "target": "monitors",
+    "detail": {
+      "slug": "monitors",
+      "newLabel": "Monitors"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774257915151",
+    "timestamp": "2026-03-23T09:25:15Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774233996286",
+    "timestamp": "2026-03-23T02:46:36Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-8139772067711",
+    "detail": {
+      "orderId": "ORD-2026-8139772067711",
+      "oldStatus": "In Progress",
+      "newStatus": "New",
+      "locationId": "AZLGC"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1021",
     "timestamp": "2026-03-23T00:14:00Z",
     "adminEmail": "chezarae.carter@foundationpartners.com",
@@ -494,6 +3132,103 @@
     "detail": {
       "browser": "Edge on Windows 11"
     },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774183342697",
+    "timestamp": "2026-03-22T12:42:22Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-3112741662355",
+    "detail": {
+      "orderId": "ORD-2026-3112741662355",
+      "oldStatus": "New",
+      "newStatus": "Fulfilled",
+      "locationId": "WAFAT"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774147562664",
+    "timestamp": "2026-03-22T02:46:02Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774111987385",
+    "timestamp": "2026-03-21T16:53:07Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-8809494103792",
+    "detail": {
+      "orderId": "ORD-2026-8809494103792",
+      "oldStatus": "Fulfilled",
+      "newStatus": "In Progress",
+      "locationId": "AZLGC"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774101401595",
+    "timestamp": "2026-03-21T13:56:41Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-4742024232041",
+    "detail": {
+      "orderId": "ORD-2026-4742024232041",
+      "reason": "Wrong location"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1774054327032",
+    "timestamp": "2026-03-21T00:52:07Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-7445031456873",
+    "detail": {
+      "orderId": "ORD-2026-7445031456873",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "TXTWO"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773938565177",
+    "timestamp": "2026-03-19T16:42:45Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "portal.products_published",
+    "target": "products.json",
+    "detail": {
+      "productsCount": 22,
+      "commitSha": "5bfcc3b7da5afb9af40f0e5cf932cc46d897717a",
+      "file": "products.json",
+      "message": "22 products published"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773923366175",
+    "timestamp": "2026-03-19T12:29:26Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773902884158",
+    "timestamp": "2026-03-19T06:48:04Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
     "result": "success"
   },
   {
@@ -521,6 +3256,17 @@
     "result": "success"
   },
   {
+    "id": "LOG-1773803131328",
+    "timestamp": "2026-03-18T03:05:31Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1072",
     "timestamp": "2026-03-17T16:17:00Z",
     "adminEmail": "chezarae.carter@foundationpartners.com",
@@ -528,6 +3274,54 @@
     "target": "",
     "detail": {
       "browser": "Edge on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773729015543",
+    "timestamp": "2026-03-17T06:30:15Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-6546953711698",
+    "detail": {
+      "orderId": "ORD-2026-6546953711698",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "AZLGC"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773724339215",
+    "timestamp": "2026-03-17T05:12:19Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-4172308127983",
+    "detail": {
+      "orderId": "ORD-2026-4172308127983",
+      "oldStatus": "Fulfilled",
+      "newStatus": "In Progress",
+      "locationId": "NYNEW"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773631584357",
+    "timestamp": "2026-03-16T03:26:24Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773629169599",
+    "timestamp": "2026-03-16T02:46:09Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
     },
     "result": "success"
   },
@@ -540,6 +3334,179 @@
     "detail": {
       "browser": "Edge on Windows 11"
     },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773573514683",
+    "timestamp": "2026-03-15T11:18:34Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773547627437",
+    "timestamp": "2026-03-15T04:07:07Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773536120471",
+    "timestamp": "2026-03-15T00:55:20Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "access.admin_added",
+    "target": "chezarae.carter@foundationpartners.com",
+    "detail": {
+      "newEmail": "chezarae.carter@foundationpartners.com",
+      "role": "admin"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773534752800",
+    "timestamp": "2026-03-15T00:32:32Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-4819670717045",
+    "detail": {
+      "orderId": "ORD-2026-4819670717045",
+      "oldStatus": "In Progress",
+      "newStatus": "New",
+      "locationId": "GAATL"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773518798513",
+    "timestamp": "2026-03-14T20:06:38Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773475993176",
+    "timestamp": "2026-03-14T08:13:13Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-5614032869318",
+    "detail": {
+      "orderId": "ORD-2026-5614032869318",
+      "oldStatus": "Fulfilled",
+      "newStatus": "In Progress",
+      "locationId": "NYNEW"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773468782073",
+    "timestamp": "2026-03-14T06:13:02Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773403505972",
+    "timestamp": "2026-03-13T12:05:05Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "portal.products_published",
+    "target": "products.json",
+    "detail": {
+      "productsCount": 20,
+      "commitSha": "ed101d977efce68499d0641dab6ff33135ddd0a9",
+      "file": "products.json",
+      "message": "20 products published"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773401279902",
+    "timestamp": "2026-03-13T11:27:59Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "category.updated",
+    "target": "laptop",
+    "detail": {
+      "slug": "laptop",
+      "newLabel": "Laptop"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773397258213",
+    "timestamp": "2026-03-13T10:20:58Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773385771289",
+    "timestamp": "2026-03-13T07:09:31Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773360456388",
+    "timestamp": "2026-03-13T00:07:36Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773346948123",
+    "timestamp": "2026-03-12T20:22:28Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-5658098679869",
+    "detail": {
+      "orderId": "ORD-2026-5658098679869",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "FLTLT"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773338383813",
+    "timestamp": "2026-03-12T17:59:43Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773320837156",
+    "timestamp": "2026-03-12T13:07:17Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
     "result": "success"
   },
   {
@@ -563,6 +3530,65 @@
       "orderId": "ORD-2026-TEST068",
       "oldStatus": "In Progress",
       "newStatus": "Fulfilled"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773169767103",
+    "timestamp": "2026-03-10T19:09:27Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773166403453",
+    "timestamp": "2026-03-10T18:13:23Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-2767400842417",
+    "detail": {
+      "orderId": "ORD-2026-2767400842417",
+      "oldStatus": "New",
+      "newStatus": "In Progress",
+      "locationId": "WAFAT"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773129247305",
+    "timestamp": "2026-03-10T07:54:07Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773043094580",
+    "timestamp": "2026-03-09T07:58:14Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1773034344741",
+    "timestamp": "2026-03-09T05:32:24Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-7834434327228",
+    "detail": {
+      "orderId": "ORD-2026-7834434327228",
+      "oldStatus": "New",
+      "newStatus": "In Progress",
+      "locationId": "AZLGC"
     },
     "result": "success"
   },
@@ -591,6 +3617,98 @@
     "result": "success"
   },
   {
+    "id": "LOG-1772982376308",
+    "timestamp": "2026-03-08T15:06:16Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-9955965579605",
+    "detail": {
+      "orderId": "ORD-2026-9955965579605",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "FLLFM"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772924351996",
+    "timestamp": "2026-03-07T22:59:11Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772914722723",
+    "timestamp": "2026-03-07T20:18:42Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-8190277363204",
+    "detail": {
+      "orderId": "ORD-2026-8190277363204",
+      "oldStatus": "New",
+      "newStatus": "In Progress",
+      "locationId": "AZLGC"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772913367343",
+    "timestamp": "2026-03-07T19:56:07Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772902342629",
+    "timestamp": "2026-03-07T16:52:22Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-8696021705897",
+    "detail": {
+      "orderId": "ORD-2026-8696021705897",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "WAFAT"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772868275159",
+    "timestamp": "2026-03-07T07:24:35Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-3650108948554",
+    "detail": {
+      "orderId": "ORD-2026-3650108948554",
+      "oldStatus": "In Progress",
+      "newStatus": "New",
+      "locationId": "FLLFM"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772774890605",
+    "timestamp": "2026-03-06T05:28:10Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-5713764130130",
+    "detail": {
+      "orderId": "ORD-2026-5713764130130",
+      "oldStatus": "In Progress",
+      "newStatus": "New",
+      "locationId": "AZLGC"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1076",
     "timestamp": "2026-03-05T22:09:00Z",
     "adminEmail": "fred.solano@foundationpartners.com",
@@ -598,6 +3716,54 @@
     "target": "",
     "detail": {
       "browser": "Chrome on Windows 11"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772727569732",
+    "timestamp": "2026-03-05T16:19:29Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "category.updated",
+    "target": "desktop",
+    "detail": {
+      "slug": "desktop",
+      "newLabel": "Desktop"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772674400147",
+    "timestamp": "2026-03-05T01:33:20Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772598955156",
+    "timestamp": "2026-03-04T04:35:55Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772585066659",
+    "timestamp": "2026-03-04T00:44:26Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-2206151583755",
+    "detail": {
+      "orderId": "ORD-2026-2206151583755",
+      "oldStatus": "Fulfilled",
+      "newStatus": "New",
+      "locationId": "FLLFM"
     },
     "result": "success"
   },
@@ -610,6 +3776,97 @@
     "detail": {
       "reason": "inactivity_timeout",
       "lastActivity": "2026-03-03T23:28:00Z"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772578643161",
+    "timestamp": "2026-03-03T22:57:23Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-4962294859683",
+    "detail": {
+      "orderId": "ORD-2026-4962294859683",
+      "oldStatus": "Fulfilled",
+      "newStatus": "In Progress",
+      "locationId": "AZLGC"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772538074996",
+    "timestamp": "2026-03-03T11:41:14Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772508727407",
+    "timestamp": "2026-03-03T03:32:07Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772378772791",
+    "timestamp": "2026-03-01T15:26:12Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "portal.products_published",
+    "target": "products.json",
+    "detail": {
+      "productsCount": 23,
+      "commitSha": "22e1daea8103cc04796aef3d9409d3a651053020",
+      "file": "products.json",
+      "message": "23 products published"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772347150632",
+    "timestamp": "2026-03-01T06:39:10Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772257912123",
+    "timestamp": "2026-02-28T05:51:52Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772244738809",
+    "timestamp": "2026-02-28T02:12:18Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "category.updated",
+    "target": "monitors",
+    "detail": {
+      "slug": "monitors",
+      "newLabel": "Monitors"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772244666257",
+    "timestamp": "2026-02-28T02:11:06Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
     },
     "result": "success"
   },
@@ -627,6 +3884,54 @@
     "result": "success"
   },
   {
+    "id": "LOG-1772148683195",
+    "timestamp": "2026-02-26T23:31:23Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.restore",
+    "target": "ORD-2026-9792505117001",
+    "detail": {
+      "orderId": "ORD-2026-9792505117001"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772145061957",
+    "timestamp": "2026-02-26T22:31:01Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-7628731757810",
+    "detail": {
+      "orderId": "ORD-2026-7628731757810",
+      "oldStatus": "In Progress",
+      "newStatus": "New",
+      "locationId": "WAFAT"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772107683138",
+    "timestamp": "2026-02-26T12:08:03Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772076912247",
+    "timestamp": "2026-02-26T03:35:12Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "category.added",
+    "target": "tablets",
+    "detail": {
+      "slug": "tablets",
+      "label": "Tablets"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1012",
     "timestamp": "2026-02-25T21:16:00Z",
     "adminEmail": "mateo.escobar@foundationpartners.com",
@@ -635,6 +3940,31 @@
     "detail": {
       "reason": "inactivity_timeout",
       "lastActivity": "2026-02-25T21:16:00Z"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772049551503",
+    "timestamp": "2026-02-25T19:59:11Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772045787360",
+    "timestamp": "2026-02-25T18:56:27Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-1220000564051",
+    "detail": {
+      "orderId": "ORD-2026-1220000564051",
+      "oldStatus": "New",
+      "newStatus": "Fulfilled",
+      "locationId": "NYNEW"
     },
     "result": "success"
   },
@@ -652,6 +3982,41 @@
     "result": "success"
   },
   {
+    "id": "LOG-1772030225779",
+    "timestamp": "2026-02-25T14:37:05Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772022088065",
+    "timestamp": "2026-02-25T12:21:28Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-9895400510603",
+    "detail": {
+      "orderId": "ORD-2026-9895400510603",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "FLLFM"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1772018517663",
+    "timestamp": "2026-02-25T11:21:57Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-5097184405423",
+    "detail": {
+      "orderId": "ORD-2026-5097184405423",
+      "reason": "Duplicate order"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1066",
     "timestamp": "2026-02-25T01:54:00Z",
     "adminEmail": "fred.solano@foundationpartners.com",
@@ -661,6 +4026,92 @@
       "orderId": "ORD-2026-TEST026",
       "oldStatus": "New",
       "newStatus": "In Progress"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771975792122",
+    "timestamp": "2026-02-24T23:29:52Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "category.added",
+    "target": "headsets",
+    "detail": {
+      "slug": "headsets",
+      "label": "Headsets"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771966382688",
+    "timestamp": "2026-02-24T20:53:02Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-7584921522940",
+    "detail": {
+      "orderId": "ORD-2026-7584921522940",
+      "oldStatus": "Fulfilled",
+      "newStatus": "New",
+      "locationId": "FLLFM"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771892503721",
+    "timestamp": "2026-02-24T00:21:43Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771875250432",
+    "timestamp": "2026-02-23T19:34:10Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "category.updated",
+    "target": "monitors",
+    "detail": {
+      "slug": "monitors",
+      "newLabel": "Monitors"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771865033828",
+    "timestamp": "2026-02-23T16:43:53Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-8602762593168",
+    "detail": {
+      "orderId": "ORD-2026-8602762593168",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "FLTLT"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771862291639",
+    "timestamp": "2026-02-23T15:58:11Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771848877947",
+    "timestamp": "2026-02-23T12:14:37Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-9293669090014",
+    "detail": {
+      "orderId": "ORD-2026-9293669090014",
+      "oldStatus": "New",
+      "newStatus": "In Progress",
+      "locationId": "NYNEW"
     },
     "result": "success"
   },
@@ -677,6 +4128,84 @@
     "result": "success"
   },
   {
+    "id": "LOG-1771803440943",
+    "timestamp": "2026-02-22T23:37:20Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771790355752",
+    "timestamp": "2026-02-22T19:59:15Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771788237207",
+    "timestamp": "2026-02-22T19:23:57Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771767117040",
+    "timestamp": "2026-02-22T13:31:57Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771761736327",
+    "timestamp": "2026-02-22T12:02:16Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771753509206",
+    "timestamp": "2026-02-22T09:45:09Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771738828378",
+    "timestamp": "2026-02-22T05:40:28Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-7114917512116",
+    "detail": {
+      "orderId": "ORD-2026-7114917512116",
+      "oldStatus": "New",
+      "newStatus": "In Progress",
+      "locationId": "AZLGC"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1073",
     "timestamp": "2026-02-22T01:23:00Z",
     "adminEmail": "fred.solano@foundationpartners.com",
@@ -684,6 +4213,37 @@
     "target": "",
     "detail": {
       "browser": "Firefox on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771722175697",
+    "timestamp": "2026-02-22T01:02:55Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771720657471",
+    "timestamp": "2026-02-22T00:37:37Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771712225503",
+    "timestamp": "2026-02-21T22:17:05Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
     },
     "result": "success"
   },
@@ -716,6 +4276,51 @@
     "result": "success"
   },
   {
+    "id": "LOG-1771639477094",
+    "timestamp": "2026-02-21T02:04:37Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771627605437",
+    "timestamp": "2026-02-20T22:46:45Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771610740027",
+    "timestamp": "2026-02-20T18:05:40Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "category.updated",
+    "target": "monitors",
+    "detail": {
+      "slug": "monitors",
+      "newLabel": "Monitors"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771608282972",
+    "timestamp": "2026-02-20T17:24:42Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.restore",
+    "target": "ORD-2026-8024146547870",
+    "detail": {
+      "orderId": "ORD-2026-8024146547870"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1034",
     "timestamp": "2026-02-20T15:55:00Z",
     "adminEmail": "mateo.escobar@foundationpartners.com",
@@ -729,6 +4334,118 @@
     "result": "success"
   },
   {
+    "id": "LOG-1771557756802",
+    "timestamp": "2026-02-20T03:22:36Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771552286941",
+    "timestamp": "2026-02-20T01:51:26Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771515607180",
+    "timestamp": "2026-02-19T15:40:07Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-4730236437446",
+    "detail": {
+      "orderId": "ORD-2026-4730236437446",
+      "reason": "Wrong location"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771450554856",
+    "timestamp": "2026-02-18T21:35:54Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-7661642225696",
+    "detail": {
+      "orderId": "ORD-2026-7661642225696",
+      "reason": "Duplicate order"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771437178714",
+    "timestamp": "2026-02-18T17:52:58Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771427363424",
+    "timestamp": "2026-02-18T15:09:23Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771426509169",
+    "timestamp": "2026-02-18T14:55:09Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771382097287",
+    "timestamp": "2026-02-18T02:34:57Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-3125995788583",
+    "detail": {
+      "orderId": "ORD-2026-3125995788583",
+      "oldStatus": "New",
+      "newStatus": "In Progress",
+      "locationId": "WAFAT"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771380965277",
+    "timestamp": "2026-02-18T02:16:05Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-6739248148046",
+    "detail": {
+      "orderId": "ORD-2026-6739248148046",
+      "oldStatus": "In Progress",
+      "newStatus": "New",
+      "locationId": "AZLGC"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771374838350",
+    "timestamp": "2026-02-18T00:33:58Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1062",
     "timestamp": "2026-02-17T23:48:00Z",
     "adminEmail": "mateo.escobar@foundationpartners.com",
@@ -736,6 +4453,17 @@
     "target": "",
     "detail": {
       "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771368791294",
+    "timestamp": "2026-02-17T22:53:11Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
     },
     "result": "success"
   },
@@ -773,6 +4501,17 @@
     "result": "success"
   },
   {
+    "id": "LOG-1771307147273",
+    "timestamp": "2026-02-17T05:45:47Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1046",
     "timestamp": "2026-02-16T01:22:00Z",
     "adminEmail": "fred.solano@foundationpartners.com",
@@ -806,6 +4545,67 @@
     "result": "success"
   },
   {
+    "id": "LOG-1771169314086",
+    "timestamp": "2026-02-15T15:28:34Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-5479723889784",
+    "detail": {
+      "orderId": "ORD-2026-5479723889784",
+      "oldStatus": "New",
+      "newStatus": "Fulfilled",
+      "locationId": "WAFAT"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771152738460",
+    "timestamp": "2026-02-15T10:52:18Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-3369982630144",
+    "detail": {
+      "orderId": "ORD-2026-3369982630144",
+      "oldStatus": "New",
+      "newStatus": "In Progress",
+      "locationId": "GAATL"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771152525794",
+    "timestamp": "2026-02-15T10:48:45Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771150605886",
+    "timestamp": "2026-02-15T10:16:45Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1771029962619",
+    "timestamp": "2026-02-14T00:46:02Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1068",
     "timestamp": "2026-02-14T00:33:00Z",
     "adminEmail": "fred.solano@foundationpartners.com",
@@ -825,6 +4625,17 @@
     "detail": {
       "reason": "inactivity_timeout",
       "lastActivity": "2026-02-13T22:50:00Z"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770988662119",
+    "timestamp": "2026-02-13T13:17:42Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
     },
     "result": "success"
   },
@@ -855,6 +4666,63 @@
     "result": "success"
   },
   {
+    "id": "LOG-1770912385033",
+    "timestamp": "2026-02-12T16:06:25Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770837410697",
+    "timestamp": "2026-02-11T19:16:50Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770748871694",
+    "timestamp": "2026-02-10T18:41:11Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-3978384201330",
+    "detail": {
+      "orderId": "ORD-2026-3978384201330",
+      "oldStatus": "Fulfilled",
+      "newStatus": "In Progress",
+      "locationId": "TXTWO"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770741958882",
+    "timestamp": "2026-02-10T16:45:58Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-1038155033671",
+    "detail": {
+      "orderId": "ORD-2026-1038155033671",
+      "reason": "Wrong location"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770732977643",
+    "timestamp": "2026-02-10T14:16:17Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1047",
     "timestamp": "2026-02-09T22:05:00Z",
     "adminEmail": "fred.solano@foundationpartners.com",
@@ -864,6 +4732,42 @@
       "newEmail": "new.admin@fpg.com",
       "newName": "New Admin",
       "role": "admin"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770656254309",
+    "timestamp": "2026-02-09T16:57:34Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770630579584",
+    "timestamp": "2026-02-09T09:49:39Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770622845579",
+    "timestamp": "2026-02-09T07:40:45Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-8650962780991",
+    "detail": {
+      "orderId": "ORD-2026-8650962780991",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "CAOAK"
     },
     "result": "success"
   },
@@ -879,6 +4783,37 @@
     "result": "success"
   },
   {
+    "id": "LOG-1770579926756",
+    "timestamp": "2026-02-08T19:45:26Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770569946092",
+    "timestamp": "2026-02-08T16:59:06Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770517072811",
+    "timestamp": "2026-02-08T02:17:52Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1074",
     "timestamp": "2026-02-08T01:19:00Z",
     "adminEmail": "chezarae.carter@foundationpartners.com",
@@ -886,6 +4821,65 @@
     "target": "",
     "detail": {
       "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770488236664",
+    "timestamp": "2026-02-07T18:17:16Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "order.restore",
+    "target": "ORD-2026-5490911137716",
+    "detail": {
+      "orderId": "ORD-2026-5490911137716"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770468504694",
+    "timestamp": "2026-02-07T12:48:24Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-5128632931699",
+    "detail": {
+      "orderId": "ORD-2026-5128632931699",
+      "oldStatus": "In Progress",
+      "newStatus": "New",
+      "locationId": "NYNEW"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770450992666",
+    "timestamp": "2026-02-07T07:56:32Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770421981952",
+    "timestamp": "2026-02-06T23:53:01Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770420060041",
+    "timestamp": "2026-02-06T23:21:00Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-1578070216415",
+    "detail": {
+      "orderId": "ORD-2026-1578070216415",
+      "oldStatus": "Fulfilled",
+      "newStatus": "In Progress",
+      "locationId": "TXTWO"
     },
     "result": "success"
   },
@@ -903,6 +4897,17 @@
     "result": "success"
   },
   {
+    "id": "LOG-1770328965547",
+    "timestamp": "2026-02-05T22:02:45Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1067",
     "timestamp": "2026-02-05T21:47:00Z",
     "adminEmail": "matthew.ritchotte@foundationpartners.com",
@@ -911,6 +4916,15 @@
     "detail": {
       "browser": "Edge on Windows 11"
     },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770290346202",
+    "timestamp": "2026-02-05T11:19:06Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
     "result": "success"
   },
   {
@@ -947,6 +4961,17 @@
     "result": "success"
   },
   {
+    "id": "LOG-1770237465265",
+    "timestamp": "2026-02-04T20:37:45Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.restore",
+    "target": "ORD-2026-2827159691647",
+    "detail": {
+      "orderId": "ORD-2026-2827159691647"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1061",
     "timestamp": "2026-02-04T16:40:00Z",
     "adminEmail": "chezarae.carter@foundationpartners.com",
@@ -970,6 +4995,31 @@
     "result": "success"
   },
   {
+    "id": "LOG-1770180137849",
+    "timestamp": "2026-02-04T04:42:17Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-5473412799591",
+    "detail": {
+      "orderId": "ORD-2026-5473412799591",
+      "oldStatus": "New",
+      "newStatus": "In Progress",
+      "locationId": "WAFAT"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770152150536",
+    "timestamp": "2026-02-03T20:55:50Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1013",
     "timestamp": "2026-02-03T19:44:00Z",
     "adminEmail": "mateo.escobar@foundationpartners.com",
@@ -979,6 +5029,77 @@
       "reason": "inactivity_timeout",
       "lastActivity": "2026-02-03T19:44:00Z"
     },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770146561722",
+    "timestamp": "2026-02-03T19:22:41Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770119108134",
+    "timestamp": "2026-02-03T11:45:08Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.restore",
+    "target": "ORD-2026-9177313371736",
+    "detail": {
+      "orderId": "ORD-2026-9177313371736"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1770051397279",
+    "timestamp": "2026-02-02T16:56:37Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769955750434",
+    "timestamp": "2026-02-01T14:22:30Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769941994237",
+    "timestamp": "2026-02-01T10:33:14Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769940248142",
+    "timestamp": "2026-02-01T10:04:08Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769898313393",
+    "timestamp": "2026-01-31T22:25:13Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
     "result": "success"
   },
   {
@@ -993,6 +5114,289 @@
     "result": "success"
   },
   {
+    "id": "LOG-1769879352872",
+    "timestamp": "2026-01-31T17:09:12Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-2972765504193",
+    "detail": {
+      "orderId": "ORD-2026-2972765504193",
+      "reason": "Equipment no longer needed"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769844429930",
+    "timestamp": "2026-01-31T07:27:09Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "category.added",
+    "target": "keyboards",
+    "detail": {
+      "slug": "keyboards",
+      "label": "Keyboards"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769840703901",
+    "timestamp": "2026-01-31T06:25:03Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-7607320593928",
+    "detail": {
+      "orderId": "ORD-2026-7607320593928",
+      "oldStatus": "Fulfilled",
+      "newStatus": "New",
+      "locationId": "CAOAK"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769796684508",
+    "timestamp": "2026-01-30T18:11:24Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "category.updated",
+    "target": "laptop",
+    "detail": {
+      "slug": "laptop",
+      "newLabel": "Laptop"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769758951208",
+    "timestamp": "2026-01-30T07:42:31Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769752981403",
+    "timestamp": "2026-01-30T06:03:01Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "portal.products_published",
+    "target": "products.json",
+    "detail": {
+      "productsCount": 22,
+      "commitSha": "dfa049be88075cbe85ef5cc073e5a68ad0a789c8",
+      "file": "products.json",
+      "message": "22 products published"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769745298714",
+    "timestamp": "2026-01-30T03:54:58Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769738771283",
+    "timestamp": "2026-01-30T02:06:11Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-4046257587697",
+    "detail": {
+      "orderId": "ORD-2026-4046257587697",
+      "reason": "Duplicate order"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769735614745",
+    "timestamp": "2026-01-30T01:13:34Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769702360140",
+    "timestamp": "2026-01-29T15:59:20Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-3231314604146",
+    "detail": {
+      "orderId": "ORD-2026-3231314604146",
+      "reason": "Equipment no longer needed"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769691741832",
+    "timestamp": "2026-01-29T13:02:21Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769670663487",
+    "timestamp": "2026-01-29T07:11:03Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-1877993246676",
+    "detail": {
+      "orderId": "ORD-2026-1877993246676",
+      "oldStatus": "In Progress",
+      "newStatus": "New",
+      "locationId": "CAOAK"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769667382906",
+    "timestamp": "2026-01-29T06:16:22Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "category.updated",
+    "target": "monitors",
+    "detail": {
+      "slug": "monitors",
+      "newLabel": "Monitors"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769636033621",
+    "timestamp": "2026-01-28T21:33:53Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769631917749",
+    "timestamp": "2026-01-28T20:25:17Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769625727814",
+    "timestamp": "2026-01-28T18:42:07Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769609483972",
+    "timestamp": "2026-01-28T14:11:23Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769589848323",
+    "timestamp": "2026-01-28T08:44:08Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-9228895675056",
+    "detail": {
+      "orderId": "ORD-2026-9228895675056",
+      "reason": "Wrong location"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769579844812",
+    "timestamp": "2026-01-28T05:57:24Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769564068268",
+    "timestamp": "2026-01-28T01:34:28Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769546126453",
+    "timestamp": "2026-01-27T20:35:26Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769535921195",
+    "timestamp": "2026-01-27T17:45:21Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.restore",
+    "target": "ORD-2026-4782389576875",
+    "detail": {
+      "orderId": "ORD-2026-4782389576875"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769502526119",
+    "timestamp": "2026-01-27T08:28:46Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769482084137",
+    "timestamp": "2026-01-27T02:48:04Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769389342818",
+    "timestamp": "2026-01-26T01:02:22Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1065",
     "timestamp": "2026-01-25T19:32:00Z",
     "adminEmail": "matthew.ritchotte@foundationpartners.com",
@@ -1000,6 +5404,42 @@
     "target": "",
     "detail": {
       "browser": "Firefox on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769320229854",
+    "timestamp": "2026-01-25T05:50:29Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-3660670908807",
+    "detail": {
+      "orderId": "ORD-2026-3660670908807",
+      "oldStatus": "In Progress",
+      "newStatus": "New",
+      "locationId": "FLLFM"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769305543944",
+    "timestamp": "2026-01-25T01:45:43Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769289176653",
+    "timestamp": "2026-01-24T21:12:56Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
     },
     "result": "success"
   },
@@ -1017,6 +5457,86 @@
     "result": "success"
   },
   {
+    "id": "LOG-1769276253158",
+    "timestamp": "2026-01-24T17:37:33Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769267517283",
+    "timestamp": "2026-01-24T15:11:57Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "access.admin_added",
+    "target": "doni.perry@foundationpartners.com",
+    "detail": {
+      "newEmail": "doni.perry@foundationpartners.com",
+      "role": "admin"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769234758211",
+    "timestamp": "2026-01-24T06:05:58Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "category.updated",
+    "target": "peripherals",
+    "detail": {
+      "slug": "peripherals",
+      "newLabel": "Peripherals"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769228769476",
+    "timestamp": "2026-01-24T04:26:09Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769220693946",
+    "timestamp": "2026-01-24T02:11:33Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769219388934",
+    "timestamp": "2026-01-24T01:49:48Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769195726044",
+    "timestamp": "2026-01-23T19:15:26Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "access.role_changed",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769154089398",
+    "timestamp": "2026-01-23T07:41:29Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1079",
     "timestamp": "2026-01-23T01:54:00Z",
     "adminEmail": "chezarae.carter@foundationpartners.com",
@@ -1030,6 +5550,31 @@
     "result": "success"
   },
   {
+    "id": "LOG-1769124756364",
+    "timestamp": "2026-01-22T23:32:36Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-9353920922726",
+    "detail": {
+      "orderId": "ORD-2026-9353920922726",
+      "oldStatus": "Fulfilled",
+      "newStatus": "New",
+      "locationId": "TXTWO"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769087554757",
+    "timestamp": "2026-01-22T13:12:34Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1033",
     "timestamp": "2026-01-21T23:02:00Z",
     "adminEmail": "fred.solano@foundationpartners.com",
@@ -1039,6 +5584,48 @@
       "orderId": "ORD-2026-TEST048",
       "oldStatus": "In Progress",
       "newStatus": "Fulfilled"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769027232031",
+    "timestamp": "2026-01-21T20:27:12Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-5302172293835",
+    "detail": {
+      "orderId": "ORD-2026-5302172293835",
+      "oldStatus": "New",
+      "newStatus": "In Progress",
+      "locationId": "FLLFM"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1769008106707",
+    "timestamp": "2026-01-21T15:08:26Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "portal.products_published",
+    "target": "products.json",
+    "detail": {
+      "productsCount": 23,
+      "commitSha": "f8f70e394e8eb794d4798dbced3c9e9d93e8a4e5",
+      "file": "products.json",
+      "message": "23 products published"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768997073990",
+    "timestamp": "2026-01-21T12:04:33Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-7388444619548",
+    "detail": {
+      "orderId": "ORD-2026-7388444619548",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "FLLFM"
     },
     "result": "success"
   },
@@ -1067,6 +5654,91 @@
     "result": "success"
   },
   {
+    "id": "LOG-1768904819822",
+    "timestamp": "2026-01-20T10:26:59Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768903144222",
+    "timestamp": "2026-01-20T09:59:04Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768818609990",
+    "timestamp": "2026-01-19T10:30:09Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768798793278",
+    "timestamp": "2026-01-19T04:59:53Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768777722933",
+    "timestamp": "2026-01-18T23:08:42Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "category.updated",
+    "target": "monitors",
+    "detail": {
+      "slug": "monitors",
+      "newLabel": "Monitors"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768735211047",
+    "timestamp": "2026-01-18T11:20:11Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768719824354",
+    "timestamp": "2026-01-18T07:03:44Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768689794798",
+    "timestamp": "2026-01-17T22:43:14Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1043",
     "timestamp": "2026-01-17T01:49:00Z",
     "adminEmail": "mateo.escobar@foundationpartners.com",
@@ -1078,6 +5750,35 @@
     "result": "success"
   },
   {
+    "id": "LOG-1768577655094",
+    "timestamp": "2026-01-16T15:34:15Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768518461183",
+    "timestamp": "2026-01-15T23:07:41Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768509985689",
+    "timestamp": "2026-01-15T20:46:25Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1059",
     "timestamp": "2026-01-15T17:15:00Z",
     "adminEmail": "chezarae.carter@foundationpartners.com",
@@ -1085,6 +5786,107 @@
     "target": "",
     "detail": {
       "browser": "Chrome on Windows 10"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768430337136",
+    "timestamp": "2026-01-14T22:38:57Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-5184220121832",
+    "detail": {
+      "orderId": "ORD-2026-5184220121832",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "FLLFM"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768407484140",
+    "timestamp": "2026-01-14T16:18:04Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768325234868",
+    "timestamp": "2026-01-13T17:27:14Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768227944516",
+    "timestamp": "2026-01-12T14:25:44Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768191795662",
+    "timestamp": "2026-01-12T04:23:15Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768189628871",
+    "timestamp": "2026-01-12T03:47:08Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.restore",
+    "target": "ORD-2026-2979110429248",
+    "detail": {
+      "orderId": "ORD-2026-2979110429248"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768188931849",
+    "timestamp": "2026-01-12T03:35:31Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768187227549",
+    "timestamp": "2026-01-12T03:07:07Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768181025478",
+    "timestamp": "2026-01-12T01:23:45Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-7408527216163",
+    "detail": {
+      "orderId": "ORD-2026-7408527216163",
+      "oldStatus": "In Progress",
+      "newStatus": "Fulfilled",
+      "locationId": "FLLFM"
     },
     "result": "success"
   },
@@ -1109,6 +5911,134 @@
       "orderId": "ORD-2026-TEST054",
       "oldStatus": "New",
       "newStatus": "In Progress"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768133954629",
+    "timestamp": "2026-01-11T12:19:14Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768076665191",
+    "timestamp": "2026-01-10T20:24:25Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768034249761",
+    "timestamp": "2026-01-10T08:37:29Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768010681323",
+    "timestamp": "2026-01-10T02:04:41Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1768009176842",
+    "timestamp": "2026-01-10T01:39:36Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767976633226",
+    "timestamp": "2026-01-09T16:37:13Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-8806878910408",
+    "detail": {
+      "orderId": "ORD-2026-8806878910408",
+      "oldStatus": "Fulfilled",
+      "newStatus": "In Progress",
+      "locationId": "FLTLT"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767964151800",
+    "timestamp": "2026-01-09T13:09:11Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767928947487",
+    "timestamp": "2026-01-09T03:22:27Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-3714979326917",
+    "detail": {
+      "orderId": "ORD-2026-3714979326917",
+      "oldStatus": "Fulfilled",
+      "newStatus": "In Progress",
+      "locationId": "WAFAT"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767924389369",
+    "timestamp": "2026-01-09T02:06:29Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-9072893140717",
+    "detail": {
+      "orderId": "ORD-2026-9072893140717",
+      "oldStatus": "Fulfilled",
+      "newStatus": "New",
+      "locationId": "WAFAT"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767920410430",
+    "timestamp": "2026-01-09T01:00:10Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-2267381878647",
+    "detail": {
+      "orderId": "ORD-2026-2267381878647",
+      "reason": "Equipment no longer needed"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767915866887",
+    "timestamp": "2026-01-08T23:44:26Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-7727062498457",
+    "detail": {
+      "orderId": "ORD-2026-7727062498457",
+      "oldStatus": "In Progress",
+      "newStatus": "New",
+      "locationId": "FLTLT"
     },
     "result": "success"
   },
@@ -1146,6 +6076,173 @@
     "result": "success"
   },
   {
+    "id": "LOG-1767878184163",
+    "timestamp": "2026-01-08T13:16:24Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "category.added",
+    "target": "tablets",
+    "detail": {
+      "slug": "tablets",
+      "label": "Tablets"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767861463776",
+    "timestamp": "2026-01-08T08:37:43Z",
+    "adminEmail": "chezarae.carter@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767857588941",
+    "timestamp": "2026-01-08T07:33:08Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767804445343",
+    "timestamp": "2026-01-07T16:47:25Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767767616727",
+    "timestamp": "2026-01-07T06:33:36Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767767486133",
+    "timestamp": "2026-01-07T06:31:26Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767739436512",
+    "timestamp": "2026-01-06T22:43:56Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767721330421",
+    "timestamp": "2026-01-06T17:42:10Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767708681561",
+    "timestamp": "2026-01-06T14:11:21Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767704911673",
+    "timestamp": "2026-01-06T13:08:31Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767688775101",
+    "timestamp": "2026-01-06T08:39:35Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-6635298001228",
+    "detail": {
+      "orderId": "ORD-2026-6635298001228",
+      "oldStatus": "Fulfilled",
+      "newStatus": "In Progress",
+      "locationId": "WAFAT"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767684655066",
+    "timestamp": "2026-01-06T07:30:55Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767668092188",
+    "timestamp": "2026-01-06T02:54:52Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-1174555993392",
+    "detail": {
+      "orderId": "ORD-2026-1174555993392",
+      "oldStatus": "New",
+      "newStatus": "In Progress",
+      "locationId": "NYNEW"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767655776692",
+    "timestamp": "2026-01-05T23:29:36Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767629097528",
+    "timestamp": "2026-01-05T16:04:57Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "category.updated",
+    "target": "monitors",
+    "detail": {
+      "slug": "monitors",
+      "newLabel": "Monitors"
+    },
+    "result": "success"
+  },
+  {
     "id": "LOG-TEST1039",
     "timestamp": "2026-01-05T15:21:00Z",
     "adminEmail": "mateo.escobar@foundationpartners.com",
@@ -1154,6 +6251,106 @@
     "detail": {
       "browser": "Chrome on Windows 10"
     },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767594612096",
+    "timestamp": "2026-01-05T06:30:12Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767574370472",
+    "timestamp": "2026-01-05T00:52:50Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "portal.products_published",
+    "target": "products.json",
+    "detail": {
+      "productsCount": 21,
+      "commitSha": "7323bae69e965dc2d436754b37c95c4036fa4ea9",
+      "file": "products.json",
+      "message": "21 products published"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767557968706",
+    "timestamp": "2026-01-04T20:19:28Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767509233794",
+    "timestamp": "2026-01-04T06:47:13Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767501160164",
+    "timestamp": "2026-01-04T04:32:40Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767423447718",
+    "timestamp": "2026-01-03T06:57:27Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
+    "detail": {
+      "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767411713779",
+    "timestamp": "2026-01-03T03:41:53Z",
+    "adminEmail": "joe.choss@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-7740866575948",
+    "detail": {
+      "orderId": "ORD-2026-7740866575948",
+      "reason": "Test entry"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767406532711",
+    "timestamp": "2026-01-03T02:15:32Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "category.updated",
+    "target": "peripherals",
+    "detail": {
+      "slug": "peripherals",
+      "newLabel": "Peripherals"
+    },
+    "result": "success"
+  },
+  {
+    "id": "LOG-1767380969448",
+    "timestamp": "2026-01-02T19:09:29Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
     "result": "success"
   },
   {
@@ -1168,727 +6365,89 @@
     "result": "success"
   },
   {
-    "action": "auth.login",
+    "id": "LOG-1767362216626",
+    "timestamp": "2026-01-02T13:56:56Z",
+    "adminEmail": "michael.benjamin@foundationpartners.com",
+    "action": "portal.products_published",
+    "target": "products.json",
     "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780343289136",
-    "timestamp": "2026-06-01T19:48:09.137Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780343542390",
-    "timestamp": "2026-06-01T19:52:22.390Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780343804521",
-    "timestamp": "2026-06-01T19:56:44.521Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780344409011",
-    "timestamp": "2026-06-01T20:06:49.011Z",
-    "adminEmail": "matthew.ritchotte@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780345070067",
-    "timestamp": "2026-06-01T20:17:50.069Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780345086851",
-    "timestamp": "2026-06-01T20:18:06.851Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780345132757",
-    "timestamp": "2026-06-01T20:18:52.757Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780345172546",
-    "timestamp": "2026-06-01T20:19:32.546Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "id": "LOG-1780345569180",
-    "timestamp": "2026-06-01T20:26:09.180Z",
-    "adminEmail": "fred.solano@foundationpartners.com",
-    "action": "order.soft_delete",
-    "target": "ORD-2026-TEST045",
-    "detail": {
-      "orderId": "ORD-2026-TEST045",
-      "reason": "Testing",
-      "orderSnapshot": {
-        "id": "ORD-2026-TEST045",
-        "status": "In Progress",
-        "submittedAt": "2026-05-31T16:09:00Z",
-        "year": 2026,
-        "submitterName": "Matthew Ritchotte",
-        "submitterEmail": "matthew.ritchotte@foundationpartners.com",
-        "recipientName": "Nicole Rivera",
-        "recipientEmail": "nicole.rivera@foundationpartners.com",
-        "locationId": "FLTLT",
-        "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
-        "items": [
-          {
-            "title": "Accounting Laptop",
-            "price": 2100,
-            "quantity": 1
-          },
-          {
-            "title": "ThinkVision Monitor 24\"",
-            "price": 300,
-            "quantity": 2
-          },
-          {
-            "title": "Logitech MK270",
-            "price": 30,
-            "quantity": 1
-          }
-        ],
-        "total": 2730,
-        "isNewEmployee": "no",
-        "dateNeeded": "2026-06-14",
-        "notes": "Urgent — location opening soon."
-      }
+      "productsCount": 23,
+      "commitSha": "76924a6a28b79bd49fd668aa46d6d603fa5ce646",
+      "file": "products.json",
+      "message": "23 products published"
     },
     "result": "success"
   },
   {
-    "id": "LOG-1780345607035",
-    "timestamp": "2026-06-01T20:26:47.035Z",
-    "adminEmail": "fred.solano@foundationpartners.com",
-    "action": "order.permanent_delete",
-    "target": "ORD-2026-TEST045",
+    "id": "LOG-1767357139890",
+    "timestamp": "2026-01-02T12:32:19Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.login",
+    "target": "",
     "detail": {
-      "orderId": "ORD-2026-TEST045",
-      "reason": "Test",
-      "orderSnapshot": {
-        "id": "ORD-2026-TEST045",
-        "status": "Deleted",
-        "submittedAt": "2026-05-31T16:09:00Z",
-        "year": 2026,
-        "submitterName": "Matthew Ritchotte",
-        "submitterEmail": "matthew.ritchotte@foundationpartners.com",
-        "recipientName": "Nicole Rivera",
-        "recipientEmail": "nicole.rivera@foundationpartners.com",
-        "locationId": "FLTLT",
-        "shipTo": "4001 E Fletcher Ave, Tampa, FL 33613",
-        "items": [
-          {
-            "title": "Accounting Laptop",
-            "price": 2100,
-            "quantity": 1
-          },
-          {
-            "title": "ThinkVision Monitor 24\"",
-            "price": 300,
-            "quantity": 2
-          },
-          {
-            "title": "Logitech MK270",
-            "price": 30,
-            "quantity": 1
-          }
-        ],
-        "total": 2730,
-        "isNewEmployee": "no",
-        "dateNeeded": "2026-06-14",
-        "notes": "Urgent — location opening soon.",
-        "deletedBy": "fred.solano@foundationpartners.com",
-        "deletedAt": "2026-06-01T20:26:07.235Z",
-        "deleteReason": "Testing"
-      }
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
     },
     "result": "success"
   },
   {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780345826175",
-    "timestamp": "2026-06-01T20:30:26.175Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780345978137",
-    "timestamp": "2026-06-01T20:32:58.137Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780345980697",
-    "timestamp": "2026-06-01T20:33:00.697Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780345983267",
-    "timestamp": "2026-06-01T20:33:03.267Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780346008399",
-    "timestamp": "2026-06-01T20:33:28.399Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780346020411",
-    "timestamp": "2026-06-01T20:33:40.411Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780346021807",
-    "timestamp": "2026-06-01T20:33:41.807Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780346024151",
-    "timestamp": "2026-06-01T20:33:44.151Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780346578367",
-    "timestamp": "2026-06-01T20:42:58.367Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780346942095",
-    "timestamp": "2026-06-01T20:49:02.095Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780346959394",
-    "timestamp": "2026-06-01T20:49:19.394Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
+    "id": "LOG-1767322653827",
+    "timestamp": "2026-01-02T02:57:33Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
     "action": "auth.auto_logoff",
-    "detail": {
-      "reason": "inactivity_timeout",
-      "lastActivity": "2026-06-01T20:50:10.841Z"
-    },
-    "result": "success",
-    "id": "LOG-1780350644666",
-    "timestamp": "2026-06-01T21:50:44.666Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
+    "target": "",
+    "detail": {},
+    "result": "success"
   },
   {
+    "id": "LOG-1767288388073",
+    "timestamp": "2026-01-01T17:26:28Z",
+    "adminEmail": "doni.perry@foundationpartners.com",
     "action": "auth.login",
+    "target": "",
     "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101"
     },
-    "result": "success",
-    "id": "LOG-1780354956499",
-    "timestamp": "2026-06-01T23:02:36.499Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
+    "result": "success"
   },
   {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780354977424",
-    "timestamp": "2026-06-01T23:02:57.424Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
+    "id": "LOG-1767286250761",
+    "timestamp": "2026-01-01T16:50:50Z",
+    "adminEmail": "matthew.ritchotte@foundationpartners.com",
+    "action": "auth.logout",
+    "target": "",
+    "detail": {},
+    "result": "success"
   },
   {
-    "action": "auth.login",
+    "id": "LOG-1767279964733",
+    "timestamp": "2026-01-01T15:06:04Z",
+    "adminEmail": "mateo.escobar@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-1561838775009",
     "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+      "orderId": "ORD-2026-1561838775009",
+      "reason": "Test entry"
     },
-    "result": "success",
-    "id": "LOG-1780355443399",
-    "timestamp": "2026-06-01T23:10:43.399Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
+    "result": "success"
   },
   {
+    "id": "LOG-1767206367880",
+    "timestamp": "2025-12-31T18:39:27Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
     "action": "auth.login",
+    "target": "",
     "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
     },
-    "result": "success",
-    "id": "LOG-1780355510374",
-    "timestamp": "2026-06-01T23:11:50.374Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
+    "result": "success"
   },
   {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780355512028",
-    "timestamp": "2026-06-01T23:11:52.028Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780355514737",
-    "timestamp": "2026-06-01T23:11:54.737Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780357474256",
-    "timestamp": "2026-06-01T23:44:34.273Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780357760455",
-    "timestamp": "2026-06-01T23:49:20.455Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780358103596",
-    "timestamp": "2026-06-01T23:55:03.615Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780359426138",
-    "timestamp": "2026-06-02T00:17:06.138Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780360026713",
-    "timestamp": "2026-06-02T00:27:06.713Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780360352407",
-    "timestamp": "2026-06-02T00:32:32.407Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780361064630",
-    "timestamp": "2026-06-02T00:44:24.639Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780361253467",
-    "timestamp": "2026-06-02T00:47:33.467Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780361543729",
-    "timestamp": "2026-06-02T00:52:23.729Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780361684456",
-    "timestamp": "2026-06-02T00:54:44.456Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780363057055",
-    "timestamp": "2026-06-02T01:17:37.056Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780363087560",
-    "timestamp": "2026-06-02T01:18:07.560Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780363090040",
-    "timestamp": "2026-06-02T01:18:10.040Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780363091467",
-    "timestamp": "2026-06-02T01:18:11.467Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780364078159",
-    "timestamp": "2026-06-02T01:34:38.159Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780364100856",
-    "timestamp": "2026-06-02T01:35:00.856Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780364855468",
-    "timestamp": "2026-06-02T01:47:35.471Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780365932823",
-    "timestamp": "2026-06-02T02:05:32.823Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780366906648",
-    "timestamp": "2026-06-02T02:21:46.648Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780366929637",
-    "timestamp": "2026-06-02T02:22:09.637Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780366948395",
-    "timestamp": "2026-06-02T02:22:28.395Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780367356187",
-    "timestamp": "2026-06-02T02:29:16.187Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780368627875",
-    "timestamp": "2026-06-02T02:50:27.875Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780368630824",
-    "timestamp": "2026-06-02T02:50:30.824Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780368647513",
-    "timestamp": "2026-06-02T02:50:47.513Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780368654907",
-    "timestamp": "2026-06-02T02:50:54.907Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780369194105",
-    "timestamp": "2026-06-02T02:59:54.105Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780369214233",
-    "timestamp": "2026-06-02T03:00:14.233Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780369716493",
-    "timestamp": "2026-06-02T03:08:36.494Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780370109202",
-    "timestamp": "2026-06-02T03:15:09.202Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780370536093",
-    "timestamp": "2026-06-02T03:22:16.093Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780370821025",
-    "timestamp": "2026-06-02T03:27:01.026Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780370839144",
-    "timestamp": "2026-06-02T03:27:19.144Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780371504969",
-    "timestamp": "2026-06-02T03:38:24.987Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780371922833",
-    "timestamp": "2026-06-02T03:45:22.833Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780371937559",
-    "timestamp": "2026-06-02T03:45:37.559Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
-  },
-  {
-    "action": "auth.login",
-    "detail": {
-      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-    },
-    "result": "success",
-    "id": "LOG-1780371982381",
-    "timestamp": "2026-06-02T03:46:22.381Z",
-    "adminEmail": "fred.solano@foundationpartners.com"
+    "id": "LOG-1767174342330",
+    "timestamp": "2025-12-31T09:45:42Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "auth.auto_logoff",
+    "target": "",
+    "detail": {},
+    "result": "success"
   }
 ]
