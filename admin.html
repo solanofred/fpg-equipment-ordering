@@ -14,8 +14,8 @@
         :root {
             --fpg-blue-1: #1661AD;
             --fpg-blue-2: #004E7E;
-            --fpg-orange-1: #5DCAA5;
-            --fpg-orange-2: #0F6E56;
+            --fpg-orange-1: #6366F1;
+            --fpg-orange-2: #4C3BAF;
             --fpg-green-1: #568935;
             --fpg-black: #000000;
             --fpg-gray: #818285;
@@ -81,7 +81,7 @@
         .confirm-icon {
             width: 56px;
             height: 56px;
-            background: linear-gradient(135deg, #0F6E56 0%, #0A2E4A 100%);
+            background: linear-gradient(135deg, #4C3BAF 0%, #141C3A 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -153,7 +153,7 @@
         }
         
         .confirm-btn-confirm {
-            background: linear-gradient(135deg, #0F6E56 0%, #0A2E4A 100%);
+            background: linear-gradient(135deg, #4C3BAF 0%, #141C3A 100%);
             color: white;
         }
         
@@ -164,7 +164,7 @@
         
         .confirm-btn-ok {
             width: 100%;
-            background: linear-gradient(135deg, #0F6E56 0%, #0A2E4A 100%);
+            background: linear-gradient(135deg, #4C3BAF 0%, #141C3A 100%);
             color: white;
         }
         
@@ -278,7 +278,7 @@
         
         /* Admin Dashboard */
         .admin-header {
-            background: #0F4068;
+            background: linear-gradient(135deg,#1E3A5F 0%,#4C3BAF 100%);
             color: white;
             padding: 0;
             position: sticky;
@@ -305,7 +305,7 @@
         .admin-logomark {
             width: 36px;
             height: 36px;
-            background: linear-gradient(135deg,#0F6E56,#5DCAA5);
+            background: linear-gradient(135deg,#4C3BAF,#6366F1);
             border-radius: 9px;
             display: flex;
             align-items: center;
@@ -337,7 +337,7 @@
             font-size: 12px;
         }
         .btn-logout {
-            background: #0F6E56;
+            background: rgba(255,255,255,0.2);
             color: white;
             padding: 7px 16px;
             border: none;
@@ -348,7 +348,7 @@
             transition: background 0.2s;
         }
         .btn-logout:hover {
-            background: #0A5542;
+            background: rgba(255,255,255,0.3);
         }
         
         .admin-container {
@@ -369,7 +369,7 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.06);
         }
         .btn-add {
-            background: #0F6E56;
+            background: #4C3BAF;
             color: white;
             padding: 0.7rem 1.4rem;
             border: none;
@@ -379,7 +379,7 @@
             font-size: 0.9rem;
             transition: background 0.2s;
         }
-        .btn-add:hover { background: #0A5542; }
+        .btn-add:hover { background: #3730A3; }
         .products-table {
             background: white;
             border-radius: 14px;
@@ -387,7 +387,7 @@
             overflow: hidden;
         }
         table { width: 100%; border-collapse: collapse; }
-        thead { background: #0F4068; }
+        thead { background: #1E3A5F; }
         th {
             padding: 10px 14px;
             text-align: left;
@@ -396,10 +396,10 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.06em;
-            border-bottom: 3px solid #0F6E56;
+            border-bottom: 3px solid #4C3BAF;
         }
         td { padding: 12px 14px; border-top: 0.5px solid #F1F5F9; }
-        tbody tr:hover td { background: #F0FBF8; }
+        tbody tr:hover td { background: #F5F3FF; }
         
         .product-cell { display: flex; align-items: center; gap: 12px; }
         .product-thumb {
@@ -408,8 +408,8 @@
             border-radius: 10px;
             overflow: hidden;
             flex-shrink: 0;
-            border: 1.5px solid #E1F5EE;
-            background: #F0FBF8;
+            border: 1.5px solid #EDE9FE;
+            background: #F5F3FF;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -422,12 +422,12 @@
         .product-info h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; color: #0F172A; }
         .product-category { font-size: 0.75rem; color: #64748B; }
         .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
-        .status-active { background: #CCFBF1; color: #0F6E56; }
+        .status-active { background: #EDE9FE; color: #4C3BAF; }
         .status-inactive { background: #FEE2E2; color: #991B1B; }
         .actions { display: flex; gap: 6px; }
         .btn-action { padding: 5px 12px; border: none; border-radius: 7px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-        .btn-edit { background: #0F4068; color: white; }
-        .btn-edit:hover { background: #0A2E4A; }
+        .btn-edit { background: #1E3A5F; color: white; }
+        .btn-edit:hover { background: #141C3A; }
         .btn-delete { background: #FEE2E2; color: #DC2626; border: 1px solid #FECACA; }
         .btn-delete:hover { background: #FECACA; }
         
@@ -1399,7 +1399,7 @@
             return (
                 <div>
                     {inactivityWarning && (
-                        <div style={{background:'#5DCAA5',color:'white',padding:'10px 20px',textAlign:'center',fontSize:'13px',fontWeight:500,display:'flex',alignItems:'center',justifyContent:'center',gap:'12px'}}>
+                        <div style={{background:'#6366F1',color:'white',padding:'10px 20px',textAlign:'center',fontSize:'13px',fontWeight:500,display:'flex',alignItems:'center',justifyContent:'center',gap:'12px'}}>
                             ⚠️ You'll be automatically logged out in 10 minutes due to inactivity.
                             <button onClick={() => setInactivityWarning(false)} style={{background:'rgba(255,255,255,0.2)',border:'none',color:'white',padding:'4px 12px',borderRadius:'6px',cursor:'pointer',fontSize:'12px',fontFamily:'inherit'}}>Dismiss</button>
                         </div>
@@ -1431,12 +1431,12 @@
                             ].map(tab => (
                                 <button key={tab.key} onClick={()=>setActiveTab(tab.key)} style={{
                                     padding:'8px 16px',
-                                    border: activeTab===tab.key ? '1.5px solid #0F6E56' : '1.5px solid transparent',
+                                    border: activeTab===tab.key ? '1.5px solid #4C3BAF' : '1.5px solid transparent',
                                     borderRadius:'8px',
                                     fontWeight:600,
                                     cursor:'pointer',
                                     fontSize:'13px',
-                                    background: activeTab===tab.key ? '#0F4068' : 'transparent',
+                                    background: activeTab===tab.key ? '#1E3A5F' : 'transparent',
                                     color: activeTab===tab.key ? 'white' : '#475569',
                                     transition:'all 0.15s',
                                     display:'flex',
@@ -1841,7 +1841,7 @@
                                             .map(cat => {
                                                 const checked = Array.isArray(formData.categories) && formData.categories.includes(cat.slug);
                                                 return (
-                                                    <label key={cat.slug} style={{display:'flex',alignItems:'center',gap:'0.4rem',cursor:'pointer',padding:'0.35rem 0.75rem',borderRadius:'20px',background:checked?'#E6F1FB':'white',border:checked?'1.5px solid #0F6E56':'1.5px solid #d1d5db',fontSize:'0.875rem',fontWeight:checked?600:400,color:checked?'#0C447C':'#374151',transition:'all 0.15s'}}>
+                                                    <label key={cat.slug} style={{display:'flex',alignItems:'center',gap:'0.4rem',cursor:'pointer',padding:'0.35rem 0.75rem',borderRadius:'20px',background:checked?'#E6F1FB':'white',border:checked?'1.5px solid #4C3BAF':'1.5px solid #d1d5db',fontSize:'0.875rem',fontWeight:checked?600:400,color:checked?'#0C447C':'#374151',transition:'all 0.15s'}}>
                                                         <input
                                                             type="checkbox"
                                                             checked={checked}
@@ -2142,8 +2142,8 @@
             return (
                 <div style={{maxWidth:'700px'}}>
                     <div style={{background:'white',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',marginBottom:'1.5rem',overflow:'hidden'}}>
-                        <div style={{padding:'1rem 1.5rem',borderBottom:'1px solid #E1F5EE',background:'#F0FBF8',display:'flex',alignItems:'center',gap:'10px'}}>
-                            <div style={{width:'30px',height:'30px',background:'linear-gradient(135deg,#0F6E56,#5DCAA5)',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'14px'}}>👥</div>
+                        <div style={{padding:'1rem 1.5rem',borderBottom:'1px solid #EDE9FE',background:'#F5F3FF',display:'flex',alignItems:'center',gap:'10px'}}>
+                            <div style={{width:'30px',height:'30px',background:'linear-gradient(135deg,#4C3BAF,#6366F1)',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'14px'}}>👥</div>
                             <div>
                                 <h3 style={{fontSize:'1rem',fontWeight:700,color:'#0F172A',margin:0}}>Current Admins</h3>
                                 <p style={{fontSize:'0.8rem',color:'#64748B',marginTop:'1px'}}>{loading ? 'Loading...' : admins.length + ' authorized user' + (admins.length !== 1 ? 's' : '')}</p>
@@ -2162,7 +2162,7 @@
                                 return (
                                     <div key={i} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'0.875rem 1.5rem',borderBottom:'1px solid #f3f4f6'}}>
                                         <div style={{display:'flex',alignItems:'center',gap:'0.875rem'}}>
-                                            <div style={{width:'40px',height:'40px',background:'linear-gradient(135deg,#0F6E56,#0A2E4A)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontWeight:700,fontSize:'0.9rem',flexShrink:0}}>{getInitials(admin.name)}</div>
+                                            <div style={{width:'40px',height:'40px',background:'linear-gradient(135deg,#4C3BAF,#1E3A5F)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontWeight:700,fontSize:'0.9rem',flexShrink:0}}>{getInitials(admin.name)}</div>
                                             <div>
                                                 <div style={{fontWeight:600,fontSize:'0.95rem',display:'flex',alignItems:'center',gap:'6px'}}>
                                                     {admin.name}
@@ -2180,7 +2180,7 @@
                                         <div style={{display:'flex',gap:'8px',alignItems:'center'}}>
                                             {!isYou && session.role === 'superadmin' && (
                                                 <button onClick={()=>handleToggleRole(admin.email, admin.name, admin.role)}
-                                                    style={{background:'none',border:'1.5px solid #5DCAA5',color:'#5DCAA5',padding:'0.375rem 0.875rem',borderRadius:'8px',fontSize:'0.8rem',fontWeight:600,cursor:'pointer'}}>
+                                                    style={{background:'none',border:'1.5px solid #6366F1',color:'#6366F1',padding:'0.375rem 0.875rem',borderRadius:'8px',fontSize:'0.8rem',fontWeight:600,cursor:'pointer'}}>
                                                     {adminIsSuperAdmin ? 'Demote to Admin' : 'Make Superadmin'}
                                                 </button>
                                             )}
@@ -2193,8 +2193,8 @@
                     </div>
 
                     <div style={{background:'white',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',overflow:'hidden'}}>
-                        <div style={{padding:'1rem 1.5rem',borderBottom:'1px solid #E1F5EE',background:'#F0FBF8',display:'flex',alignItems:'center',gap:'10px'}}>
-                            <div style={{width:'30px',height:'30px',background:'linear-gradient(135deg,#0F4068,#0F6E56)',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'14px'}}>➕</div>
+                        <div style={{padding:'1rem 1.5rem',borderBottom:'1px solid #EDE9FE',background:'#F5F3FF',display:'flex',alignItems:'center',gap:'10px'}}>
+                            <div style={{width:'30px',height:'30px',background:'linear-gradient(135deg,#1E3A5F,#4C3BAF)',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'14px'}}>➕</div>
                             <div>
                                 <h3 style={{fontSize:'1rem',fontWeight:700,color:'#0F172A',margin:0}}>Add New Admin</h3>
                                 <p style={{fontSize:'0.8rem',color:'#64748B',marginTop:'1px'}}>They will receive an email invitation with the portal link</p>
@@ -2213,7 +2213,7 @@
                                     Body: Hi {newName}, you have been granted access to the FPG Equipment Admin Portal...
                                 </div>
                             )}
-                            <button onClick={handleAdd} disabled={adding} style={{background:'#0F6E56',color:'white',border:'none',padding:'0.875rem',borderRadius:'10px',fontWeight:700,cursor:'pointer',fontSize:'0.95rem'}}>
+                            <button onClick={handleAdd} disabled={adding} style={{background:'#4C3BAF',color:'white',border:'none',padding:'0.875rem',borderRadius:'10px',fontWeight:700,cursor:'pointer',fontSize:'0.95rem'}}>
                                 {adding ? '⏳ Adding...' : '✅ Add Admin & Send Invite'}
                             </button>
                         </div>
@@ -2395,15 +2395,15 @@
                         </div>
                     )}
                     <div style={{background:'white',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',overflow:'hidden'}}>
-                        <div style={{padding:'1rem 1.5rem',borderBottom:'1px solid #E1F5EE',background:'#F0FBF8',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                        <div style={{padding:'1rem 1.5rem',borderBottom:'1px solid #EDE9FE',background:'#F5F3FF',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                             <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
-                                <div style={{width:'30px',height:'30px',background:'linear-gradient(135deg,#0F6E56,#5DCAA5)',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'14px'}}>🏷️</div>
+                                <div style={{width:'30px',height:'30px',background:'linear-gradient(135deg,#4C3BAF,#6366F1)',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'14px'}}>🏷️</div>
                                 <div>
                                     <h3 style={{fontSize:'1rem',fontWeight:700,margin:0,color:'#0F172A'}}>Categories</h3>
                                     <p style={{fontSize:'0.8rem',color:'#64748B',margin:0}}>{(categories||[]).length} total · {(categories||[]).filter(function(c){return getProductCount(c.slug)===0;}).length} empty</p>
                                 </div>
                             </div>
-                            <button onClick={function(){setShowAddModal(true);setStatus(null);}} style={{background:'#0F6E56',color:'white',border:'none',padding:'7px 14px',borderRadius:'8px',fontWeight:700,cursor:'pointer',fontSize:'0.85rem',display:'flex',alignItems:'center',gap:'6px',whiteSpace:'nowrap'}}>
+                            <button onClick={function(){setShowAddModal(true);setStatus(null);}} style={{background:'#4C3BAF',color:'white',border:'none',padding:'7px 14px',borderRadius:'8px',fontWeight:700,cursor:'pointer',fontSize:'0.85rem',display:'flex',alignItems:'center',gap:'6px',whiteSpace:'nowrap'}}>
                                 + New category
                             </button>
                         </div>
@@ -2431,7 +2431,7 @@
                                                         onKeyDown={function(e){if(e.key==='Enter') handleSaveEdit(cat.slug); if(e.key==='Escape') handleCancelEdit();}}
                                                         autoFocus
                                                         placeholder="Category name"
-                                                        style={{width:'100%',padding:'0.375rem 0.625rem',border:'2px solid #0F6E56',borderRadius:'6px',fontSize:'0.95rem',outline:'none'}}
+                                                        style={{width:'100%',padding:'0.375rem 0.625rem',border:'2px solid #4C3BAF',borderRadius:'6px',fontSize:'0.95rem',outline:'none'}}
                                                     />
                                                     <input
                                                         type="text"
@@ -2450,9 +2450,9 @@
                                             ) : (
                                                 <div style={{display:'flex',alignItems:'center',gap:'0.75rem',flex:1}}>
                                                     {cat.imageUrl ? (
-                                                        <img src={cat.imageUrl} alt={cat.label} style={{width:'40px',height:'40px',objectFit:'cover',borderRadius:'8px',border:'2px solid #9FE1CB',flexShrink:0,boxShadow:'0 0 0 3px #E1F5EE'}} onError={function(e){e.target.style.display='none';}} />
+                                                        <img src={cat.imageUrl} alt={cat.label} style={{width:'40px',height:'40px',objectFit:'cover',borderRadius:'8px',border:'2px solid #C4B5FD',flexShrink:0,boxShadow:'0 0 0 3px #EDE9FE'}} onError={function(e){e.target.style.display='none';}} />
                                                     ) : (
-                                                        <div style={{width:'10px',height:'10px',borderRadius:'50%',background:isEmpty?'#d1d5db':'#0F6E56',flexShrink:0}}></div>
+                                                        <div style={{width:'10px',height:'10px',borderRadius:'50%',background:isEmpty?'#d1d5db':'#4C3BAF',flexShrink:0}}></div>
                                                     )}
                                                     <div>
                                                         <div style={{fontWeight:600,fontSize:'0.95rem'}}>{cat.label}</div>
@@ -2467,7 +2467,7 @@
                                                     <button
                                                         onClick={function(){handleSaveEdit(cat.slug);}}
                                                         disabled={saving || !editLabel.trim()}
-                                                        style={{background:'#0F6E56',border:'none',color:'white',padding:'0.35rem 0.875rem',borderRadius:'8px',fontSize:'0.8rem',fontWeight:600,cursor:'pointer'}}
+                                                        style={{background:'#4C3BAF',border:'none',color:'white',padding:'0.35rem 0.875rem',borderRadius:'8px',fontSize:'0.8rem',fontWeight:600,cursor:'pointer'}}
                                                     >{saving ? 'Saving...' : 'Save'}</button>
                                                     <button
                                                         onClick={handleCancelEdit}
@@ -2478,12 +2478,12 @@
                                             ) : (
                                                 <>
                                                     {!isEmpty && (
-                                                        <span style={{background:'#CCFBF1',color:'#0F6E56',padding:'0.2rem 0.7rem',borderRadius:'20px',fontSize:'0.75rem',fontWeight:600}}>In use</span>
+                                                        <span style={{background:'#EDE9FE',color:'#4C3BAF',padding:'0.2rem 0.7rem',borderRadius:'20px',fontSize:'0.75rem',fontWeight:600}}>In use</span>
                                                     )}
                                                     <button
                                                         onClick={function(){handleStartEdit(cat);}}
                                                         disabled={saving}
-                                                        style={{background:'none',border:'1.5px solid #0F6E56',color:'#0F6E56',padding:'0.35rem 0.875rem',borderRadius:'8px',fontSize:'0.8rem',fontWeight:600,cursor:'pointer'}}
+                                                        style={{background:'none',border:'1.5px solid #4C3BAF',color:'#4C3BAF',padding:'0.35rem 0.875rem',borderRadius:'8px',fontSize:'0.8rem',fontWeight:600,cursor:'pointer'}}
                                                     >Edit</button>
                                                     <button
                                                         onClick={function(){handleRemove(cat.slug, cat.label);}}
@@ -2608,7 +2608,7 @@
                             const items = (s.items||[]).map(it => it.title + ' x' + (it.quantity||1) + ' ($' + (((it.price||0)*(it.quantity||1)).toFixed(2)) + ')').join(', ');
                             snapHtml = '<tr class="snap" id="snap-' + i + '" style="display:none;background:#F0F4F8"><td colspan="7" style="padding:10px 14px 12px 32px"><div style="background:white;border-radius:6px;border:0.5px solid #C7D9F0;padding:10px 14px;font-size:11.5px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#78716C;margin-bottom:8px">Order snapshot</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px"><div><span style="color:#A8A29E">Submitter:</span> ' + (s.submitterName||'') + '</div><div><span style="color:#A8A29E">Recipient:</span> ' + (s.recipientName||'') + '</div><div><span style="color:#A8A29E">Location:</span> <strong style="color:#185FA5">' + (s.locationId||'') + '</strong></div><div><span style="color:#A8A29E">Total:</span> <strong>$' + ((s.total||0).toFixed(2)) + '</strong></div><div style="grid-column:2/-1"><span style="color:#A8A29E">Ship to:</span> ' + (s.shipTo||'') + '</div><div style="grid-column:1/-1"><span style="color:#A8A29E">Items:</span> ' + items + '</div></div></div></td></tr>';
                         }
-                        return '<tr data-action="' + entry.action + '" style="background:' + bg + ';cursor:' + (expandable?'pointer':'default') + '"' + (expandable?' onclick="toggleSnap(' + i + ')"':'') + '><td style="padding:9px 8px;text-align:center;width:3%"><input type="checkbox" class="row-cb" onchange="updateSelCount()" style="cursor:pointer;accent-color:#0F4068"></td><td style="padding:9px 8px;text-align:center;color:#A8A29E;font-size:13px;width:3%">' + (expandable?'<span id="chev-'+i+'">&#9658;</span>':'') + '</td><td style="padding:9px 10px;font-size:11px;font-weight:700;color:#0F4068;width:12%">' + dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) + '<br><span style="font-size:10.5px;color:#57534E">' + dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) + '</span></td><td style="padding:9px 10px;width:16%"><div style="font-weight:500;font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + ((entry.adminEmail||'').split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase()})) + '</div><div style="font-size:10px;color:#A8A29E;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.adminEmail||'') + '</div></td><td style="padding:9px 10px;width:13%"><span style="display:inline-block;padding:2px 8px;border-radius:4px;background:' + m.bg + ';color:' + m.color + ';font-weight:700;font-size:10.5px">' + m.label + '</span></td><td style="padding:9px 10px;font-size:11px;font-family:monospace;color:#185FA5;width:14%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.target||'&mdash;') + '</td><td style="padding:9px 10px;font-size:11px;color:#57534E;width:33%">' + detail + '</td><td style="padding:9px 10px;width:9%"><span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;background:' + resBg + ';color:' + resColor + '">' + (entry.result||'') + '</span></td></tr>' + snapHtml;
+                        return '<tr data-action="' + entry.action + '" style="background:' + bg + ';cursor:' + (expandable?'pointer':'default') + '"' + (expandable?' onclick="toggleSnap(' + i + ')"':'') + '><td style="padding:9px 8px;text-align:center;width:3%"><input type="checkbox" class="row-cb" onchange="updateSelCount()" style="cursor:pointer;accent-color:#1E3A5F"></td><td style="padding:9px 8px;text-align:center;color:#A8A29E;font-size:13px;width:3%">' + (expandable?'<span id="chev-'+i+'">&#9658;</span>':'') + '</td><td style="padding:9px 10px;font-size:11px;font-weight:700;color:#1E3A5F;width:12%">' + dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) + '<br><span style="font-size:10.5px;color:#57534E">' + dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) + '</span></td><td style="padding:9px 10px;width:16%"><div style="font-weight:500;font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + ((entry.adminEmail||'').split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase()})) + '</div><div style="font-size:10px;color:#A8A29E;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.adminEmail||'') + '</div></td><td style="padding:9px 10px;width:13%"><span style="display:inline-block;padding:2px 8px;border-radius:4px;background:' + m.bg + ';color:' + m.color + ';font-weight:700;font-size:10.5px">' + m.label + '</span></td><td style="padding:9px 10px;font-size:11px;font-family:monospace;color:#185FA5;width:14%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.target||'&mdash;') + '</td><td style="padding:9px 10px;font-size:11px;color:#57534E;width:33%">' + detail + '</td><td style="padding:9px 10px;width:9%"><span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;background:' + resBg + ';color:' + resColor + '">' + (entry.result||'') + '</span></td></tr>' + snapHtml;
                     }).join('');
 
                     const sidebarHtml = Object.entries(typeCounts).sort((a,b)=>b[1]-a[1]).map(([action, count]) => {
@@ -2619,7 +2619,7 @@
                     const allYears = availableYears;
                     const yearPills = allYears.map(y => '<button class="ypill' + (yearsToLoad.includes(y)?' on':'') + '" onclick="toggleYear(' + y + ',this)">' + y + '</button>').join('');
 
-                    const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Audit Log — FPG Equipment Portal</title><style>*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}body{background:#F3F4F6;height:100vh;display:flex;flex-direction:column;overflow:hidden}.titlebar{background:#0F4068;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}.titlebar h1{color:white;font-size:15px;font-weight:500}.titlebar-right{display:flex;gap:8px;align-items:center}.ypill{padding:3px 10px;border:1px solid rgba(219,128,46,0.5);border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;background:transparent;color:rgba(255,255,255,0.7)}.ypill.on{background:#5DCAA5;color:white;border-color:#5DCAA5}.exp-btn{padding:5px 14px;background:rgba(219,128,46,0.2);color:#9FE1CB;border:1px solid rgba(219,128,46,0.6);border-radius:6px;font-size:11px;cursor:pointer;font-weight:700}.layout{display:flex;flex:1;overflow:hidden}.sidebar{width:165px;flex-shrink:0;border-right:0.5px solid #E7E5E4;padding:12px 10px;background:#0A2E4A;overflow-y:auto}.sidebar-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#5DCAA5;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid rgba(219,128,46,0.25)}.filter-item{padding:6px 8px;border-radius:6px;font-size:11px;cursor:pointer;margin-bottom:3px;display:flex;justify-content:space-between;align-items:center}.filter-item:hover{background:rgba(255,255,255,0.07)}.filter-item.active{background:#5DCAA5}.all-btn{padding:6px 8px;border-radius:6px;font-size:12px;cursor:pointer;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center;font-weight:700}.all-btn.active{background:#5DCAA5;color:white}.all-btn:not(.active){color:rgba(255,255,255,0.65)}.main{flex:1;overflow:hidden;display:flex;flex-direction:column;background:white}.search-bar{padding:10px 14px;border-bottom:0.5px solid #E7E5E4;display:flex;gap:8px;align-items:center;flex-shrink:0}.search-bar input{flex:1;padding:6px 10px;border:0.5px solid #D6D3D1;border-radius:8px;font-size:12px}.count-info{font-size:12px;color:#78716C;white-space:nowrap}.count-info strong{color:#0F4068}.table-scroll{flex:1;overflow-y:auto}table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}thead{position:sticky;top:0;z-index:1}th{padding:9px 10px;text-align:left;font-size:11px;font-weight:700;color:#0F4068;text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid #5DCAA5;background:#E1F5EE}td{border-bottom:0.5px solid #E7E5E4;vertical-align:top}tr:hover td{filter:brightness(0.97)}.snap{}</style></head><body><div style="height:3px;background:linear-gradient(90deg,#DB802E,#EFA855,#DB802E)"></div><div class="titlebar"><h1>&#128203; Audit Log — FPG Equipment Portal</h1><div class="titlebar-right">${yearPills}<div style="position:relative"><button class="exp-btn" onclick="toggleExportMenu()">&#8595; Export <span id="exp-arrow">&#9660;</span></button><div id="exp-menu" style="display:none;position:absolute;top:calc(100% + 4px);right:0;background:white;border:1.5px solid #0F6E56;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.15);z-index:999;min-width:220px;overflow:hidden"><div style="padding:6px 10px;background:#F0F4F8;border-bottom:0.5px solid #C7D9F0;font-size:10px;font-weight:700;color:#0F6E56;text-transform:uppercase;letter-spacing:0.07em">Choose what to export</div><button onclick="exportMode('page')" style="width:100%;padding:10px 14px;border:none;border-bottom:0.5px solid #E7E5E4;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#0F4068">This page only</div><div id="page-count-label" style="font-size:11px;color:#78716C;margin-top:1px">First 25 visible entries</div></button><button onclick="exportMode('all')" style="width:100%;padding:10px 14px;border:none;border-bottom:0.5px solid #E7E5E4;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#0F4068">All filtered results</div><div id="filtered-count-label" style="font-size:11px;color:#78716C;margin-top:1px">All visible entries</div></button><button onclick="exportMode('selected')" style="width:100%;padding:10px 14px;border:none;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#0F4068">Selected only</div><div id="selected-count-label" style="font-size:11px;color:#78716C;margin-top:1px">0 entries selected</div></button></div></div></div></div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:2px solid #5DCAA5"><div style="padding:11px 14px;background:#0F4068;border-right:1px solid rgba(219,128,46,0.25);text-align:center"><div id="sc-total" style="font-size:20px;font-weight:500;color:#9FE1CB;font-family:Georgia,serif">-</div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);margin-top:2px">Total entries</div></div><div style="padding:11px 14px;background:#0F4068;border-right:1px solid rgba(219,128,46,0.25);text-align:center"><div id="sc-logins" style="font-size:20px;font-weight:500;color:#93C5FD;font-family:Georgia,serif">-</div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);margin-top:2px">Logins</div></div><div style="padding:11px 14px;background:#0F4068;border-right:1px solid rgba(219,128,46,0.25);text-align:center"><div id="sc-deletes" style="font-size:20px;font-weight:500;color:#FCA5A5;font-family:Georgia,serif">-</div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);margin-top:2px">Deletions</div></div><div style="padding:11px 14px;background:#0F4068;text-align:center"><div id="sc-status" style="font-size:20px;font-weight:500;color:#FCD34D;font-family:Georgia,serif">-</div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);margin-top:2px">Status changes</div></div></div><div class="layout"><div class="sidebar"><div class="sidebar-title">Filter by type</div><div class="all-btn active" id="all-btn" onclick="filterType(\'all\')"><span>All actions</span><span style="font-weight:700;font-size:11px">${allEntries.length}</span></div>${sidebarHtml}</div><div class="main"><div class="search-bar"><input type="text" id="search-input" placeholder="Search by admin, action, target, or detail..." oninput="applyFilters()"><span class="count-info">Showing <strong id="vc">${allEntries.length}</strong> of <strong>${allEntries.length}</strong> entries</span></div><div class="table-scroll"><table><thead><tr><th style="width:3%"><input type="checkbox" id="select-all" onchange="toggleSelectAll(this)" style="cursor:pointer;accent-color:#0F4068"></th><th style="width:12%">Date / Time</th><th style="width:16%">Admin</th><th style="width:13%">Action</th><th style="width:14%">Target</th><th style="width:33%">Detail</th><th style="width:9%">Result</th></tr></thead><tbody id="ab">${rowsHtml}</tbody></table></div></div></div><script>function toggleExportMenu(){var m=document.getElementById("exp-menu");var a=document.getElementById("exp-arrow");var open=m.style.display!=="none";m.style.display=open?"none":"block";a.innerHTML=open?"&#9660;":"&#9650;";if(!open){var vis=document.querySelectorAll("#ab tr:not(.snap):not([style*=\'display:none\'])");var sel=document.querySelectorAll("#ab tr:not(.snap) .row-cb:checked");document.getElementById("page-count-label").textContent="First 25 of "+vis.length+" visible entries";document.getElementById("filtered-count-label").textContent=vis.length+" entries matching current filters";document.getElementById("selected-count-label").textContent=sel.length+" entries selected";}}
+                    const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Audit Log — FPG Equipment Portal</title><style>*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}body{background:#F3F4F6;height:100vh;display:flex;flex-direction:column;overflow:hidden}.titlebar{background:#1E3A5F;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}.titlebar h1{color:white;font-size:15px;font-weight:500}.titlebar-right{display:flex;gap:8px;align-items:center}.ypill{padding:3px 10px;border:1px solid rgba(219,128,46,0.5);border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;background:transparent;color:rgba(255,255,255,0.7)}.ypill.on{background:#6366F1;color:white;border-color:#6366F1}.exp-btn{padding:5px 14px;background:rgba(219,128,46,0.2);color:#C4B5FD;border:1px solid rgba(219,128,46,0.6);border-radius:6px;font-size:11px;cursor:pointer;font-weight:700}.layout{display:flex;flex:1;overflow:hidden}.sidebar{width:165px;flex-shrink:0;border-right:0.5px solid #E7E5E4;padding:12px 10px;background:#141C3A;overflow-y:auto}.sidebar-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6366F1;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid rgba(219,128,46,0.25)}.filter-item{padding:6px 8px;border-radius:6px;font-size:11px;cursor:pointer;margin-bottom:3px;display:flex;justify-content:space-between;align-items:center}.filter-item:hover{background:rgba(255,255,255,0.07)}.filter-item.active{background:#6366F1}.all-btn{padding:6px 8px;border-radius:6px;font-size:12px;cursor:pointer;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center;font-weight:700}.all-btn.active{background:#6366F1;color:white}.all-btn:not(.active){color:rgba(255,255,255,0.65)}.main{flex:1;overflow:hidden;display:flex;flex-direction:column;background:white}.search-bar{padding:10px 14px;border-bottom:0.5px solid #E7E5E4;display:flex;gap:8px;align-items:center;flex-shrink:0}.search-bar input{flex:1;padding:6px 10px;border:0.5px solid #D6D3D1;border-radius:8px;font-size:12px}.count-info{font-size:12px;color:#78716C;white-space:nowrap}.count-info strong{color:#1E3A5F}.table-scroll{flex:1;overflow-y:auto}table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}thead{position:sticky;top:0;z-index:1}th{padding:9px 10px;text-align:left;font-size:11px;font-weight:700;color:#1E3A5F;text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid #6366F1;background:#EDE9FE}td{border-bottom:0.5px solid #E7E5E4;vertical-align:top}tr:hover td{filter:brightness(0.97)}.snap{}</style></head><body><div style="height:3px;background:linear-gradient(90deg,#DB802E,#EFA855,#DB802E)"></div><div class="titlebar"><h1>&#128203; Audit Log — FPG Equipment Portal</h1><div class="titlebar-right">${yearPills}<div style="position:relative"><button class="exp-btn" onclick="toggleExportMenu()">&#8595; Export <span id="exp-arrow">&#9660;</span></button><div id="exp-menu" style="display:none;position:absolute;top:calc(100% + 4px);right:0;background:white;border:1.5px solid #4C3BAF;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.15);z-index:999;min-width:220px;overflow:hidden"><div style="padding:6px 10px;background:#F0F4F8;border-bottom:0.5px solid #C7D9F0;font-size:10px;font-weight:700;color:#4C3BAF;text-transform:uppercase;letter-spacing:0.07em">Choose what to export</div><button onclick="exportMode('page')" style="width:100%;padding:10px 14px;border:none;border-bottom:0.5px solid #E7E5E4;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">This page only</div><div id="page-count-label" style="font-size:11px;color:#78716C;margin-top:1px">First 25 visible entries</div></button><button onclick="exportMode('all')" style="width:100%;padding:10px 14px;border:none;border-bottom:0.5px solid #E7E5E4;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">All filtered results</div><div id="filtered-count-label" style="font-size:11px;color:#78716C;margin-top:1px">All visible entries</div></button><button onclick="exportMode('selected')" style="width:100%;padding:10px 14px;border:none;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">Selected only</div><div id="selected-count-label" style="font-size:11px;color:#78716C;margin-top:1px">0 entries selected</div></button></div></div></div></div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:2px solid #6366F1"><div style="padding:11px 14px;background:#1E3A5F;border-right:1px solid rgba(219,128,46,0.25);text-align:center"><div id="sc-total" style="font-size:20px;font-weight:500;color:#C4B5FD;font-family:Georgia,serif">-</div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);margin-top:2px">Total entries</div></div><div style="padding:11px 14px;background:#1E3A5F;border-right:1px solid rgba(219,128,46,0.25);text-align:center"><div id="sc-logins" style="font-size:20px;font-weight:500;color:#93C5FD;font-family:Georgia,serif">-</div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);margin-top:2px">Logins</div></div><div style="padding:11px 14px;background:#1E3A5F;border-right:1px solid rgba(219,128,46,0.25);text-align:center"><div id="sc-deletes" style="font-size:20px;font-weight:500;color:#FCA5A5;font-family:Georgia,serif">-</div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);margin-top:2px">Deletions</div></div><div style="padding:11px 14px;background:#1E3A5F;text-align:center"><div id="sc-status" style="font-size:20px;font-weight:500;color:#FCD34D;font-family:Georgia,serif">-</div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);margin-top:2px">Status changes</div></div></div><div class="layout"><div class="sidebar"><div class="sidebar-title">Filter by type</div><div class="all-btn active" id="all-btn" onclick="filterType(\'all\')"><span>All actions</span><span style="font-weight:700;font-size:11px">${allEntries.length}</span></div>${sidebarHtml}</div><div class="main"><div class="search-bar"><input type="text" id="search-input" placeholder="Search by admin, action, target, or detail..." oninput="applyFilters()"><span class="count-info">Showing <strong id="vc">${allEntries.length}</strong> of <strong>${allEntries.length}</strong> entries</span></div><div class="table-scroll"><table><thead><tr><th style="width:3%"><input type="checkbox" id="select-all" onchange="toggleSelectAll(this)" style="cursor:pointer;accent-color:#1E3A5F"></th><th style="width:12%">Date / Time</th><th style="width:16%">Admin</th><th style="width:13%">Action</th><th style="width:14%">Target</th><th style="width:33%">Detail</th><th style="width:9%">Result</th></tr></thead><tbody id="ab">${rowsHtml}</tbody></table></div></div></div><script>function toggleExportMenu(){var m=document.getElementById("exp-menu");var a=document.getElementById("exp-arrow");var open=m.style.display!=="none";m.style.display=open?"none":"block";a.innerHTML=open?"&#9660;":"&#9650;";if(!open){var vis=document.querySelectorAll("#ab tr:not(.snap):not([style*=\'display:none\'])");var sel=document.querySelectorAll("#ab tr:not(.snap) .row-cb:checked");document.getElementById("page-count-label").textContent="First 25 of "+vis.length+" visible entries";document.getElementById("filtered-count-label").textContent=vis.length+" entries matching current filters";document.getElementById("selected-count-label").textContent=sel.length+" entries selected";}}
 function closeExportMenu(){var m=document.getElementById("exp-menu");if(m)m.style.display="none";var a=document.getElementById("exp-arrow");if(a)a.innerHTML="&#9660;";}
 document.addEventListener("click",function(e){if(!e.target.closest("#exp-menu")&&!e.target.closest(".exp-btn"))closeExportMenu();});
 function exportMode(mode){closeExportMenu();var rows=document.querySelectorAll("#ab tr:not(.snap)");var h=["Timestamp","Admin","Action","Target","Detail","Result"];var lines=[h.join(",")];var toExport=[];rows.forEach(function(r,i){if(r.style.display==="none")return;if(mode==="page"&&i>=25)return;if(mode==="selected"){var cb=r.querySelector(".row-cb");if(!cb||!cb.checked)return;}toExport.push(r);});toExport.forEach(function(r){var c=r.querySelectorAll("td");if(c.length<7)return;lines.push([1,2,3,4,5,6].map(function(i){return'"'+c[i].innerText.replace(/"/g,'""'). replace(/\n/g," ").trim()+'"';}).join(","));});if(toExport.length===0){alert("No entries to export. Check your selection.");return;}var b=new Blob([lines.join("\n")],{type:"text/csv"});var u=URL.createObjectURL(b);var a=document.createElement("a");a.href=u;a.download="audit-log-"+mode+".csv";a.click();URL.revokeObjectURL(u);}
@@ -2834,7 +2834,7 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                     <div style={{height:'3px',background:'linear-gradient(90deg,#DB802E,#EFA855,#DB802E)',borderRadius:'2px',marginBottom:'16px'}}></div>
 
                     {/* Stats - navy boxes with gold numbers */}
-                    <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:'0',marginBottom:'20px',borderRadius:'10px',overflow:'hidden',border:'1px solid #0F4068'}}>
+                    <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:'0',marginBottom:'20px',borderRadius:'10px',overflow:'hidden',border:'1px solid #1E3A5F'}}>
                         {[
                             {label:'Total orders', value: stats.total, sub:'All time', color:'#FFFFFF'},
                             {label:'New · Awaiting action', value: stats.newOrders, sub:'Pending IT review', color:'#60B4FF'},
@@ -2844,7 +2844,7 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                         ].map((s,i) => (
                             <div key={i}
                                 onClick={s.clickable ? ()=>setShowDeleted(true) : undefined}
-                                style={{background:'#0F4068',borderRight:i<4?'1px solid rgba(219,128,46,0.25)':'none',padding:'14px 16px',cursor:s.clickable?'pointer':'default'}}>
+                                style={{background:'#1E3A5F',borderRight:i<4?'1px solid rgba(219,128,46,0.25)':'none',padding:'14px 16px',cursor:s.clickable?'pointer':'default'}}>
                                 <div style={{fontSize:'10px',fontWeight:700,color:'rgba(255,255,255,0.5)',textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'6px'}}>{s.label}</div>
                                 <div style={{fontSize:'24px',fontWeight:500,color:s.color,fontFamily:"Georgia,'Times New Roman',serif"}}>{s.value}</div>
                                 <div style={{fontSize:'10.5px',color:i===4 && stats.deleted>0?'#FCA5A5':'rgba(255,255,255,0.35)',marginTop:'3px'}}>{s.sub}</div>
@@ -2856,13 +2856,13 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                     {/* Toolbar Row 1 — Search + Dropdowns */}
                     <div style={{display:'flex',gap:'8px',marginBottom:'8px',flexWrap:'wrap',alignItems:'center'}}>
                         <div style={{flex:1,minWidth:'260px',position:'relative'}}>
-                            <span style={{position:'absolute',left:'10px',top:'50%',transform:'translateY(-50%)',color:'#0F6E56',fontSize:'15px'}}>🔍</span>
+                            <span style={{position:'absolute',left:'10px',top:'50%',transform:'translateY(-50%)',color:'#4C3BAF',fontSize:'15px'}}>🔍</span>
                             <input type="text" placeholder="Search name, email, location, recipient, address..." value={searchQuery}
                                 onChange={handleFilterChange(setSearchQuery)}
-                                style={{width:'100%',padding:'9px 12px 9px 34px',border:'1.5px solid #0F6E56',borderRadius:'8px',fontSize:'13px',background:'white',color:'#0F4068'}} />
+                                style={{width:'100%',padding:'9px 12px 9px 34px',border:'1.5px solid #4C3BAF',borderRadius:'8px',fontSize:'13px',background:'white',color:'#1E3A5F'}} />
                         </div>
                         <select value={statusFilter} onChange={handleFilterChange(setStatusFilter)}
-                            style={{padding:'9px 12px',border:'1.5px solid #0F6E56',borderRadius:'8px',fontSize:'13px',minWidth:'140px',background:'white',color:'#0F4068',fontWeight:500}}>
+                            style={{padding:'9px 12px',border:'1.5px solid #4C3BAF',borderRadius:'8px',fontSize:'13px',minWidth:'140px',background:'white',color:'#1E3A5F',fontWeight:500}}>
                             <option value="all">All statuses</option>
                             <option value="New">New</option>
                             <option value="In Progress">In Progress</option>
@@ -2870,14 +2870,14 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                             {showDeleted && <option value="Deleted">Deleted</option>}
                         </select>
                         <select value={submitterFilter} onChange={handleFilterChange(setSubmitterFilter)}
-                            style={{padding:'9px 12px',border:'1.5px solid #0F6E56',borderRadius:'8px',fontSize:'13px',minWidth:'155px',background:'white',color:'#0F4068',fontWeight:500}}>
+                            style={{padding:'9px 12px',border:'1.5px solid #4C3BAF',borderRadius:'8px',fontSize:'13px',minWidth:'155px',background:'white',color:'#1E3A5F',fontWeight:500}}>
                             <option value="all">All submitters</option>
                             {uniqueSubmitters.map(([email, name]) => (
                                 <option key={email} value={email}>{name}</option>
                             ))}
                         </select>
                         <select value={locationFilter} onChange={handleFilterChange(setLocationFilter)}
-                            style={{padding:'9px 12px',border:'1.5px solid #0F6E56',borderRadius:'8px',fontSize:'13px',minWidth:'145px',background:'white',color:'#0F4068',fontWeight:500}}>
+                            style={{padding:'9px 12px',border:'1.5px solid #4C3BAF',borderRadius:'8px',fontSize:'13px',minWidth:'145px',background:'white',color:'#1E3A5F',fontWeight:500}}>
                             <option value="all">All locations</option>
                             {uniqueLocations.map(loc => (
                                 <option key={loc} value={loc}>{loc}</option>
@@ -2887,56 +2887,56 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
 
                     {/* Toolbar Row 2 — Date Range + Total Range + Year Pills + Actions */}
                     <div style={{display:'flex',gap:'7px',marginBottom:'16px',flexWrap:'wrap',alignItems:'center',background:'#F0F4F8',padding:'10px 12px',borderRadius:'8px',border:'0.5px solid #C7D9F0'}}>
-                        <span style={{fontSize:'12px',color:'#0F6E56',fontWeight:700}}>Date:</span>
+                        <span style={{fontSize:'12px',color:'#4C3BAF',fontWeight:700}}>Date:</span>
                         <input type="date" value={dateFrom} onChange={handleFilterChange(setDateFrom)}
-                            style={{padding:'6px 9px',border:'1.5px solid #0F6E56',borderRadius:'7px',fontSize:'12px',background:'white',color:'#0F4068'}} />
+                            style={{padding:'6px 9px',border:'1.5px solid #4C3BAF',borderRadius:'7px',fontSize:'12px',background:'white',color:'#1E3A5F'}} />
                         <span style={{fontSize:'12px',color:'#78716C',fontWeight:500}}>to</span>
                         <input type="date" value={dateTo} onChange={handleFilterChange(setDateTo)}
-                            style={{padding:'6px 9px',border:'1.5px solid #0F6E56',borderRadius:'7px',fontSize:'12px',background:'white',color:'#0F4068'}} />
+                            style={{padding:'6px 9px',border:'1.5px solid #4C3BAF',borderRadius:'7px',fontSize:'12px',background:'white',color:'#1E3A5F'}} />
                         <div style={{width:'1px',height:'20px',background:'#C7D9F0',margin:'0 4px'}}></div>
-                        <span style={{fontSize:'12px',color:'#0F6E56',fontWeight:700}}>$ Total:</span>
+                        <span style={{fontSize:'12px',color:'#4C3BAF',fontWeight:700}}>$ Total:</span>
                         <input type="number" placeholder="Min" value={minTotal} onChange={handleFilterChange(setMinTotal)}
-                            style={{width:'75px',padding:'6px 9px',border:'1.5px solid #0F6E56',borderRadius:'7px',fontSize:'12px',background:'white',color:'#0F4068'}} />
+                            style={{width:'75px',padding:'6px 9px',border:'1.5px solid #4C3BAF',borderRadius:'7px',fontSize:'12px',background:'white',color:'#1E3A5F'}} />
                         <span style={{fontSize:'12px',color:'#78716C',fontWeight:500}}>to</span>
                         <input type="number" placeholder="Max" value={maxTotal} onChange={handleFilterChange(setMaxTotal)}
-                            style={{width:'75px',padding:'6px 9px',border:'1.5px solid #0F6E56',borderRadius:'7px',fontSize:'12px',background:'white',color:'#0F4068'}} />
+                            style={{width:'75px',padding:'6px 9px',border:'1.5px solid #4C3BAF',borderRadius:'7px',fontSize:'12px',background:'white',color:'#1E3A5F'}} />
                         <div style={{width:'1px',height:'20px',background:'#C7D9F0',margin:'0 4px'}}></div>
                         {availableYears.map(y => (
                             <button key={y} onClick={()=>{setYearFilter(prev=>prev.includes(y)?prev.filter(x=>x!==y):[...prev,y]);setCurrentPage(1);}}
-                                style={{padding:'5px 14px',border:'1.5px solid #0F6E56',borderRadius:'20px',fontSize:'12px',fontWeight:700,cursor:'pointer',
-                                    background:yearFilter.includes(y)?'#0F6E56':'white',
-                                    color:yearFilter.includes(y)?'white':'#0F6E56'}}>
+                                style={{padding:'5px 14px',border:'1.5px solid #4C3BAF',borderRadius:'20px',fontSize:'12px',fontWeight:700,cursor:'pointer',
+                                    background:yearFilter.includes(y)?'#4C3BAF':'white',
+                                    color:yearFilter.includes(y)?'white':'#4C3BAF'}}>
                                 {y}
                             </button>
                         ))}
-                        <span style={{fontSize:'12px',color:'#0F6E56',fontWeight:500,marginLeft:'4px'}}>
-                            Showing <strong style={{color:'#0F4068'}}>{filtered.length}</strong> of <strong style={{color:'#0F4068'}}>{orders.filter(o=>showDeleted||o.status!=="Deleted").length}</strong> orders
+                        <span style={{fontSize:'12px',color:'#4C3BAF',fontWeight:500,marginLeft:'4px'}}>
+                            Showing <strong style={{color:'#1E3A5F'}}>{filtered.length}</strong> of <strong style={{color:'#1E3A5F'}}>{orders.filter(o=>showDeleted||o.status!=="Deleted").length}</strong> orders
                         </span>
                         <div style={{marginLeft:'auto',display:'flex',gap:'6px'}}>
                             <button onClick={()=>setShowDeleted(p=>!p)}
                                 style={{padding:'6px 12px',border:'1.5px solid',borderRadius:'8px',fontSize:'12px',fontWeight:500,cursor:'pointer',
-                                    borderColor:showDeleted?'#DC2626':'#0F6E56',
+                                    borderColor:showDeleted?'#DC2626':'#4C3BAF',
                                     background:showDeleted?'#FEE2E2':'white',
-                                    color:showDeleted?'#DC2626':'#0F6E56'}}>
+                                    color:showDeleted?'#DC2626':'#4C3BAF'}}>
                                 {showDeleted?'Hide deleted':'Show deleted'}
                             </button>
                             <div style={{position:'relative'}}>
                                 <button onClick={()=>setShowExportMenu(p=>!p)}
-                                    style={{padding:'6px 12px',border:'1.5px solid #0F6E56',borderRadius:'8px',fontSize:'12px',fontWeight:500,cursor:'pointer',background:showExportMenu?'#0F6E56':'white',color:showExportMenu?'white':'#0F6E56',display:'flex',alignItems:'center',gap:'5px'}}>
+                                    style={{padding:'6px 12px',border:'1.5px solid #4C3BAF',borderRadius:'8px',fontSize:'12px',fontWeight:500,cursor:'pointer',background:showExportMenu?'#4C3BAF':'white',color:showExportMenu?'white':'#4C3BAF',display:'flex',alignItems:'center',gap:'5px'}}>
                                     ⬇ Export <span style={{fontSize:'10px'}}>{showExportMenu?'▲':'▼'}</span>
                                 </button>
                                 {showExportMenu && (
-                                    <div style={{position:'absolute',top:'calc(100% + 4px)',right:0,background:'white',border:'1.5px solid #0F6E56',borderRadius:'8px',boxShadow:'0 4px 16px rgba(0,0,0,0.12)',zIndex:200,minWidth:'210px',overflow:'hidden'}}>
-                                        <div style={{padding:'6px 8px',background:'#F0F4F8',borderBottom:'0.5px solid #C7D9F0',fontSize:'10px',fontWeight:700,color:'#0F6E56',textTransform:'uppercase',letterSpacing:'0.07em'}}>
+                                    <div style={{position:'absolute',top:'calc(100% + 4px)',right:0,background:'white',border:'1.5px solid #4C3BAF',borderRadius:'8px',boxShadow:'0 4px 16px rgba(0,0,0,0.12)',zIndex:200,minWidth:'210px',overflow:'hidden'}}>
+                                        <div style={{padding:'6px 8px',background:'#F0F4F8',borderBottom:'0.5px solid #C7D9F0',fontSize:'10px',fontWeight:700,color:'#4C3BAF',textTransform:'uppercase',letterSpacing:'0.07em'}}>
                                             Choose what to export
                                         </div>
                                         <button onClick={()=>{exportToCSV(paginated,`orders-page-${currentPage}.csv`);setShowExportMenu(false);}}
-                                            style={{width:'100%',padding:'9px 14px',border:'none',borderBottom:'0.5px solid #E7E5E4',background:'white',textAlign:'left',cursor:'pointer',fontSize:'12px',color:'#0F4068',fontFamily:'inherit'}}>
+                                            style={{width:'100%',padding:'9px 14px',border:'none',borderBottom:'0.5px solid #E7E5E4',background:'white',textAlign:'left',cursor:'pointer',fontSize:'12px',color:'#1E3A5F',fontFamily:'inherit'}}>
                                             <div style={{fontWeight:600}}>This page only</div>
                                             <div style={{fontSize:'11px',color:'#78716C',marginTop:'1px'}}>{paginated.length} orders currently visible</div>
                                         </button>
                                         <button onClick={()=>{exportToCSV(filtered,`orders-${yearFilter.join('-')}-filtered.csv`);setShowExportMenu(false);}}
-                                            style={{width:'100%',padding:'9px 14px',border:'none',borderBottom:'0.5px solid #E7E5E4',background:'white',textAlign:'left',cursor:'pointer',fontSize:'12px',color:'#0F4068',fontFamily:'inherit'}}>
+                                            style={{width:'100%',padding:'9px 14px',border:'none',borderBottom:'0.5px solid #E7E5E4',background:'white',textAlign:'left',cursor:'pointer',fontSize:'12px',color:'#1E3A5F',fontFamily:'inherit'}}>
                                             <div style={{fontWeight:600}}>All filtered results</div>
                                             <div style={{fontSize:'11px',color:'#78716C',marginTop:'1px'}}>{filtered.length} orders matching current filters</div>
                                         </button>
@@ -2946,7 +2946,7 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                             exportToCSV(sel,`orders-selected-${Date.now()}.csv`);
                                             setShowExportMenu(false);
                                         }}
-                                            style={{width:'100%',padding:'9px 14px',border:'none',background:'white',textAlign:'left',cursor:'pointer',fontSize:'12px',color: Object.values(selectedOrders).some(Boolean)?'#0F4068':'#A8A29E',fontFamily:'inherit'}}>
+                                            style={{width:'100%',padding:'9px 14px',border:'none',background:'white',textAlign:'left',cursor:'pointer',fontSize:'12px',color: Object.values(selectedOrders).some(Boolean)?'#1E3A5F':'#A8A29E',fontFamily:'inherit'}}>
                                             <div style={{fontWeight:600}}>Selected orders only</div>
                                             <div style={{fontSize:'11px',color:'#78716C',marginTop:'1px'}}>{Object.values(selectedOrders).filter(Boolean).length} orders selected</div>
                                         </button>
@@ -2954,7 +2954,7 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                 )}
                             </div>
                             <button onClick={()=>loadAuditLog()}
-                                style={{padding:'6px 12px',border:'none',borderRadius:'8px',fontSize:'12px',fontWeight:600,cursor:'pointer',background:'#0F6E56',color:'white'}}>
+                                style={{padding:'6px 12px',border:'none',borderRadius:'8px',fontSize:'12px',fontWeight:600,cursor:'pointer',background:'#4C3BAF',color:'white'}}>
                                 Audit log
                             </button>
                         </div>
@@ -2975,7 +2975,7 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                         {Object.values(selectedOrders).filter(Boolean).length} order{Object.values(selectedOrders).filter(Boolean).length > 1 ? 's' : ''} selected
                                     </span>
                                     <button onClick={handleExportSelected}
-                                        style={{padding:'4px 14px',background:'#0F4068',color:'white',border:'none',borderRadius:'6px',fontSize:'11px',cursor:'pointer',fontFamily:'inherit',fontWeight:500}}>
+                                        style={{padding:'4px 14px',background:'#1E3A5F',color:'white',border:'none',borderRadius:'6px',fontSize:'11px',cursor:'pointer',fontFamily:'inherit',fontWeight:500}}>
                                         ⬇ Export selected
                                     </button>
                                 </div>
@@ -2986,7 +2986,7 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                         <th style={{padding:'9px 10px',width:'3%',borderBottom:'0.5px solid #E7E5E4'}}>
                                             <input type="checkbox" onChange={toggleSelectAll}
                                                 checked={filtered.length > 0 && filtered.every(o => selectedOrders[o.id])}
-                                                style={{cursor:'pointer',accentColor:'#0F4068'}} />
+                                                style={{cursor:'pointer',accentColor:'#1E3A5F'}} />
                                         </th>
                                         <th style={{padding:'9px 10px',width:'3%',borderBottom:'0.5px solid #E7E5E4'}}></th>
                                         {[
@@ -3000,11 +3000,11 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                             {label:'Actions', col:null, w:'12%'},
                                         ].map((h,i) => (
                                             <th key={i} onClick={h.col ? ()=>handleSort(h.col) : undefined}
-                                                style={{padding:'9px 10px',textAlign:'left',fontSize:'11px',fontWeight:700,color:'#0F4068',textTransform:'uppercase',
-                                                    letterSpacing:'0.05em',borderBottom:'3px solid #5DCAA5',width:h.w,
-                                                    cursor:h.col?'pointer':'default',userSelect:'none',background:'#0F4068',color:'white'}}>
+                                                style={{padding:'9px 10px',textAlign:'left',fontSize:'11px',fontWeight:700,color:'#1E3A5F',textTransform:'uppercase',
+                                                    letterSpacing:'0.05em',borderBottom:'3px solid #6366F1',width:h.w,
+                                                    cursor:h.col?'pointer':'default',userSelect:'none',background:'#1E3A5F',color:'white'}}>
                                                 {h.label}
-                                                {h.col && <span style={{marginLeft:'4px',fontSize:'10px',opacity:sortCol===h.col?1:0.35,color:sortCol===h.col?'#0F6E56':'#78716C'}}>
+                                                {h.col && <span style={{marginLeft:'4px',fontSize:'10px',opacity:sortCol===h.col?1:0.35,color:sortCol===h.col?'#4C3BAF':'#78716C'}}>
                                                     {sortCol===h.col ? (sortDir==='asc'?'▲':'▼') : '⇅'}
                                                 </span>}
                                             </th>
@@ -3020,13 +3020,13 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                                 <td style={{padding:'10px',borderBottom:'0.5px solid #E7E5E4'}} onClick={e=>e.stopPropagation()}>
                                                     <input type="checkbox" checked={!!selectedOrders[order.id]}
                                                         onChange={e=>toggleSelect(e, order.id)}
-                                                        style={{cursor:'pointer',accentColor:'#0F4068'}} />
+                                                        style={{cursor:'pointer',accentColor:'#1E3A5F'}} />
                                                 </td>
                                                 <td style={{padding:'10px',borderBottom:'0.5px solid #E7E5E4',color:'#A8A29E',fontSize:'14px',textAlign:'center'}}>
                                                     {expandedRows[order.id] ? '▾' : '▸'}
                                                 </td>
                                                 <td style={{padding:'10px',borderBottom:'0.5px solid #E7E5E4'}}>
-                                                    <div style={{fontWeight:700,fontSize:'12px',color:'#0F4068'}}>{new Date(order.submittedAt).toLocaleDateString()}</div>
+                                                    <div style={{fontWeight:700,fontSize:'12px',color:'#1E3A5F'}}>{new Date(order.submittedAt).toLocaleDateString()}</div>
                                                     <div style={{fontWeight:700,fontSize:'11px',color:'#57534E'}}>{new Date(order.submittedAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
                                                 </td>
                                                 <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}}>
@@ -3035,10 +3035,10 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                                 </td>
                                                 <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontSize:'12px',fontWeight:500,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{order.recipientName}</td>
                                                 <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}}>
-                                                    <div style={{fontWeight:600,fontSize:'12px',color:'#0F6E56'}}>{order.locationId}</div>
+                                                    <div style={{fontWeight:600,fontSize:'12px',color:'#4C3BAF'}}>{order.locationId}</div>
                                                 </td>
-                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontSize:'11.5px',fontWeight:700,color:'#0F4068',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{order.shipTo}</td>
-                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontWeight:500,fontSize:'12px',color:'#0F4068'}}>${(order.total||0).toFixed(2)}</td>
+                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontSize:'11.5px',fontWeight:700,color:'#1E3A5F',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{order.shipTo}</td>
+                                                <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4',fontWeight:500,fontSize:'12px',color:'#1E3A5F'}}>${(order.total||0).toFixed(2)}</td>
                                                 <td style={{padding:'10px',borderBottom:'0.5px solid #F5F5F4'}} onClick={e=>e.stopPropagation()}>
                                                     {order.status === 'Deleted' ? (
                                                         <span style={badgeStyle('Deleted')}>Deleted</span>
@@ -3076,24 +3076,24 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                             </tr>
                                             {expandedRows[order.id] && (
                                                 <tr>
-                                                    <td colSpan={10} style={{padding:0,borderBottom:'3px solid #5DCAA5',background:'#F0F4F8'}}>
-                                                        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'0',borderTop:'2px solid #0F6E56'}}>
+                                                    <td colSpan={10} style={{padding:0,borderBottom:'3px solid #6366F1',background:'#F0F4F8'}}>
+                                                        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'0',borderTop:'2px solid #4C3BAF'}}>
 
                                                             {/* ITEMS ORDERED — blue section */}
                                                             <div style={{background:'#EEF4FF',borderRight:'1px solid #C7D9F0',padding:'14px 16px'}}>
-                                                                <div style={{display:'flex',alignItems:'center',gap:'6px',marginBottom:'10px',paddingBottom:'8px',borderBottom:'1.5px solid #0F6E56'}}>
-                                                                    <div style={{width:'3px',height:'14px',background:'#0F6E56',borderRadius:'2px'}}></div>
-                                                                    <span style={{fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.08em',color:'#0F6E56'}}>Items Ordered</span>
+                                                                <div style={{display:'flex',alignItems:'center',gap:'6px',marginBottom:'10px',paddingBottom:'8px',borderBottom:'1.5px solid #4C3BAF'}}>
+                                                                    <div style={{width:'3px',height:'14px',background:'#4C3BAF',borderRadius:'2px'}}></div>
+                                                                    <span style={{fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.08em',color:'#4C3BAF'}}>Items Ordered</span>
                                                                 </div>
                                                                 {(order.items||[]).length > 0 ? (
                                                                     <div style={{background:'white',borderRadius:'6px',overflow:'hidden',border:'1px solid #C7D9F0'}}>
                                                                         {(order.items||[]).map((item,i) => (
                                                                             <div key={i} style={{display:'flex',justifyContent:'space-between',padding:'7px 10px',borderBottom:i<(order.items||[]).length-1?'0.5px solid #E6F1FB':'none',fontSize:'12px'}}>
-                                                                                <span style={{color:'#0F4068',fontWeight:500}}>{item.title} <span style={{color:'#78716C',fontWeight:400}}>×{item.quantity||1}</span></span>
-                                                                                <span style={{color:'#0F6E56',fontWeight:600}}>${((item.price||0)*(item.quantity||1)).toFixed(2)}</span>
+                                                                                <span style={{color:'#1E3A5F',fontWeight:500}}>{item.title} <span style={{color:'#78716C',fontWeight:400}}>×{item.quantity||1}</span></span>
+                                                                                <span style={{color:'#4C3BAF',fontWeight:600}}>${((item.price||0)*(item.quantity||1)).toFixed(2)}</span>
                                                                             </div>
                                                                         ))}
-                                                                        <div style={{display:'flex',justifyContent:'space-between',padding:'8px 10px',background:'#0F6E56',fontSize:'12px',fontWeight:700}}>
+                                                                        <div style={{display:'flex',justifyContent:'space-between',padding:'8px 10px',background:'#4C3BAF',fontSize:'12px',fontWeight:700}}>
                                                                             <span style={{color:'white'}}>Total</span>
                                                                             <span style={{color:'white'}}>${(order.total||0).toFixed(2)}</span>
                                                                         </div>
@@ -3103,12 +3103,12 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
 
                                                             {/* RECIPIENT DETAILS — teal section */}
                                                             <div style={{background:'#F0FBF6',borderRight:'1px solid #A3D9C0',padding:'14px 16px'}}>
-                                                                <div style={{display:'flex',alignItems:'center',gap:'6px',marginBottom:'10px',paddingBottom:'8px',borderBottom:'1.5px solid #0F6E56'}}>
-                                                                    <div style={{width:'3px',height:'14px',background:'#0F6E56',borderRadius:'2px'}}></div>
-                                                                    <span style={{fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.08em',color:'#0F6E56'}}>Recipient Details</span>
+                                                                <div style={{display:'flex',alignItems:'center',gap:'6px',marginBottom:'10px',paddingBottom:'8px',borderBottom:'1.5px solid #4C3BAF'}}>
+                                                                    <div style={{width:'3px',height:'14px',background:'#4C3BAF',borderRadius:'2px'}}></div>
+                                                                    <span style={{fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.08em',color:'#4C3BAF'}}>Recipient Details</span>
                                                                 </div>
                                                                 <div style={{fontSize:'12px'}}>
-                                                                    <div style={{fontWeight:700,fontSize:'13px',color:'#0F4068',marginBottom:'2px'}}>{order.recipientName}</div>
+                                                                    <div style={{fontWeight:700,fontSize:'13px',color:'#1E3A5F',marginBottom:'2px'}}>{order.recipientName}</div>
                                                                     {order.recipientEmail && order.recipientEmail !== 'Not provided' && (
                                                                         <div style={{color:'#57534E',marginBottom:'8px',fontSize:'11.5px'}}>{order.recipientEmail}</div>
                                                                     )}
@@ -3118,12 +3118,12 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                                                         {order.isNewEmployee==='yes' ? '★ New employee' : 'Existing employee'}
                                                                     </div>
                                                                     <div style={{marginBottom:'8px'}}>
-                                                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',color:'#0F6E56',marginBottom:'2px'}}>Date Needed</div>
-                                                                        <div style={{color:'#0F4068',fontWeight:500}}>{order.dateNeeded || 'Not specified'}</div>
+                                                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',color:'#4C3BAF',marginBottom:'2px'}}>Date Needed</div>
+                                                                        <div style={{color:'#1E3A5F',fontWeight:500}}>{order.dateNeeded || 'Not specified'}</div>
                                                                     </div>
                                                                     <div>
-                                                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',color:'#0F6E56',marginBottom:'2px'}}>Ship To</div>
-                                                                        <div style={{color:'#0F4068',fontWeight:500}}>{order.shipTo}</div>
+                                                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',color:'#4C3BAF',marginBottom:'2px'}}>Ship To</div>
+                                                                        <div style={{color:'#1E3A5F',fontWeight:500}}>{order.shipTo}</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -3141,7 +3141,7 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                                                     </div>
                                                                     <div style={{marginBottom:'10px'}}>
                                                                         <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',color:'#B45309',marginBottom:'4px'}}>Special Instructions</div>
-                                                                        <div style={{color:'#0F4068',fontWeight:order.notes&&order.notes!=='None'?500:400,
+                                                                        <div style={{color:'#1E3A5F',fontWeight:order.notes&&order.notes!=='None'?500:400,
                                                                             padding:'6px 8px',background:'white',borderRadius:'4px',border:'1px solid #FDE68A',fontSize:'12px'}}>
                                                                             {order.notes && order.notes !== 'None' ? order.notes : <span style={{color:'#A8A29E',fontStyle:'italic'}}>None</span>}
                                                                         </div>
@@ -3149,7 +3149,7 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                                                     {order.status === 'Fulfilled' && (
                                                                         <div style={{marginBottom:'10px'}}>
                                                                             <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',color:'#B45309',marginBottom:'4px'}}>Fulfilled By</div>
-                                                                            <div style={{color:'#0F4068',fontWeight:500}}>{order.statusUpdatedBy || 'Unknown'}</div>
+                                                                            <div style={{color:'#1E3A5F',fontWeight:500}}>{order.statusUpdatedBy || 'Unknown'}</div>
                                                                         </div>
                                                                     )}
                                                                     <button onClick={e=>handleExportSingle(e, order)}
@@ -3184,7 +3184,7 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                 </select>
                                 per page
                                 {pageSize === 'all' && filtered.length > 200 && (
-                                    <span style={{color:'#5DCAA5',fontSize:'11px',fontWeight:500}}>⚠ Large result — consider exporting to CSV</span>
+                                    <span style={{color:'#6366F1',fontSize:'11px',fontWeight:500}}>⚠ Large result — consider exporting to CSV</span>
                                 )}
                             </div>
                             <div style={{fontSize:'12px',color:'#78716C'}}>
@@ -3203,8 +3203,8 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                         return (
                                             <button key={p} onClick={()=>setCurrentPage(p)}
                                                 style={{padding:'4px 10px',border:'0.5px solid',borderRadius:'6px',fontSize:'12px',cursor:'pointer',fontFamily:'inherit',fontWeight:currentPage===p?500:400,
-                                                    borderColor:currentPage===p?'#0F4068':'#D6D3D1',
-                                                    background:currentPage===p?'#0F4068':'white',
+                                                    borderColor:currentPage===p?'#1E3A5F':'#D6D3D1',
+                                                    background:currentPage===p?'#1E3A5F':'white',
                                                     color:currentPage===p?'white':'#57534E'}}>{p}</button>
                                         );
                                     })}
@@ -3289,7 +3289,7 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                             'order.permanent_delete_attempt':{ label:'Perm. denied', bg:'#FCA5A5', color:'#7F1D1D' },
                             'order.restore':       { label: 'Restored',       bg:'#D1FAE5', color:'#065F46' },
                             'order.status_change': { label: 'Status change',  bg:'#FEF3C7', color:'#92400E' },
-                            'access.admin_added':  { label: 'Admin added',    bg:'#E1F5EE', color:'#085041' },
+                            'access.admin_added':  { label: 'Admin added',    bg:'#EDE9FE', color:'#085041' },
                             'access.admin_removed':{ label: 'Admin removed',  bg:'#FEE2E2', color:'#991B1B' },
                             'access.role_changed': { label: 'Role changed',   bg:'#FAEEDA', color:'#633806' },
                         };
@@ -3350,8 +3350,8 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                             {availableYears.map(y => (
                                                 <button key={y} onClick={()=>toggleAuditYear(y)}
                                                     style={{padding:'3px 10px',border:'0.5px solid',borderRadius:'20px',fontSize:'11px',cursor:'pointer',fontFamily:'inherit',fontWeight:500,
-                                                        borderColor: auditYears.includes(y)?'#0F4068':'#D6D3D1',
-                                                        background: auditYears.includes(y)?'#0F4068':'white',
+                                                        borderColor: auditYears.includes(y)?'#1E3A5F':'#D6D3D1',
+                                                        background: auditYears.includes(y)?'#1E3A5F':'white',
                                                         color: auditYears.includes(y)?'white':'#57534E'}}>
                                                     {y}
                                                 </button>
@@ -3361,7 +3361,7 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                     </div>
                                     <div style={{display:'flex',gap:'8px',alignItems:'center'}}>
                                         <button onClick={exportAuditCSV}
-                                            style={{padding:'5px 14px',background:'#0F4068',color:'white',border:'none',borderRadius:'6px',fontSize:'12px',cursor:'pointer',fontFamily:'inherit',fontWeight:500}}>
+                                            style={{padding:'5px 14px',background:'#1E3A5F',color:'white',border:'none',borderRadius:'6px',fontSize:'12px',cursor:'pointer',fontFamily:'inherit',fontWeight:500}}>
                                             ⬇ Export CSV
                                         </button>
                                         <button onClick={()=>setShowAudit(false)} style={{background:'none',border:'none',fontSize:'20px',cursor:'pointer',color:'#A8A29E',lineHeight:1}}>✕</button>
@@ -3376,7 +3376,7 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                         <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.08em',color:'#A8A29E',marginBottom:'8px'}}>Filter by type</div>
                                         <div onClick={()=>setAuditTypeFilter('all')}
                                             style={{padding:'6px 8px',borderRadius:'6px',fontSize:'12px',cursor:'pointer',marginBottom:'3px',display:'flex',justifyContent:'space-between',alignItems:'center',
-                                                background:auditTypeFilter==='all'?'#0F4068':'transparent',
+                                                background:auditTypeFilter==='all'?'#1E3A5F':'transparent',
                                                 color:auditTypeFilter==='all'?'white':'#57534E'}}>
                                             <span>All actions</span>
                                             <span style={{fontSize:'11px',opacity:0.7}}>{auditLog.length}</span>
@@ -3402,7 +3402,7 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                         ) : (
                                             <table style={{width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed'}}>
                                                 <thead style={{position:'sticky',top:0,zIndex:1}}>
-                                                    <tr style={{background:'#0F4068'}}>
+                                                    <tr style={{background:'#1E3A5F'}}>
                                                         <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'3%'}}></th>
                                                         <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'14%'}}>Date/Time</th>
                                                         <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'17%'}}>Admin</th>
@@ -3445,7 +3445,7 @@ function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.g
                                                                         {entry.detail?.oldStatus && <span>{entry.detail.oldStatus} → <strong>{entry.detail.newStatus}</strong> · </span>}
                                                                         {entry.detail?.newEmail && <span><span style={{color:'#A8A29E'}}>Added:</span> {entry.detail.newEmail} ({entry.detail.role}) · </span>}
                                                                         {entry.detail?.removedEmail && <span><span style={{color:'#A8A29E'}}>Removed:</span> {entry.detail.removedEmail} · </span>}
-                                                                        {s && <span><span style={{color:'#A8A29E'}}>For:</span> {s.recipientName} · <span style={{color:'#0F6E56',fontWeight:500}}>{s.locationId}</span> · ${(s.total||0).toFixed(2)}</span>}
+                                                                        {s && <span><span style={{color:'#A8A29E'}}>For:</span> {s.recipientName} · <span style={{color:'#4C3BAF',fontWeight:500}}>{s.locationId}</span> · ${(s.total||0).toFixed(2)}</span>}
                                                                         {entry.detail?.browser && <span style={{color:'#A8A29E'}}>{entry.detail.browser.substring(0,60)}</span>}
                                                                     </td>
                                                                     <td style={{padding:'9px 10px'}}>
