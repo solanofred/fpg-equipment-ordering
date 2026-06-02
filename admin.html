@@ -2961,23 +2961,38 @@ document.getElementById("sc-status").textContent=stat;
                         </div>
                     )}
                     <div style={{height:'3px',background:'linear-gradient(90deg,#DB802E,#EFA855,#DB802E)',borderRadius:'2px',marginBottom:'16px'}}></div>
-                    <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:'0',marginBottom:'20px',borderRadius:'10px',overflow:'hidden',border:'1px solid #1E3A5F'}}>
-                        {[
-                            {label:'Total orders', value: stats.total, sub:'All time', color:'#FFFFFF'},
-                            {label:'New · Awaiting action', value: stats.newOrders, sub:'Pending IT review', color:'#60B4FF'},
-                            {label:'In progress · Fulfilled', value: stats.inProgress, sub:'Being sourced', color:'#FFD966'},
-                            {label:'Total value · This year', value: '$'+stats.totalValue.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}), sub:`Year ${currentYear}`, color:'#4ADE80'},
-                            {label:'Soft deleted', value: stats.deleted, sub: stats.deleted > 0 ? 'Click to view' : 'None', color: stats.deleted > 0 ? '#FF8585' : 'rgba(255,255,255,0.35)', clickable: stats.deleted > 0},
-                        ].map((s,i) => (
-                            <div key={i}
-                                onClick={s.clickable ? ()=>setShowDeleted(true) : undefined}
-                                style={{background:'#1E3A5F',borderRight:i<4?'1px solid rgba(219,128,46,0.25)':'none',padding:'14px 16px',cursor:s.clickable?'pointer':'default'}}>
-                                <div style={{fontSize:'10px',fontWeight:700,color:'rgba(255,255,255,0.5)',textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'6px'}}>{s.label}</div>
-                                <div style={{fontSize:'24px',fontWeight:500,color:s.color,fontFamily:"Georgia,'Times New Roman',serif"}}>{s.value}</div>
-                                <div style={{fontSize:'10.5px',color:i===4 && stats.deleted>0?'#FCA5A5':'rgba(255,255,255,0.35)',marginTop:'3px'}}>{s.sub}</div>
-                            </div>
-                        ))}
-                    </div>
+                    <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:'10px',marginBottom:'20px'}}>
+                        <div style={{background:'white',borderRadius:'10px',border:'0.5px solid #E2E8F0',padding:'14px 16px'}}>
+                            <div style={{width:'32px',height:'32px',background:'#EEF2FF',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'16px',marginBottom:'10px'}}>🛒</div>
+                            <div style={{fontSize:'22px',fontWeight:700,color:'#0F172A',fontFamily:"Georgia,serif",lineHeight:1}}>{stats.total}</div>
+                            <div style={{fontSize:'11.5px',color:'#64748B',marginTop:'4px'}}>Total orders</div>
+                            <div style={{display:'inline-block',marginTop:'8px',background:'#EEF2FF',color:'#4C3BAF',fontSize:'10px',fontWeight:700,padding:'2px 8px',borderRadius:'20px'}}>All time</div>
+                        </div>
+                        <div style={{background:'white',borderRadius:'10px',border:'0.5px solid #E2E8F0',padding:'14px 16px'}}>
+                            <div style={{width:'32px',height:'32px',background:'#EFF6FF',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'16px',marginBottom:'10px'}}>⏱</div>
+                            <div style={{fontSize:'22px',fontWeight:700,color:'#3B82F6',fontFamily:"Georgia,serif",lineHeight:1}}>{stats.newOrders}</div>
+                            <div style={{fontSize:'11.5px',color:'#64748B',marginTop:'4px'}}>New · Awaiting</div>
+                            <div style={{display:'inline-block',marginTop:'8px',background:'#EFF6FF',color:'#3B82F6',fontSize:'10px',fontWeight:700,padding:'2px 8px',borderRadius:'20px'}}>Pending review</div>
+                        </div>
+                        <div style={{background:'white',borderRadius:'10px',border:'0.5px solid #E2E8F0',padding:'14px 16px'}}>
+                            <div style={{width:'32px',height:'32px',background:'#FFFBEB',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'16px',marginBottom:'10px'}}>⚙️</div>
+                            <div style={{fontSize:'22px',fontWeight:700,color:'#D97706',fontFamily:"Georgia,serif",lineHeight:1}}>{stats.inProgress}</div>
+                            <div style={{fontSize:'11.5px',color:'#64748B',marginTop:'4px'}}>In progress</div>
+                            <div style={{display:'inline-block',marginTop:'8px',background:'#FFFBEB',color:'#D97706',fontSize:'10px',fontWeight:700,padding:'2px 8px',borderRadius:'20px'}}>Being sourced</div>
+                        </div>
+                        <div style={{background:'white',borderRadius:'10px',border:'0.5px solid #E2E8F0',padding:'14px 16px'}}>
+                            <div style={{width:'32px',height:'32px',background:'#F0FDF4',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'16px',marginBottom:'10px'}}>💰</div>
+                            <div style={{fontSize:'22px',fontWeight:700,color:'#16A34A',fontFamily:"Georgia,serif",lineHeight:1}}>${stats.totalValue>=1000?Math.round(stats.totalValue/1000)+'K':stats.totalValue.toLocaleString()}</div>
+                            <div style={{fontSize:'11.5px',color:'#64748B',marginTop:'4px'}}>Total value</div>
+                            <div style={{display:'inline-block',marginTop:'8px',background:'#F0FDF4',color:'#16A34A',fontSize:'10px',fontWeight:700,padding:'2px 8px',borderRadius:'20px'}}>Year {currentYear}</div>
+                        </div>
+                        <div onClick={stats.deleted>0?()=>setShowDeleted(true):undefined} style={{background:'white',borderRadius:'10px',border:stats.deleted>0?'0.5px solid #FCA5A5':'0.5px solid #E2E8F0',padding:'14px 16px',cursor:stats.deleted>0?'pointer':'default'}}>
+                            <div style={{width:'32px',height:'32px',background:stats.deleted>0?'#FEF2F2':'#F8FAFC',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'16px',marginBottom:'10px'}}>🗑</div>
+                            <div style={{fontSize:'22px',fontWeight:700,color:stats.deleted>0?'#DC2626':'#94A3B8',fontFamily:"Georgia,serif",lineHeight:1}}>{stats.deleted}</div>
+                            <div style={{fontSize:'11.5px',color:'#64748B',marginTop:'4px'}}>Soft deleted</div>
+                            <div style={{display:'inline-block',marginTop:'8px',background:stats.deleted>0?'#FEF2F2':'#F8FAFC',color:stats.deleted>0?'#DC2626':'#94A3B8',fontSize:'10px',fontWeight:700,padding:'2px 8px',borderRadius:'20px'}}>{stats.deleted>0?'Click to view':'None'}</div>
+                        </div>
+                    </div>                    </div>
                     <div style={{display:'flex',gap:'8px',marginBottom:'8px',flexWrap:'wrap',alignItems:'center'}}>
                         <div style={{flex:1,minWidth:'260px',position:'relative'}}>
                             <span style={{position:'absolute',left:'10px',top:'50%',transform:'translateY(-50%)',color:'#4C3BAF',fontSize:'15px'}}>🔍</span>
