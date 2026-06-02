@@ -16066,5 +16066,28 @@
     "isNewEmployee": "yes",
     "dateNeeded": "2026-01-19",
     "notes": ""
+  },
+  {
+    "id": "ORD-2026-1780433045228",
+    "status": "New",
+    "submittedAt": "2026-06-02T20:44:05.228Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Matthew Ritchotte",
+    "recipientEmail": "Matthew.Ritchotte@foundationpartners.com",
+    "locationId": "FLFPG",
+    "shipTo": "4307 Vineland Road, Floor 1 Suite H17-19, Orlando, FL 32811",
+    "items": [
+      {
+        "title": "Amcrest Network Video Recorder",
+        "price": 300,
+        "quantity": 1,
+        "total": 300,
+        "components": []
+      }
+    ],
+    "total": 300,
+    "notes": "NONE"
   }
 ]
