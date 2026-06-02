@@ -708,6 +708,66 @@ function OrdersDashboard({ session, azureUrl, onNavigate }) {
                     </div>
                 </div>
             )}
+            {drilldown && (
+                <div onClick={()=>setDrilldown(null)} style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(15,23,42,0.55)',zIndex:200,display:'flex',alignItems:'center',justifyContent:'center'}}>
+                    <div onClick={e=>e.stopPropagation()} style={{background:'white',borderRadius:'14px',width:'580px',maxWidth:'95vw',maxHeight:'80vh',overflow:'auto',padding:'24px',boxShadow:'0 20px 60px rgba(0,0,0,0.2)'}}>
+                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'20px'}}>
+                            <div>
+                                <div style={{fontSize:'16px',fontWeight:700,color:'#0F172A'}}>
+                                    {drilldown==='total'?'All Active Orders':drilldown==='new'?'New — Awaiting Review':drilldown==='inprogress'?'In Progress':'Total Value Breakdown'}
+                                </div>
+                                <div style={{fontSize:'12px',color:'#64748B',marginTop:'3px'}}>
+                                    {drilldown==='total'?stats.total+' orders':drilldown==='new'?stats.newOrders+' orders':drilldown==='inprogress'?stats.inProgress+' orders':'$'+stats.totalValue.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})+' total'}
+                                </div>
+                            </div>
+                            <button onClick={()=>setDrilldown(null)} style={{background:'none',border:'none',fontSize:'20px',color:'#94A3B8',cursor:'pointer',lineHeight:1}}>✕</button>
+                        </div>
+                        {(()=>{
+                            const subset = drilldown==='total'?orders.filter(o=>o.status!=='Deleted'):drilldown==='new'?orders.filter(o=>o.status==='New'):drilldown==='inprogress'?orders.filter(o=>o.status==='In Progress'):orders.filter(o=>o.status!=='Deleted');
+                            const byLoc={};
+                            subset.forEach(o=>{ const k=o.locationId||'Unknown'; byLoc[k]=(byLoc[k]||0)+1; });
+                            const locRows=Object.entries(byLoc).sort((a,b)=>b[1]-a[1]);
+                            const maxL=locRows.length?locRows[0][1]:1;
+                            const bySub={};
+                            subset.forEach(o=>{ const k=o.submitterName||o.submitterEmail||'Unknown'; bySub[k]=(bySub[k]||0)+1; });
+                            const subRows=Object.entries(bySub).sort((a,b)=>b[1]-a[1]);
+                            const maxS=subRows.length?subRows[0][1]:1;
+                            return (
+                                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'24px'}}>
+                                    <div>
+                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>By Location</div>
+                                        {locRows.slice(0,10).map(([loc,count])=>(
+                                            <div key={loc} style={{marginBottom:'9px'}}>
+                                                <div style={{display:'flex',justifyContent:'space-between',fontSize:'12px',marginBottom:'3px'}}>
+                                                    <span style={{fontWeight:600,color:'#0F172A'}}>{loc}</span>
+                                                    <span style={{color:'#64748B'}}>{count}</span>
+                                                </div>
+                                                <div style={{height:'5px',background:'#F1F5F9',borderRadius:'3px'}}>
+                                                    <div style={{height:'100%',background:'#6366F1',borderRadius:'3px',width:Math.max(4,Math.round(count/maxL*100))+'%'}}></div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div>
+                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>By Submitter</div>
+                                        {subRows.slice(0,10).map(([name,count])=>(
+                                            <div key={name} style={{marginBottom:'9px'}}>
+                                                <div style={{display:'flex',justifyContent:'space-between',fontSize:'12px',marginBottom:'3px'}}>
+                                                    <span style={{fontWeight:600,color:'#0F172A'}}>{name}</span>
+                                                    <span style={{color:'#64748B'}}>{count}</span>
+                                                </div>
+                                                <div style={{height:'5px',background:'#F1F5F9',borderRadius:'3px'}}>
+                                                    <div style={{height:'100%',background:'#0EA5E9',borderRadius:'3px',width:Math.max(4,Math.round(count/maxS*100))+'%'}}></div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            );
+                        })()}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

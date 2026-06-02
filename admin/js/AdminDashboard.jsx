@@ -394,7 +394,7 @@ function AdminDashboard({ onLogout }) {
                     </div>
                 )}
                 
-                <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'6px'}}>
+                <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'4px'}}>
                     <div>
                         <span style={{fontSize:'15px',fontWeight:700,color:'#0F172A'}}>Products</span>
                         <span style={{fontSize:'13px',fontWeight:400,color:'#64748B',marginLeft:'8px'}}>{products.length} items</span>

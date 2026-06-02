@@ -9,6 +9,7 @@ function AuditLogOpener({ session, azureUrl }) {
     const [filterResult, setFilterResult] = React.useState('');
     const [filterFrom, setFilterFrom] = React.useState('');
     const [filterTo, setFilterTo] = React.useState('');
+            const [showDrill, setShowDrill] = React.useState(null);
 
     React.useEffect(() => {
         (async () => {
@@ -121,7 +122,7 @@ setEntries(allEntries);
                     {label:'Order Events',val:entries.filter(e=>e.action.startsWith('order.')).length,sub:'Deletes & changes',grad:'linear-gradient(135deg,#EF4444,#F87171)'},
                     {label:'Access & System',val:entries.filter(e=>!e.action.startsWith('order.')&&!e.action.startsWith('auth.')).length,sub:'Admin & publish',grad:'linear-gradient(135deg,#10B981,#34D399)'},
                 ].map((s,i) => (
-                    <div key={i} style={{background:s.grad,borderRadius:'14px',padding:'16px 18px',position:'relative',overflow:'hidden'}}>
+                    <div key={i} onClick={()=>setShowDrill(i)} style={{cursor:'pointer',background:s.grad,borderRadius:'14px',padding:'16px 18px',position:'relative',overflow:'hidden'}}>
                         <div style={{position:'absolute',top:'-12px',right:'-12px',width:'70px',height:'70px',background:'rgba(255,255,255,0.12)',borderRadius:'50%'}}></div>
                         <div style={{fontSize:'32px',fontWeight:800,color:'rgba(255,255,255,0.92)',letterSpacing:'-1px',lineHeight:1}}>{s.val}</div>
                         <div style={{fontSize:'12px',color:'rgba(255,255,255,0.72)',marginTop:'6px',fontWeight:600}}>{s.label}</div>
@@ -216,6 +217,67 @@ setEntries(allEntries);
                     </tbody>
                 </table>
             </div>
+            {showDrill !== null && (
+                <div onClick={()=>setShowDrill(null)} style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(15,23,42,0.55)',zIndex:200,display:'flex',alignItems:'center',justifyContent:'center'}}>
+                    <div onClick={e=>e.stopPropagation()} style={{background:'white',borderRadius:'14px',width:'560px',maxWidth:'95vw',maxHeight:'80vh',overflow:'auto',padding:'24px',boxShadow:'0 20px 60px rgba(0,0,0,0.2)'}}>
+                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'20px'}}>
+                            <div>
+                                <div style={{fontSize:'16px',fontWeight:700,color:'#0F172A'}}>
+                                    {showDrill===0?'Total Entries':showDrill===1?'Auth Events':showDrill===2?'Order Events':'Access & System'}
+                                </div>
+                                <div style={{fontSize:'12px',color:'#64748B',marginTop:'3px'}}>
+                                    {showDrill===0?entries.length+' entries':showDrill===1?entries.filter(e=>e.action.startsWith('auth.')).length+' events':showDrill===2?entries.filter(e=>e.action.startsWith('order.')).length+' events':entries.filter(e=>!e.action.startsWith('order.')&&!e.action.startsWith('auth.')).length+' events'}
+                                </div>
+                            </div>
+                            <button onClick={()=>setShowDrill(null)} style={{background:'none',border:'none',fontSize:'20px',color:'#94A3B8',cursor:'pointer',lineHeight:1}}>✕</button>
+                        </div>
+                        {(()=>{
+                            const subset = showDrill===0?entries:showDrill===1?entries.filter(e=>e.action.startsWith('auth.')):showDrill===2?entries.filter(e=>e.action.startsWith('order.')):entries.filter(e=>!e.action.startsWith('order.')&&!e.action.startsWith('auth.'));
+                            const byAction={};
+                            subset.forEach(e=>{ byAction[e.action]=(byAction[e.action]||0)+1; });
+                            const byAdmin={};
+                            subset.forEach(e=>{ const k=e.adminEmail||'Unknown'; byAdmin[k]=(byAdmin[k]||0)+1; });
+                            const actionRows=Object.entries(byAction).sort((a,b)=>b[1]-a[1]);
+                            const adminRows=Object.entries(byAdmin).sort((a,b)=>b[1]-a[1]);
+                            const maxA=actionRows.length?actionRows[0][1]:1;
+                            const maxU=adminRows.length?adminRows[0][1]:1;
+                            const META={'auth.login':'Login','auth.logout':'Logout','auth.auto_logoff':'Auto-logout','order.soft_delete':'Order deleted','order.permanent_delete':'Perm. deleted','order.restore':'Restored','order.status_change':'Status change','access.admin_added':'Admin added','access.admin_removed':'Admin removed','portal.products_published':'Published','category.added':'Cat. added','category.updated':'Cat. updated','category.removed':'Cat. removed'};
+                            return (
+                                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'24px'}}>
+                                    <div>
+                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>By Action</div>
+                                        {actionRows.map(([action,count])=>(
+                                            <div key={action} style={{marginBottom:'9px'}}>
+                                                <div style={{display:'flex',justifyContent:'space-between',fontSize:'12px',marginBottom:'3px'}}>
+                                                    <span style={{fontWeight:600,color:'#0F172A'}}>{META[action]||action}</span>
+                                                    <span style={{color:'#64748B'}}>{count}</span>
+                                                </div>
+                                                <div style={{height:'5px',background:'#F1F5F9',borderRadius:'3px'}}>
+                                                    <div style={{height:'100%',background:'#6366F1',borderRadius:'3px',width:Math.max(4,Math.round(count/maxA*100))+'%'}}></div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div>
+                                        <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>By Admin</div>
+                                        {adminRows.map(([admin,count])=>(
+                                            <div key={admin} style={{marginBottom:'9px'}}>
+                                                <div style={{display:'flex',justifyContent:'space-between',fontSize:'12px',marginBottom:'3px'}}>
+                                                    <span style={{fontWeight:600,color:'#0F172A'}}>{admin.split('@')[0]}</span>
+                                                    <span style={{color:'#64748B'}}>{count}</span>
+                                                </div>
+                                                <div style={{height:'5px',background:'#F1F5F9',borderRadius:'3px'}}>
+                                                    <div style={{height:'100%',background:'#10B981',borderRadius:'3px',width:Math.max(4,Math.round(count/maxU*100))+'%'}}></div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            );
+                        })()}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
