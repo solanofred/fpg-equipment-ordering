@@ -7153,5 +7153,17 @@
       "newRole": "superadmin"
     },
     "result": "success"
+  },
+  {
+    "id": "LOG-1780432378186",
+    "timestamp": "2026-06-02T20:32:58.186Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "access.role_changed",
+    "target": "michael.benjamin@foundationpartners.com",
+    "detail": {
+      "targetEmail": "michael.benjamin@foundationpartners.com",
+      "newRole": "superadmin"
+    },
+    "result": "success"
   }
 ]
