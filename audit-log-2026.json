@@ -1560,5 +1560,15 @@
     "id": "LOG-1780359426138",
     "timestamp": "2026-06-02T00:17:06.138Z",
     "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.login",
+    "detail": {
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+    },
+    "result": "success",
+    "id": "LOG-1780360026713",
+    "timestamp": "2026-06-02T00:27:06.713Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
   }
 ]
