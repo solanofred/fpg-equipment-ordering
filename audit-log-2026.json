@@ -7129,5 +7129,17 @@
     "id": "LOG-1780432198325",
     "timestamp": "2026-06-02T20:29:58.325Z",
     "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "id": "LOG-1780432365283",
+    "timestamp": "2026-06-02T20:32:45.283Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "access.role_changed",
+    "target": "matthew.ritchotte@foundationpartners.com",
+    "detail": {
+      "targetEmail": "matthew.ritchotte@foundationpartners.com",
+      "newRole": "superadmin"
+    },
+    "result": "success"
   }
 ]
