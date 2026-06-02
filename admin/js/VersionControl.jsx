@@ -4,6 +4,33 @@ function VersionControl({ session, azureUrl }) {
     const [versions, setVersions] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
     const [status, setStatus] = React.useState(null);
+    const [selectedVersions, setSelectedVersions] = React.useState({});
+    const [showVCExportMenu, setShowVCExportMenu] = React.useState(false);
+    const exportVCCSV = function(rows, filename) {
+        const headers = ['Date','Time','Admin','Action','File','Detail','Commit'];
+        const data = rows.map(function(v) {
+            const dt = new Date(v.timestamp);
+            const detail = v.detail || {};
+            return [
+                dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
+                dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),
+                (v.adminEmail||'').split('@')[0],
+                v.action||'',
+                detail.file||'',
+                detail.productsCount ? detail.productsCount+' products' : '',
+                detail.commitSha||''
+            ];
+        });
+        const csv = [headers,...data].map(function(r){return r.map(function(v){var s=String(v==null?'':v);return s.includes(',')||s.includes('"')?'"'+s.replace(/"/g,'""')+'"':s;}).join(',');}).join('\n');
+        const blob = new Blob([csv],{type:'text/csv'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href=url; a.download=filename||'versions.csv'; a.click();
+        URL.revokeObjectURL(url);
+    };
+    const toggleSelectVersion = function(idx) {
+        setSelectedVersions(function(prev){var n=Object.assign({},prev);n[idx]=!n[idx];return n;});
+    };
 
     React.useEffect(() => {
         // Load version history from audit log entries with action portal.version
