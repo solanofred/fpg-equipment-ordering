@@ -7165,5 +7165,17 @@
       "newRole": "superadmin"
     },
     "result": "success"
+  },
+  {
+    "id": "LOG-1780432384552",
+    "timestamp": "2026-06-02T20:33:04.552Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "access.role_changed",
+    "target": "chezarae.carter@foundationpartners.com",
+    "detail": {
+      "targetEmail": "chezarae.carter@foundationpartners.com",
+      "newRole": "superadmin"
+    },
+    "result": "success"
   }
 ]
