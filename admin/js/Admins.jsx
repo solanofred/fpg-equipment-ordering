@@ -186,7 +186,7 @@ function AccessManagement({ session, azureUrl, adminPortalUrl }) {
                             Body: Hi {newName}, you have been granted access to the FPG Equipment Admin Portal...
                         </div>
                     )}
-                    <button onClick={handleAdd} disabled={adding} style={{background:'#4C3BAF',color:'white',border:'none',padding:'0.875rem',borderRadius:'10px',fontWeight:700,cursor:'pointer',fontSize:'0.95rem'}}>
+                    <button onClick={handleAdd} disabled={adding} style={{background:'#D97706',color:'white',border:'none',padding:'0.875rem',borderRadius:'10px',fontWeight:700,cursor:'pointer',fontSize:'0.95rem'}}>
                         {adding ? '⏳ Adding...' : '✅ Add Admin & Send Invite'}
                     </button>
                 </div>

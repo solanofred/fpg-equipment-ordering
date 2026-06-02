@@ -329,6 +329,7 @@ setEntries(allEntries);
                                 <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'24px'}}>
                                     <div>
                                         <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>By Action</div>
+                                        <div style={{maxHeight:'340px',overflowY:'auto',paddingRight:'6px'}}>
                                         {actionRows.map(([action,count])=>(
                                             <div key={action} style={{marginBottom:'9px'}}>
                                                 <div style={{display:'flex',justifyContent:'space-between',fontSize:'12px',marginBottom:'3px'}}>
@@ -340,9 +341,11 @@ setEntries(allEntries);
                                                 </div>
                                             </div>
                                         ))}
+                                        </div>
                                     </div>
                                     <div>
                                         <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>By Admin</div>
+                                        <div style={{maxHeight:'340px',overflowY:'auto',paddingRight:'6px'}}>
                                         {adminRows.map(([admin,count])=>(
                                             <div key={admin} style={{marginBottom:'9px'}}>
                                                 <div style={{display:'flex',justifyContent:'space-between',fontSize:'12px',marginBottom:'3px'}}>
@@ -354,6 +357,7 @@ setEntries(allEntries);
                                                 </div>
                                             </div>
                                         ))}
+                                        </div>
                                     </div>
                                 </div>
                             );
