@@ -1604,7 +1604,7 @@
                             </div>
                         )}
                         
-                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'16px'}}>
+                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'8px'}}>
                             <div>
                                 <span style={{fontSize:'16px',fontWeight:700,color:'#0F172A'}}>Products</span>
                                 <span style={{fontSize:'13px',fontWeight:400,color:'#64748B',marginLeft:'8px'}}>{products.length} items</span>
@@ -2481,7 +2481,7 @@
                         </div>
                     )}
                     <div>
-                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'16px'}}>
+                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'8px'}}>
                             <div>
                                 <span style={{fontSize:'16px',fontWeight:700,color:'#0F172A'}}>Categories</span>
                                 <span style={{fontSize:'13px',fontWeight:400,color:'#64748B',marginLeft:'8px'}}>{(categories||[]).length} total · {(categories||[]).filter(function(c){return getProductCount(c.slug)===0;}).length} empty</span>
@@ -2578,6 +2578,7 @@
             const [pageSize, setPageSize] = React.useState(25);
             const [currentPage, setCurrentPage] = React.useState(1);
             const [showDeleted, setShowDeleted] = React.useState(false);
+            const [drilldown, setDrilldown] = React.useState(null);
             const [deleteModal, setDeleteModal] = React.useState(null);
             const [deleteReason, setDeleteReason] = React.useState('');
             const [restoreModal, setRestoreModal] = React.useState(null);
@@ -2987,7 +2988,7 @@ document.getElementById("sc-status").textContent=stat;
                     )}
                     <div style={{height:'3px',background:'linear-gradient(90deg,#DB802E,#EFA855,#DB802E)',borderRadius:'2px',marginBottom:'16px'}}></div>
                     <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:'14px',marginBottom:'20px'}}>
-                        <div style={{background:'linear-gradient(135deg,#4F46E5 0%,#6366F1 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden'}}>
+                        <div onClick={()=>setDrilldown('total')} style={{cursor:'pointer',background:'linear-gradient(135deg,#4F46E5 0%,#6366F1 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden'}}>
                             <div style={{position:'absolute',top:'-10px',right:'-10px',width:'70px',height:'70px',background:'rgba(255,255,255,0.1)',borderRadius:'50%'}}></div>
                             <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'16px'}}>
                                 <div style={{width:'36px',height:'36px',background:'rgba(255,255,255,0.2)',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center'}}>
@@ -2998,7 +2999,7 @@ document.getElementById("sc-status").textContent=stat;
                             <div style={{fontSize:'13px',color:'rgba(255,255,255,0.75)',marginTop:'8px',fontWeight:500}}>Total Orders</div>
                             <div style={{fontSize:'11px',color:'rgba(255,255,255,0.5)',marginTop:'2px'}}>All time</div>
                         </div>
-                        <div style={{background:'linear-gradient(135deg,#0EA5E9 0%,#38BDF8 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden'}}>
+                        <div onClick={()=>setDrilldown('new')} style={{cursor:'pointer',background:'linear-gradient(135deg,#0EA5E9 0%,#38BDF8 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden'}}>
                             <div style={{position:'absolute',top:'-10px',right:'-10px',width:'70px',height:'70px',background:'rgba(255,255,255,0.1)',borderRadius:'50%'}}></div>
                             <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'16px'}}>
                                 <div style={{width:'36px',height:'36px',background:'rgba(255,255,255,0.2)',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center'}}>
@@ -3009,7 +3010,7 @@ document.getElementById("sc-status").textContent=stat;
                             <div style={{fontSize:'13px',color:'rgba(255,255,255,0.75)',marginTop:'8px',fontWeight:500}}>New · Awaiting</div>
                             <div style={{fontSize:'11px',color:'rgba(255,255,255,0.5)',marginTop:'2px'}}>Pending review</div>
                         </div>
-                        <div style={{background:'linear-gradient(135deg,#F59E0B 0%,#FBBF24 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden'}}>
+                        <div onClick={()=>setDrilldown('inprogress')} style={{cursor:'pointer',background:'linear-gradient(135deg,#F59E0B 0%,#FBBF24 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden'}}>
                             <div style={{position:'absolute',top:'-10px',right:'-10px',width:'70px',height:'70px',background:'rgba(255,255,255,0.1)',borderRadius:'50%'}}></div>
                             <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'16px'}}>
                                 <div style={{width:'36px',height:'36px',background:'rgba(255,255,255,0.2)',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center'}}>
@@ -3020,7 +3021,7 @@ document.getElementById("sc-status").textContent=stat;
                             <div style={{fontSize:'13px',color:'rgba(255,255,255,0.75)',marginTop:'8px',fontWeight:500}}>In Progress</div>
                             <div style={{fontSize:'11px',color:'rgba(255,255,255,0.5)',marginTop:'2px'}}>Being sourced</div>
                         </div>
-                        <div style={{background:'linear-gradient(135deg,#10B981 0%,#34D399 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden'}}>
+                        <div onClick={()=>setDrilldown('value')} style={{cursor:'pointer',background:'linear-gradient(135deg,#10B981 0%,#34D399 100%)',borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden'}}>
                             <div style={{position:'absolute',top:'-10px',right:'-10px',width:'70px',height:'70px',background:'rgba(255,255,255,0.1)',borderRadius:'50%'}}></div>
                             <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'16px'}}>
                                 <div style={{width:'36px',height:'36px',background:'rgba(255,255,255,0.2)',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center'}}>
@@ -3651,6 +3652,117 @@ document.getElementById("sc-status").textContent=stat;
                                 </div>
                             </div>
                         </div>
+                        );
+                    })()}
+
+                    {drilldown && (() => {
+                        const fmtVal = (v) => v>=1000000 ? '$'+(v/1000000).toFixed(2).replace(/\.?0+$/,'')+'M' : v>=1000 ? '$'+Math.round(v/1000)+'K' : '$'+v.toLocaleString();
+                        const nonDel = orders.filter(o => o.status !== 'Deleted');
+                        const byStatus = [
+                            {label:'New', color:'#0EA5E9', count: orders.filter(o=>o.status==='New').length},
+                            {label:'In Progress', color:'#F59E0B', count: orders.filter(o=>o.status==='In Progress').length},
+                            {label:'Fulfilled', color:'#10B981', count: orders.filter(o=>o.status==='Fulfilled').length},
+                            {label:'Deleted', color:'#EF4444', count: orders.filter(o=>o.status==='Deleted').length},
+                        ];
+                        const months = {};
+                        nonDel.forEach(o => { const m = o.submittedAt ? o.submittedAt.slice(0,7) : 'Unknown'; months[m] = (months[m]||0)+1; });
+                        const byMonth = Object.entries(months).sort((a,b)=>a[0].localeCompare(b[0])).slice(-12);
+                        const maxMonth = Math.max(...byMonth.map(([,c])=>c), 1);
+                        const cfg = {
+                            total:     {title:'Total Orders Breakdown',      color:'#4F46E5', subset: nonDel,                                showStatus:true,  showTrend:true},
+                            new:       {title:'New · Awaiting Action',       color:'#0EA5E9', subset: orders.filter(o=>o.status==='New'),     showStatus:false, showTrend:false},
+                            inprogress:{title:'In Progress Orders',          color:'#F59E0B', subset: orders.filter(o=>o.status==='In Progress'), showStatus:false, showTrend:false},
+                            value:     {title:'Total Value — '+currentYear,  color:'#10B981', subset: nonDel,                                showStatus:true,  showTrend:true},
+                            deleted:   {title:'Soft Deleted Orders',         color:'#EF4444', subset: orders.filter(o=>o.status==='Deleted'), showStatus:false, showTrend:false},
+                        }[drilldown] || {title:'Orders',color:'#4F46E5',subset:nonDel,showStatus:true,showTrend:true};
+                        const sub = cfg.subset;
+                        const byLoc = [...new Map(sub.map(o=>[o.locationId,o])).entries()]
+                            .map(([loc])=>({loc, count:sub.filter(o=>o.locationId===loc).length, value:sub.filter(o=>o.locationId===loc).reduce((s,o)=>s+(o.total||0),0)}))
+                            .sort((a,b)=>b.count-a.count).slice(0,8);
+                        const byAdm = [...new Map(sub.map(o=>[o.submitterEmail,o.submitterName])).entries()]
+                            .map(([email,name])=>({name, count:sub.filter(o=>o.submitterEmail===email).length, value:sub.filter(o=>o.submitterEmail===email).reduce((s,o)=>s+(o.total||0),0)}))
+                            .sort((a,b)=>b.count-a.count);
+                        const maxL = Math.max(...byLoc.map(r=>r.count),1);
+                        const maxA = Math.max(...byAdm.map(r=>r.count),1);
+                        return (
+                            <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(15,23,42,0.55)',zIndex:2000,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={()=>setDrilldown(null)}>
+                                <div style={{background:'white',borderRadius:'16px',width:'820px',maxWidth:'95vw',maxHeight:'88vh',overflow:'hidden',display:'flex',flexDirection:'column'}} onClick={e=>e.stopPropagation()}>
+                                    <div style={{padding:'18px 24px',borderBottom:'1px solid #F1F5F9',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                                        <div style={{display:'flex',alignItems:'center',gap:'12px'}}>
+                                            <div style={{width:'8px',height:'32px',background:cfg.color,borderRadius:'4px'}}></div>
+                                            <div>
+                                                <div style={{fontSize:'15px',fontWeight:700,color:'#0F172A'}}>{cfg.title}</div>
+                                                <div style={{fontSize:'12px',color:'#64748B',marginTop:'2px'}}>{sub.length} orders · {fmtVal(sub.reduce((s,o)=>s+(o.total||0),0))} total value</div>
+                                            </div>
+                                        </div>
+                                        <button onClick={()=>setDrilldown(null)} style={{background:'none',border:'none',fontSize:'18px',color:'#94A3B8',cursor:'pointer',padding:'4px 8px'}}>✕</button>
+                                    </div>
+                                    <div style={{overflow:'auto',padding:'20px 24px',display:'flex',flexDirection:'column',gap:'18px'}}>
+                                        {cfg.showStatus && (
+                                            <div>
+                                                <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>Status Breakdown</div>
+                                                <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'10px'}}>
+                                                    {byStatus.map(s => (
+                                                        <div key={s.label} style={{background:'#F8FAFC',borderRadius:'10px',padding:'12px 14px',borderLeft:'3px solid '+s.color}}>
+                                                            <div style={{fontSize:'24px',fontWeight:800,color:s.color,lineHeight:1}}>{s.count}</div>
+                                                            <div style={{fontSize:'11.5px',color:'#475569',marginTop:'4px',fontWeight:600}}>{s.label}</div>
+                                                            <div style={{fontSize:'10.5px',color:'#94A3B8',marginTop:'1px'}}>{orders.length>0?(s.count/orders.length*100).toFixed(1):0}% of all orders</div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                        {cfg.showTrend && byMonth.length > 1 && (
+                                            <div>
+                                                <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>Monthly Trend (last 12 months)</div>
+                                                <div style={{display:'flex',alignItems:'flex-end',gap:'5px',height:'72px',paddingBottom:'18px',position:'relative'}}>
+                                                    {byMonth.map(([m,c]) => (
+                                                        <div key={m} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:'3px',position:'relative'}}>
+                                                            <div style={{fontSize:'9px',color:'#64748B',fontWeight:600,position:'absolute',top:'-14px'}}>{c}</div>
+                                                            <div style={{width:'100%',background:cfg.color,borderRadius:'3px 3px 0 0',height:Math.max(4,Math.round((c/maxMonth)*54))+'px',opacity:0.8}}></div>
+                                                            <div style={{fontSize:'8px',color:'#94A3B8',position:'absolute',bottom:'-16px',whiteSpace:'nowrap'}}>{m.slice(5)}</div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'18px'}}>
+                                            <div>
+                                                <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>Top Locations</div>
+                                                <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
+                                                    {byLoc.map(r => (
+                                                        <div key={r.loc}>
+                                                            <div style={{display:'flex',justifyContent:'space-between',marginBottom:'3px'}}>
+                                                                <span style={{fontSize:'12px',fontWeight:600,color:'#0F172A'}}>{r.loc}</span>
+                                                                <span style={{fontSize:'11.5px',color:'#64748B'}}>{r.count} orders · {fmtVal(r.value)}</span>
+                                                            </div>
+                                                            <div style={{height:'5px',background:'#F1F5F9',borderRadius:'3px'}}>
+                                                                <div style={{height:'100%',background:cfg.color,borderRadius:'3px',width:(r.count/maxL*100)+'%',opacity:0.75}}></div>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>By Submitter</div>
+                                                <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
+                                                    {byAdm.map(r => (
+                                                        <div key={r.name}>
+                                                            <div style={{display:'flex',justifyContent:'space-between',marginBottom:'3px'}}>
+                                                                <span style={{fontSize:'12px',fontWeight:600,color:'#0F172A'}}>{r.name}</span>
+                                                                <span style={{fontSize:'11.5px',color:'#64748B'}}>{r.count} · {fmtVal(r.value)}</span>
+                                                            </div>
+                                                            <div style={{height:'5px',background:'#F1F5F9',borderRadius:'3px'}}>
+                                                                <div style={{height:'100%',background:cfg.color,borderRadius:'3px',width:(r.count/maxA*100)+'%',opacity:0.75}}></div>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         );
                     })()}
                 </div>
