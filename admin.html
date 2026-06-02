@@ -2713,11 +2713,14 @@ body{background:#F1F5F9;height:100vh;display:flex;flex-direction:column;overflow
 .exp-opt-title{font-weight:700;font-size:12px;color:#1E3A5F}
 .exp-opt-sub{font-size:11px;color:#64748B;margin-top:2px}
 /* ── Stats bar ── */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:12px 20px;flex-shrink:0}
-.stat{background:white;border-radius:10px;border:0.5px solid #E2E8F0;padding:11px 16px;display:flex;align-items:center;gap:12px}
-.stat-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px}
-.stat-num{font-size:24px;font-weight:800;letter-spacing:-0.5px;line-height:1}
-.stat-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#94A3B8;margin-top:2px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:12px 20px;flex-shrink:0}
+.sc-card{border-radius:14px;padding:16px 18px;position:relative;overflow:hidden;cursor:pointer;transition:opacity 0.15s}
+.sc-card:hover{opacity:0.9}
+.sc-circle{position:absolute;top:-12px;right:-12px;width:70px;height:70px;background:rgba(255,255,255,0.12);border-radius:50%;pointer-events:none}
+.sc-icon{width:34px;height:34px;background:rgba(255,255,255,0.2);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:12px}
+.sc-num{font-size:34px;font-weight:800;color:white;letter-spacing:-1px;line-height:1}
+.sc-lbl{font-size:12px;color:rgba(255,255,255,0.8);margin-top:6px;font-weight:600}
+.sc-sub{font-size:10.5px;color:rgba(255,255,255,0.55);margin-top:2px}
 /* ── Filter toolbar ── */
 .toolbar{padding:10px 20px;background:white;border-top:0.5px solid #F1F5F9;border-bottom:0.5px solid #E2E8F0;display:flex;gap:8px;align-items:center;flex-shrink:0;flex-wrap:wrap}
 .search-wrap{position:relative;flex:1;min-width:220px}
@@ -2764,6 +2767,13 @@ tr.data-row.expandable{cursor:pointer}
 .table-wrap::-webkit-scrollbar{width:6px}
 .table-wrap::-webkit-scrollbar-track{background:#F1F5F9}
 .table-wrap::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:3px}
+.dd-bg{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.55);z-index:1000;align-items:center;justify-content:center}
+.dd-bg.open{display:flex}
+.dd-box{background:white;border-radius:14px;width:680px;max-width:95vw;max-height:85vh;overflow:hidden;display:flex;flex-direction:column}
+.dd-hdr{padding:16px 20px;border-bottom:1px solid #F1F5F9;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.dd-title{font-size:15px;font-weight:700;color:#0F172A}
+.dd-sub{font-size:12px;color:#64748B;margin-top:2px}
+.dd-body{overflow:auto;padding:18px 20px}
 </style></head><body>
 <div class="gold-bar"></div>
 <div class="hdr">
@@ -2795,21 +2805,33 @@ tr.data-row.expandable{cursor:pointer}
   </div>
 </div>
 <div class="stats">
-  <div class="stat">
-    <div class="stat-icon" style="background:#EEF2FF;font-size:17px">&#128203;</div>
-    <div><div class="stat-num" id="sc-total" style="color:#4C3BAF">0</div><div class="stat-lbl">Total entries</div></div>
+  <div class="sc-card" style="background:linear-gradient(135deg,#4F46E5,#6366F1)" onclick="showDrill('total')">
+    <div class="sc-circle"></div>
+    <div class="sc-icon">&#128203;</div>
+    <div class="sc-num" id="sc-total">0</div>
+    <div class="sc-lbl">Total Entries</div>
+    <div class="sc-sub">Click to drill down</div>
   </div>
-  <div class="stat">
-    <div class="stat-icon" style="background:#EFF6FF;font-size:17px">&#128274;</div>
-    <div><div class="stat-num" id="sc-logins" style="color:#3B82F6">0</div><div class="stat-lbl">Auth events</div></div>
+  <div class="sc-card" style="background:linear-gradient(135deg,#0EA5E9,#38BDF8)" onclick="showDrill('auth')">
+    <div class="sc-circle"></div>
+    <div class="sc-icon">&#128274;</div>
+    <div class="sc-num" id="sc-auth">0</div>
+    <div class="sc-lbl">Auth Events</div>
+    <div class="sc-sub">Logins &amp; logouts</div>
   </div>
-  <div class="stat">
-    <div class="stat-icon" style="background:#FEF2F2;font-size:17px">&#128203;</div>
-    <div><div class="stat-num" id="sc-orders" style="color:#EF4444">0</div><div class="stat-lbl">Order events</div></div>
+  <div class="sc-card" style="background:linear-gradient(135deg,#EF4444,#F87171)" onclick="showDrill('orders')">
+    <div class="sc-circle"></div>
+    <div class="sc-icon">&#128466;</div>
+    <div class="sc-num" id="sc-orders">0</div>
+    <div class="sc-lbl">Order Events</div>
+    <div class="sc-sub">Deletes &amp; changes</div>
   </div>
-  <div class="stat">
-    <div class="stat-icon" style="background:#F0FDF4;font-size:17px">&#128100;</div>
-    <div><div class="stat-num" id="sc-access" style="color:#10B981">0</div><div class="stat-lbl">Access changes</div></div>
+  <div class="sc-card" style="background:linear-gradient(135deg,#10B981,#34D399)" onclick="showDrill('access')">
+    <div class="sc-circle"></div>
+    <div class="sc-icon">&#128100;</div>
+    <div class="sc-num" id="sc-access">0</div>
+    <div class="sc-lbl">Access &amp; System</div>
+    <div class="sc-sub">Admin &amp; publish events</div>
   </div>
 </div>
 <div class="toolbar">
@@ -2819,20 +2841,20 @@ tr.data-row.expandable{cursor:pointer}
   </div>
   <select class="flt-select" id="f-type" onchange="applyFilters()">
     <option value="">All action types</option>
-    <option value="auth.login">Login</option>
-    <option value="auth.logout">Logout</option>
-    <option value="auth.auto_logoff">Auto-logout</option>
-    <option value="order.status_change">Status change</option>
-    <option value="order.soft_delete">Order deleted</option>
-    <option value="order.permanent_delete">Perm. deleted</option>
-    <option value="order.restore">Restored</option>
     <option value="access.admin_added">Admin added</option>
     <option value="access.admin_removed">Admin removed</option>
-    <option value="access.role_changed">Role changed</option>
-    <option value="portal.products_published">Published</option>
+    <option value="access.role_changed">Admin role changed</option>
+    <option value="auth.auto_logoff">Auto-logout</option>
     <option value="category.added">Category added</option>
-    <option value="category.updated">Category updated</option>
     <option value="category.removed">Category removed</option>
+    <option value="category.updated">Category updated</option>
+    <option value="auth.login">Login</option>
+    <option value="auth.logout">Logout</option>
+    <option value="order.soft_delete">Order deleted</option>
+    <option value="order.permanent_delete">Order perm. deleted</option>
+    <option value="order.restore">Order restored</option>
+    <option value="order.status_change">Order status change</option>
+    <option value="portal.products_published">Products published</option>
   </select>
   <select class="flt-select" id="f-admin" onchange="applyFilters()">
     <option value="">All admins</option>
@@ -2864,6 +2886,19 @@ tr.data-row.expandable{cursor:pointer}
     <tbody id="tbody">${rowsHtml}</tbody>
   </table>
 </div>
+<!-- Drilldown modal -->
+<div class="dd-bg" id="dd-bg" onclick="closeDrill()">
+  <div class="dd-box" onclick="event.stopPropagation()">
+    <div class="dd-hdr">
+      <div>
+        <div class="dd-title" id="dd-title">Details</div>
+        <div class="dd-sub" id="dd-sub"></div>
+      </div>
+      <button onclick="closeDrill()" style="background:none;border:none;font-size:18px;color:#94A3B8;cursor:pointer;padding:4px 8px;line-height:1">&#10005;</button>
+    </div>
+    <div class="dd-body" id="dd-body"></div>
+  </div>
+</div>
 <script>
 var ALL=[];
 (function(){
@@ -2881,9 +2916,14 @@ var ALL=[];
   });
   /* populate admin dropdown */
   var admins={};
-  ALL.forEach(function(d){if(d.admin)admins[d.admin]=(d.admin);});
+  ALL.forEach(function(d){
+    if(d.admin&&!admins[d.admin]){
+      var name=d.admin.split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase();});
+      admins[d.admin]=name;
+    }
+  });
   var sel=document.getElementById('f-admin');
-  Object.keys(admins).sort().forEach(function(a){
+  Object.keys(admins).sort(function(a,b){return admins[a].localeCompare(admins[b]);}).forEach(function(a){
     var o=document.createElement('option');
     o.value=a;
     o.textContent=a.split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase();});
@@ -2917,11 +2957,11 @@ function applyFilters(){
     if(fa&&d.admin!==fa)show=false;
     if(fr&&d.result!==fr)show=false;
     if(df&&d.ts&&d.ts<df)show=false;
-    if(dt&&d.ts&&d.ts>dt+'T23:59:59')show=false;
+    if(dt&&d.ts&&d.ts>dt)show=false;
     if(q&&!(d.admin.includes(q)||d.action.includes(q)||d.target.includes(q)||d.detail.includes(q)))show=false;
     d.el.style.display=show?'':'none';
-    var snap=document.getElementById('snap-'+d.el.dataset.idx);
-    if(!show&&snap)snap.style.display='none';
+    var sn=document.getElementById('sn-'+d.el.dataset.idx);
+    if(!show&&sn)sn.style.display='none';
     if(show)count++;
   });
   document.getElementById('count-pill').textContent=count+' entr'+(count===1?'y':'ies');
@@ -3000,6 +3040,47 @@ function doExport(mode){
 }
 
 function csvQ(v){return '"'+String(v||'').split('"').join('""')+'"';}
+
+
+function showDrill(type){
+  var colors={total:'#4F46E5',auth:'#0EA5E9',orders:'#EF4444',access:'#10B981'};
+  var color=colors[type]||'#4F46E5';
+  var titles={total:'All Audit Entries',auth:'Auth Events',orders:'Order Events',access:'Access & System Events'};
+  var subsets={
+    total:ALL,
+    auth:ALL.filter(function(d){return d.action.indexOf('auth.')===0;}),
+    orders:ALL.filter(function(d){return d.action.indexOf('order.')===0;}),
+    access:ALL.filter(function(d){return d.action.indexOf('order.')!==0&&d.action.indexOf('auth.')!==0;})
+  };
+  var sub=subsets[type]||ALL;
+  var actionLabels={'auth.login':'Login','auth.logout':'Logout','auth.auto_logoff':'Auto-logout','order.status_change':'Status change','order.soft_delete':'Order deleted','order.permanent_delete':'Perm. deleted','order.restore':'Restored','access.admin_added':'Admin added','access.admin_removed':'Admin removed','access.role_changed':'Role changed','portal.products_published':'Published','category.added':'Cat. added','category.updated':'Cat. updated','category.removed':'Cat. removed'};
+  var actionCounts={};
+  sub.forEach(function(d){actionCounts[d.action]=(actionCounts[d.action]||0)+1;});
+  var actionRows=Object.entries(actionCounts).sort(function(a,b){return b[1]-a[1];});
+  var maxA=actionRows.length?actionRows[0][1]:1;
+  var adminCounts={};var adminNames={};
+  sub.forEach(function(d){if(d.admin){adminCounts[d.admin]=(adminCounts[d.action]||0)+1;adminCounts[d.admin]=(adminCounts[d.admin]||0)+1;adminNames[d.admin]=d.admin.split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase();}); }});
+  var adminRows=Object.entries(adminCounts).sort(function(a,b){return b[1]-a[1];});
+  var maxAdm=adminRows.length?adminRows[0][1]:1;
+  var resCounts={success:0,denied:0,other:0};
+  sub.forEach(function(d){if(d.result==='success')resCounts.success++;else if(d.result==='denied')resCounts.denied++;else resCounts.other++;});
+  var html='<div style="margin-bottom:14px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#94A3B8;margin-bottom:8px">By Result</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">';
+  html+='<div style="background:#F8FAFC;border-radius:9px;padding:11px 13px;border-left:3px solid #10B981"><div style="font-size:20px;font-weight:800;color:#10B981">'+resCounts.success+'</div><div style="font-size:11px;color:#64748B;margin-top:3px;font-weight:600">Success</div></div>';
+  html+='<div style="background:#F8FAFC;border-radius:9px;padding:11px 13px;border-left:3px solid #EF4444"><div style="font-size:20px;font-weight:800;color:#EF4444">'+resCounts.denied+'</div><div style="font-size:11px;color:#64748B;margin-top:3px;font-weight:600">Denied</div></div>';
+  html+='<div style="background:#F8FAFC;border-radius:9px;padding:11px 13px;border-left:3px solid #94A3B8"><div style="font-size:20px;font-weight:800;color:#94A3B8">'+resCounts.other+'</div><div style="font-size:11px;color:#64748B;margin-top:3px;font-weight:600">No result</div></div>';
+  html+='</div></div>';
+  html+='<div style="margin-bottom:14px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#94A3B8;margin-bottom:8px">By Action Type</div>';
+  actionRows.forEach(function(r){var label=actionLabels[r[0]]||r[0];var pct=Math.max(4,Math.round(r[1]/maxA*100));html+='<div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span style="font-weight:600;color:#0F172A">'+label+'</span><span style="color:#64748B">'+r[1]+'</span></div><div style="height:5px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div style="height:100%;background:'+color+';border-radius:3px;width:'+pct+'%;opacity:0.8"></div></div></div>';});
+  html+='</div>';
+  html+='<div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#94A3B8;margin-bottom:8px">By Admin</div>';
+  adminRows.slice(0,8).forEach(function(r){var name=adminNames[r[0]]||r[0];var pct=Math.max(4,Math.round(r[1]/maxAdm*100));html+='<div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span style="font-weight:600;color:#0F172A">'+name+'</span><span style="color:#64748B">'+r[1]+'</span></div><div style="height:5px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div style="height:100%;background:'+color+';border-radius:3px;width:'+pct+'%;opacity:0.8"></div></div></div>';});
+  html+='</div>';
+  document.getElementById('dd-title').textContent=titles[type]||'Details';
+  document.getElementById('dd-sub').textContent=sub.length+' entries';
+  document.getElementById('dd-body').innerHTML=html;
+  document.getElementById('dd-bg').classList.add('open');
+}
+function closeDrill(){document.getElementById('dd-bg').classList.remove('open');}
 
 function toggleYear(y,btn){alert('Close this tab and re-open the Audit Log from the admin panel to load '+y+'.');}
 
@@ -4097,11 +4178,14 @@ body{background:#F1F5F9;height:100vh;display:flex;flex-direction:column;overflow
 .exp-opt-title{font-weight:700;font-size:12px;color:#1E3A5F}
 .exp-opt-sub{font-size:11px;color:#64748B;margin-top:2px}
 /* ── Stats bar ── */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:12px 20px;flex-shrink:0}
-.stat{background:white;border-radius:10px;border:0.5px solid #E2E8F0;padding:11px 16px;display:flex;align-items:center;gap:12px}
-.stat-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px}
-.stat-num{font-size:24px;font-weight:800;letter-spacing:-0.5px;line-height:1}
-.stat-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#94A3B8;margin-top:2px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:12px 20px;flex-shrink:0}
+.sc-card{border-radius:14px;padding:16px 18px;position:relative;overflow:hidden;cursor:pointer;transition:opacity 0.15s}
+.sc-card:hover{opacity:0.9}
+.sc-circle{position:absolute;top:-12px;right:-12px;width:70px;height:70px;background:rgba(255,255,255,0.12);border-radius:50%;pointer-events:none}
+.sc-icon{width:34px;height:34px;background:rgba(255,255,255,0.2);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:12px}
+.sc-num{font-size:34px;font-weight:800;color:white;letter-spacing:-1px;line-height:1}
+.sc-lbl{font-size:12px;color:rgba(255,255,255,0.8);margin-top:6px;font-weight:600}
+.sc-sub{font-size:10.5px;color:rgba(255,255,255,0.55);margin-top:2px}
 /* ── Filter toolbar ── */
 .toolbar{padding:10px 20px;background:white;border-top:0.5px solid #F1F5F9;border-bottom:0.5px solid #E2E8F0;display:flex;gap:8px;align-items:center;flex-shrink:0;flex-wrap:wrap}
 .search-wrap{position:relative;flex:1;min-width:220px}
@@ -4148,6 +4232,13 @@ tr.data-row.expandable{cursor:pointer}
 .table-wrap::-webkit-scrollbar{width:6px}
 .table-wrap::-webkit-scrollbar-track{background:#F1F5F9}
 .table-wrap::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:3px}
+.dd-bg{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.55);z-index:1000;align-items:center;justify-content:center}
+.dd-bg.open{display:flex}
+.dd-box{background:white;border-radius:14px;width:680px;max-width:95vw;max-height:85vh;overflow:hidden;display:flex;flex-direction:column}
+.dd-hdr{padding:16px 20px;border-bottom:1px solid #F1F5F9;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.dd-title{font-size:15px;font-weight:700;color:#0F172A}
+.dd-sub{font-size:12px;color:#64748B;margin-top:2px}
+.dd-body{overflow:auto;padding:18px 20px}
 </style></head><body>
 <div class="gold-bar"></div>
 <div class="hdr">
@@ -4179,21 +4270,33 @@ tr.data-row.expandable{cursor:pointer}
   </div>
 </div>
 <div class="stats">
-  <div class="stat">
-    <div class="stat-icon" style="background:#EEF2FF;font-size:17px">&#128203;</div>
-    <div><div class="stat-num" id="sc-total" style="color:#4C3BAF">0</div><div class="stat-lbl">Total entries</div></div>
+  <div class="sc-card" style="background:linear-gradient(135deg,#4F46E5,#6366F1)" onclick="showDrill('total')">
+    <div class="sc-circle"></div>
+    <div class="sc-icon">&#128203;</div>
+    <div class="sc-num" id="sc-total">0</div>
+    <div class="sc-lbl">Total Entries</div>
+    <div class="sc-sub">Click to drill down</div>
   </div>
-  <div class="stat">
-    <div class="stat-icon" style="background:#EFF6FF;font-size:17px">&#128274;</div>
-    <div><div class="stat-num" id="sc-logins" style="color:#3B82F6">0</div><div class="stat-lbl">Auth events</div></div>
+  <div class="sc-card" style="background:linear-gradient(135deg,#0EA5E9,#38BDF8)" onclick="showDrill('auth')">
+    <div class="sc-circle"></div>
+    <div class="sc-icon">&#128274;</div>
+    <div class="sc-num" id="sc-auth">0</div>
+    <div class="sc-lbl">Auth Events</div>
+    <div class="sc-sub">Logins &amp; logouts</div>
   </div>
-  <div class="stat">
-    <div class="stat-icon" style="background:#FEF2F2;font-size:17px">&#128203;</div>
-    <div><div class="stat-num" id="sc-orders" style="color:#EF4444">0</div><div class="stat-lbl">Order events</div></div>
+  <div class="sc-card" style="background:linear-gradient(135deg,#EF4444,#F87171)" onclick="showDrill('orders')">
+    <div class="sc-circle"></div>
+    <div class="sc-icon">&#128466;</div>
+    <div class="sc-num" id="sc-orders">0</div>
+    <div class="sc-lbl">Order Events</div>
+    <div class="sc-sub">Deletes &amp; changes</div>
   </div>
-  <div class="stat">
-    <div class="stat-icon" style="background:#F0FDF4;font-size:17px">&#128100;</div>
-    <div><div class="stat-num" id="sc-access" style="color:#10B981">0</div><div class="stat-lbl">Access changes</div></div>
+  <div class="sc-card" style="background:linear-gradient(135deg,#10B981,#34D399)" onclick="showDrill('access')">
+    <div class="sc-circle"></div>
+    <div class="sc-icon">&#128100;</div>
+    <div class="sc-num" id="sc-access">0</div>
+    <div class="sc-lbl">Access &amp; System</div>
+    <div class="sc-sub">Admin &amp; publish events</div>
   </div>
 </div>
 <div class="toolbar">
@@ -4203,20 +4306,20 @@ tr.data-row.expandable{cursor:pointer}
   </div>
   <select class="flt-select" id="f-type" onchange="applyFilters()">
     <option value="">All action types</option>
-    <option value="auth.login">Login</option>
-    <option value="auth.logout">Logout</option>
-    <option value="auth.auto_logoff">Auto-logout</option>
-    <option value="order.status_change">Status change</option>
-    <option value="order.soft_delete">Order deleted</option>
-    <option value="order.permanent_delete">Perm. deleted</option>
-    <option value="order.restore">Restored</option>
     <option value="access.admin_added">Admin added</option>
     <option value="access.admin_removed">Admin removed</option>
-    <option value="access.role_changed">Role changed</option>
-    <option value="portal.products_published">Published</option>
+    <option value="access.role_changed">Admin role changed</option>
+    <option value="auth.auto_logoff">Auto-logout</option>
     <option value="category.added">Category added</option>
-    <option value="category.updated">Category updated</option>
     <option value="category.removed">Category removed</option>
+    <option value="category.updated">Category updated</option>
+    <option value="auth.login">Login</option>
+    <option value="auth.logout">Logout</option>
+    <option value="order.soft_delete">Order deleted</option>
+    <option value="order.permanent_delete">Order perm. deleted</option>
+    <option value="order.restore">Order restored</option>
+    <option value="order.status_change">Order status change</option>
+    <option value="portal.products_published">Products published</option>
   </select>
   <select class="flt-select" id="f-admin" onchange="applyFilters()">
     <option value="">All admins</option>
@@ -4248,6 +4351,19 @@ tr.data-row.expandable{cursor:pointer}
     <tbody id="tbody">${rowsHtml}</tbody>
   </table>
 </div>
+<!-- Drilldown modal -->
+<div class="dd-bg" id="dd-bg" onclick="closeDrill()">
+  <div class="dd-box" onclick="event.stopPropagation()">
+    <div class="dd-hdr">
+      <div>
+        <div class="dd-title" id="dd-title">Details</div>
+        <div class="dd-sub" id="dd-sub"></div>
+      </div>
+      <button onclick="closeDrill()" style="background:none;border:none;font-size:18px;color:#94A3B8;cursor:pointer;padding:4px 8px;line-height:1">&#10005;</button>
+    </div>
+    <div class="dd-body" id="dd-body"></div>
+  </div>
+</div>
 <script>
 var ALL=[];
 (function(){
@@ -4265,9 +4381,14 @@ var ALL=[];
   });
   /* populate admin dropdown */
   var admins={};
-  ALL.forEach(function(d){if(d.admin)admins[d.admin]=(d.admin);});
+  ALL.forEach(function(d){
+    if(d.admin&&!admins[d.admin]){
+      var name=d.admin.split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase();});
+      admins[d.admin]=name;
+    }
+  });
   var sel=document.getElementById('f-admin');
-  Object.keys(admins).sort().forEach(function(a){
+  Object.keys(admins).sort(function(a,b){return admins[a].localeCompare(admins[b]);}).forEach(function(a){
     var o=document.createElement('option');
     o.value=a;
     o.textContent=a.split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase();});
@@ -4301,11 +4422,11 @@ function applyFilters(){
     if(fa&&d.admin!==fa)show=false;
     if(fr&&d.result!==fr)show=false;
     if(df&&d.ts&&d.ts<df)show=false;
-    if(dt&&d.ts&&d.ts>dt+'T23:59:59')show=false;
+    if(dt&&d.ts&&d.ts>dt)show=false;
     if(q&&!(d.admin.includes(q)||d.action.includes(q)||d.target.includes(q)||d.detail.includes(q)))show=false;
     d.el.style.display=show?'':'none';
-    var snap=document.getElementById('snap-'+d.el.dataset.idx);
-    if(!show&&snap)snap.style.display='none';
+    var sn=document.getElementById('sn-'+d.el.dataset.idx);
+    if(!show&&sn)sn.style.display='none';
     if(show)count++;
   });
   document.getElementById('count-pill').textContent=count+' entr'+(count===1?'y':'ies');
@@ -4384,6 +4505,47 @@ function doExport(mode){
 }
 
 function csvQ(v){return '"'+String(v||'').split('"').join('""')+'"';}
+
+
+function showDrill(type){
+  var colors={total:'#4F46E5',auth:'#0EA5E9',orders:'#EF4444',access:'#10B981'};
+  var color=colors[type]||'#4F46E5';
+  var titles={total:'All Audit Entries',auth:'Auth Events',orders:'Order Events',access:'Access & System Events'};
+  var subsets={
+    total:ALL,
+    auth:ALL.filter(function(d){return d.action.indexOf('auth.')===0;}),
+    orders:ALL.filter(function(d){return d.action.indexOf('order.')===0;}),
+    access:ALL.filter(function(d){return d.action.indexOf('order.')!==0&&d.action.indexOf('auth.')!==0;})
+  };
+  var sub=subsets[type]||ALL;
+  var actionLabels={'auth.login':'Login','auth.logout':'Logout','auth.auto_logoff':'Auto-logout','order.status_change':'Status change','order.soft_delete':'Order deleted','order.permanent_delete':'Perm. deleted','order.restore':'Restored','access.admin_added':'Admin added','access.admin_removed':'Admin removed','access.role_changed':'Role changed','portal.products_published':'Published','category.added':'Cat. added','category.updated':'Cat. updated','category.removed':'Cat. removed'};
+  var actionCounts={};
+  sub.forEach(function(d){actionCounts[d.action]=(actionCounts[d.action]||0)+1;});
+  var actionRows=Object.entries(actionCounts).sort(function(a,b){return b[1]-a[1];});
+  var maxA=actionRows.length?actionRows[0][1]:1;
+  var adminCounts={};var adminNames={};
+  sub.forEach(function(d){if(d.admin){adminCounts[d.admin]=(adminCounts[d.action]||0)+1;adminCounts[d.admin]=(adminCounts[d.admin]||0)+1;adminNames[d.admin]=d.admin.split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase();}); }});
+  var adminRows=Object.entries(adminCounts).sort(function(a,b){return b[1]-a[1];});
+  var maxAdm=adminRows.length?adminRows[0][1]:1;
+  var resCounts={success:0,denied:0,other:0};
+  sub.forEach(function(d){if(d.result==='success')resCounts.success++;else if(d.result==='denied')resCounts.denied++;else resCounts.other++;});
+  var html='<div style="margin-bottom:14px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#94A3B8;margin-bottom:8px">By Result</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">';
+  html+='<div style="background:#F8FAFC;border-radius:9px;padding:11px 13px;border-left:3px solid #10B981"><div style="font-size:20px;font-weight:800;color:#10B981">'+resCounts.success+'</div><div style="font-size:11px;color:#64748B;margin-top:3px;font-weight:600">Success</div></div>';
+  html+='<div style="background:#F8FAFC;border-radius:9px;padding:11px 13px;border-left:3px solid #EF4444"><div style="font-size:20px;font-weight:800;color:#EF4444">'+resCounts.denied+'</div><div style="font-size:11px;color:#64748B;margin-top:3px;font-weight:600">Denied</div></div>';
+  html+='<div style="background:#F8FAFC;border-radius:9px;padding:11px 13px;border-left:3px solid #94A3B8"><div style="font-size:20px;font-weight:800;color:#94A3B8">'+resCounts.other+'</div><div style="font-size:11px;color:#64748B;margin-top:3px;font-weight:600">No result</div></div>';
+  html+='</div></div>';
+  html+='<div style="margin-bottom:14px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#94A3B8;margin-bottom:8px">By Action Type</div>';
+  actionRows.forEach(function(r){var label=actionLabels[r[0]]||r[0];var pct=Math.max(4,Math.round(r[1]/maxA*100));html+='<div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span style="font-weight:600;color:#0F172A">'+label+'</span><span style="color:#64748B">'+r[1]+'</span></div><div style="height:5px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div style="height:100%;background:'+color+';border-radius:3px;width:'+pct+'%;opacity:0.8"></div></div></div>';});
+  html+='</div>';
+  html+='<div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#94A3B8;margin-bottom:8px">By Admin</div>';
+  adminRows.slice(0,8).forEach(function(r){var name=adminNames[r[0]]||r[0];var pct=Math.max(4,Math.round(r[1]/maxAdm*100));html+='<div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span style="font-weight:600;color:#0F172A">'+name+'</span><span style="color:#64748B">'+r[1]+'</span></div><div style="height:5px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div style="height:100%;background:'+color+';border-radius:3px;width:'+pct+'%;opacity:0.8"></div></div></div>';});
+  html+='</div>';
+  document.getElementById('dd-title').textContent=titles[type]||'Details';
+  document.getElementById('dd-sub').textContent=sub.length+' entries';
+  document.getElementById('dd-body').innerHTML=html;
+  document.getElementById('dd-bg').classList.add('open');
+}
+function closeDrill(){document.getElementById('dd-bg').classList.remove('open');}
 
 function toggleYear(y,btn){alert('Close this tab and re-open the Audit Log from the admin panel to load '+y+'.');}
 
