@@ -278,48 +278,77 @@
         
         /* Admin Dashboard */
         .admin-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: #0F4068;
             color: white;
-            padding: 1.5rem 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 0;
             position: sticky;
             top: 0;
             z-index: 100;
         }
-        
+        .admin-header-gold-bar {
+            height: 4px;
+            background: linear-gradient(90deg,#DB802E,#EFA855,#DB802E);
+        }
         .admin-header-content {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 13px 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
-        .admin-header h1 {
-            font-size: 1.5rem;
-            font-weight: 300;
+        .admin-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        
+        .admin-logomark {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg,#0F6E56,#5DCAA5);
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 15px;
+            font-family: Georgia, serif;
+            flex-shrink: 0;
+        }
+        .admin-header h1 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            margin: 0;
+        }
+        .admin-header-sub {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 1px;
+        }
         .admin-user {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 12px;
         }
-        
+        .admin-user-email {
+            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+        }
         .btn-logout {
-            background: rgba(255,255,255,0.2);
+            background: #0F6E56;
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 7px 16px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 0.875rem;
-            transition: all 0.3s;
+            font-size: 12px;
+            font-weight: 600;
+            transition: background 0.2s;
         }
-        
         .btn-logout:hover {
-            background: rgba(255,255,255,0.3);
+            background: #0A5542;
         }
         
         .admin-container {
@@ -332,140 +361,75 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            padding: 1.25rem 1.5rem;
+            border-radius: 14px;
+            border: 0.5px solid #E2E8F0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
         }
-        
         .btn-add {
-            background: var(--success);
+            background: #0F6E56;
             color: white;
-            padding: 0.875rem 1.5rem;
+            padding: 0.7rem 1.4rem;
             border: none;
-            border-radius: 10px;
+            border-radius: 9px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            font-size: 0.9rem;
+            transition: background 0.2s;
         }
-        
-        .btn-add:hover {
-            background: #3d6b25;
-            transform: translateY(-2px);
-        }
-        
+        .btn-add:hover { background: #0A5542; }
         .products-table {
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            border-radius: 14px;
+            border: 0.5px solid #E2E8F0;
             overflow: hidden;
         }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        thead {
-            background: var(--bg-light);
-        }
-        
+        table { width: 100%; border-collapse: collapse; }
+        thead { background: #0F4068; }
         th {
-            padding: 1rem;
+            padding: 10px 14px;
             text-align: left;
-            font-weight: 600;
-            color: var(--fpg-gray-dark);
-            font-size: 0.875rem;
+            font-weight: 700;
+            color: white;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.06em;
+            border-bottom: 3px solid #0F6E56;
         }
+        td { padding: 12px 14px; border-top: 0.5px solid #F1F5F9; }
+        tbody tr:hover td { background: #F0FBF8; }
         
-        td {
-            padding: 1rem;
-            border-top: 1px solid var(--border);
-        }
-        
-        tbody tr:hover {
-            background: var(--bg-light);
-        }
-        
-        .product-cell {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
+        .product-cell { display: flex; align-items: center; gap: 12px; }
         .product-thumb {
-            width: 50px;
-            height: 50px;
-            background: var(--bg-light);
-            border-radius: 8px;
+            width: 46px;
+            height: 46px;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1.5px solid #E1F5EE;
+            background: #F0FBF8;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
         }
-        
-        .product-info h3 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
+        .product-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-        
-        .product-category {
-            font-size: 0.8rem;
-            color: var(--fpg-gray);
-        }
-        
-        .status-badge {
-            padding: 0.375rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .status-active {
-            background: #D1FAE5;
-            color: #065F46;
-        }
-        
-        .status-inactive {
-            background: #FEE2E2;
-            color: #991B1B;
-        }
-        
-        .actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        .btn-action {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .btn-edit {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .btn-edit:hover {
-            background: var(--primary-dark);
-        }
-        
-        .btn-delete {
-            background: var(--danger);
-            color: white;
-        }
-        
-        .btn-delete:hover {
-            background: #DC2626;
-        }
+        .product-info h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; color: #0F172A; }
+        .product-category { font-size: 0.75rem; color: #64748B; }
+        .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+        .status-active { background: #CCFBF1; color: #0F6E56; }
+        .status-inactive { background: #FEE2E2; color: #991B1B; }
+        .actions { display: flex; gap: 6px; }
+        .btn-action { padding: 5px 12px; border: none; border-radius: 7px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .btn-edit { background: #0F4068; color: white; }
+        .btn-edit:hover { background: #0A2E4A; }
+        .btn-delete { background: #FEE2E2; color: #DC2626; border: 1px solid #FECACA; }
+        .btn-delete:hover { background: #FECACA; }
         
         /* Modal */
         .modal-overlay {
@@ -1441,23 +1405,45 @@
                         </div>
                     )}
                     <header className="admin-header">
+                        <div className="admin-header-gold-bar"></div>
                         <div className="admin-header-content">
-                            <h1>🛠️ Equipment Admin Panel</h1>
+                            <div className="admin-header-left">
+                                <div className="admin-logomark">F</div>
+                                <div>
+                                    <h1>Equipment Admin Panel</h1>
+                                    <div className="admin-header-sub">Foundation Partners Group · Technology</div>
+                                </div>
+                            </div>
                             <div className="admin-user">
-                                <span>{session.email}</span>
-                                <button className="btn-logout" onClick={onLogout}>
-                                    Logout →
-                                </button>
+                                <span className="admin-user-email">{session.email}</span>
+                                <button className="btn-logout" onClick={onLogout}>Logout →</button>
                             </div>
                         </div>
                     </header>
                     
                     <div className="admin-container">
-                        <div className="tab-nav" style={{display:'flex',gap:'0.5rem',marginBottom:'1.5rem',background:'white',padding:'0.5rem',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',width:'fit-content'}}>
-                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='access'?'#0F6E56':'transparent',color:activeTab==='access'?'white':'#666'}} onClick={()=>setActiveTab('access')}>👥 Access Management</button>
-                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='categories'?'#0F6E56':'transparent',color:activeTab==='categories'?'white':'#666'}} onClick={()=>setActiveTab('categories')}>🏷️ Categories</button>
-                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='products'?'#0F6E56':'transparent',color:activeTab==='products'?'white':'#666'}} onClick={()=>setActiveTab('products')}>📦 Products</button>
-                            <button style={{padding:'0.6rem 1.2rem',border:'none',borderRadius:'8px',fontWeight:600,cursor:'pointer',background:activeTab==='orders'?'#0F6E56':'transparent',color:activeTab==='orders'?'white':'#666'}} onClick={()=>setActiveTab('orders')}>📋 Orders</button>
+                        <div style={{display:'flex',gap:'4px',marginBottom:'1.5rem',background:'white',padding:'6px',borderRadius:'12px',border:'0.5px solid #E2E8F0',width:'fit-content',boxShadow:'0 1px 4px rgba(0,0,0,0.06)'}}>
+                            {[
+                                {key:'access', label:'Access Management', icon:'👥'},
+                                {key:'categories', label:'Categories', icon:'🏷️'},
+                                {key:'products', label:'Products', icon:'📦'},
+                                {key:'orders', label:'Orders', icon:'📋'},
+                            ].map(tab => (
+                                <button key={tab.key} onClick={()=>setActiveTab(tab.key)} style={{
+                                    padding:'8px 16px',
+                                    border: activeTab===tab.key ? '1.5px solid #0F6E56' : '1.5px solid transparent',
+                                    borderRadius:'8px',
+                                    fontWeight:600,
+                                    cursor:'pointer',
+                                    fontSize:'13px',
+                                    background: activeTab===tab.key ? '#0F4068' : 'transparent',
+                                    color: activeTab===tab.key ? 'white' : '#475569',
+                                    transition:'all 0.15s',
+                                    display:'flex',
+                                    alignItems:'center',
+                                    gap:'6px',
+                                }}>{tab.icon} {tab.label}</button>
+                            ))}
                         </div>
 
                         {activeTab === 'access' && <AccessManagement session={session} azureUrl={AZURE_FUNCTION_URL} adminPortalUrl={ADMIN_PORTAL_URL} />}
@@ -1536,7 +1522,9 @@
                                                 <td>
                                                     <div className="product-cell">
                                                         <div className="product-thumb">
-                                                            {product.imageUrl ? '🖼️' : '📦'}
+                                                            {product.imageUrl
+                                                                ? <img src={product.imageUrl} alt={product.title} onError={function(e){e.target.style.display='none';e.target.parentNode.innerHTML='📦';}} />
+                                                                : <span style={{fontSize:'1.4rem'}}>📦</span>}
                                                         </div>
                                                         <div className="product-info">
                                                             <h3>
@@ -2154,9 +2142,12 @@
             return (
                 <div style={{maxWidth:'700px'}}>
                     <div style={{background:'white',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',marginBottom:'1.5rem',overflow:'hidden'}}>
-                        <div style={{padding:'1.25rem 1.5rem',borderBottom:'1px solid #e5e7eb'}}>
-                            <h3 style={{fontSize:'1.1rem',fontWeight:600}}>👥 Current Admins</h3>
-                            <p style={{fontSize:'0.85rem',color:'#666',marginTop:'0.2rem'}}>{loading ? 'Loading...' : admins.length + ' authorized user' + (admins.length !== 1 ? 's' : '')}</p>
+                        <div style={{padding:'1rem 1.5rem',borderBottom:'1px solid #E1F5EE',background:'#F0FBF8',display:'flex',alignItems:'center',gap:'10px'}}>
+                            <div style={{width:'30px',height:'30px',background:'linear-gradient(135deg,#0F6E56,#5DCAA5)',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'14px'}}>👥</div>
+                            <div>
+                                <h3 style={{fontSize:'1rem',fontWeight:700,color:'#0F172A',margin:0}}>Current Admins</h3>
+                                <p style={{fontSize:'0.8rem',color:'#64748B',marginTop:'1px'}}>{loading ? 'Loading...' : admins.length + ' authorized user' + (admins.length !== 1 ? 's' : '')}</p>
+                            </div>
                         </div>
                         {status && (
                             <div style={{margin:'0.75rem 1.5rem',padding:'0.75rem 1rem',borderRadius:'8px',fontSize:'0.875rem',background:status.type==='success'?'#D1FAE5':'#FEE2E2',color:status.type==='success'?'#065F46':'#991B1B'}}>
@@ -2202,9 +2193,12 @@
                     </div>
 
                     <div style={{background:'white',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',overflow:'hidden'}}>
-                        <div style={{padding:'1.25rem 1.5rem',borderBottom:'1px solid #e5e7eb'}}>
-                            <h3 style={{fontSize:'1.1rem',fontWeight:600}}>➕ Add New Admin</h3>
-                            <p style={{fontSize:'0.85rem',color:'#666',marginTop:'0.2rem'}}>They will receive an email invitation with the portal link</p>
+                        <div style={{padding:'1rem 1.5rem',borderBottom:'1px solid #E1F5EE',background:'#F0FBF8',display:'flex',alignItems:'center',gap:'10px'}}>
+                            <div style={{width:'30px',height:'30px',background:'linear-gradient(135deg,#0F4068,#0F6E56)',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'14px'}}>➕</div>
+                            <div>
+                                <h3 style={{fontSize:'1rem',fontWeight:700,color:'#0F172A',margin:0}}>Add New Admin</h3>
+                                <p style={{fontSize:'0.8rem',color:'#64748B',marginTop:'1px'}}>They will receive an email invitation with the portal link</p>
+                            </div>
                         </div>
                         <div style={{padding:'1.5rem',display:'flex',flexDirection:'column',gap:'1rem'}}>
                             <div style={{display:'flex',gap:'0.75rem'}}>
@@ -2219,7 +2213,7 @@
                                     Body: Hi {newName}, you have been granted access to the FPG Equipment Admin Portal...
                                 </div>
                             )}
-                            <button onClick={handleAdd} disabled={adding} style={{background:'#4a7c2f',color:'white',border:'none',padding:'0.875rem',borderRadius:'10px',fontWeight:600,cursor:'pointer',fontSize:'0.95rem'}}>
+                            <button onClick={handleAdd} disabled={adding} style={{background:'#0F6E56',color:'white',border:'none',padding:'0.875rem',borderRadius:'10px',fontWeight:700,cursor:'pointer',fontSize:'0.95rem'}}>
                                 {adding ? '⏳ Adding...' : '✅ Add Admin & Send Invite'}
                             </button>
                         </div>
@@ -2401,12 +2395,15 @@
                         </div>
                     )}
                     <div style={{background:'white',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',overflow:'hidden'}}>
-                        <div style={{padding:'1.25rem 1.5rem',borderBottom:'1px solid #f3f4f6',display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}>
-                            <div>
-                                <h3 style={{fontSize:'1.25rem',fontWeight:700,margin:'0 0 0.25rem 0',color:'#1a1a2e'}}>🏷️ Categories</h3>
-                                <p style={{fontSize:'0.8rem',color:'#9ca3af',margin:0,letterSpacing:'0.01em'}}>{(categories||[]).length} total · {(categories||[]).filter(function(c){return getProductCount(c.slug)===0;}).length} empty</p>
+                        <div style={{padding:'1rem 1.5rem',borderBottom:'1px solid #E1F5EE',background:'#F0FBF8',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                            <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
+                                <div style={{width:'30px',height:'30px',background:'linear-gradient(135deg,#0F6E56,#5DCAA5)',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'14px'}}>🏷️</div>
+                                <div>
+                                    <h3 style={{fontSize:'1rem',fontWeight:700,margin:0,color:'#0F172A'}}>Categories</h3>
+                                    <p style={{fontSize:'0.8rem',color:'#64748B',margin:0}}>{(categories||[]).length} total · {(categories||[]).filter(function(c){return getProductCount(c.slug)===0;}).length} empty</p>
+                                </div>
                             </div>
-                            <button onClick={function(){setShowAddModal(true);setStatus(null);}} className="btn btn-primary btn-compact" style={{display:'flex',alignItems:'center',gap:'6px',whiteSpace:'nowrap'}}>
+                            <button onClick={function(){setShowAddModal(true);setStatus(null);}} style={{background:'#0F6E56',color:'white',border:'none',padding:'7px 14px',borderRadius:'8px',fontWeight:700,cursor:'pointer',fontSize:'0.85rem',display:'flex',alignItems:'center',gap:'6px',whiteSpace:'nowrap'}}>
                                 + New category
                             </button>
                         </div>
@@ -2453,7 +2450,7 @@
                                             ) : (
                                                 <div style={{display:'flex',alignItems:'center',gap:'0.75rem',flex:1}}>
                                                     {cat.imageUrl ? (
-                                                        <img src={cat.imageUrl} alt={cat.label} style={{width:'32px',height:'32px',objectFit:'cover',borderRadius:'6px',border:'1px solid #e5e7eb',flexShrink:0}} onError={function(e){e.target.style.display='none';}} />
+                                                        <img src={cat.imageUrl} alt={cat.label} style={{width:'40px',height:'40px',objectFit:'cover',borderRadius:'8px',border:'2px solid #9FE1CB',flexShrink:0,boxShadow:'0 0 0 3px #E1F5EE'}} onError={function(e){e.target.style.display='none';}} />
                                                     ) : (
                                                         <div style={{width:'10px',height:'10px',borderRadius:'50%',background:isEmpty?'#d1d5db':'#0F6E56',flexShrink:0}}></div>
                                                     )}
@@ -2481,7 +2478,7 @@
                                             ) : (
                                                 <>
                                                     {!isEmpty && (
-                                                        <span style={{background:'#E6F1FB',color:'#0C447C',padding:'0.2rem 0.7rem',borderRadius:'20px',fontSize:'0.75rem',fontWeight:600}}>In use</span>
+                                                        <span style={{background:'#CCFBF1',color:'#0F6E56',padding:'0.2rem 0.7rem',borderRadius:'20px',fontSize:'0.75rem',fontWeight:600}}>In use</span>
                                                     )}
                                                     <button
                                                         onClick={function(){handleStartEdit(cat);}}
