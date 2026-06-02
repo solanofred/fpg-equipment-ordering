@@ -446,6 +446,11 @@
             padding: 24px;
         }
         .admin-container { max-width: none; margin: 0; padding: 0; }
+        .resizable-table { table-layout: fixed; width: 100%; border-collapse: collapse; }
+        .resizable-table th { position: relative; overflow: hidden; white-space: nowrap; }
+        .resizable-table th .col-resizer { position: absolute; right: 0; top: 0; bottom: 0; width: 5px; cursor: col-resize; user-select: none; z-index: 1; }
+        .resizable-table th .col-resizer:hover, .resizable-table th .col-resizer.dragging { background: rgba(255,255,255,0.4); }
+        .resizable-table td { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .inactivity-bar {
             background: #0369A1;
             color: white;
@@ -1636,10 +1641,10 @@
                             </div>
                         </div>
                         <div style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',overflow:'hidden',maxWidth:'1200px'}}>
-                            <table style={{width:'100%',borderCollapse:'collapse',fontSize:'13px'}}>
+                            <table id="tbl-products" className="resizable-table" style={{width:'100%',borderCollapse:'collapse',fontSize:'13px',tableLayout:'fixed'}}>
                                 <thead>
                                     <tr style={{background:'#D97706'}}>
-                                        <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'36%'}}>Product</th>
+                                        <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'36%',position:'relative'}}>Product</th>
                                         <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'16%'}}>Category</th>
                                         <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'12%'}}>Price</th>
                                         <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'10%'}}>Status</th>
@@ -2511,7 +2516,7 @@
                         )}
 
                         <div style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',overflow:'hidden',maxWidth:'1200px'}}>
-                            <table style={{width:'100%',borderCollapse:'collapse',fontSize:'13px'}}>
+                            <table id="tbl-categories" className="resizable-table" style={{tableLayout:'fixed',width:'100%',borderCollapse:'collapse',fontSize:'13px'}}>
                                 <thead>
                                     <tr style={{background:'#D97706'}}>
                                         <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'42%'}}>Category</th>
@@ -2679,7 +2684,7 @@
                             const items = (s.items||[]).map(it => it.title + ' x' + (it.quantity||1) + ' ($' + (((it.price||0)*(it.quantity||1)).toFixed(2)) + ')').join(', ');
                             snapHtml = '<tr class="snap" id="snap-' + i + '" style="display:none;background:#F0F4F8"><td colspan="7" style="padding:10px 14px 12px 32px"><div style="background:white;border-radius:6px;border:0.5px solid #C7D9F0;padding:10px 14px;font-size:11.5px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#78716C;margin-bottom:8px">Order snapshot</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px"><div><span style="color:#A8A29E">Submitter:</span> ' + (s.submitterName||'') + '</div><div><span style="color:#A8A29E">Recipient:</span> ' + (s.recipientName||'') + '</div><div><span style="color:#A8A29E">Location:</span> <strong style="color:#185FA5">' + (s.locationId||'') + '</strong></div><div><span style="color:#A8A29E">Total:</span> <strong>$' + ((s.total||0).toFixed(2)) + '</strong></div><div style="grid-column:2/-1"><span style="color:#A8A29E">Ship to:</span> ' + (s.shipTo||'') + '</div><div style="grid-column:1/-1"><span style="color:#A8A29E">Items:</span> ' + items + '</div></div></div></td></tr>';
                         }
-                        return '<tr class="data-row' + (expandable?' expandable':'') + '" data-action="' + entry.action + '" data-idx="' + i + '" data-admin="' + (entry.adminEmail||'') + '" data-target="' + (entry.target||'') + '" data-detail="' + ((entry.detail&&entry.detail.reason)||'') + '" data-result="' + (entry.result||'') + '" data-ts="' + (entry.timestamp?entry.timestamp.slice(0,10):'') + '" onclick="' + (expandable?'toggleSnap('+i+')':'') + '" style="background:' + bg + '"><td style="padding:9px 8px;text-align:center;width:3%"><input type="checkbox" class="row-cb" onchange="updateSelCount()" style="cursor:pointer;accent-color:#1E3A5F"></td><td style="padding:9px 8px;text-align:center;color:#6366F1;font-size:12px;width:3%">' + (expandable?'<span id="chev-'+i+'">&#9658;</span>':'') + '</td><td style="padding:9px 10px;font-size:11px;font-weight:700;color:#1E3A5F;width:10%">' + dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) + '<br><span style="font-size:10.5px;color:#57534E">' + dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) + '</span></td><td style="padding:9px 10px;width:15%"><div style="font-weight:500;font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + ((entry.adminEmail||'').split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase()})) + '</div><div style="font-size:10px;color:#A8A29E;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.adminEmail||'') + '</div></td><td style="padding:9px 10px;width:11%"><span style="display:inline-block;padding:2px 8px;border-radius:20px;background:' + m.bg + ';color:' + m.color + ';font-weight:600;font-size:10.5px;border:1px solid ' + (m.border||m.color) + '">' + m.label + '</span></td><td style="padding:9px 10px;font-size:11px;font-family:monospace;color:#4C3BAF;width:13%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.target||'&mdash;') + '</td><td style="padding:9px 10px;font-size:11px;color:#475569;width:42%">' + detail + '</td><td style="padding:9px 10px;width:6%"><span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;background:' + resBg + ';color:' + resColor + '">' + (entry.result||'') + '</span></td></tr>' + snapHtml;
+                        return '<tr class="data-row' + (expandable?' expandable':'') + '" data-action="' + entry.action + '" data-idx="' + i + '" data-admin="' + (entry.adminEmail||'') + '" data-target="' + (entry.target||'') + '" data-detail="' + ((entry.detail&&entry.detail.reason)||'') + '" data-result="' + (entry.result||'') + '" data-ts="' + (entry.timestamp?entry.timestamp.slice(0,10):'') + '" onclick="' + (expandable?'toggleSnap('+i+')':'') + '" style="background:' + bg + '"><td style="padding:9px 8px;text-align:center;width:3%"><input type="checkbox" class="row-cb" onchange="updateSelCount()" style="cursor:pointer;accent-color:#1E3A5F"></td><td style="padding:9px 8px;text-align:center;color:#6366F1;font-size:12px;width:3%">' + (expandable?'<span id="chev-'+i+'">&#9658;</span>':'') + '</td><td style="padding:9px 10px;font-size:11px;font-weight:700;color:#1E3A5F;width:10%">' + dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) + '<br><span style="font-size:10.5px;color:#57534E">' + dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) + '</span></td><td style="padding:9px 10px;width:15%"><div style="font-weight:500;font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + ((entry.adminEmail||'').split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase()})) + '</div><div style="font-size:10px;color:#A8A29E;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.adminEmail||'') + '</div></td><td style="padding:9px 10px;width:11%"><span style="display:inline-block;padding:2px 8px;border-radius:20px;background:' + m.bg + ';color:' + m.color + ';font-weight:600;font-size:10.5px;border:1px solid ' + (m.border||m.color) + '">' + m.label + '</span></td><td style="padding:9px 10px;font-size:11px;font-family:monospace;color:#4C3BAF;width:13%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.target||'&mdash;') + '</td><td style="padding:9px 10px;font-size:11px;color:#0F172A;width:42%">' + detail + '</td><td style="padding:9px 10px;width:6%"><span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;background:' + resBg + ';color:' + resColor + '">' + (entry.result||'') + '</span></td></tr>' + snapHtml;
                     }).join('');
 
                     const sidebarHtml = Object.entries(typeCounts).sort((a,b)=>b[1]-a[1]).map(([action, count]) => {
@@ -2696,7 +2701,7 @@
 body{background:#F1F5F9;height:100vh;display:flex;flex-direction:column;overflow:hidden;font-size:13px}
 /* ── Header ── */
 .gold-bar{height:4px;background:linear-gradient(90deg,#DB802E,#EFA855,#DB802E);flex-shrink:0}
-.hdr{background:linear-gradient(135deg,#0369A1 0%,#023E6A 100%);padding:10px 20px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;gap:12px}
+.hdr{background:linear-gradient(135deg,#15803D 0%,#16A34A 50%,#4ADE80 100%);padding:10px 20px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;gap:12px}
 .hdr-left{display:flex;align-items:center;gap:10px}
 .logo{width:28px;height:28px;background:linear-gradient(135deg,#38BDF8,#0369A1);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;font-family:Georgia,serif;flex-shrink:0}
 .hdr h1{color:white;font-size:14px;font-weight:700}
@@ -2876,14 +2881,14 @@ tr.data-row.expandable{cursor:pointer}
 <div class="table-wrap">
   <table>
     <thead><tr>
-      <th class="center" style="width:36px"><input type="checkbox" id="sel-all" onchange="toggleAll(this)" style="cursor:pointer;accent-color:#4C3BAF"></th>
-      <th class="center" style="width:28px"></th>
-      <th style="width:130px">Date / Time</th>
-      <th style="width:160px">Admin</th>
-      <th style="width:130px">Action</th>
-      <th style="width:140px">Target</th>
+      <th class="center" style="width:34px"><input type="checkbox" id="sel-all" onchange="toggleAll(this)" style="cursor:pointer;accent-color:#16A34A"></th>
+      <th class="center" style="width:24px"></th>
+      <th style="width:10%">Date / Time</th>
+      <th style="width:15%">Admin</th>
+      <th style="width:11%">Action</th>
+      <th style="width:13%">Target</th>
       <th>Detail</th>
-      <th style="width:80px">Result</th>
+      <th style="width:7%;text-align:center">Result</th>
     </tr></thead>
     <tbody id="tbody">${rowsHtml}</tbody>
   </table>
@@ -3472,7 +3477,7 @@ window.onload=function(){
                                     </button>
                                 </div>
                             )}
-                            <table style={{width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed'}}>
+                            <table id="tbl-orders" className="resizable-table" style={{tableLayout:'fixed',width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed'}}>
                                 <thead>
                                     <tr style={{background:'#FAFAF9'}}>
                                         <th style={{padding:'9px 10px',width:'3%',borderBottom:'0.5px solid #E7E5E4'}}>
@@ -3868,7 +3873,7 @@ window.onload=function(){
                                         {filtered.length === 0 ? (
                                             <div style={{textAlign:'center',padding:'3rem',color:'#A8A29E'}}>No entries for this filter.</div>
                                         ) : (
-                                            <table style={{width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed'}}>
+                                            <table id="tbl-versions" className="resizable-table" style={{tableLayout:'fixed',width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed'}}>
                                                 <thead style={{position:'sticky',top:0,zIndex:1}}>
                                                     <tr style={{background:'#D97706'}}>
                                                         <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'3%'}}></th>
@@ -4144,7 +4149,7 @@ window.onload=function(){
                                 const items = (s.items||[]).map(it => it.title + ' x' + (it.quantity||1) + ' ($' + (((it.price||0)*(it.quantity||1)).toFixed(2)) + ')').join(', ');
                                 snapHtml = '<tr class="snap" id="snap-' + i + '" style="display:none;background:#F0F4F8"><td colspan="7" style="padding:10px 14px 12px 32px"><div style="background:white;border-radius:6px;border:0.5px solid #C7D9F0;padding:10px 14px;font-size:11.5px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#78716C;margin-bottom:8px">Order snapshot</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px"><div><span style="color:#A8A29E">Submitter:</span> ' + (s.submitterName||'') + '</div><div><span style="color:#A8A29E">Recipient:</span> ' + (s.recipientName||'') + '</div><div><span style="color:#A8A29E">Location:</span> <strong style="color:#4C3BAF">' + (s.locationId||'') + '</strong></div><div><span style="color:#A8A29E">Total:</span> <strong>$' + ((s.total||0).toFixed(2)) + '</strong></div></div></div></td></tr>';
                             }
-                            return '<tr class="data-row' + (expandable?' expandable':'') + '" data-action="' + entry.action + '" data-idx="' + i + '" data-admin="' + (entry.adminEmail||'') + '" data-target="' + (entry.target||'') + '" data-detail="' + ((entry.detail&&entry.detail.reason)||'') + '" data-result="' + (entry.result||'') + '" data-ts="' + (entry.timestamp?entry.timestamp.slice(0,10):'') + '" onclick="' + (expandable?'toggleSnap('+i+')':'') + '" style="background:' + bg + '"><td style="padding:9px 8px;text-align:center;width:3%"><input type="checkbox" class="row-cb" onchange="updateSelCount()" style="cursor:pointer;accent-color:#1E3A5F"></td><td style="padding:9px 8px;text-align:center;color:#6366F1;font-size:12px;width:3%">' + (expandable?'<span id="chev-'+i+'">&#9658;</span>':'') + '</td><td style="padding:9px 10px;font-size:11px;font-weight:700;color:#1E3A5F;width:10%">' + dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) + '<br><span style="font-size:10.5px;color:#57534E">' + dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) + '</span></td><td style="padding:9px 10px;width:15%"><div style="font-weight:500;font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + ((entry.adminEmail||'').split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase()})) + '</div><div style="font-size:10px;color:#A8A29E;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.adminEmail||'') + '</div></td><td style="padding:9px 10px;width:11%"><span style="display:inline-block;padding:2px 8px;border-radius:20px;background:' + m.bg + ';color:' + m.color + ';font-weight:600;font-size:10.5px;border:1px solid ' + (m.border||m.color) + '">' + m.label + '</span></td><td style="padding:9px 10px;font-size:11px;font-family:monospace;color:#4C3BAF;width:13%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.target||'&mdash;') + '</td><td style="padding:9px 10px;font-size:11px;color:#475569;width:42%">' + detail + '</td><td style="padding:9px 10px;width:6%"><span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;background:' + resBg + ';color:' + resColor + '">' + (entry.result||'') + '</span></td></tr>' + snapHtml;
+                            return '<tr class="data-row' + (expandable?' expandable':'') + '" data-action="' + entry.action + '" data-idx="' + i + '" data-admin="' + (entry.adminEmail||'') + '" data-target="' + (entry.target||'') + '" data-detail="' + ((entry.detail&&entry.detail.reason)||'') + '" data-result="' + (entry.result||'') + '" data-ts="' + (entry.timestamp?entry.timestamp.slice(0,10):'') + '" onclick="' + (expandable?'toggleSnap('+i+')':'') + '" style="background:' + bg + '"><td style="padding:9px 8px;text-align:center;width:3%"><input type="checkbox" class="row-cb" onchange="updateSelCount()" style="cursor:pointer;accent-color:#1E3A5F"></td><td style="padding:9px 8px;text-align:center;color:#6366F1;font-size:12px;width:3%">' + (expandable?'<span id="chev-'+i+'">&#9658;</span>':'') + '</td><td style="padding:9px 10px;font-size:11px;font-weight:700;color:#1E3A5F;width:10%">' + dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) + '<br><span style="font-size:10.5px;color:#57534E">' + dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) + '</span></td><td style="padding:9px 10px;width:15%"><div style="font-weight:500;font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + ((entry.adminEmail||'').split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase()})) + '</div><div style="font-size:10px;color:#A8A29E;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.adminEmail||'') + '</div></td><td style="padding:9px 10px;width:11%"><span style="display:inline-block;padding:2px 8px;border-radius:20px;background:' + m.bg + ';color:' + m.color + ';font-weight:600;font-size:10.5px;border:1px solid ' + (m.border||m.color) + '">' + m.label + '</span></td><td style="padding:9px 10px;font-size:11px;font-family:monospace;color:#4C3BAF;width:13%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.target||'&mdash;') + '</td><td style="padding:9px 10px;font-size:11px;color:#0F172A;width:42%">' + detail + '</td><td style="padding:9px 10px;width:6%"><span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;background:' + resBg + ';color:' + resColor + '">' + (entry.result||'') + '</span></td></tr>' + snapHtml;
                         }).join('');
 
                         const sidebarHtml = Object.entries(typeCounts).sort((a,b)=>b[1]-a[1]).map(([action, count]) => {
@@ -4161,7 +4166,7 @@ window.onload=function(){
 body{background:#F1F5F9;height:100vh;display:flex;flex-direction:column;overflow:hidden;font-size:13px}
 /* ── Header ── */
 .gold-bar{height:4px;background:linear-gradient(90deg,#DB802E,#EFA855,#DB802E);flex-shrink:0}
-.hdr{background:linear-gradient(135deg,#0369A1 0%,#023E6A 100%);padding:10px 20px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;gap:12px}
+.hdr{background:linear-gradient(135deg,#15803D 0%,#16A34A 50%,#4ADE80 100%);padding:10px 20px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;gap:12px}
 .hdr-left{display:flex;align-items:center;gap:10px}
 .logo{width:28px;height:28px;background:linear-gradient(135deg,#38BDF8,#0369A1);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;font-family:Georgia,serif;flex-shrink:0}
 .hdr h1{color:white;font-size:14px;font-weight:700}
@@ -4341,14 +4346,14 @@ tr.data-row.expandable{cursor:pointer}
 <div class="table-wrap">
   <table>
     <thead><tr>
-      <th class="center" style="width:36px"><input type="checkbox" id="sel-all" onchange="toggleAll(this)" style="cursor:pointer;accent-color:#4C3BAF"></th>
-      <th class="center" style="width:28px"></th>
-      <th style="width:130px">Date / Time</th>
-      <th style="width:160px">Admin</th>
-      <th style="width:130px">Action</th>
-      <th style="width:140px">Target</th>
+      <th class="center" style="width:34px"><input type="checkbox" id="sel-all" onchange="toggleAll(this)" style="cursor:pointer;accent-color:#16A34A"></th>
+      <th class="center" style="width:24px"></th>
+      <th style="width:10%">Date / Time</th>
+      <th style="width:15%">Admin</th>
+      <th style="width:11%">Action</th>
+      <th style="width:13%">Target</th>
       <th>Detail</th>
-      <th style="width:80px">Result</th>
+      <th style="width:7%;text-align:center">Result</th>
     </tr></thead>
     <tbody id="tbody">${rowsHtml}</tbody>
   </table>
@@ -4713,6 +4718,41 @@ window.onload=function(){
                     </div>
                 </div>
             );
+        }
+
+
+        /* ── Column resizer ── */
+        function initResizableCols(tableId) {
+            var table = document.getElementById(tableId);
+            if (!table) return;
+            var ths = table.querySelectorAll('thead th');
+            ths.forEach(function(th) {
+                if (th.querySelector('.col-resizer')) return;
+                var rz = document.createElement('div');
+                rz.className = 'col-resizer';
+                th.appendChild(rz);
+                var x0, w0;
+                rz.addEventListener('mousedown', function(e) {
+                    x0 = e.pageX; w0 = th.offsetWidth;
+                    rz.classList.add('dragging');
+                    document.addEventListener('mousemove', move);
+                    document.addEventListener('mouseup', up);
+                    e.preventDefault();
+                });
+                function move(e) { th.style.width = Math.max(40, w0 + e.pageX - x0) + 'px'; }
+                function up() { rz.classList.remove('dragging'); document.removeEventListener('mousemove', move); document.removeEventListener('mouseup', up); }
+            });
+        }
+        function tryInitResizers() {
+            ['tbl-products','tbl-categories','tbl-orders','tbl-admins','tbl-versions'].forEach(function(id) {
+                initResizableCols(id);
+            });
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() { setTimeout(tryInitResizers, 800);
+        setInterval(tryInitResizers, 2000); });
+        } else {
+            setTimeout(tryInitResizers, 800);
         }
 
         ReactDOM.createRoot(document.getElementById('root')).render(<App />);
