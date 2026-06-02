@@ -1529,7 +1529,7 @@
                             <button className={`sidebar-item ${activeTab==='access'?'active':''}`} onClick={()=>setActiveTab('access')}>
                                 <span className="sidebar-item-icon">👥</span> Admins
                             </button>
-                            <button className={`sidebar-item ${activeTab==='auditlog'?'active':''}`} onClick={()=>{ loadAuditLog(session, AZURE_FUNCTION_URL); }}>
+                            <button className={`sidebar-item ${activeTab==='auditlog'?'active':''}`} onClick={()=>setActiveTab('auditlog')}>
                                 <span className="sidebar-item-icon">📜</span> Audit Log
                             </button>
                             {isSuperAdmin && (
@@ -1576,7 +1576,7 @@
                         {activeTab === 'access' && <AccessManagement session={session} azureUrl={AZURE_FUNCTION_URL} adminPortalUrl={ADMIN_PORTAL_URL} />}
                         {activeTab === 'categories' && <CategoryManagement session={session} azureUrl={AZURE_FUNCTION_URL} categories={categories} products={products} onCategoryAdded={handleCategoryAdded} onCategoryUpdated={handleCategoryUpdated} onCategoryRemoved={handleCategoryRemoved} />}
                         {activeTab === 'orders' && <OrdersDashboard session={session} azureUrl={AZURE_FUNCTION_URL} />}
-                        {activeTab === 'auditlog' && <div style={{color:'#64748B',padding:'2rem',textAlign:'center'}}>Opening audit log in new tab...</div>}
+                        {activeTab === 'auditlog' && <AuditLogOpener session={session} azureUrl={AZURE_FUNCTION_URL} />}
                         {activeTab === 'versions' && isSuperAdmin && <VersionControl session={session} azureUrl={AZURE_FUNCTION_URL} />}
 
                         {activeTab === 'products' && <div>
@@ -1603,55 +1603,67 @@
                             </div>
                         )}
                         
-                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'16px'}}>
+                        <div className="admin-toolbar">
                             <div>
-                                <div style={{fontSize:'16px',fontWeight:700,color:'#0F172A'}}>Products <span style={{fontWeight:400,fontSize:'13px',color:'#64748B'}}>({products.length} items)</span></div>
-                                <div style={{fontSize:'12px',color:'#94A3B8',marginTop:'2px'}}>Manage equipment packages</div>
+                                <h2 style={{ fontSize: '1.5rem', fontWeight: '300', marginBottom: '0.25rem' }}>
+                                    Products ({products.length})
+                                </h2>
+                                <p style={{ color: 'var(--fpg-gray)', fontSize: '0.9rem' }}>
+                                    Manage equipment packages
+                                </p>
                             </div>
-                            <div style={{display:'flex',gap:'8px'}}>
-                                <button
-                                    style={{padding:'8px 16px',background:'white',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12px',fontWeight:600,color:'#475569',cursor:'pointer'}}
-                                    onClick={() => setShowReviewModal(true)}
-                                >Review drafts</button>
-                                <button
-                                    style={{padding:'8px 18px',background:'#4C3BAF',border:'none',borderRadius:'8px',fontSize:'12px',fontWeight:700,color:'white',cursor:'pointer'}}
-                                    onClick={() => {
-                                        setEditingProduct({ title:'',category:'desktop',items:[],price:0,recommended:false,available:true,imageUrl:'' });
-                                        setShowModal(true);
-                                    }}
-                                >+ Add Product</button>
-                            </div>
+                            <button
+                                className="btn-add"
+                                onClick={() => {
+                                    setEditingProduct({
+                                        title: '',
+                                        category: 'desktop',
+                                        items: [],
+                                        price: 0,
+                                        recommended: false,
+                                        available: true,
+                                        imageUrl: ''
+                                    });
+                                    setShowModal(true);
+                                }}
+                            >
+                                + Add Product
+                            </button>
                         </div>
                         
-                        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(180px,1fr))',gap:'12px',maxWidth:'1100px'}}>
+                        <div style={{display:'grid',gridTemplateColumns:'repeat(4,minmax(0,1fr))',gap:'14px'}}>
                             {[...products].sort((a, b) => a.title.localeCompare(b.title)).map(product => {
                                 const isDraft = DraftService.isDraftProduct(product.id);
                                 return (
-                                    <div key={product.id} style={{background:'white',borderRadius:'12px',border:isDraft?'2px solid #F59E0B':'0.5px solid #E2E8F0',overflow:'hidden',display:'flex',flexDirection:'column'}}>
-                                        <div style={{height:'120px',background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',overflow:'hidden'}}>
+                                    <div key={product.id} style={{background:'white',borderRadius:'12px',border: isDraft ? '2px solid #F59E0B' : '0.5px solid #E2E8F0',overflow:'hidden',transition:'box-shadow 0.15s'}}>
+                                        <div style={{width:'100%',height:'72px',overflow:'hidden',background:'#F5F3FF',borderBottom:'1.5px solid #EDE9FE',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',flexShrink:0}}>
                                             {product.imageUrl
-                                                ? <img src={product.imageUrl} alt={product.title} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.innerHTML='<span style="font-size:32px">📦</span>';}} />
-                                                : <span style={{fontSize:'32px'}}>📦</span>}
-                                            <div style={{position:'absolute',top:'7px',right:'7px',display:'flex',flexDirection:'column',gap:'3px',alignItems:'flex-end'}}>
-                                                {isDraft && <span style={{background:'#F59E0B',color:'white',padding:'2px 7px',borderRadius:'6px',fontSize:'9px',fontWeight:700}}>EDITED</span>}
-                                                <button className={`status-badge ${product.available?'status-active':'status-inactive'}`} onClick={()=>handleToggleStatus(product.id)} style={{cursor:'pointer',border:'none',fontSize:'9px',padding:'2px 7px',borderRadius:'20px'}}>{product.available?'Published':'Draft'}</button>
-                                            </div>
+                                                ? <img src={product.imageUrl} alt={product.title} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.innerHTML='<span style="font-size:28px">📦</span>';}} />
+                                                : <span style={{fontSize:'28px'}}>📦</span>}
+                                            {isDraft && <span style={{position:'absolute',top:'5px',right:'5px',background:'#F59E0B',color:'white',padding:'1px 6px',borderRadius:'6px',fontSize:'9px',fontWeight:700}}>EDITED</span>}
                                         </div>
-                                        <div style={{padding:'10px 12px',flex:1,display:'flex',flexDirection:'column'}}>
-                                            <div style={{fontWeight:700,fontSize:'12.5px',color:'#0F172A',marginBottom:'3px',overflow:'hidden',display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical',lineHeight:'1.4',minHeight:'35px'}}>{product.title}</div>
-                                            <div style={{fontSize:'14px',fontWeight:700,color:'#4C3BAF',fontFamily:'Georgia,serif',marginBottom:'2px'}}>${product.price.toLocaleString()}</div>
-                                            <div style={{fontSize:'10.5px',color:'#94A3B8',marginBottom:'10px'}}>{(categories||[]).find(c=>c.slug===product.category)?.label||product.category}{product.recommended?' · ⭐':''}</div>
-                                            <div style={{display:'flex',gap:'6px',marginTop:'auto'}}>
-                                                <button onClick={()=>{setEditingProduct(product);setShowModal(true);}} style={{flex:1,padding:'6px',border:'1.5px solid #E2E8F0',borderRadius:'7px',fontSize:'11px',fontWeight:600,background:'white',color:'#1E3A5F',cursor:'pointer'}}>Edit</button>
-                                                <button onClick={()=>handleDelete(product.id)} style={{flex:1,padding:'6px',border:'1.5px solid #FCA5A5',borderRadius:'7px',fontSize:'11px',fontWeight:600,background:'white',color:'#DC2626',cursor:'pointer'}}>Delete</button>
+                                        <div style={{padding:'10px 12px'}}>
+                                            <div style={{fontWeight:700,fontSize:'12px',color:'#0F172A',marginBottom:'2px',overflow:'hidden',display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical',lineHeight:'1.35',minHeight:'32px'}}>{product.title}</div>
+                                            <div style={{fontSize:'15px',fontWeight:700,color:'#4C3BAF',fontFamily:'Georgia,serif',marginBottom:'2px'}}>${product.price.toLocaleString()}</div>
+                                            <div style={{fontSize:'10px',color:'#64748B',marginBottom:'6px'}}>{product.category}{product.recommended ? ' · ⭐' : ''}</div>
+                                            <div style={{marginBottom:'8px'}}>
+                                                <button
+                                                    className={`status-badge ${product.available ? 'status-active' : 'status-inactive'}`}
+                                                    onClick={() => handleToggleStatus(product.id)}
+                                                    style={{cursor:'pointer',border:'none',fontSize:'10px',padding:'2px 8px',borderRadius:'20px'}}
+                                                >{product.available ? 'Published' : 'Draft'}</button>
+                                            </div>
+                                            <div style={{display:'flex',gap:'5px'}}>
+                                                <button className="btn-action btn-edit" onClick={() => { setEditingProduct(product); setShowModal(true); }} style={{flex:1,padding:'5px',fontSize:'11px',textAlign:'center'}}>Edit</button>
+                                                <button className="btn-action btn-delete" onClick={() => handleDelete(product.id)} style={{flex:1,padding:'5px',fontSize:'11px',textAlign:'center'}}>Delete</button>
                                             </div>
                                         </div>
                                     </div>
                                 );
                             })}
-                            <div onClick={()=>{setEditingProduct({title:'',category:'desktop',items:[],price:0,recommended:false,available:true,imageUrl:''});setShowModal(true);}} style={{background:'white',borderRadius:'12px',border:'2px dashed #C4B5FD',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',minHeight:'220px',cursor:'pointer',gap:'6px'}}>
-                                <div style={{width:'36px',height:'36px',background:'#EDE9FE',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'20px',color:'#4C3BAF'}}>+</div>
-                                <div style={{fontSize:'12px',fontWeight:600,color:'#4C3BAF'}}>Add Product</div>
+                            <div onClick={() => { setEditingProduct({ title:'',category:'desktop',items:[],price:0,recommended:false,available:true,imageUrl:'' }); setShowModal(true); }} style={{background:'white',borderRadius:'12px',border:'2px dashed #C4B5FD',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',minHeight:'195px',cursor:'pointer'}}>
+                                <div style={{fontSize:'28px',color:'6366F1',marginBottom:'6px'}}>+</div>
+                                <div style={{fontSize:'11px',fontWeight:600,color:'#4C3BAF'}}>Add Product</div>
                             </div>
                         </div>
                         </div>}
@@ -1765,7 +1777,6 @@
                                                 {!draft.available && <div style={{ color: 'var(--danger)' }}>Inactive</div>}
                                             </div>
                                         )}
-                                        </div>
                                     </div>
                                 );
                             })}
@@ -2470,38 +2481,38 @@
                             </div>
                         </div>
                     )}
-                    <div>
-                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'16px'}}>
-                            <div>
-                                <div style={{fontSize:'16px',fontWeight:700,color:'#0F172A'}}>Categories <span style={{fontWeight:400,fontSize:'13px',color:'#64748B'}}>({(categories||[]).length} total · {(categories||[]).filter(function(c){return getProductCount(c.slug)===0;}).length} empty)</span></div>
-                                <div style={{fontSize:'12px',color:'#94A3B8',marginTop:'2px'}}>Organize equipment into categories</div>
+                    <div style={{background:'white',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',overflow:'hidden'}}>
+                        <div style={{padding:'1rem 1.5rem',borderBottom:'1px solid #EDE9FE',background:'#F5F3FF',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                            <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
+                                <div style={{width:'30px',height:'30px',background:'linear-gradient(135deg,#4C3BAF,#6366F1)',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'14px'}}>🏷️</div>
+                                <div>
+                                    <h3 style={{fontSize:'1rem',fontWeight:700,margin:0,color:'#0F172A'}}>Categories</h3>
+                                    <p style={{fontSize:'0.8rem',color:'#64748B',margin:0}}>{(categories||[]).length} total · {(categories||[]).filter(function(c){return getProductCount(c.slug)===0;}).length} empty</p>
+                                </div>
                             </div>
-                            <button onClick={function(){setShowAddModal(true);setStatus(null);}} style={{padding:'8px 18px',background:'#4C3BAF',border:'none',borderRadius:'8px',fontSize:'12px',fontWeight:700,color:'white',cursor:'pointer'}}>
+                            <button onClick={function(){setShowAddModal(true);setStatus(null);}} style={{background:'#4C3BAF',color:'white',border:'none',padding:'7px 14px',borderRadius:'8px',fontWeight:700,cursor:'pointer',fontSize:'0.85rem',display:'flex',alignItems:'center',gap:'6px',whiteSpace:'nowrap'}}>
                                 + New category
                             </button>
                         </div>
+
                         {status && !showAddModal && (
-                            <div style={{padding:'10px 14px',borderRadius:'8px',fontSize:'13px',marginBottom:'12px',background:status.type==='success'?'#DCFCE7':'#FEE2E2',color:status.type==='success'?'#166534':'#991B1B',border:status.type==='success'?'1px solid #86EFAC':'1px solid #FECACA'}}>
+                            <div style={{margin:'0.75rem 1.5rem',padding:'0.75rem 1rem',borderRadius:'8px',fontSize:'0.875rem',background:status.type==='success'?'#D1FAE5':'#FEE2E2',color:status.type==='success'?'#065F46':'#991B1B'}}>
                                 {status.type === 'success' ? '✅' : '❌'} {status.text}
                             </div>
                         )}
 
-                        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(160px,1fr))',gap:'12px',maxWidth:'1100px'}}>
+                        <div style={{display:'grid',gridTemplateColumns:'repeat(4,minmax(0,1fr))',gap:'14px',padding:'16px'}}>
                             {(categories || []).slice().sort((a,b) => a.label.localeCompare(b.label)).map(function(cat, i) {
                                 const count = getProductCount(cat.slug);
                                 const isEmpty = count === 0;
                                 const isEditing = editingSlug === cat.slug;
                                 return (
-                                    <div key={i} style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',overflow:'hidden',display:'flex',flexDirection:'column'}}>
-                                        <div style={{height:'100px',background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',overflow:'hidden'}}>
-                                            {cat.imageUrl
-                                                ? <img src={cat.imageUrl} alt={cat.label} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.style.background='#EDE9FE';}} />
-                                                : <span style={{fontSize:'32px'}}>🏷️</span>}
-                                            {!isEmpty && <span style={{position:'absolute',top:'6px',right:'6px',background:'#4C3BAF',color:'white',padding:'2px 7px',borderRadius:'10px',fontSize:'9px',fontWeight:700}}>In use</span>}
-                                        </div>
-                                        <div style={{padding:'10px 12px',flex:1,display:'flex',flexDirection:'column'}}>
+                                    <div key={i} style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',padding:'16px',textAlign:'center',position:'relative',transition:'box-shadow 0.15s',boxSizing:'border-box'}}>
+                                        {!isEmpty && (
+                                            <span style={{position:'absolute',top:'8px',right:'8px',background:'#EDE9FE',color:'#4C3BAF',padding:'1px 7px',borderRadius:'10px',fontSize:'9px',fontWeight:700}}>In use</span>
+                                        )}
                                         {isEditing ? (
-                                            <div style={{display:'flex',flexDirection:'column',gap:'6px'}}>
+                                            <div style={{display:'flex',flexDirection:'column',gap:'6px',textAlign:'left'}}>
                                                 <input
                                                     type="text"
                                                     value={editLabel}
@@ -2528,21 +2539,25 @@
                                             </div>
                                         ) : (
                                             <>
-                                                <div style={{fontWeight:700,fontSize:'13px',color:'#0F172A',marginBottom:'2px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{cat.label}</div>
-                                                <div style={{fontSize:'11px',color:'#94A3B8',marginBottom:'10px'}}>{count} product{count!==1?'s':''}</div>
-                                                <div style={{display:'flex',gap:'5px',marginTop:'auto'}}>
-                                                    <button onClick={function(){handleStartEdit(cat);}} disabled={saving} style={{flex:1,padding:'6px',border:'1.5px solid #E2E8F0',borderRadius:'7px',fontSize:'11px',fontWeight:600,background:'white',color:'#1E3A5F',cursor:'pointer'}}>Edit</button>
-                                                    <button onClick={function(){handleRemove(cat.slug,cat.label);}} disabled={saving} style={{flex:1,padding:'6px',border:'1.5px solid #FCA5A5',borderRadius:'7px',fontSize:'11px',fontWeight:600,background:'white',color:'#DC2626',cursor:'pointer'}}>Remove</button>
+                                                <div style={{width:'80px',height:'80px',borderRadius:'12px',overflow:'hidden',margin:'0 auto 12px',border:'2px solid #C4B5FD',boxShadow:'0 0 0 3px #EDE9FE',background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                                                    {cat.imageUrl
+                                                        ? <img src={cat.imageUrl} alt={cat.label} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.style.background='#EDE9FE';e.target.parentNode.innerHTML='🏷️';}} />
+                                                        : <span style={{fontSize:'24px'}}>🏷️</span>}
+                                                </div>
+                                                <div style={{fontWeight:700,fontSize:'13px',color:'#0F172A',marginBottom:'3px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{cat.label}</div>
+                                                <div style={{fontSize:'11px',color:'#64748B',marginBottom:'10px'}}>{count} product{count !== 1 ? 's' : ''}</div>
+                                                <div style={{display:'flex',gap:'5px',justifyContent:'center'}}>
+                                                    <button onClick={function(){handleStartEdit(cat);}} disabled={saving} style={{flex:1,padding:'5px 8px',border:'1.5px solid #4C3BAF',borderRadius:'7px',fontSize:'11px',background:'white',color:'#4C3BAF',cursor:'pointer',fontWeight:600}}>Edit</button>
+                                                    <button onClick={function(){handleRemove(cat.slug, cat.label);}} disabled={saving} style={{flex:1,padding:'5px 8px',border:'1.5px solid #FCA5A5',borderRadius:'7px',fontSize:'11px',background:'white',color:'#DC2626',cursor:'pointer',fontWeight:600}}>Remove</button>
                                                 </div>
                                             </>
                                         )}
-                                        </div>
                                     </div>
                                 );
                             })}
-                            <div onClick={function(){setShowAddModal(true);setStatus(null);}} style={{background:'white',borderRadius:'12px',border:'2px dashed #C4B5FD',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',minHeight:'185px',cursor:'pointer',gap:'8px'}}>
-                                <div style={{width:'36px',height:'36px',background:'#EDE9FE',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'20px',color:'#4C3BAF'}}>+</div>
-                                <div style={{fontSize:'12px',fontWeight:600,color:'#4C3BAF'}}>Add Category</div>
+                            <div onClick={function(){setShowAddModal(true);setStatus(null);}} style={{background:'white',borderRadius:'12px',border:'2px dashed #C4B5FD',padding:'14px',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',minHeight:'148px',cursor:'pointer'}}>
+                                <div style={{fontSize:'28px',color:'#6366F1',marginBottom:'6px'}}>+</div>
+                                <div style={{fontSize:'11px',fontWeight:600,color:'#4C3BAF'}}>Add Category</div>
                             </div>
                         </div>
                     </div>
@@ -3591,6 +3606,214 @@ document.getElementById("sc-status").textContent=stat;
                         </div>
                         );
                     })()}
+                </div>
+            );
+        }
+
+
+        // ─── AUDIT LOG OPENER ────────────────────────────────────────────
+        // Self-contained component that fires the audit log fetch on mount
+        // and opens the result in a new tab, then switches back to orders.
+        function AuditLogOpener({ session, azureUrl }) {
+            const [status, setStatus] = React.useState('loading');
+
+            React.useEffect(() => {
+                (async () => {
+                    try {
+                        const year = new Date().getFullYear();
+                        const availableYears = [year, year - 1, year - 2].filter(y => y >= 2024);
+                        const yearsToLoad = [year];
+
+                        let allEntries = [];
+                        for (const y of yearsToLoad) {
+                            const res = await fetch(azureUrl, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
+                                body: JSON.stringify({ action: 'get-audit-log', year: y })
+                            });
+                            const data = await res.json();
+                            if (Array.isArray(data.log)) allEntries = allEntries.concat(data.log);
+                        }
+                        allEntries.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+                        const actionMetaMap = {
+                            'auth.login':          { label: 'Login',           bg:'#EEF2FF', color:'#4C3BAF', border:'#C7D2FE', dot:'#818CF8' },
+                            'auth.logout':         { label: 'Logout',          bg:'#F1F5F9', color:'#475569', border:'#CBD5E1', dot:'#94A3B8' },
+                            'auth.auto_logoff':    { label: 'Auto-logout',     bg:'#F1F5F9', color:'#475569', border:'#CBD5E1', dot:'#94A3B8' },
+                            'order.soft_delete':   { label: 'Order deleted',   bg:'#FEE2E2', color:'#DC2626', border:'#FECACA', dot:'#F87171' },
+                            'order.permanent_delete': { label:'Perm. deleted', bg:'#FCA5A5', color:'#7F1D1D', border:'#F87171', dot:'#EF4444' },
+                            'order.permanent_delete_attempt': { label:'Perm. denied', bg:'#FCA5A5', color:'#7F1D1D', border:'#F87171', dot:'#EF4444' },
+                            'order.restore':       { label: 'Restored',        bg:'#DCFCE7', color:'#166534', border:'#86EFAC', dot:'#4ADE80' },
+                            'order.status_change': { label: 'Status change',   bg:'#FEF9C3', color:'#854D0E', border:'#FDE68A', dot:'#FCD34D' },
+                            'access.admin_added':  { label: 'Admin added',     bg:'#DCFCE7', color:'#166534', border:'#86EFAC', dot:'#4ADE80' },
+                            'access.admin_removed':{ label: 'Admin removed',   bg:'#FEE2E2', color:'#DC2626', border:'#FECACA', dot:'#F87171' },
+                            'access.role_changed': { label: 'Role changed',    bg:'#FEF9C3', color:'#854D0E', border:'#FDE68A', dot:'#FCD34D' },
+                            'category.added':      { label: 'Category added',  bg:'#EEF2FF', color:'#4C3BAF', border:'#C7D2FE', dot:'#818CF8' },
+                            'category.updated':    { label: 'Category updated',bg:'#EEF2FF', color:'#4C3BAF', border:'#C7D2FE', dot:'#818CF8' },
+                            'category.removed':    { label: 'Category removed',bg:'#FEE2E2', color:'#DC2626', border:'#FECACA', dot:'#F87171' },
+                            'portal.products_published': { label: 'Published', bg:'#DCFCE7', color:'#166534', border:'#86EFAC', dot:'#4ADE80' },
+                        };
+                        const getMetaFn = (action) => actionMetaMap[action] || { label: action, bg:'#F1F5F9', color:'#475569', border:'#CBD5E1', dot:'#94A3B8' };
+
+                        const typeCounts = {};
+                        allEntries.forEach(e => { typeCounts[e.action] = (typeCounts[e.action]||0) + 1; });
+
+                        const rowsHtml = allEntries.map((entry, i) => {
+                            const m = getMetaFn(entry.action);
+                            const dt = new Date(entry.timestamp);
+                            const s = entry.detail && entry.detail.orderSnapshot;
+                            const expandable = entry.action === 'order.soft_delete' || entry.action === 'order.permanent_delete';
+                            const bg = i % 2 === 0 ? '#ffffff' : '#F5F3FF';
+                            let detail = '';
+                            if (entry.detail && entry.detail.reason) detail += '<strong>Reason:</strong> ' + entry.detail.reason + ' &middot; ';
+                            if (entry.detail && entry.detail.oldStatus) detail += entry.detail.oldStatus + ' &rarr; <strong>' + entry.detail.newStatus + '</strong> &middot; ';
+                            if (entry.detail && entry.detail.newEmail) detail += '<strong>Added:</strong> ' + entry.detail.newEmail + ' (' + entry.detail.role + ') &middot; ';
+                            if (entry.detail && entry.detail.removedEmail) detail += '<strong>Removed:</strong> ' + entry.detail.removedEmail + ' &middot; ';
+                            if (s) detail += '<strong>For:</strong> ' + (s.recipientName||'') + ' &middot; <strong style="color:#4C3BAF">' + (s.locationId||'') + '</strong> &middot; $' + ((s.total||0).toFixed(2));
+                            if (entry.detail && entry.detail.browser) detail += '<span style="color:#A8A29E">' + (entry.detail.browser||'').substring(0,70) + '</span>';
+                            if (entry.detail && entry.detail.productsCount) detail += entry.detail.productsCount + ' products published';
+                            const resBg = entry.result==='success' ? '#DCFCE7' : entry.result==='denied' ? '#FEE2E2' : '#F5F5F4';
+                            const resColor = entry.result==='success' ? '#166534' : entry.result==='denied' ? '#991B1B' : '#78716C';
+                            let snapHtml = '';
+                            if (expandable && s) {
+                                const items = (s.items||[]).map(it => it.title + ' x' + (it.quantity||1) + ' ($' + (((it.price||0)*(it.quantity||1)).toFixed(2)) + ')').join(', ');
+                                snapHtml = '<tr class="snap" id="snap-' + i + '" style="display:none;background:#F0F4F8"><td colspan="7" style="padding:10px 14px 12px 32px"><div style="background:white;border-radius:6px;border:0.5px solid #C7D9F0;padding:10px 14px;font-size:11.5px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#78716C;margin-bottom:8px">Order snapshot</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px"><div><span style="color:#A8A29E">Submitter:</span> ' + (s.submitterName||'') + '</div><div><span style="color:#A8A29E">Recipient:</span> ' + (s.recipientName||'') + '</div><div><span style="color:#A8A29E">Location:</span> <strong style="color:#4C3BAF">' + (s.locationId||'') + '</strong></div><div><span style="color:#A8A29E">Total:</span> <strong>$' + ((s.total||0).toFixed(2)) + '</strong></div></div></div></td></tr>';
+                            }
+                            return '<tr data-action="' + entry.action + '" style="background:' + bg + ';cursor:' + (expandable?'pointer':'default') + '"' + (expandable?' onclick="toggleSnap(' + i + ')"':'') + '><td style="padding:9px 8px;text-align:center;width:3%"><input type="checkbox" class="row-cb" onchange="updateSelCount()" style="cursor:pointer;accent-color:#1E3A5F"></td><td style="padding:9px 8px;text-align:center;color:#6366F1;font-size:12px;width:3%">' + (expandable?'<span id="chev-'+i+'">&#9658;</span>':'') + '</td><td style="padding:9px 10px;font-size:11px;font-weight:700;color:#1E3A5F;width:10%">' + dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) + '<br><span style="font-size:10.5px;color:#57534E">' + dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) + '</span></td><td style="padding:9px 10px;width:15%"><div style="font-weight:500;font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + ((entry.adminEmail||'').split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase()})) + '</div><div style="font-size:10px;color:#A8A29E;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.adminEmail||'') + '</div></td><td style="padding:9px 10px;width:11%"><span style="display:inline-block;padding:2px 8px;border-radius:20px;background:' + m.bg + ';color:' + m.color + ';font-weight:600;font-size:10.5px;border:1px solid ' + (m.border||m.color) + '">' + m.label + '</span></td><td style="padding:9px 10px;font-size:11px;font-family:monospace;color:#4C3BAF;width:13%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.target||'&mdash;') + '</td><td style="padding:9px 10px;font-size:11px;color:#475569;width:42%">' + detail + '</td><td style="padding:9px 10px;width:6%"><span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;background:' + resBg + ';color:' + resColor + '">' + (entry.result||'') + '</span></td></tr>' + snapHtml;
+                        }).join('');
+
+                        const sidebarHtml = Object.entries(typeCounts).sort((a,b)=>b[1]-a[1]).map(([action, count]) => {
+                            const m = getMetaFn(action);
+                            const dot = m.dot || m.color;
+                            return '<div class="filter-row" onclick="filterType(\'' + action + '\')" data-action="' + action + '"><div class="fr-left"><div class="fr-dot" style="background:' + dot + '"></div><span class="fr-name">' + m.label + '</span></div><span class="fr-count">' + count + '</span></div>';
+                        }).join('');
+
+                        const allYears = availableYears;
+                        const yearPills = allYears.map(y => '<button class="ypill' + (yearsToLoad.includes(y)?' on':'') + '" onclick="toggleYear(' + y + ',this)">' + y + '</button>').join('');
+
+                        const html = const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Audit Log — FPG Equipment Portal</title><style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}
+body{background:#F3F4F6;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.gold-bar{height:4px;background:linear-gradient(90deg,#DB802E,#EFA855,#DB802E)}
+.titlebar{background:linear-gradient(135deg,#1E3A5F 0%,#4C3BAF 100%);padding:12px 18px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.titlebar h1{color:white;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
+.titlebar-logomark{width:28px;height:28px;background:linear-gradient(135deg,#4C3BAF,#6366F1);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;font-family:Georgia,serif}
+.titlebar-right{display:flex;gap:7px;align-items:center}
+.ypill{padding:4px 12px;border-radius:20px;font-size:11.5px;font-weight:700;cursor:pointer;border:1.5px solid rgba(255,255,255,0.3);background:transparent;color:rgba(255,255,255,0.65);transition:all 0.15s}
+.ypill.on{background:#4C3BAF;color:white;border-color:#4C3BAF}
+.exp-btn{padding:6px 14px;background:rgba(219,128,46,0.2);color:#EFA855;border:1.5px solid rgba(219,128,46,0.5);border-radius:8px;font-size:11.5px;cursor:pointer;font-weight:700;display:flex;align-items:center;gap:5px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:2px solid #4C3BAF;flex-shrink:0}
+.stat-box{padding:11px 18px;background:#1E3A5F;border-right:1px solid rgba(99,102,241,0.2);text-align:center}
+.stat-box:last-child{border-right:none}
+.stat-num{font-size:22px;font-weight:700;font-family:Georgia,serif;line-height:1.1}
+.stat-lbl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.45);margin-top:4px}
+.layout{display:flex;flex:1;overflow:hidden}
+.sidebar{width:170px;flex-shrink:0;background:#141C3A;padding:14px 10px;overflow-y:auto;border-right:1px solid rgba(99,102,241,0.15)}
+.sb-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6366F1;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(99,102,241,0.2)}
+.filter-row{padding:7px 9px;border-radius:8px;cursor:pointer;margin-bottom:3px;display:flex;justify-content:space-between;align-items:center;transition:background 0.15s}
+.filter-row:hover{background:rgba(255,255,255,0.06)}
+.filter-row.active{background:#4C3BAF}
+.fr-left{display:flex;align-items:center;gap:7px}
+.fr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.fr-name{color:rgba(255,255,255,0.8);font-size:11.5px;font-weight:500}
+.filter-row.active .fr-name{color:white;font-weight:600}
+.fr-count{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.08);padding:1px 7px;border-radius:10px;white-space:nowrap}
+.filter-row.active .fr-count{color:white;background:rgba(255,255,255,0.2)}
+.main{flex:1;overflow:hidden;display:flex;flex-direction:column;background:white}
+.search-bar{padding:9px 14px;border-bottom:0.5px solid #F1F5F9;display:flex;gap:8px;align-items:center;flex-shrink:0;background:#FAFAFA}
+.search-bar input{flex:1;padding:7px 10px 7px 14px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:12px;color:#0F172A}
+.count-info{font-size:12px;color:#64748B;white-space:nowrap;font-weight:500}
+.count-info strong{color:#1E3A5F}
+.table-scroll{flex:1;overflow-y:auto}
+table{width:100%;border-collapse:collapse;font-size:11.5px;table-layout:fixed}
+thead{position:sticky;top:0;z-index:1}
+th{padding:9px 12px;text-align:left;font-size:10px;font-weight:700;color:white;text-transform:uppercase;letter-spacing:0.07em;background:#1E3A5F;border-bottom:2px solid #4C3BAF}
+td{padding:9px 12px;border-bottom:0.5px solid #F1F5F9;vertical-align:top}
+tr:hover td{filter:brightness(0.97)}
+.snap{}
+</style></head><body>
+<div class="gold-bar"></div>
+<div class="titlebar">
+  <h1><div class="titlebar-logomark">F</div> Audit Log — FPG Equipment Portal</h1>
+  <div class="titlebar-right">${yearPills}<div style="position:relative"><button class="exp-btn" onclick="toggleExportMenu()">&#8595; Export <span id="exp-arrow">&#9660;</span></button><div id="exp-menu" style="display:none;position:absolute;top:calc(100% + 4px);right:0;background:white;border:1.5px solid #4C3BAF;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.15);z-index:999;min-width:220px;overflow:hidden"><div style="padding:6px 10px;background:#EDE9FE;border-bottom:0.5px solid #C4B5FD;font-size:10px;font-weight:700;color:#4C3BAF;text-transform:uppercase;letter-spacing:0.07em">Choose what to export</div><button onclick="exportMode('page')" style="width:100%;padding:10px 14px;border:none;border-bottom:0.5px solid #F1F5F9;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">This page only</div><div id="page-count-label" style="font-size:11px;color:#64748B;margin-top:1px">First 25 visible entries</div></button><button onclick="exportMode('all')" style="width:100%;padding:10px 14px;border:none;border-bottom:0.5px solid #F1F5F9;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">All filtered results</div><div id="filtered-count-label" style="font-size:11px;color:#64748B;margin-top:1px">All visible entries</div></button><button onclick="exportMode('selected')" style="width:100%;padding:10px 14px;border:none;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">Selected only</div><div id="selected-count-label" style="font-size:11px;color:#64748B;margin-top:1px">0 entries selected</div></button></div></div></div>
+</div>
+<div class="stats">
+  <div class="stat-box"><div id="sc-total" class="stat-num" style="color:#C4B5FD">-</div><div class="stat-lbl">Total entries</div></div>
+  <div class="stat-box"><div id="sc-logins" class="stat-num" style="color:#93C5FD">-</div><div class="stat-lbl">Logins</div></div>
+  <div class="stat-box"><div id="sc-deletes" class="stat-num" style="color:#FCA5A5">-</div><div class="stat-lbl">Deletions</div></div>
+  <div class="stat-box"><div id="sc-status" class="stat-num" style="color:#FCD34D">-</div><div class="stat-lbl">Status changes</div></div>
+</div>
+<div class="layout">
+  <div class="sidebar">
+    <div class="sb-title">Filter by type</div>
+    <div class="filter-row active" id="all-btn" onclick="filterType('all')">
+      <div class="fr-left"><div class="fr-dot" style="background:#C4B5FD"></div><span class="fr-name">All actions</span></div>
+      <span class="fr-count" style="font-weight:700;font-size:11px">${allEntries.length}</span>
+    </div>
+    ${sidebarHtml}
+  </div>
+  <div class="main">
+    <div class="search-bar"><input type="text" id="search-input" placeholder="Search by admin, action, target, or detail..." oninput="applyFilters()"><span class="count-info">Showing <strong id="vc">${allEntries.length}</strong> of <strong>${allEntries.length}</strong> entries</span></div>
+    <div class="table-scroll"><table><thead><tr>
+      <th style="width:3%"><input type="checkbox" id="select-all" onchange="toggleSelectAll(this)" style="cursor:pointer;accent-color:#4C3BAF"></th>
+      <th style="width:10%">Date / Time</th>
+      <th style="width:15%">Admin</th>
+      <th style="width:11%">Action</th>
+      <th style="width:13%">Target</th>
+      <th style="width:42%">Detail</th>
+      <th style="width:6%">Result</th>
+    </tr></thead><tbody id="ab">${rowsHtml}</tbody></table></div>
+  </div>
+</div>
+<script>
+function toggleExportMenu(){var m=document.getElementById("exp-menu");var a=document.getElementById("exp-arrow");var open=m.style.display!=="none";m.style.display=open?"none":"block";a.innerHTML=open?"&#9660;":"&#9650;";if(!open){var vis=document.querySelectorAll("#ab tr:not(.snap):not([style*='display:none'])");var sel=document.querySelectorAll("#ab tr:not(.snap) .row-cb:checked");document.getElementById("page-count-label").textContent="First 25 of "+vis.length+" visible entries";document.getElementById("filtered-count-label").textContent=vis.length+" entries matching current filters";document.getElementById("selected-count-label").textContent=sel.length+" entries selected";}}
+function closeExportMenu(){var m=document.getElementById("exp-menu");if(m)m.style.display="none";var a=document.getElementById("exp-arrow");if(a)a.innerHTML="&#9660;";}
+document.addEventListener("click",function(e){if(!e.target.closest("#exp-menu")&&!e.target.closest(".exp-btn"))closeExportMenu();});
+function exportMode(mode){closeExportMenu();var rows=document.querySelectorAll("#ab tr:not(.snap)");var h=["Timestamp","Admin","Action","Target","Detail","Result"];var lines=[h.join(",")];var toExport=[];rows.forEach(function(r,i){if(r.style.display==="none")return;if(mode==="page"&&i>=25)return;if(mode==="selected"){var cb=r.querySelector(".row-cb");if(!cb||!cb.checked)return;}toExport.push(r);});toExport.forEach(function(r){var c=r.querySelectorAll("td");if(c.length<7)return;lines.push([1,2,3,4,5,6].map(function(i){return'"'+c[i].innerText.replace(/"/g,'""').replace(/\n/g," ").trim()+'"';}).join(","));});if(toExport.length===0){alert("No entries to export. Check your selection.");return;}var b=new Blob([lines.join("\n")],{type:"text/csv"});var u=URL.createObjectURL(b);var a=document.createElement("a");a.href=u;a.download="audit-log-"+mode+".csv";a.click();URL.revokeObjectURL(u);}
+function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.getElementById("chev-"+i);if(!r)return;var o=r.style.display!=="none";r.style.display=o?"none":"table-row";if(c)c.innerHTML=o?"&#9658;":"&#9660;";}
+function filterType(t){document.querySelectorAll(".filter-row").forEach(function(e){e.classList.remove("active")});document.getElementById("all-btn").classList.remove("active");if(t==="all"){document.getElementById("all-btn").classList.add("active")}else{var el=document.querySelector("[data-action=\""+t+"\"]");if(el)el.classList.add("active")}window._type=t;applyFilters();}
+function applyFilters(){var q=(document.getElementById("search-input").value||"").toLowerCase();var rows=document.querySelectorAll("#ab tr:not(.snap)");var count=0;rows.forEach(function(row){var a=row.getAttribute("data-action")||"";var text=row.textContent.toLowerCase();var tm=(!window._type||window._type==="all"||a===window._type);var sm=!q||text.includes(q);row.style.display=(tm&&sm)?"":"none";if(tm&&sm)count++;});document.getElementById("vc").textContent=count;}
+function toggleSelectAll(cb){document.querySelectorAll("#ab tr:not(.snap) .row-cb").forEach(function(c){c.checked=cb.checked;});updateSelCount();}
+function updateSelCount(){var sel=document.querySelectorAll("#ab tr:not(.snap) .row-cb:checked").length;var lbl=document.getElementById("selected-count-label");if(lbl)lbl.textContent=sel+" entries selected";}
+function toggleYear(y,btn){alert("Close this tab and reselect years in the admin panel, then click Audit Log again.");}
+window._type="all";
+var _d=document.querySelectorAll("#ab tr:not(.snap)");var tot=_d.length,log=0,del=0,stat=0;
+_d.forEach(function(r){var a=r.getAttribute("data-action")||"";if(a.includes("login")||a.includes("logoff"))log++;if(a.includes("delete"))del++;if(a.includes("status"))stat++;});
+document.getElementById("sc-total").textContent=tot;
+document.getElementById("sc-logins").textContent=log;
+document.getElementById("sc-deletes").textContent=del;
+document.getElementById("sc-status").textContent=stat;
+<\/script></body></html>`
+
+                        const blob = new Blob([html], { type: 'text/html' });
+                        const url = URL.createObjectURL(blob);
+                        window.open(url, '_blank');
+                        setStatus('done');
+                    } catch(e) {
+                        setStatus('error');
+                    }
+                })();
+            }, []);
+
+            if (status === 'loading') {
+                return (
+                    <div style={{display:'flex',alignItems:'center',justifyContent:'center',padding:'3rem',gap:'12px',color:'#64748B'}}>
+                        <div style={{width:'20px',height:'20px',border:'2px solid #E2E8F0',borderTop:'2px solid #4C3BAF',borderRadius:'50%',animation:'spin 0.8s linear infinite'}}></div>
+                        Loading audit log...
+                    </div>
+                );
+            }
+            if (status === 'error') {
+                return (
+                    <div style={{padding:'2rem',textAlign:'center',color:'#DC2626'}}>
+                        Failed to load audit log. Check your connection and try again.
+                    </div>
+                );
+            }
+            return (
+                <div style={{padding:'2rem',textAlign:'center',color:'#64748B'}}>
+                    <div style={{fontSize:'1.5rem',marginBottom:'8px'}}>✅</div>
+                    Audit log opened in a new tab.
                 </div>
             );
         }
