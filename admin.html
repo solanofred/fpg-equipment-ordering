@@ -1502,86 +1502,42 @@
                             </button>
                         </div>
                         
-                        <div className="products-table">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Product</th>
-                                        <th>Category</th>
-                                        <th>Price</th>
-                                        <th>Items</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {[...products].sort((a, b) => a.title.localeCompare(b.title)).map(product => {
-                                        const isDraft = DraftService.isDraftProduct(product.id);
-                                        return (
-                                            <tr key={product.id} className={isDraft ? 'product-row-edited' : ''}>
-                                                <td>
-                                                    <div className="product-cell">
-                                                        <div className="product-thumb">
-                                                            {product.imageUrl
-                                                                ? <img src={product.imageUrl} alt={product.title} onError={function(e){e.target.style.display='none';e.target.parentNode.innerHTML='📦';}} />
-                                                                : <span style={{fontSize:'1.4rem'}}>📦</span>}
-                                                        </div>
-                                                        <div className="product-info">
-                                                            <h3>
-                                                                {product.title}
-                                                                {isDraft && <span className="edited-badge">EDITED</span>}
-                                                            </h3>
-                                                            {product.recommended && (
-                                                                <span className="product-category" style={{ color: 'var(--accent)' }}>
-                                                                    ⭐ Recommended
-                                                                </span>
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            <td>
-                                                <span className="product-category">
-                                                    {product.category}
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <strong>${product.price.toLocaleString()}</strong>
-                                            </td>
-                                            <td>{product.items.length} items</td>
-                                            <td>
+                        <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'12px'}}>
+                            {[...products].sort((a, b) => a.title.localeCompare(b.title)).map(product => {
+                                const isDraft = DraftService.isDraftProduct(product.id);
+                                return (
+                                    <div key={product.id} style={{background:'white',borderRadius:'12px',border: isDraft ? '2px solid #F59E0B' : '0.5px solid #E2E8F0',overflow:'hidden',transition:'box-shadow 0.15s'}}>
+                                        <div style={{width:'100%',height:'80px',overflow:'hidden',background:'#F5F3FF',borderBottom:'1.5px solid #EDE9FE',display:'flex',alignItems:'center',justifyContent:'center',position:'relative'}}>
+                                            {product.imageUrl
+                                                ? <img src={product.imageUrl} alt={product.title} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.innerHTML='<span style="font-size:28px">📦</span>';}} />
+                                                : <span style={{fontSize:'28px'}}>📦</span>}
+                                            {isDraft && <span style={{position:'absolute',top:'5px',right:'5px',background:'#F59E0B',color:'white',padding:'1px 6px',borderRadius:'6px',fontSize:'9px',fontWeight:700}}>EDITED</span>}
+                                        </div>
+                                        <div style={{padding:'11px 12px'}}>
+                                            <div style={{fontWeight:700,fontSize:'12px',color:'#0F172A',marginBottom:'2px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{product.title}</div>
+                                            <div style={{fontSize:'15px',fontWeight:700,color:'#4C3BAF',fontFamily:'Georgia,serif',marginBottom:'2px'}}>${product.price.toLocaleString()}</div>
+                                            <div style={{fontSize:'10px',color:'#64748B',marginBottom:'6px'}}>{product.category}{product.recommended ? ' · ⭐' : ''}</div>
+                                            <div style={{marginBottom:'8px'}}>
                                                 <button
                                                     className={`status-badge ${product.available ? 'status-active' : 'status-inactive'}`}
                                                     onClick={() => handleToggleStatus(product.id)}
-                                                    style={{ cursor: 'pointer', border: 'none' }}
-                                                >
-                                                    {product.available ? 'Active' : 'Inactive'}
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <div className="actions">
-                                                    <button
-                                                        className="btn-action btn-edit"
-                                                        onClick={() => {
-                                                            setEditingProduct(product);
-                                                            setShowModal(true);
-                                                        }}
-                                                    >
-                                                        Edit
-                                                    </button>
-                                                    <button
-                                                        className="btn-action btn-delete"
-                                                        onClick={() => handleDelete(product.id)}
-                                                    >
-                                                        Delete
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </table>
-                        </div></div>}
+                                                    style={{cursor:'pointer',border:'none',fontSize:'10px',padding:'2px 8px',borderRadius:'20px'}}
+                                                >{product.available ? 'Published' : 'Draft'}</button>
+                                            </div>
+                                            <div style={{display:'flex',gap:'5px'}}>
+                                                <button className="btn-action btn-edit" onClick={() => { setEditingProduct(product); setShowModal(true); }} style={{flex:1,padding:'5px',fontSize:'11px',textAlign:'center'}}>Edit</button>
+                                                <button className="btn-action btn-delete" onClick={() => handleDelete(product.id)} style={{flex:1,padding:'5px',fontSize:'11px',textAlign:'center'}}>Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                            <div onClick={() => { setEditingProduct({ title:'',category:'desktop',items:[],price:0,recommended:false,available:true,imageUrl:'' }); setShowModal(true); }} style={{background:'white',borderRadius:'12px',border:'2px dashed #C4B5FD',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',minHeight:'195px',cursor:'pointer'}}>
+                                <div style={{fontSize:'28px',color:'6366F1',marginBottom:'6px'}}>+</div>
+                                <div style={{fontSize:'11px',fontWeight:600,color:'#4C3BAF'}}>Add Product</div>
+                            </div>
+                        </div>
+                        </div>}
 
                     </div>
                     
@@ -2414,88 +2370,64 @@
                             </div>
                         )}
 
-                        <div>
+                        <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'12px',padding:'16px'}}>
                             {(categories || []).slice().sort((a,b) => a.label.localeCompare(b.label)).map(function(cat, i) {
                                 const count = getProductCount(cat.slug);
                                 const isEmpty = count === 0;
                                 const isEditing = editingSlug === cat.slug;
                                 return (
-                                    <div key={i} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'0.875rem 1.5rem',borderBottom:'1px solid #f3f4f6',gap:'1rem'}}>
-                                        <div style={{display:'flex',alignItems:'center',gap:'0.875rem',flex:1}}>
-                                            {isEditing ? (
-                                                <div style={{flex:1,display:'flex',flexDirection:'column',gap:'6px'}}>
-                                                    <input
-                                                        type="text"
-                                                        value={editLabel}
-                                                        onChange={function(e){setEditLabel(e.target.value);}}
-                                                        onKeyDown={function(e){if(e.key==='Enter') handleSaveEdit(cat.slug); if(e.key==='Escape') handleCancelEdit();}}
-                                                        autoFocus
-                                                        placeholder="Category name"
-                                                        style={{width:'100%',padding:'0.375rem 0.625rem',border:'2px solid #4C3BAF',borderRadius:'6px',fontSize:'0.95rem',outline:'none'}}
-                                                    />
-                                                    <input
-                                                        type="text"
-                                                        value={editImageUrl}
-                                                        onChange={function(e){setEditImageUrl(e.target.value);}}
-                                                        placeholder="Image URL (optional) — https://..."
-                                                        style={{width:'100%',padding:'0.375rem 0.625rem',border:'1.5px solid #d1d5db',borderRadius:'6px',fontSize:'0.85rem',outline:'none'}}
-                                                    />
-                                                    {editImageUrl.trim() && (
-                                                        <div style={{display:'flex',alignItems:'center',gap:'6px'}}>
-                                                            <img src={editImageUrl.trim()} alt="preview" style={{width:'32px',height:'32px',objectFit:'cover',borderRadius:'6px',border:'1px solid #e5e7eb'}} onError={function(e){e.target.style.display='none';}} />
-                                                            <span style={{fontSize:'0.75rem',color:'#9ca3af'}}>Preview</span>
-                                                        </div>
-                                                    )}
+                                    <div key={i} style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',padding:'14px',textAlign:'center',position:'relative',transition:'box-shadow 0.15s'}}>
+                                        {!isEmpty && (
+                                            <span style={{position:'absolute',top:'8px',right:'8px',background:'#EDE9FE',color:'#4C3BAF',padding:'1px 7px',borderRadius:'10px',fontSize:'9px',fontWeight:700}}>In use</span>
+                                        )}
+                                        {isEditing ? (
+                                            <div style={{display:'flex',flexDirection:'column',gap:'6px',textAlign:'left'}}>
+                                                <input
+                                                    type="text"
+                                                    value={editLabel}
+                                                    onChange={function(e){setEditLabel(e.target.value);}}
+                                                    onKeyDown={function(e){if(e.key==='Enter') handleSaveEdit(cat.slug); if(e.key==='Escape') handleCancelEdit();}}
+                                                    autoFocus
+                                                    placeholder="Category name"
+                                                    style={{width:'100%',padding:'0.375rem 0.625rem',border:'2px solid #4C3BAF',borderRadius:'6px',fontSize:'0.85rem',outline:'none'}}
+                                                />
+                                                <input
+                                                    type="text"
+                                                    value={editImageUrl}
+                                                    onChange={function(e){setEditImageUrl(e.target.value);}}
+                                                    placeholder="Image URL (optional)"
+                                                    style={{width:'100%',padding:'0.375rem 0.625rem',border:'1.5px solid #d1d5db',borderRadius:'6px',fontSize:'0.8rem',outline:'none'}}
+                                                />
+                                                {editImageUrl.trim() && (
+                                                    <img src={editImageUrl.trim()} alt="preview" style={{width:'100%',height:'60px',objectFit:'cover',borderRadius:'8px',border:'2px solid #C4B5FD'}} onError={function(e){e.target.style.display='none';}} />
+                                                )}
+                                                <div style={{display:'flex',gap:'5px',marginTop:'4px'}}>
+                                                    <button onClick={function(){handleSaveEdit(cat.slug);}} disabled={saving || !editLabel.trim()} style={{flex:1,background:'#4C3BAF',border:'none',color:'white',padding:'5px',borderRadius:'7px',fontSize:'11px',fontWeight:700,cursor:'pointer'}}>{saving ? 'Saving...' : 'Save'}</button>
+                                                    <button onClick={handleCancelEdit} disabled={saving} style={{flex:1,background:'none',border:'1.5px solid #9ca3af',color:'#6b7280',padding:'5px',borderRadius:'7px',fontSize:'11px',fontWeight:600,cursor:'pointer'}}>Cancel</button>
                                                 </div>
-                                            ) : (
-                                                <div style={{display:'flex',alignItems:'center',gap:'0.75rem',flex:1}}>
-                                                    {cat.imageUrl ? (
-                                                        <img src={cat.imageUrl} alt={cat.label} style={{width:'40px',height:'40px',objectFit:'cover',borderRadius:'8px',border:'2px solid #C4B5FD',flexShrink:0,boxShadow:'0 0 0 3px #EDE9FE'}} onError={function(e){e.target.style.display='none';}} />
-                                                    ) : (
-                                                        <div style={{width:'10px',height:'10px',borderRadius:'50%',background:isEmpty?'#d1d5db':'#4C3BAF',flexShrink:0}}></div>
-                                                    )}
-                                                    <div>
-                                                        <div style={{fontWeight:600,fontSize:'0.95rem'}}>{cat.label}</div>
-                                                        <div style={{fontSize:'0.8rem',color:'#666'}}>{count} product{count !== 1 ? 's' : ''}</div>
-                                                    </div>
+                                            </div>
+                                        ) : (
+                                            <>
+                                                <div style={{width:'64px',height:'64px',borderRadius:'12px',overflow:'hidden',margin:'0 auto 10px',border:'2px solid #C4B5FD',boxShadow:'0 0 0 3px #EDE9FE',background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                                                    {cat.imageUrl
+                                                        ? <img src={cat.imageUrl} alt={cat.label} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.style.background='#EDE9FE';e.target.parentNode.innerHTML='🏷️';}} />
+                                                        : <span style={{fontSize:'24px'}}>🏷️</span>}
                                                 </div>
-                                            )}
-                                        </div>
-                                        <div style={{display:'flex',alignItems:'center',gap:'0.5rem',flexShrink:0}}>
-                                            {isEditing ? (
-                                                <>
-                                                    <button
-                                                        onClick={function(){handleSaveEdit(cat.slug);}}
-                                                        disabled={saving || !editLabel.trim()}
-                                                        style={{background:'#4C3BAF',border:'none',color:'white',padding:'0.35rem 0.875rem',borderRadius:'8px',fontSize:'0.8rem',fontWeight:600,cursor:'pointer'}}
-                                                    >{saving ? 'Saving...' : 'Save'}</button>
-                                                    <button
-                                                        onClick={handleCancelEdit}
-                                                        disabled={saving}
-                                                        style={{background:'none',border:'1.5px solid #9ca3af',color:'#6b7280',padding:'0.35rem 0.875rem',borderRadius:'8px',fontSize:'0.8rem',fontWeight:600,cursor:'pointer'}}
-                                                    >Cancel</button>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    {!isEmpty && (
-                                                        <span style={{background:'#EDE9FE',color:'#4C3BAF',padding:'0.2rem 0.7rem',borderRadius:'20px',fontSize:'0.75rem',fontWeight:600}}>In use</span>
-                                                    )}
-                                                    <button
-                                                        onClick={function(){handleStartEdit(cat);}}
-                                                        disabled={saving}
-                                                        style={{background:'none',border:'1.5px solid #4C3BAF',color:'#4C3BAF',padding:'0.35rem 0.875rem',borderRadius:'8px',fontSize:'0.8rem',fontWeight:600,cursor:'pointer'}}
-                                                    >Edit</button>
-                                                    <button
-                                                        onClick={function(){handleRemove(cat.slug, cat.label);}}
-                                                        disabled={saving}
-                                                        style={{background:'none',border:'1.5px solid #dc2626',color:'#dc2626',padding:'0.35rem 0.875rem',borderRadius:'8px',fontSize:'0.8rem',fontWeight:600,cursor:'pointer'}}
-                                                    >Remove</button>
-                                                </>
-                                            )}
-                                        </div>
+                                                <div style={{fontWeight:600,fontSize:'12px',color:'#0F172A',marginBottom:'2px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{cat.label}</div>
+                                                <div style={{fontSize:'11px',color:'#64748B',marginBottom:'10px'}}>{count} product{count !== 1 ? 's' : ''}</div>
+                                                <div style={{display:'flex',gap:'5px',justifyContent:'center'}}>
+                                                    <button onClick={function(){handleStartEdit(cat);}} disabled={saving} style={{flex:1,padding:'5px 8px',border:'1.5px solid #4C3BAF',borderRadius:'7px',fontSize:'11px',background:'white',color:'#4C3BAF',cursor:'pointer',fontWeight:600}}>Edit</button>
+                                                    <button onClick={function(){handleRemove(cat.slug, cat.label);}} disabled={saving} style={{flex:1,padding:'5px 8px',border:'1.5px solid #FCA5A5',borderRadius:'7px',fontSize:'11px',background:'white',color:'#DC2626',cursor:'pointer',fontWeight:600}}>Remove</button>
+                                                </div>
+                                            </>
+                                        )}
                                     </div>
                                 );
                             })}
+                            <div onClick={function(){setShowAddModal(true);setStatus(null);}} style={{background:'white',borderRadius:'12px',border:'2px dashed #C4B5FD',padding:'14px',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',minHeight:'148px',cursor:'pointer'}}>
+                                <div style={{fontSize:'28px',color:'#6366F1',marginBottom:'6px'}}>+</div>
+                                <div style={{fontSize:'11px',fontWeight:600,color:'#4C3BAF'}}>Add Category</div>
+                            </div>
                         </div>
                     </div>
                 </div>
