@@ -167,12 +167,12 @@ setEntries(allEntries);
                 <table id="tbl-auditlog" style={{width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed'}}>
                     <thead>
                         <tr style={{background:'#D97706'}}>
-                            <th style={{padding:'9px 10px',textAlign:'left',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'11%',position:'relative'}}>Date / Time</th>
-                            <th style={{padding:'9px 10px',textAlign:'left',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'14%',position:'relative'}}>Admin</th>
-                            <th style={{padding:'9px 10px',textAlign:'left',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'11%',position:'relative'}}>Action</th>
-                            <th style={{padding:'9px 10px',textAlign:'left',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'12%',position:'relative'}}>Target</th>
-                            <th style={{padding:'9px 10px',textAlign:'left',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',position:'relative'}}>Detail</th>
-                            <th style={{padding:'9px 10px',textAlign:'center',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'7%',position:'relative'}}>Result</th>
+                            <th style={{padding:'10px 12px',textAlign:'left',color:'white',fontSize:'10.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'12%',position:'relative'}}>Date / Time</th>
+                            <th style={{padding:'10px 12px',textAlign:'left',color:'white',fontSize:'10.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'11%',position:'relative'}}>Admin</th>
+                            <th style={{padding:'10px 12px',textAlign:'left',color:'white',fontSize:'10.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'12%',position:'relative'}}>Action</th>
+                            <th style={{padding:'10px 12px',textAlign:'left',color:'white',fontSize:'10.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'13%',position:'relative'}}>Reference</th>
+                            <th style={{padding:'10px 12px',textAlign:'left',color:'white',fontSize:'10.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',position:'relative'}}>Summary</th>
+                            <th style={{padding:'10px 12px',textAlign:'center',color:'white',fontSize:'10.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'8%',position:'relative'}}>Result</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -180,33 +180,71 @@ setEntries(allEntries);
                             const m = getMeta(e.action);
                             const dt = new Date(e.timestamp);
                             const s = e.detail && e.detail.orderSnapshot;
-                            let detail = '';
-                            if (e.detail && e.detail.reason) detail += 'Reason: ' + e.detail.reason + ' · ';
-                            if (e.detail && e.detail.oldStatus) detail += e.detail.oldStatus + ' → ' + e.detail.newStatus + ' · ';
-                            if (e.detail && e.detail.newEmail) detail += 'Added: ' + e.detail.newEmail + ' (' + (e.detail.role||'') + ') · ';
-                            if (e.detail && e.detail.removedEmail) detail += 'Removed: ' + e.detail.removedEmail + ' · ';
-                            if (s) detail += 'For: ' + (s.recipientName||'') + ' · ' + (s.locationId||'') + ' · $' + ((s.total||0).toFixed(2));
-                            if (e.detail && e.detail.browser) detail += (e.detail.browser||'').substring(0,80);
-                            if (e.detail && e.detail.productsCount) detail += e.detail.productsCount + ' products published';
+                            const adminName = (e.adminEmail||'').split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase();});
+                            let ref = e.target || '';
+                            if (!ref && e.detail) {
+                                if (e.detail.orderId) ref = e.detail.orderId;
+                                else if (e.detail.newEmail) ref = e.detail.newEmail;
+                                else if (e.detail.removedEmail) ref = e.detail.removedEmail;
+                                else if (e.detail.slug) ref = e.detail.slug;
+                                else if (e.detail.file) ref = e.detail.file;
+                            }
+                            let summary = '';
+                            if (e.action === 'auth.login' && e.detail && e.detail.browser) {
+                                const ua = e.detail.browser||'';
+                                const browser = ua.includes('Chrome')?'Chrome':ua.includes('Firefox')?'Firefox':ua.includes('Safari')?'Safari':ua.includes('Edge')?'Edge':'Browser';
+                                const os = ua.includes('Windows')?'Windows':ua.includes('Mac')?'Mac':ua.includes('iPhone')?'iPhone':ua.includes('Android')?'Android':'Unknown OS';
+                                summary = browser + ' on ' + os + ' — signed in';
+                            } else if (e.action === 'auth.logout') {
+                                summary = 'Signed out';
+                            } else if (e.action === 'auth.auto_logoff') {
+                                summary = 'Session timed out after inactivity';
+                            } else if (e.action === 'order.soft_delete') {
+                                summary = (e.detail&&e.detail.reason?'Reason: '+e.detail.reason+' · ':'') + (s?'For: '+(s.recipientName||'')+' · '+(s.locationId||'')+' · $'+((s.total||0).toFixed(2)):'');
+                            } else if (e.action === 'order.permanent_delete') {
+                                summary = 'Permanently deleted'+(e.detail&&e.detail.reason?' · Reason: '+e.detail.reason:'')+(s?' · For: '+(s.recipientName||'')+' · '+(s.locationId||''):'');
+                            } else if (e.action === 'order.restore') {
+                                summary = 'Order restored';
+                            } else if (e.action === 'order.status_change' && e.detail) {
+                                summary = (e.detail.oldStatus||'')+' → '+(e.detail.newStatus||'')+(e.detail.locationId?' · '+e.detail.locationId:'');
+                            } else if (e.action === 'access.admin_added' && e.detail) {
+                                summary = 'Added '+(e.detail.newName||e.detail.newEmail||'')+' as '+(e.detail.role||'admin');
+                            } else if (e.action === 'access.admin_removed' && e.detail) {
+                                summary = 'Removed '+(e.detail.removedEmail||'');
+                            } else if (e.action === 'access.role_changed' && e.detail) {
+                                summary = 'Role changed to '+(e.detail.newRole||'');
+                            } else if (e.action === 'portal.products_published' && e.detail) {
+                                summary = (e.detail.productsCount||'')+' products published'+(e.detail.commitSha?' · commit '+e.detail.commitSha.substring(0,7):'');
+                            } else if (e.action === 'category.added' && e.detail) {
+                                summary = 'Added category “'+(e.detail.label||e.detail.slug||'')+'”';
+                            } else if (e.action === 'category.updated' && e.detail) {
+                                summary = 'Renamed to “'+(e.detail.newLabel||'')+'”';
+                            } else if (e.action === 'category.removed' && e.detail) {
+                                summary = 'Removed category “'+(e.detail.label||e.detail.slug||'')+'”';
+                            } else if (e.detail) {
+                                const parts=[];
+                                if(e.detail.reason) parts.push('Reason: '+e.detail.reason);
+                                if(e.detail.oldStatus) parts.push(e.detail.oldStatus+' → '+e.detail.newStatus);
+                                summary = parts.join(' · ')||'';
+                            }
                             const resBg = e.result==='success'?'#DCFCE7':e.result==='denied'?'#FEE2E2':'#F5F5F4';
                             const resCol = e.result==='success'?'#166534':e.result==='denied'?'#991B1B':'#78716C';
                             return (
                                 <tr key={i} style={{background:i%2===0?'#ffffff':'#F5F3FF'}}>
-                                    <td style={{padding:'8px 10px',verticalAlign:'middle'}}>
-                                        <div style={{fontWeight:700,fontSize:'11px',color:'#1E293B'}}>{dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
-                                        <div style={{fontSize:'10px',color:'#57534E'}}>{dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
+                                    <td style={{padding:'10px 12px',verticalAlign:'middle'}}>
+                                        <div style={{fontWeight:700,fontSize:'12px',color:'#1E293B'}}>{dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
+                                        <div style={{fontSize:'11px',color:'#57534E'}}>{dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
                                     </td>
-                                    <td style={{padding:'8px 10px',verticalAlign:'middle',overflow:'hidden'}}>
-                                        <div style={{fontWeight:600,fontSize:'11.5px',color:'#1E293B',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{(e.adminEmail||'').split('@')[0].replace('.',' ').replace(/\w/g,c=>c.toUpperCase())}</div>
-                                        <div style={{fontSize:'10px',color:'#A8A29E',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{e.adminEmail||''}</div>
+                                    <td style={{padding:'10px 12px',verticalAlign:'middle',overflow:'hidden'}}>
+                                        <div style={{fontWeight:600,fontSize:'12px',color:'#1E293B',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} title={e.adminEmail||''}>{adminName}</div>
                                     </td>
-                                    <td style={{padding:'8px 10px',verticalAlign:'middle'}}>
-                                        <span style={{display:'inline-block',padding:'2px 8px',borderRadius:'20px',background:m.bg,color:m.color,fontWeight:600,fontSize:'10.5px',border:'1px solid '+(m.border||m.color),whiteSpace:'nowrap'}}>{m.label}</span>
+                                    <td style={{padding:'10px 12px',verticalAlign:'middle'}}>
+                                        <span style={{display:'inline-block',padding:'2px 9px',borderRadius:'20px',background:m.bg,color:m.color,fontWeight:600,fontSize:'11px',border:'1px solid '+(m.border||m.color),whiteSpace:'nowrap'}}>{m.label}</span>
                                     </td>
-                                    <td style={{padding:'8px 10px',verticalAlign:'middle',fontSize:'11px',fontFamily:'monospace',color:'#4C3BAF',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{e.target||'—'}</td>
-                                    <td style={{padding:'8px 10px',verticalAlign:'middle',fontSize:'11px',color:'#0F172A',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} title={detail}>{detail||'—'}</td>
-                                    <td style={{padding:'8px 10px',verticalAlign:'middle',textAlign:'center'}}>
-                                        <span style={{fontSize:'10px',padding:'2px 7px',borderRadius:'10px',fontWeight:700,background:resBg,color:resCol}}>{e.result||''}</span>
+                                    <td style={{padding:'10px 12px',verticalAlign:'middle',fontSize:'11.5px',fontFamily:'monospace',color:'#4C3BAF',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} title={ref}>{ref||'—'}</td>
+                                    <td style={{padding:'10px 12px',verticalAlign:'middle',fontSize:'12px',color:'#0F172A',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} title={summary}>{summary||'—'}</td>
+                                    <td style={{padding:'10px 12px',verticalAlign:'middle',textAlign:'center'}}>
+                                        <span style={{fontSize:'11px',padding:'2px 8px',borderRadius:'10px',fontWeight:700,background:resBg,color:resCol}}>{e.result||''}</span>
                                     </td>
                                 </tr>
                             );
