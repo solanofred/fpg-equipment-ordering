@@ -73,11 +73,5 @@
     "slug": "video_surveillance",
     "label": "Video Surveillance",
     "imageUrl": "https://raw.githubusercontent.com/solanofred/fpg-equipment-ordering/main/CategoryIcons/Video_Surveillance.jpg"
-  },
-  {
-    "slug": "calculator",
-    "label": "Calculator",
-    "addedBy": "fred.solano@foundationpartners.com",
-    "addedAt": "2026-06-02T02:08:25.730Z"
   }
 ]
