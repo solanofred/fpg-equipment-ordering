@@ -27,10 +27,10 @@ function VersionControl({ session, azureUrl }) {
         const a = document.createElement('a');
         a.href=url; a.download=filename||'versions.csv'; a.click();
         URL.revokeObjectURL(url);
-    };
+    }
     const toggleSelectVersion = function(idx) {
         setSelectedVersions(function(prev){var n=Object.assign({},prev);n[idx]=!n[idx];return n;});
-    };
+    };;
 
     React.useEffect(() => {
         // Load version history from audit log entries with action portal.version
