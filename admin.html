@@ -446,10 +446,6 @@
             padding: 24px;
         }
         .admin-container { max-width: none; margin: 0; padding: 0; }
-        .resizable-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-        .resizable-table th { position: relative !important; overflow: hidden; }
-        .col-resizer { position: absolute; right: 0; top: 0; bottom: 0; width: 6px; cursor: col-resize; z-index: 10; background: transparent; }
-        .col-resizer:hover { background: rgba(255,255,255,0.35); }
         .resizable-table { table-layout: fixed; width: 100%; border-collapse: collapse; }
         .resizable-table th { position: relative; overflow: hidden; white-space: nowrap; }
         .resizable-table th .col-resizer { position: absolute; right: 0; top: 0; bottom: 0; width: 5px; cursor: col-resize; user-select: none; z-index: 1; }
@@ -1600,7 +1596,7 @@
 
                         {activeTab === 'access' && <AccessManagement session={session} azureUrl={AZURE_FUNCTION_URL} adminPortalUrl={ADMIN_PORTAL_URL} />}
                         {activeTab === 'categories' && <CategoryManagement session={session} azureUrl={AZURE_FUNCTION_URL} categories={categories} products={products} onCategoryAdded={handleCategoryAdded} onCategoryUpdated={handleCategoryUpdated} onCategoryRemoved={handleCategoryRemoved} />}
-                        {activeTab === 'orders' && <OrdersDashboard session={session} azureUrl={AZURE_FUNCTION_URL} />}
+                        {activeTab === 'orders' && <OrdersDashboard session={session} azureUrl={AZURE_FUNCTION_URL} onNavigate={setActiveTab} />}
                         {activeTab === 'auditlog' && <AuditLogOpener session={session} azureUrl={AZURE_FUNCTION_URL} />}
                         {activeTab === 'versions' && isSuperAdmin && <VersionControl session={session} azureUrl={AZURE_FUNCTION_URL} />}
 
@@ -2582,7 +2578,7 @@
         }
 
         // ─── ORDERS DASHBOARD ────────────────────────────────────────────
-        function OrdersDashboard({ session, azureUrl }) {
+        function OrdersDashboard({ session, azureUrl, onNavigate }) {
             const [orders, setOrders] = React.useState([]);
             const [loading, setLoading] = React.useState(true);
             const [searchQuery, setSearchQuery] = React.useState('');
@@ -2605,10 +2601,7 @@
             const [restoreModal, setRestoreModal] = React.useState(null);
             const [permDeleteModal, setPermDeleteModal] = React.useState(null);
             const [permDeleteReason, setPermDeleteReason] = React.useState('');
-            const [auditLog, setAuditLog] = React.useState([]);
-            const [showAudit, setShowAudit] = React.useState(false);
             const [showExportMenu, setShowExportMenu] = React.useState(false);
-            const [auditYears, setAuditYears] = React.useState([new Date().getFullYear()]);
             const [auditTypeFilter, setAuditTypeFilter] = React.useState('all');
             const [auditExpandedRows, setAuditExpandedRows] = React.useState({});
             const [status, setStatus] = React.useState(null);
@@ -2634,478 +2627,7 @@
                 setLoading(false);
             };
 
-            const loadAuditLog = async function(years) {
-                const yearsToLoad = Array.isArray(years) ? years : Array.isArray(auditYears) ? auditYears : [new Date().getFullYear()];
-                try {
-                    let allEntries = [];
-                    for (const year of yearsToLoad) {
-                        const res = await fetch(azureUrl, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
-                            body: JSON.stringify({ action: 'get-audit-log', year })
-                        });
-                        const data = await res.json();
-                        const entries = Array.isArray(data.log) ? data.log : [];
-                        allEntries = allEntries.concat(entries);
-                    }
-                    allEntries.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
-
-                     const actionMetaMap = {
-                         'auth.login':          { label: 'Login',           bg:'#EEF2FF', color:'#4C3BAF', border:'#C7D2FE', dot:'#818CF8' },
-                         'auth.logout':         { label: 'Logout',          bg:'#F1F5F9', color:'#475569', border:'#CBD5E1', dot:'#94A3B8' },
-                         'auth.auto_logoff':    { label: 'Auto-logout',     bg:'#F1F5F9', color:'#475569', border:'#CBD5E1', dot:'#94A3B8' },
-                         'order.soft_delete':   { label: 'Order deleted',   bg:'#FEE2E2', color:'#DC2626', border:'#FECACA', dot:'#F87171' },
-                         'order.permanent_delete': { label:'Perm. deleted', bg:'#FCA5A5', color:'#7F1D1D', border:'#F87171', dot:'#EF4444' },
-                         'order.permanent_delete_attempt': { label:'Perm. denied', bg:'#FCA5A5', color:'#7F1D1D', border:'#F87171', dot:'#EF4444' },
-                         'order.restore':       { label: 'Restored',        bg:'#DCFCE7', color:'#166534', border:'#86EFAC', dot:'#4ADE80' },
-                         'order.status_change': { label: 'Status change',   bg:'#FEF9C3', color:'#854D0E', border:'#FDE68A', dot:'#FCD34D' },
-                         'access.admin_added':  { label: 'Admin added',     bg:'#DCFCE7', color:'#166534', border:'#86EFAC', dot:'#4ADE80' },
-                         'access.admin_removed':{ label: 'Admin removed',   bg:'#FEE2E2', color:'#DC2626', border:'#FECACA', dot:'#F87171' },
-                         'access.role_changed': { label: 'Role changed',    bg:'#FEF9C3', color:'#854D0E', border:'#FDE68A', dot:'#FCD34D' },
-                     };
-                    const getMetaFn = (action) => actionMetaMap[action] || { label: action, bg:'#F1F5F9', color:'#475569' };
-
-                    const typeCounts = {};
-                    allEntries.forEach(e => { typeCounts[e.action] = (typeCounts[e.action]||0) + 1; });
-
-                    const rowsHtml = allEntries.map((entry, i) => {
-                        const m = getMetaFn(entry.action);
-                        const dt = new Date(entry.timestamp);
-                        const s = entry.detail && entry.detail.orderSnapshot;
-                        const expandable = entry.action === 'order.soft_delete' || entry.action === 'order.permanent_delete';
-                        const bg = i % 2 === 0 ? '#ffffff' : '#F5F3FF';
-                        let detail = '';
-                        if (entry.detail && entry.detail.reason) detail += '<strong>Reason:</strong> ' + entry.detail.reason + ' &middot; ';
-                        if (entry.detail && entry.detail.oldStatus) detail += entry.detail.oldStatus + ' &rarr; <strong>' + entry.detail.newStatus + '</strong> &middot; ';
-                        if (entry.detail && entry.detail.newEmail) detail += '<strong>Added:</strong> ' + entry.detail.newEmail + ' (' + entry.detail.role + ') &middot; ';
-                        if (entry.detail && entry.detail.removedEmail) detail += '<strong>Removed:</strong> ' + entry.detail.removedEmail + ' &middot; ';
-                        if (s) detail += '<strong>For:</strong> ' + (s.recipientName||'') + ' &middot; <strong style="color:#185FA5">' + (s.locationId||'') + '</strong> &middot; $' + ((s.total||0).toFixed(2));
-                        if (entry.detail && entry.detail.browser) detail += '<span style="color:#A8A29E">' + (entry.detail.browser||'').substring(0,70) + '</span>';
-                        const resBg = entry.result==='success' ? '#D1FAE5' : entry.result==='denied' ? '#FEE2E2' : '#F5F5F4';
-                        const resColor = entry.result==='success' ? '#065F46' : entry.result==='denied' ? '#991B1B' : '#78716C';
-                        let snapHtml = '';
-                        if (expandable && s) {
-                            const items = (s.items||[]).map(it => it.title + ' x' + (it.quantity||1) + ' ($' + (((it.price||0)*(it.quantity||1)).toFixed(2)) + ')').join(', ');
-                            snapHtml = '<tr class="snap" id="snap-' + i + '" style="display:none;background:#F0F4F8"><td colspan="7" style="padding:10px 14px 12px 32px"><div style="background:white;border-radius:6px;border:0.5px solid #C7D9F0;padding:10px 14px;font-size:11.5px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#78716C;margin-bottom:8px">Order snapshot</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px"><div><span style="color:#A8A29E">Submitter:</span> ' + (s.submitterName||'') + '</div><div><span style="color:#A8A29E">Recipient:</span> ' + (s.recipientName||'') + '</div><div><span style="color:#A8A29E">Location:</span> <strong style="color:#185FA5">' + (s.locationId||'') + '</strong></div><div><span style="color:#A8A29E">Total:</span> <strong>$' + ((s.total||0).toFixed(2)) + '</strong></div><div style="grid-column:2/-1"><span style="color:#A8A29E">Ship to:</span> ' + (s.shipTo||'') + '</div><div style="grid-column:1/-1"><span style="color:#A8A29E">Items:</span> ' + items + '</div></div></div></td></tr>';
-                        }
-                        return '<tr class="data-row' + (expandable?' expandable':'') + '" data-action="' + entry.action + '" data-idx="' + i + '" data-admin="' + (entry.adminEmail||'') + '" data-target="' + (entry.target||'') + '" data-detail="' + ((entry.detail&&entry.detail.reason)||'') + '" data-result="' + (entry.result||'') + '" data-ts="' + (entry.timestamp?entry.timestamp.slice(0,10):'') + '" onclick="' + (expandable?'toggleSnap('+i+')':'') + '" style="background:' + bg + '"><td style="padding:9px 8px;text-align:center;width:3%"><input type="checkbox" class="row-cb" onchange="updateSelCount()" style="cursor:pointer;accent-color:#1E3A5F"></td><td style="padding:9px 8px;text-align:center;color:#6366F1;font-size:12px;width:3%">' + (expandable?'<span id="chev-'+i+'">&#9658;</span>':'') + '</td><td style="padding:9px 10px;font-size:11px;font-weight:700;color:#1E3A5F;width:10%">' + dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) + '<br><span style="font-size:10.5px;color:#57534E">' + dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) + '</span></td><td style="padding:9px 10px;width:15%"><div style="font-weight:500;font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + ((entry.adminEmail||'').split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase()})) + '</div><div style="font-size:10px;color:#A8A29E;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.adminEmail||'') + '</div></td><td style="padding:9px 10px;width:11%"><span style="display:inline-block;padding:2px 8px;border-radius:20px;background:' + m.bg + ';color:' + m.color + ';font-weight:600;font-size:10.5px;border:1px solid ' + (m.border||m.color) + '">' + m.label + '</span></td><td style="padding:9px 10px;font-size:11px;font-family:monospace;color:#4C3BAF;width:13%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.target||'&mdash;') + '</td><td style="padding:9px 10px;font-size:11px;color:#0F172A;width:42%">' + detail + '</td><td style="padding:9px 10px;width:6%"><span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;background:' + resBg + ';color:' + resColor + '">' + (entry.result||'') + '</span></td></tr>' + snapHtml;
-                    }).join('');
-
-                    const sidebarHtml = Object.entries(typeCounts).sort((a,b)=>b[1]-a[1]).map(([action, count]) => {
-                        const m = getMetaFn(action);
-                        const dot = m.dot || m.color;
-                        return '<div class="filter-row" onclick="filterType(\'' + action + '\')" data-action="' + action + '"><div class="fr-left"><div class="fr-dot" style="background:' + dot + '"></div><span class="fr-name">' + m.label + '</span></div><span class="fr-count">' + count + '</span></div>';
-                    }).join('');
-
-                    const allYears = availableYears;
-                    const yearPills = allYears.map(y => '<button class="ypill' + (yearsToLoad.includes(y)?' on':'') + '" onclick="toggleYear(' + y + ',this)">' + y + '</button>').join('');
-
-                    const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Audit Log — FPG Equipment Portal</title><style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-body{background:#F1F5F9;height:100vh;display:flex;flex-direction:column;overflow:hidden;font-size:13px}
-/* ── Header ── */
-.gold-bar{height:4px;background:linear-gradient(90deg,#DB802E,#EFA855,#DB802E);flex-shrink:0}
-.hdr{background:linear-gradient(135deg,#15803D 0%,#16A34A 50%,#4ADE80 100%);padding:10px 20px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;gap:12px}
-.hdr-left{display:flex;align-items:center;gap:10px}
-.logo{width:28px;height:28px;background:linear-gradient(135deg,#38BDF8,#0369A1);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;font-family:Georgia,serif;flex-shrink:0}
-.hdr h1{color:white;font-size:14px;font-weight:700}
-.hdr-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.ypill{padding:4px 11px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:1.5px solid rgba(255,255,255,0.35);background:transparent;color:rgba(255,255,255,0.6);transition:all 0.15s;white-space:nowrap}
-.ypill:hover{border-color:rgba(255,255,255,0.6);color:white}
-.ypill.on{background:#4C3BAF;color:white;border-color:#4C3BAF}
-.exp-wrap{position:relative}
-.exp-btn{padding:6px 14px;background:rgba(219,128,46,0.2);color:#EFA855;border:1.5px solid rgba(219,128,46,0.5);border-radius:8px;font-size:11.5px;cursor:pointer;font-weight:700;white-space:nowrap;display:flex;align-items:center;gap:5px}
-.exp-btn:hover{background:rgba(219,128,46,0.35)}
-.exp-menu{display:none;position:absolute;top:calc(100% + 5px);right:0;background:white;border:1.5px solid #E2E8F0;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:999;min-width:230px;overflow:hidden}
-.exp-hd{padding:7px 14px;background:#F5F3FF;border-bottom:1px solid #EDE9FE;font-size:10px;font-weight:700;color:#4C3BAF;text-transform:uppercase;letter-spacing:0.07em}
-.exp-opt{width:100%;padding:10px 14px;border:none;border-bottom:0.5px solid #F1F5F9;background:white;text-align:left;cursor:pointer;font-family:inherit}
-.exp-opt:hover{background:#F8FAFF}
-.exp-opt:last-child{border-bottom:none}
-.exp-opt-title{font-weight:700;font-size:12px;color:#1E3A5F}
-.exp-opt-sub{font-size:11px;color:#64748B;margin-top:2px}
-/* ── Stats bar ── */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:12px 20px;flex-shrink:0}
-.sc-card{border-radius:14px;padding:16px 18px;position:relative;overflow:hidden;cursor:pointer;transition:opacity 0.15s}
-.sc-card:hover{opacity:0.9}
-.sc-circle{position:absolute;top:-12px;right:-12px;width:70px;height:70px;background:rgba(255,255,255,0.12);border-radius:50%;pointer-events:none}
-.sc-icon{width:34px;height:34px;background:rgba(255,255,255,0.2);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:12px}
-.sc-num{font-size:34px;font-weight:800;color:white;letter-spacing:-1px;line-height:1}
-.sc-lbl{font-size:12px;color:white;margin-top:6px;font-weight:600}
-.sc-sub{font-size:10.5px;color:rgba(255,255,255,0.8);margin-top:2px}
-/* ── Filter toolbar ── */
-.toolbar{padding:10px 20px;background:white;border-top:0.5px solid #F1F5F9;border-bottom:0.5px solid #E2E8F0;display:flex;gap:8px;align-items:center;flex-shrink:0;flex-wrap:wrap}
-.search-wrap{position:relative;flex:1;min-width:220px}
-.search-wrap input{width:100%;padding:7px 10px 7px 32px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:12.5px;color:#0F172A;font-family:inherit;outline:none}
-.search-wrap input:focus{border-color:#4C3BAF}
-.search-ico{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:#94A3B8;font-size:15px;pointer-events:none;line-height:1}
-.flt-select{padding:7px 10px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:12px;color:#1E3A5F;font-family:inherit;background:white;cursor:pointer;font-weight:500;outline:none}
-.flt-select:focus{border-color:#4C3BAF}
-.flt-date{padding:7px 10px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:12px;color:#1E3A5F;font-family:inherit;background:white;cursor:pointer;outline:none;width:130px}
-.flt-date:focus{border-color:#4C3BAF}
-.flt-sep{font-size:11px;color:#94A3B8;white-space:nowrap}
-.clear-btn{padding:7px 12px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:11.5px;color:#64748B;background:white;cursor:pointer;font-weight:600;white-space:nowrap}
-.clear-btn:hover{background:#F8FAFF;border-color:#4C3BAF;color:#4C3BAF}
-.count-pill{background:#EEF2FF;color:#4C3BAF;border-radius:20px;padding:3px 10px;font-size:11.5px;font-weight:700;white-space:nowrap}
-/* ── Table ── */
-.table-wrap{flex:1;overflow-y:auto;background:white}
-table{width:100%;border-collapse:collapse;table-layout:fixed}
-thead{position:sticky;top:0;z-index:2}
-th{padding:9px 12px;text-align:left;font-size:10px;font-weight:700;color:white;text-transform:uppercase;letter-spacing:0.07em;background:#D97706;border-bottom:2px solid #F59E0B;white-space:nowrap;overflow:hidden}
-th.center{text-align:center}
-td{padding:9px 12px;border-bottom:0.5px solid #F1F5F9;vertical-align:middle;overflow:hidden;text-overflow:ellipsis}
-tr.data-row:hover td{background:#F8F9FF}
-tr.data-row{cursor:default}
-tr.data-row.expandable{cursor:pointer}
-/* ── Action badges ── */
-.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10.5px;font-weight:700;border:1px solid;white-space:nowrap}
-/* ── Result badges ── */
-.res-success{background:#DCFCE7;color:#166534;border:1px solid #86EFAC;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700}
-.res-denied{background:#FEE2E2;color:#991B1B;border:1px solid #FECACA;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700}
-.res-other{background:#F5F5F4;color:#78716C;border:1px solid #D6D3D1;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700}
-/* ── Expand rows ── */
-.snap-row{display:none}
-.snap-row td{background:#F0F4F8;padding:0}
-.snap-inner{padding:12px 16px 14px 40px;border-bottom:0.5px solid #DBEAFE}
-.snap-title{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#78716C;margin-bottom:8px}
-.snap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;font-size:11.5px}
-.snap-lbl{color:#A8A29E}
-.snap-val{color:#0F172A;font-weight:500}
-.chev{font-size:10px;color:#6366F1;transition:transform 0.15s;display:inline-block}
-.chev.open{transform:rotate(90deg)}
-/* ── Empty state ── */
-.empty-row td{text-align:center;padding:40px;color:#94A3B8;font-size:13px}
-/* ── Scrollbar ── */
-.table-wrap::-webkit-scrollbar{width:6px}
-.table-wrap::-webkit-scrollbar-track{background:#F1F5F9}
-.table-wrap::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:3px}
-.dd-bg{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.55);z-index:1000;align-items:center;justify-content:center}
-.dd-bg.open{display:flex}
-.dd-box{background:white;border-radius:14px;width:680px;max-width:95vw;max-height:85vh;overflow:hidden;display:flex;flex-direction:column}
-.dd-hdr{padding:16px 20px;border-bottom:1px solid #F1F5F9;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
-.dd-title{font-size:15px;font-weight:700;color:#0F172A}
-.dd-sub{font-size:12px;color:#64748B;margin-top:2px}
-.dd-body{overflow:auto;padding:18px 20px}
-</style></head><body>
-<div class="gold-bar"></div>
-<div class="hdr">
-  <div class="hdr-left">
-    <div class="logo">F</div>
-    <h1>Audit Log &mdash; FPG Equipment Portal</h1>
-  </div>
-  <div class="hdr-right">
-    <span style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:600;margin-right:2px">YEAR:</span>
-    ${yearPills}
-    <div class="exp-wrap">
-      <button class="exp-btn" onclick="toggleExp()">&#8595; Export &#9660;</button>
-      <div class="exp-menu" id="exp-menu">
-        <div class="exp-hd">Choose what to export</div>
-        <button class="exp-opt" onclick="doExport('page')">
-          <div class="exp-opt-title">This page only</div>
-          <div class="exp-opt-sub" id="lbl-page">First 25 visible entries</div>
-        </button>
-        <button class="exp-opt" onclick="doExport('filtered')">
-          <div class="exp-opt-title">All filtered results</div>
-          <div class="exp-opt-sub" id="lbl-filtered">All visible entries</div>
-        </button>
-        <button class="exp-opt" onclick="doExport('selected')">
-          <div class="exp-opt-title">Selected rows only</div>
-          <div class="exp-opt-sub" id="lbl-selected">0 rows selected</div>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="stats">
-  <div class="sc-card" style="background:linear-gradient(135deg,#4F46E5,#6366F1)" onclick="showDrill('total')">
-    <div class="sc-circle"></div>
-    <div class="sc-icon">&#128203;</div>
-    <div class="sc-num" id="sc-total">0</div>
-    <div class="sc-lbl">Total Entries</div>
-    <div class="sc-sub">Click to drill down</div>
-  </div>
-  <div class="sc-card" style="background:linear-gradient(135deg,#0EA5E9,#38BDF8)" onclick="showDrill('auth')">
-    <div class="sc-circle"></div>
-    <div class="sc-icon">&#128274;</div>
-    <div class="sc-num" id="sc-auth">0</div>
-    <div class="sc-lbl">Auth Events</div>
-    <div class="sc-sub">Logins &amp; logouts</div>
-  </div>
-  <div class="sc-card" style="background:linear-gradient(135deg,#EF4444,#F87171)" onclick="showDrill('orders')">
-    <div class="sc-circle"></div>
-    <div class="sc-icon">&#128466;</div>
-    <div class="sc-num" id="sc-orders">0</div>
-    <div class="sc-lbl">Order Events</div>
-    <div class="sc-sub">Deletes &amp; changes</div>
-  </div>
-  <div class="sc-card" style="background:linear-gradient(135deg,#10B981,#34D399)" onclick="showDrill('access')">
-    <div class="sc-circle"></div>
-    <div class="sc-icon">&#128100;</div>
-    <div class="sc-num" id="sc-access">0</div>
-    <div class="sc-lbl">Access &amp; System</div>
-    <div class="sc-sub">Admin &amp; publish events</div>
-  </div>
-</div>
-<div class="toolbar">
-  <div class="search-wrap">
-    <span class="search-ico">&#128269;</span>
-    <input type="text" id="q" placeholder="Search admin, action, target, detail..." oninput="applyFilters()">
-  </div>
-  <select class="flt-select" id="f-type" onchange="applyFilters()">
-    <option value="">All action types</option>
-    <option value="access.admin_added">Admin added</option>
-    <option value="access.admin_removed">Admin removed</option>
-    <option value="access.role_changed">Admin role changed</option>
-    <option value="auth.auto_logoff">Auto-logout</option>
-    <option value="category.added">Category added</option>
-    <option value="category.removed">Category removed</option>
-    <option value="category.updated">Category updated</option>
-    <option value="auth.login">Login</option>
-    <option value="auth.logout">Logout</option>
-    <option value="order.soft_delete">Order deleted</option>
-    <option value="order.permanent_delete">Order perm. deleted</option>
-    <option value="order.restore">Order restored</option>
-    <option value="order.status_change">Order status change</option>
-    <option value="portal.products_published">Products published</option>
-  </select>
-  <select class="flt-select" id="f-admin" onchange="applyFilters()">
-    <option value="">All admins</option>
-  </select>
-  <select class="flt-select" id="f-result" onchange="applyFilters()">
-    <option value="">All results</option>
-    <option value="success">Success</option>
-    <option value="denied">Denied</option>
-  </select>
-  <span class="flt-sep">From</span>
-  <input type="date" class="flt-date" id="f-from" onchange="applyFilters()">
-  <span class="flt-sep">To</span>
-  <input type="date" class="flt-date" id="f-to" onchange="applyFilters()">
-  <button class="clear-btn" onclick="clearFilters()">&#10005; Clear</button>
-  <span class="count-pill" id="count-pill">0 entries</span>
-</div>
-<div class="table-wrap">
-  <table>
-    <thead><tr>
-      <th class="center" style="width:34px"><input type="checkbox" id="sel-all" onchange="toggleAll(this)" style="cursor:pointer;accent-color:#16A34A"></th>
-      <th class="center" style="width:24px"></th>
-      <th style="width:10%">Date / Time</th>
-      <th style="width:15%">Admin</th>
-      <th style="width:11%">Action</th>
-      <th style="width:13%">Target</th>
-      <th>Detail</th>
-      <th style="width:7%;text-align:center">Result</th>
-    </tr></thead>
-    <tbody id="tbody">${rowsHtml}</tbody>
-  </table>
-</div>
-<!-- Drilldown modal -->
-<div class="dd-bg" id="dd-bg" onclick="closeDrill()">
-  <div class="dd-box" onclick="event.stopPropagation()">
-    <div class="dd-hdr">
-      <div>
-        <div class="dd-title" id="dd-title">Details</div>
-        <div class="dd-sub" id="dd-sub"></div>
-      </div>
-      <button onclick="closeDrill()" style="background:none;border:none;font-size:18px;color:#94A3B8;cursor:pointer;padding:4px 8px;line-height:1">&#10005;</button>
-    </div>
-    <div class="dd-body" id="dd-body"></div>
-  </div>
-</div>
-<script>
-var ALL=[];
-(function(){
-  var rows=document.querySelectorAll('#tbody tr.data-row');
-  rows.forEach(function(r){
-    ALL.push({
-      el:r,
-      action:r.dataset.action||'',
-      admin:(r.dataset.admin||'').toLowerCase(),
-      target:(r.dataset.target||'').toLowerCase(),
-      detail:(r.dataset.detail||'').toLowerCase(),
-      result:r.dataset.result||'',
-      ts:r.dataset.ts||''
-    });
-  });
-  /* populate admin dropdown */
-  var admins={};
-  ALL.forEach(function(d){
-    if(d.admin&&!admins[d.admin]){
-      var name=d.admin.split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase();});
-      admins[d.admin]=name;
-    }
-  });
-  var sel=document.getElementById('f-admin');
-  Object.keys(admins).sort(function(a,b){return admins[a].localeCompare(admins[b]);}).forEach(function(a){
-    var o=document.createElement('option');
-    o.value=a;
-    o.textContent=a.split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase();});
-    sel.appendChild(o);
-  });
-  /* stats */
-  var tot=ALL.length,auth=0,ord=0,acc=0;
-  ALL.forEach(function(d){
-    if(d.action.startsWith('auth.'))auth++;
-    else if(d.action.startsWith('order.'))ord++;
-    else if(d.action.startsWith('access.')||d.action.startsWith('category.')||d.action.startsWith('portal.'))acc++;
-  });
-  document.getElementById('sc-total').textContent=tot;
-  document.getElementById('sc-logins').textContent=auth;
-  document.getElementById('sc-orders').textContent=ord;
-  document.getElementById('sc-access').textContent=acc;
-  document.getElementById('count-pill').textContent=tot+' entries';
-})();
-
-function applyFilters(){
-  var q=document.getElementById('q').value.toLowerCase();
-  var ft=document.getElementById('f-type').value;
-  var fa=document.getElementById('f-admin').value;
-  var fr=document.getElementById('f-result').value;
-  var df=document.getElementById('f-from').value;
-  var dt=document.getElementById('f-to').value;
-  var count=0;
-  ALL.forEach(function(d){
-    var show=true;
-    if(ft&&d.action!==ft)show=false;
-    if(fa&&d.admin!==fa)show=false;
-    if(fr&&d.result!==fr)show=false;
-    if(df&&d.ts&&d.ts<df)show=false;
-    if(dt&&d.ts&&d.ts>dt)show=false;
-    if(q&&!(d.admin.includes(q)||d.action.includes(q)||d.target.includes(q)||d.detail.includes(q)))show=false;
-    d.el.style.display=show?'':'none';
-    var sn=document.getElementById('sn-'+d.el.dataset.idx);
-    if(!show&&sn)sn.style.display='none';
-    if(show)count++;
-  });
-  document.getElementById('count-pill').textContent=count+' entr'+(count===1?'y':'ies');
-}
-
-function clearFilters(){
-  ['q','f-from','f-to'].forEach(function(id){document.getElementById(id).value='';});
-  ['f-type','f-admin','f-result'].forEach(function(id){document.getElementById(id).selectedIndex=0;});
-  ALL.forEach(function(d){d.el.style.display='';});
-  document.getElementById('count-pill').textContent=ALL.length+' entries';
-}
-
-function toggleSnap(idx){
-  var snap=document.getElementById('snap-'+idx);
-  var chev=document.getElementById('chev-'+idx);
-  if(!snap)return;
-  var open=snap.style.display==='table-row';
-  snap.style.display=open?'none':'table-row';
-  if(chev)chev.classList.toggle('open',!open);
-}
-
-function toggleAll(cb){
-  document.querySelectorAll('#tbody .row-cb').forEach(function(c){c.checked=cb.checked;});
-  updSelCount();
-}
-
-function updSelCount(){
-  var n=document.querySelectorAll('#tbody .row-cb:checked').length;
-  document.getElementById('lbl-selected').textContent=n+' row'+(n===1?'':'s')+' selected';
-}
-
-function toggleExp(){
-  var m=document.getElementById('exp-menu');
-  var open=m.style.display==='block';
-  if(!open){
-    var vis=visibleRows();
-    document.getElementById('lbl-page').textContent='First 25 of '+vis.length+' visible entries';
-    document.getElementById('lbl-filtered').textContent=vis.length+' entries matching filters';
-  }
-  m.style.display=open?'none':'block';
-}
-
-document.addEventListener('click',function(e){
-  if(!e.target.closest('.exp-wrap'))document.getElementById('exp-menu').style.display='none';
-});
-
-function visibleRows(){
-  return Array.from(document.querySelectorAll('#tbody tr.data-row')).filter(function(r){return r.style.display!=='none';});
-}
-
-function doExport(mode){
-  document.getElementById('exp-menu').style.display='none';
-  var rows=visibleRows();
-  if(mode==='page')rows=rows.slice(0,25);
-  if(mode==='selected')rows=rows.filter(function(r){var cb=r.querySelector('.row-cb');return cb&&cb.checked;});
-  if(!rows.length){alert('No entries to export.');return;}
-  var headers=['Timestamp','Admin','Action','Target','Detail','Result'];
-  var lines=[headers.map(csvQ).join(',')];
-  rows.forEach(function(r){
-    var tds=r.querySelectorAll('td');
-    if(tds.length<8)return;
-    var ts=r.dataset.ts||tds[2].innerText.replace(/\n/g,' ').trim();
-    var admin=tds[3].innerText.replace(/\n/g,' ').trim();
-    var action=tds[4].innerText.trim();
-    var target=tds[5].innerText.trim();
-    var detail=tds[6].innerText.replace(/\n/g,' ').trim();
-    var result=tds[7].innerText.trim();
-    lines.push([ts,admin,action,target,detail,result].map(csvQ).join(','));
-  });
-  var blob=new Blob([lines.join('\n')],{type:'text/csv;charset=utf-8;'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;a.download='fpg-audit-log-'+mode+'-'+new Date().toISOString().slice(0,10)+'.csv';
-  document.body.appendChild(a);a.click();document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-function csvQ(v){return '"'+String(v||'').split('"').join('""')+'"';}
-
-
-function showDrill(type){
-  var colors={total:'#4F46E5',auth:'#0EA5E9',orders:'#EF4444',access:'#10B981'};
-  var color=colors[type]||'#4F46E5';
-  var titles={total:'All Audit Entries',auth:'Auth Events',orders:'Order Events',access:'Access & System Events'};
-  var subsets={
-    total:ALL,
-    auth:ALL.filter(function(d){return d.action.indexOf('auth.')===0;}),
-    orders:ALL.filter(function(d){return d.action.indexOf('order.')===0;}),
-    access:ALL.filter(function(d){return d.action.indexOf('order.')!==0&&d.action.indexOf('auth.')!==0;})
-  };
-  var sub=subsets[type]||ALL;
-  var actionLabels={'auth.login':'Login','auth.logout':'Logout','auth.auto_logoff':'Auto-logout','order.status_change':'Status change','order.soft_delete':'Order deleted','order.permanent_delete':'Perm. deleted','order.restore':'Restored','access.admin_added':'Admin added','access.admin_removed':'Admin removed','access.role_changed':'Role changed','portal.products_published':'Published','category.added':'Cat. added','category.updated':'Cat. updated','category.removed':'Cat. removed'};
-  var actionCounts={};
-  sub.forEach(function(d){actionCounts[d.action]=(actionCounts[d.action]||0)+1;});
-  var actionRows=Object.entries(actionCounts).sort(function(a,b){return b[1]-a[1];});
-  var maxA=actionRows.length?actionRows[0][1]:1;
-  var adminCounts={};var adminNames={};
-  sub.forEach(function(d){if(d.admin){adminCounts[d.admin]=(adminCounts[d.admin]||0)+1;adminNames[d.admin]=d.admin.split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase();}); }});
-  var adminRows=Object.entries(adminCounts).sort(function(a,b){return b[1]-a[1];});
-  var maxAdm=adminRows.length?adminRows[0][1]:1;
-  var resCounts={success:0,denied:0,other:0};
-  sub.forEach(function(d){if(d.result==='success')resCounts.success++;else if(d.result==='denied')resCounts.denied++;else resCounts.other++;});
-  var html='<div style="margin-bottom:14px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#94A3B8;margin-bottom:8px">By Result</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">';
-  html+='<div style="background:#F8FAFC;border-radius:9px;padding:11px 13px;border-left:3px solid #10B981"><div style="font-size:20px;font-weight:800;color:#10B981">'+resCounts.success+'</div><div style="font-size:11px;color:#64748B;margin-top:3px;font-weight:600">Success</div></div>';
-  html+='<div style="background:#F8FAFC;border-radius:9px;padding:11px 13px;border-left:3px solid #EF4444"><div style="font-size:20px;font-weight:800;color:#EF4444">'+resCounts.denied+'</div><div style="font-size:11px;color:#64748B;margin-top:3px;font-weight:600">Denied</div></div>';
-  html+='<div style="background:#F8FAFC;border-radius:9px;padding:11px 13px;border-left:3px solid #94A3B8"><div style="font-size:20px;font-weight:800;color:#94A3B8">'+resCounts.other+'</div><div style="font-size:11px;color:#64748B;margin-top:3px;font-weight:600">No result</div></div>';
-  html+='</div></div>';
-  html+='<div style="margin-bottom:14px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#94A3B8;margin-bottom:8px">By Action Type</div>';
-  actionRows.forEach(function(r){var label=actionLabels[r[0]]||r[0];var pct=Math.max(4,Math.round(r[1]/maxA*100));html+='<div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span style="font-weight:600;color:#0F172A">'+label+'</span><span style="color:#64748B">'+r[1]+'</span></div><div style="height:5px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div style="height:100%;background:'+color+';border-radius:3px;width:'+pct+'%;opacity:0.8"></div></div></div>';});
-  html+='</div>';
-  html+='<div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#94A3B8;margin-bottom:8px">By Admin</div>';
-  adminRows.slice(0,8).forEach(function(r){var name=adminNames[r[0]]||r[0];var pct=Math.max(4,Math.round(r[1]/maxAdm*100));html+='<div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span style="font-weight:600;color:#0F172A">'+name+'</span><span style="color:#64748B">'+r[1]+'</span></div><div style="height:5px;background:#F1F5F9;border-radius:3px;overflow:hidden"><div style="height:100%;background:'+color+';border-radius:3px;width:'+pct+'%;opacity:0.8"></div></div></div>';});
-  html+='</div>';
-  document.getElementById('dd-title').textContent=titles[type]||'Details';
-  document.getElementById('dd-sub').textContent=sub.length+' entries';
-  document.getElementById('dd-body').innerHTML=html;
-  document.getElementById('dd-bg').classList.add('open');
-}
-function closeDrill(){document.getElementById('dd-bg').classList.remove('open');}
-
-function toggleYear(y,btn){alert('Close this tab and re-open the Audit Log from the admin panel to load '+y+'.');}
-
-window.onload=function(){
-  document.getElementById('count-pill').textContent=ALL.length+' entr'+(ALL.length===1?'y':'ies');
-};
-<\/script></body></html>`
-
-                    const blob = new Blob([html], { type: 'text/html' });
-                    const url = URL.createObjectURL(blob);
-                    window.open(url, '_blank');
-                    setAuditYears(yearsToLoad);
-                } catch(e) { setStatus({ type: 'error', text: 'Failed to load audit log: ' + (e.message || 'Unknown error') }); }
-            };
+            const loadAuditLog = function() { if (onNavigate) onNavigate('auditlog'); };
 
             const handleStatusChange = async function(order, newStatus) {
                 try {
@@ -3764,332 +3286,23 @@ window.onload=function(){
                             </div>
                         </div>
                     )}
-                    {showAudit && (() => {
-                        const actionMeta = {
-                            'auth.login':          { label: 'Login',          bg:'#E6F1FB', color:'#0C447C' },
-                            'auth.logout':         { label: 'Logout',         bg:'#F1EFE8', color:'#5F5E5A' },
-                            'auth.auto_logoff':    { label: 'Auto-logout',    bg:'#F1EFE8', color:'#5F5E5A' },
-                            'order.soft_delete':   { label: 'Order deleted',  bg:'#FEE2E2', color:'#991B1B' },
-                            'order.permanent_delete':{ label:'Perm. deleted', bg:'#FCA5A5', color:'#7F1D1D' },
-                            'order.permanent_delete_attempt':{ label:'Perm. denied', bg:'#FCA5A5', color:'#7F1D1D' },
-                            'order.restore':       { label: 'Restored',       bg:'#D1FAE5', color:'#065F46' },
-                            'order.status_change': { label: 'Status change',  bg:'#FEF3C7', color:'#92400E' },
-                            'access.admin_added':  { label: 'Admin added',    bg:'#EDE9FE', color:'#085041' },
-                            'access.admin_removed':{ label: 'Admin removed',  bg:'#FEE2E2', color:'#991B1B' },
-                            'access.role_changed': { label: 'Role changed',   bg:'#FAEEDA', color:'#633806' },
-                        };
-                        const getMeta = (action) => actionMeta[action] || { label: action, bg:'#F1F5F9', color:'#475569' };
 
-                        // Build type counts
-                        const typeCounts = {};
-                        auditLog.forEach(e => {
-                            const key = e.action;
-                            typeCounts[key] = (typeCounts[key]||0) + 1;
-                        });
 
-                        // Filtered entries
-                        const filtered = auditTypeFilter === 'all' ? auditLog : auditLog.filter(e => e.action === auditTypeFilter);
 
-                        const isExpandable = (action) => action === 'order.soft_delete' || action === 'order.permanent_delete';
-
-                        const exportAuditCSV = () => {
-                            const headers = ['Log ID','Timestamp','Admin Email','Action','Target','Reason','Status Change','Order Recipient','Location ID','Total','Ship To','Items','Result'];
-                            const rows = filtered.map(e => {
-                                const s = e.detail?.orderSnapshot || {};
-                                const items = (s.items||[]).map(i => `${i.title} x${i.quantity||1}`).join('; ');
-                                return [
-                                    e.id, new Date(e.timestamp).toLocaleString(), e.adminEmail, e.action,
-                                    e.target||'',
-                                    e.detail?.reason||'',
-                                    e.detail?.oldStatus ? `${e.detail.oldStatus} -> ${e.detail.newStatus}` : '',
-                                    s.recipientName||'', s.locationId||'',
-                                    s.total ? `$${s.total.toFixed(2)}` : '',
-                                    `"${(s.shipTo||'').replace(/"/g,'""')}"`,
-                                    `"${items.replace(/"/g,'""')}"`,
-                                    e.result
-                                ];
-                            });
-                            const csv = [headers,...rows].map(r=>r.join(',')).join('\n');
-                            const blob = new Blob([csv],{type:'text/csv'});
-                            const url = URL.createObjectURL(blob);
-                            const a = document.createElement('a'); a.href=url; a.download=`audit-log-${auditYears.join('-')}.csv`; a.click();
-                            URL.revokeObjectURL(url);
-                        };
-
-                        const toggleAuditYear = (year) => {
-                            const next = auditYears.includes(year) ? auditYears.filter(y=>y!==year) : [...auditYears,year];
-                            if (next.length === 0) return;
-                            setAuditYears(next);
-                            loadAuditLog(next);
-                        };
-
-                        return (
-                        <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.5)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center',padding:'16px'}}>
-                            <div style={{background:'white',borderRadius:'12px',width:'960px',maxWidth:'98vw',maxHeight:'90vh',overflow:'hidden',display:'flex',flexDirection:'column',boxShadow:'0 12px 40px rgba(0,0,0,0.2)'}}>
-                                <div style={{padding:'14px 18px',borderBottom:'0.5px solid #E7E5E4',display:'flex',justifyContent:'space-between',alignItems:'center',background:'#FAFAF9'}}>
-                                    <div style={{display:'flex',alignItems:'center',gap:'12px'}}>
-                                        <span style={{fontSize:'15px',fontWeight:500}}>📋 Audit Log</span>
-                                        <div style={{display:'flex',gap:'5px'}}>
-                                            {availableYears.map(y => (
-                                                <button key={y} onClick={()=>toggleAuditYear(y)}
-                                                    style={{padding:'3px 10px',border:'0.5px solid',borderRadius:'20px',fontSize:'11px',cursor:'pointer',fontFamily:'inherit',fontWeight:500,
-                                                        borderColor: auditYears.includes(y)?'#1E3A5F':'#D6D3D1',
-                                                        background: auditYears.includes(y)?'#1E3A5F':'white',
-                                                        color: auditYears.includes(y)?'white':'#57534E'}}>
-                                                    {y}
-                                                </button>
-                                            ))}
-                                        </div>
-                                        <span style={{fontSize:'11px',color:'#A8A29E'}}>{filtered.length} entries</span>
-                                    </div>
-                                    <div style={{display:'flex',gap:'8px',alignItems:'center'}}>
-                                        <button onClick={exportAuditCSV}
-                                            style={{padding:'5px 14px',background:'#D97706',color:'white',border:'none',borderRadius:'6px',fontSize:'12px',cursor:'pointer',fontFamily:'inherit',fontWeight:500}}>
-                                            ⬇ Export CSV
-                                        </button>
-                                        <button onClick={()=>setShowAudit(false)} style={{background:'none',border:'none',fontSize:'20px',cursor:'pointer',color:'#A8A29E',lineHeight:1}}>✕</button>
-                                    </div>
-                                </div>
-                                <div style={{display:'flex',flex:1,overflow:'hidden'}}>
-                                    <div style={{width:'170px',flexShrink:0,borderRight:'0.5px solid #E7E5E4',padding:'12px 10px',overflowY:'auto'}}>
-                                        <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.08em',color:'#A8A29E',marginBottom:'8px'}}>Filter by type</div>
-                                        <div onClick={()=>setAuditTypeFilter('all')}
-                                            style={{padding:'6px 8px',borderRadius:'6px',fontSize:'12px',cursor:'pointer',marginBottom:'3px',display:'flex',justifyContent:'space-between',alignItems:'center',
-                                                background:auditTypeFilter==='all'?'#1E3A5F':'transparent',
-                                                color:auditTypeFilter==='all'?'white':'#57534E'}}>
-                                            <span>All actions</span>
-                                            <span style={{fontSize:'11px',opacity:0.7}}>{auditLog.length}</span>
-                                        </div>
-                                        {Object.entries(typeCounts).sort((a,b)=>b[1]-a[1]).map(([action, count]) => {
-                                            const m = getMeta(action);
-                                            const isActive = auditTypeFilter === action;
-                                            return (
-                                                <div key={action} onClick={()=>setAuditTypeFilter(action)}
-                                                    style={{padding:'5px 8px',borderRadius:'6px',fontSize:'11px',cursor:'pointer',marginBottom:'3px',display:'flex',justifyContent:'space-between',alignItems:'center',
-                                                        background:isActive?'#F1F5F9':'transparent'}}>
-                                                    <span style={{display:'inline-block',padding:'2px 7px',borderRadius:'4px',background:m.bg,color:m.color,fontWeight:500,fontSize:'10.5px'}}>{m.label}</span>
-                                                    <span style={{fontSize:'11px',color:'#A8A29E'}}>{count}</span>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                    <div style={{flex:1,overflowY:'auto'}}>
-                                        {filtered.length === 0 ? (
-                                            <div style={{textAlign:'center',padding:'3rem',color:'#A8A29E'}}>No entries for this filter.</div>
-                                        ) : (
-                                            <table id="tbl-versions" className="resizable-table" style={{tableLayout:'fixed',width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed'}}>
-                                                <thead style={{position:'sticky',top:0,zIndex:1}}>
-                                                    <tr style={{background:'#D97706'}}>
-                                                        <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'3%'}}></th>
-                                                        <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'14%'}}>Date/Time</th>
-                                                        <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'17%'}}>Admin</th>
-                                                        <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'14%'}}>Action</th>
-                                                        <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'12%'}}>Target</th>
-                                                        <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'32%'}}>Detail</th>
-                                                        <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'8%'}}>Result</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {filtered.map((entry, i) => {
-                                                        const m = getMeta(entry.action);
-                                                        const expandable = isExpandable(entry.action);
-                                                        const expanded = auditExpandedRows[entry.id];
-                                                        const s = entry.detail?.orderSnapshot;
-                                                        const dt = new Date(entry.timestamp);
-                                                        return (
-                                                            <React.Fragment key={entry.id || i}>
-                                                                <tr onClick={expandable ? ()=>setAuditExpandedRows(prev=>({...prev,[entry.id]:!prev[entry.id]})) : undefined}
-                                                                    style={{borderBottom:'0.5px solid #E7E5E4',cursor:expandable?'pointer':'default',background:expanded?'#DBEAFE':i%2===0?'white':'#DBEAFE'}}>
-                                                                    <td style={{padding:'9px 6px',textAlign:'center',color:'#A8A29E',fontSize:'11px'}}>
-                                                                        {expandable ? (expanded ? '▾' : '▸') : ''}
-                                                                    </td>
-                                                                    <td style={{padding:'9px 10px',color:'#78716C',fontSize:'11px'}}>
-                                                                        {dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}<br/>
-                                                                        <span style={{fontSize:'10.5px'}}>{dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>
-                                                                    </td>
-                                                                    <td style={{padding:'9px 10px'}}>
-                                                                        <div style={{fontWeight:500,fontSize:'11.5px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{entry.adminEmail?.split('@')[0].replace('.',' ').replace(/\b\w/g,c=>c.toUpperCase())}</div>
-                                                                        <div style={{fontSize:'10px',color:'#A8A29E',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{entry.adminEmail}</div>
-                                                                    </td>
-                                                                    <td style={{padding:'9px 10px'}}>
-                                                                        <span style={{display:'inline-block',padding:'2px 8px',borderRadius:'4px',background:m.bg,color:m.color,fontWeight:500,fontSize:'10.5px',whiteSpace:'nowrap'}}>{m.label}</span>
-                                                                    </td>
-                                                                    <td style={{padding:'9px 10px',fontSize:'11px',fontFamily:'monospace',color:'#185FA5',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
-                                                                        {entry.target || '—'}
-                                                                    </td>
-                                                                    <td style={{padding:'9px 10px',fontSize:'11px',color:'#57534E'}}>
-                                                                        {entry.detail?.reason && <span><span style={{color:'#A8A29E'}}>Reason:</span> {entry.detail.reason} · </span>}
-                                                                        {entry.detail?.oldStatus && <span>{entry.detail.oldStatus} → <strong>{entry.detail.newStatus}</strong> · </span>}
-                                                                        {entry.detail?.newEmail && <span><span style={{color:'#A8A29E'}}>Added:</span> {entry.detail.newEmail} ({entry.detail.role}) · </span>}
-                                                                        {entry.detail?.removedEmail && <span><span style={{color:'#A8A29E'}}>Removed:</span> {entry.detail.removedEmail} · </span>}
-                                                                        {s && <span><span style={{color:'#A8A29E'}}>For:</span> {s.recipientName} · <span style={{color:'#4C3BAF',fontWeight:500}}>{s.locationId}</span> · ${(s.total||0).toFixed(2)}</span>}
-                                                                        {entry.detail?.browser && <span style={{color:'#A8A29E'}}>{entry.detail.browser.substring(0,60)}</span>}
-                                                                    </td>
-                                                                    <td style={{padding:'9px 10px'}}>
-                                                                        <span style={{fontSize:'10px',padding:'2px 7px',borderRadius:'10px',fontWeight:500,
-                                                                            background:entry.result==='success'?'#D1FAE5':entry.result==='denied'?'#FEE2E2':'#F5F5F4',
-                                                                            color:entry.result==='success'?'#065F46':entry.result==='denied'?'#991B1B':'#78716C'}}>
-                                                                            {entry.result}
-                                                                        </span>
-                                                                    </td>
-                                                                </tr>
-                                                                {expandable && expanded && s && (
-                                                                    <tr style={{background:'#F8FAFC'}}>
-                                                                        <td colSpan={7} style={{padding:'0 10px 12px 32px',borderBottom:'0.5px solid #E7E5E4'}}>
-                                                                            <div style={{padding:'12px 14px',background:'white',borderRadius:'8px',border:'0.5px solid #E7E5E4',fontSize:'11.5px'}}>
-                                                                                <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.06em',color:'#A8A29E',marginBottom:'8px'}}>Order snapshot at time of action</div>
-                                                                                <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'8px'}}>
-                                                                                    <div><span style={{color:'#A8A29E'}}>Submitter:</span> {s.submitterName}</div>
-                                                                                    <div><span style={{color:'#A8A29E'}}>Recipient:</span> {s.recipientName}</div>
-                                                                                    <div><span style={{color:'#A8A29E'}}>Location:</span> <strong style={{color:'#185FA5'}}>{s.locationId}</strong></div>
-                                                                                    <div><span style={{color:'#A8A29E'}}>Total:</span> <strong>${(s.total||0).toFixed(2)}</strong></div>
-                                                                                    <div style={{gridColumn:'2/-1'}}><span style={{color:'#A8A29E'}}>Ship to:</span> {s.shipTo}</div>
-                                                                                    {(s.items||[]).length > 0 && (
-                                                                                        <div style={{gridColumn:'1/-1'}}>
-                                                                                            <span style={{color:'#A8A29E'}}>Items:</span>{' '}
-                                                                                            {s.items.map((item,j) => (
-                                                                                                <span key={j} style={{marginRight:'10px'}}>{item.title} ×{item.quantity||1} <span style={{color:'#A8A29E'}}>${((item.price||0)*(item.quantity||1)).toFixed(2)}</span></span>
-                                                                                            ))}
-                                                                                        </div>
-                                                                                    )}
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                )}
-                                                            </React.Fragment>
-                                                        );
-                                                    })}
-                                                </tbody>
-                                            </table>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        );
-                    })()}
-
-                    {drilldown && (() => {
-                        const fmtVal = (v) => v>=1000000 ? '$'+(v/1000000).toFixed(2).replace(/\.?0+$/,'')+'M' : v>=1000 ? '$'+Math.round(v/1000)+'K' : '$'+v.toLocaleString();
-                        const nonDel = orders.filter(o => o.status !== 'Deleted');
-                        const byStatus = [
-                            {label:'New', color:'#0EA5E9', count: orders.filter(o=>o.status==='New').length},
-                            {label:'In Progress', color:'#F59E0B', count: orders.filter(o=>o.status==='In Progress').length},
-                            {label:'Fulfilled', color:'#10B981', count: orders.filter(o=>o.status==='Fulfilled').length},
-                            {label:'Deleted', color:'#EF4444', count: orders.filter(o=>o.status==='Deleted').length},
-                        ];
-                        const months = {};
-                        nonDel.forEach(o => { const m = o.submittedAt ? o.submittedAt.slice(0,7) : 'Unknown'; months[m] = (months[m]||0)+1; });
-                        const byMonth = Object.entries(months).sort((a,b)=>a[0].localeCompare(b[0])).slice(-12);
-                        const maxMonth = Math.max(...byMonth.map(([,c])=>c), 1);
-                        const cfg = {
-                            total:     {title:'Total Orders Breakdown',      color:'#4F46E5', subset: nonDel,                                showStatus:true,  showTrend:true},
-                            new:       {title:'New · Awaiting Action',       color:'#0EA5E9', subset: orders.filter(o=>o.status==='New'),     showStatus:false, showTrend:false},
-                            inprogress:{title:'In Progress Orders',          color:'#F59E0B', subset: orders.filter(o=>o.status==='In Progress'), showStatus:false, showTrend:false},
-                            value:     {title:'Total Value — '+currentYear,  color:'#10B981', subset: nonDel,                                showStatus:true,  showTrend:true},
-                            deleted:   {title:'Soft Deleted Orders',         color:'#EF4444', subset: orders.filter(o=>o.status==='Deleted'), showStatus:false, showTrend:false},
-                        }[drilldown] || {title:'Orders',color:'#4F46E5',subset:nonDel,showStatus:true,showTrend:true};
-                        const sub = cfg.subset;
-                        const byLoc = [...new Map(sub.map(o=>[o.locationId,o])).entries()]
-                            .map(([loc])=>({loc, count:sub.filter(o=>o.locationId===loc).length, value:sub.filter(o=>o.locationId===loc).reduce((s,o)=>s+(o.total||0),0)}))
-                            .sort((a,b)=>b.count-a.count).slice(0,8);
-                        const byAdm = [...new Map(sub.map(o=>[o.submitterEmail,o.submitterName])).entries()]
-                            .map(([email,name])=>({name, count:sub.filter(o=>o.submitterEmail===email).length, value:sub.filter(o=>o.submitterEmail===email).reduce((s,o)=>s+(o.total||0),0)}))
-                            .sort((a,b)=>b.count-a.count);
-                        const maxL = Math.max(...byLoc.map(r=>r.count),1);
-                        const maxA = Math.max(...byAdm.map(r=>r.count),1);
-                        return (
-                            <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(15,23,42,0.55)',zIndex:2000,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={()=>setDrilldown(null)}>
-                                <div style={{background:'white',borderRadius:'16px',width:'820px',maxWidth:'95vw',maxHeight:'88vh',overflow:'hidden',display:'flex',flexDirection:'column'}} onClick={e=>e.stopPropagation()}>
-                                    <div style={{padding:'18px 24px',borderBottom:'1px solid #F1F5F9',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-                                        <div style={{display:'flex',alignItems:'center',gap:'12px'}}>
-                                            <div style={{width:'8px',height:'32px',background:cfg.color,borderRadius:'4px'}}></div>
-                                            <div>
-                                                <div style={{fontSize:'15px',fontWeight:700,color:'#0F172A'}}>{cfg.title}</div>
-                                                <div style={{fontSize:'12px',color:'#64748B',marginTop:'2px'}}>{sub.length} orders · {fmtVal(sub.reduce((s,o)=>s+(o.total||0),0))} total value</div>
-                                            </div>
-                                        </div>
-                                        <button onClick={()=>setDrilldown(null)} style={{background:'none',border:'none',fontSize:'18px',color:'#94A3B8',cursor:'pointer',padding:'4px 8px'}}>✕</button>
-                                    </div>
-                                    <div style={{overflow:'auto',padding:'20px 24px',display:'flex',flexDirection:'column',gap:'18px'}}>
-                                        {cfg.showStatus && (
-                                            <div>
-                                                <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>Status Breakdown</div>
-                                                <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'10px'}}>
-                                                    {byStatus.map(s => (
-                                                        <div key={s.label} style={{background:'#F8FAFC',borderRadius:'10px',padding:'12px 14px',borderLeft:'3px solid '+s.color}}>
-                                                            <div style={{fontSize:'24px',fontWeight:800,color:s.color,lineHeight:1}}>{s.count}</div>
-                                                            <div style={{fontSize:'11.5px',color:'#475569',marginTop:'4px',fontWeight:600}}>{s.label}</div>
-                                                            <div style={{fontSize:'10.5px',color:'#94A3B8',marginTop:'1px'}}>{orders.length>0?(s.count/orders.length*100).toFixed(1):0}% of all orders</div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
-                                        {cfg.showTrend && byMonth.length > 1 && (
-                                            <div>
-                                                <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>Monthly Trend (last 12 months)</div>
-                                                <div style={{display:'flex',alignItems:'flex-end',gap:'5px',height:'72px',paddingBottom:'18px',position:'relative'}}>
-                                                    {byMonth.map(([m,c]) => (
-                                                        <div key={m} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:'3px',position:'relative'}}>
-                                                            <div style={{fontSize:'9px',color:'#64748B',fontWeight:600,position:'absolute',top:'-14px'}}>{c}</div>
-                                                            <div style={{width:'100%',background:cfg.color,borderRadius:'3px 3px 0 0',height:Math.max(4,Math.round((c/maxMonth)*54))+'px',opacity:0.8}}></div>
-                                                            <div style={{fontSize:'8px',color:'#94A3B8',position:'absolute',bottom:'-16px',whiteSpace:'nowrap'}}>{m.slice(5)}</div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
-                                        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'18px'}}>
-                                            <div>
-                                                <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>Top Locations</div>
-                                                <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
-                                                    {byLoc.map(r => (
-                                                        <div key={r.loc}>
-                                                            <div style={{display:'flex',justifyContent:'space-between',marginBottom:'3px'}}>
-                                                                <span style={{fontSize:'12px',fontWeight:600,color:'#0F172A'}}>{r.loc}</span>
-                                                                <span style={{fontSize:'11.5px',color:'#64748B'}}>{r.count} orders · {fmtVal(r.value)}</span>
-                                                            </div>
-                                                            <div style={{height:'5px',background:'#F1F5F9',borderRadius:'3px'}}>
-                                                                <div style={{height:'100%',background:cfg.color,borderRadius:'3px',width:(r.count/maxL*100)+'%',opacity:0.75}}></div>
-                                                            </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div style={{fontSize:'10px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.09em',color:'#94A3B8',marginBottom:'10px'}}>By Submitter</div>
-                                                <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
-                                                    {byAdm.map(r => (
-                                                        <div key={r.name}>
-                                                            <div style={{display:'flex',justifyContent:'space-between',marginBottom:'3px'}}>
-                                                                <span style={{fontSize:'12px',fontWeight:600,color:'#0F172A'}}>{r.name}</span>
-                                                                <span style={{fontSize:'11.5px',color:'#64748B'}}>{r.count} · {fmtVal(r.value)}</span>
-                                                            </div>
-                                                            <div style={{height:'5px',background:'#F1F5F9',borderRadius:'3px'}}>
-                                                                <div style={{height:'100%',background:cfg.color,borderRadius:'3px',width:(r.count/maxA*100)+'%',opacity:0.75}}></div>
-                                                            </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        );
-                    })()}
-                </div>
-            );
         }
-
 
         // ─── AUDIT LOG OPENER ────────────────────────────────────────────
         // Self-contained component that fires the audit log fetch on mount
         // and opens the result in a new tab, then switches back to orders.
         function AuditLogOpener({ session, azureUrl }) {
             const [status, setStatus] = React.useState('loading');
+            const [entries, setEntries] = React.useState([]);
+            const [filterQ, setFilterQ] = React.useState('');
+            const [filterType, setFilterType] = React.useState('');
+            const [filterAdmin, setFilterAdmin] = React.useState('');
+            const [filterResult, setFilterResult] = React.useState('');
+            const [filterFrom, setFilterFrom] = React.useState('');
+            const [filterTo, setFilterTo] = React.useState('');
 
             React.useEffect(() => {
                 (async () => {
@@ -4565,9 +3778,7 @@ window.onload=function(){
 };
 <\/script></body></html>`
 
-                        const blob = new Blob([html], { type: 'text/html' });
-                        const url = URL.createObjectURL(blob);
-                        window.open(url, '_blank');
+                        setEntries(allEntries);
                         setStatus('done');
                     } catch(e) {
                         setStatus('error');
@@ -4590,10 +3801,148 @@ window.onload=function(){
                     </div>
                 );
             }
+            const META = {
+                'auth.login':          { label: 'Login',            bg:'#EEF2FF', color:'#4C3BAF', border:'#C7D2FE' },
+                'auth.logout':         { label: 'Logout',           bg:'#F1F5F9', color:'#475569', border:'#CBD5E1' },
+                'auth.auto_logoff':    { label: 'Auto-logout',      bg:'#F1F5F9', color:'#475569', border:'#CBD5E1' },
+                'order.soft_delete':   { label: 'Order deleted',    bg:'#FEE2E2', color:'#DC2626', border:'#FECACA' },
+                'order.permanent_delete': { label:'Perm. deleted',  bg:'#FCA5A5', color:'#7F1D1D', border:'#F87171' },
+                'order.restore':       { label: 'Restored',         bg:'#DCFCE7', color:'#166534', border:'#86EFAC' },
+                'order.status_change': { label: 'Status change',    bg:'#FEF9C3', color:'#854D0E', border:'#FDE68A' },
+                'access.admin_added':  { label: 'Admin added',      bg:'#DCFCE7', color:'#166534', border:'#86EFAC' },
+                'access.admin_removed':{ label: 'Admin removed',    bg:'#FEE2E2', color:'#DC2626', border:'#FECACA' },
+                'access.role_changed': { label: 'Role changed',     bg:'#FEF3C7', color:'#92400E', border:'#FDE68A' },
+                'portal.products_published': { label:'Published',   bg:'#DCFCE7', color:'#166534', border:'#86EFAC' },
+                'category.added':      { label: 'Cat. added',       bg:'#EFF6FF', color:'#1E40AF', border:'#BFDBFE' },
+                'category.updated':    { label: 'Cat. updated',     bg:'#EFF6FF', color:'#1E40AF', border:'#BFDBFE' },
+                'category.removed':    { label: 'Cat. removed',     bg:'#FEE2E2', color:'#DC2626', border:'#FECACA' },
+            };
+            const getMeta = (a) => META[a] || { label: a, bg:'#F1F5F9', color:'#475569', border:'#CBD5E1' };
+            const admins = [...new Set(entries.map(e=>e.adminEmail).filter(Boolean))].sort();
+            const filtered = entries.filter(e => {
+                const q = filterQ.toLowerCase();
+                const ts = e.timestamp ? e.timestamp.slice(0,10) : '';
+                if (filterQ && ![(e.adminEmail||''),(e.action||''),(e.target||''),JSON.stringify(e.detail||'')].join(' ').toLowerCase().includes(q)) return false;
+                if (filterType && e.action !== filterType) return false;
+                if (filterAdmin && e.adminEmail !== filterAdmin) return false;
+                if (filterResult && e.result !== filterResult) return false;
+                if (filterFrom && ts < filterFrom) return false;
+                if (filterTo && ts > filterTo) return false;
+                return true;
+            });
+            if (status === 'loading') return (
+                <div style={{display:'flex',alignItems:'center',justifyContent:'center',padding:'3rem',gap:'12px',color:'#64748B'}}>
+                    <div style={{width:'20px',height:'20px',border:'2px solid #E2E8F0',borderTopColor:'#16A34A',borderRadius:'50%',animation:'spin 0.8s linear infinite'}}></div>
+                    Loading audit log...
+                </div>
+            );
+            if (status === 'error') return (
+                <div style={{padding:'3rem',textAlign:'center',color:'#DC2626'}}>Failed to load audit log. Please try again.</div>
+            );
             return (
-                <div style={{padding:'2rem',textAlign:'center',color:'#64748B'}}>
-                    <div style={{fontSize:'1.5rem',marginBottom:'8px'}}>✅</div>
-                    Audit log opened in a new tab.
+                <div style={{display:'flex',flexDirection:'column',height:'100%',overflow:'hidden'}}>
+                    <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'14px',padding:'14px 20px',flexShrink:0}}>
+                        {[
+                            {label:'Total Entries',val:entries.length,sub:'All time',grad:'linear-gradient(135deg,#4F46E5,#6366F1)'},
+                            {label:'Auth Events',val:entries.filter(e=>e.action.startsWith('auth.')).length,sub:'Logins & logouts',grad:'linear-gradient(135deg,#0EA5E9,#38BDF8)'},
+                            {label:'Order Events',val:entries.filter(e=>e.action.startsWith('order.')).length,sub:'Deletes & changes',grad:'linear-gradient(135deg,#EF4444,#F87171)'},
+                            {label:'Access & System',val:entries.filter(e=>!e.action.startsWith('order.')&&!e.action.startsWith('auth.')).length,sub:'Admin & publish',grad:'linear-gradient(135deg,#10B981,#34D399)'},
+                        ].map((s,i) => (
+                            <div key={i} style={{background:s.grad,borderRadius:'14px',padding:'16px 18px',position:'relative',overflow:'hidden'}}>
+                                <div style={{position:'absolute',top:'-12px',right:'-12px',width:'70px',height:'70px',background:'rgba(255,255,255,0.12)',borderRadius:'50%'}}></div>
+                                <div style={{fontSize:'32px',fontWeight:800,color:'rgba(255,255,255,0.92)',letterSpacing:'-1px',lineHeight:1}}>{s.val}</div>
+                                <div style={{fontSize:'12px',color:'rgba(255,255,255,0.72)',marginTop:'6px',fontWeight:600}}>{s.label}</div>
+                                <div style={{fontSize:'10.5px',color:'rgba(255,255,255,0.50)',marginTop:'2px'}}>{s.sub}</div>
+                            </div>
+                        ))}
+                    </div>
+                    <div style={{padding:'8px 20px',background:'white',borderBottom:'0.5px solid #E2E8F0',display:'flex',gap:'8px',alignItems:'center',flexShrink:0,flexWrap:'wrap'}}>
+                        <input value={filterQ} onChange={e=>setFilterQ(e.target.value)} placeholder="Search admin, action, target, detail..." style={{flex:1,minWidth:'180px',padding:'7px 10px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12.5px',fontFamily:'inherit',outline:'none'}} />
+                        <select value={filterType} onChange={e=>setFilterType(e.target.value)} style={{padding:'7px 10px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12px',fontFamily:'inherit',background:'white',cursor:'pointer',outline:'none'}}>
+                            <option value="">All action types</option>
+                            <option value="access.admin_added">Admin added</option>
+                            <option value="access.admin_removed">Admin removed</option>
+                            <option value="access.role_changed">Admin role changed</option>
+                            <option value="auth.auto_logoff">Auto-logout</option>
+                            <option value="category.added">Category added</option>
+                            <option value="category.removed">Category removed</option>
+                            <option value="category.updated">Category updated</option>
+                            <option value="auth.login">Login</option>
+                            <option value="auth.logout">Logout</option>
+                            <option value="order.soft_delete">Order deleted</option>
+                            <option value="order.permanent_delete">Order perm. deleted</option>
+                            <option value="order.restore">Order restored</option>
+                            <option value="order.status_change">Order status change</option>
+                            <option value="portal.products_published">Products published</option>
+                        </select>
+                        <select value={filterAdmin} onChange={e=>setFilterAdmin(e.target.value)} style={{padding:'7px 10px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12px',fontFamily:'inherit',background:'white',cursor:'pointer',outline:'none'}}>
+                            <option value="">All admins</option>
+                            {admins.map(a => <option key={a} value={a}>{(a.split('@')[0].replace('.',' ')).replace(/\w/g,c=>c.toUpperCase())}</option>)}
+                        </select>
+                        <select value={filterResult} onChange={e=>setFilterResult(e.target.value)} style={{padding:'7px 10px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12px',fontFamily:'inherit',background:'white',cursor:'pointer',outline:'none'}}>
+                            <option value="">All results</option>
+                            <option value="success">Success</option>
+                            <option value="denied">Denied</option>
+                        </select>
+                        <input type="date" value={filterFrom} onChange={e=>setFilterFrom(e.target.value)} style={{padding:'7px 9px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12px',fontFamily:'inherit',background:'white',outline:'none'}} />
+                        <input type="date" value={filterTo} onChange={e=>setFilterTo(e.target.value)} style={{padding:'7px 9px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12px',fontFamily:'inherit',background:'white',outline:'none'}} />
+                        <button onClick={()=>{setFilterQ('');setFilterType('');setFilterAdmin('');setFilterResult('');setFilterFrom('');setFilterTo('');}} style={{padding:'7px 12px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'11.5px',color:'#64748B',background:'white',cursor:'pointer',fontWeight:600}}>Clear</button>
+                        <span style={{background:'#EEF2FF',color:'#4C3BAF',borderRadius:'20px',padding:'3px 11px',fontSize:'11.5px',fontWeight:700,marginLeft:'auto',whiteSpace:'nowrap'}}>{filtered.length} {filtered.length===1?'entry':'entries'}</span>
+                    </div>
+                    <div style={{flex:1,overflowY:'auto',background:'white'}}>
+                        <table id="tbl-auditlog" style={{width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed'}}>
+                            <thead>
+                                <tr style={{background:'#D97706'}}>
+                                    <th style={{padding:'9px 10px',textAlign:'left',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'11%',position:'relative'}}>Date / Time</th>
+                                    <th style={{padding:'9px 10px',textAlign:'left',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'14%',position:'relative'}}>Admin</th>
+                                    <th style={{padding:'9px 10px',textAlign:'left',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'11%',position:'relative'}}>Action</th>
+                                    <th style={{padding:'9px 10px',textAlign:'left',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'12%',position:'relative'}}>Target</th>
+                                    <th style={{padding:'9px 10px',textAlign:'left',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',position:'relative'}}>Detail</th>
+                                    <th style={{padding:'9px 10px',textAlign:'center',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'7%',position:'relative'}}>Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {filtered.map((e,i) => {
+                                    const m = getMeta(e.action);
+                                    const dt = new Date(e.timestamp);
+                                    const s = e.detail && e.detail.orderSnapshot;
+                                    let detail = '';
+                                    if (e.detail && e.detail.reason) detail += 'Reason: ' + e.detail.reason + ' · ';
+                                    if (e.detail && e.detail.oldStatus) detail += e.detail.oldStatus + ' → ' + e.detail.newStatus + ' · ';
+                                    if (e.detail && e.detail.newEmail) detail += 'Added: ' + e.detail.newEmail + ' (' + (e.detail.role||'') + ') · ';
+                                    if (e.detail && e.detail.removedEmail) detail += 'Removed: ' + e.detail.removedEmail + ' · ';
+                                    if (s) detail += 'For: ' + (s.recipientName||'') + ' · ' + (s.locationId||'') + ' · $' + ((s.total||0).toFixed(2));
+                                    if (e.detail && e.detail.browser) detail += (e.detail.browser||'').substring(0,80);
+                                    if (e.detail && e.detail.productsCount) detail += e.detail.productsCount + ' products published';
+                                    const resBg = e.result==='success'?'#DCFCE7':e.result==='denied'?'#FEE2E2':'#F5F5F4';
+                                    const resCol = e.result==='success'?'#166534':e.result==='denied'?'#991B1B':'#78716C';
+                                    return (
+                                        <tr key={i} style={{background:i%2===0?'#ffffff':'#F5F3FF'}}>
+                                            <td style={{padding:'8px 10px',verticalAlign:'middle'}}>
+                                                <div style={{fontWeight:700,fontSize:'11px',color:'#1E293B'}}>{dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
+                                                <div style={{fontSize:'10px',color:'#57534E'}}>{dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
+                                            </td>
+                                            <td style={{padding:'8px 10px',verticalAlign:'middle',overflow:'hidden'}}>
+                                                <div style={{fontWeight:600,fontSize:'11.5px',color:'#1E293B',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{(e.adminEmail||'').split('@')[0].replace('.',' ').replace(/\w/g,c=>c.toUpperCase())}</div>
+                                                <div style={{fontSize:'10px',color:'#A8A29E',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{e.adminEmail||''}</div>
+                                            </td>
+                                            <td style={{padding:'8px 10px',verticalAlign:'middle'}}>
+                                                <span style={{display:'inline-block',padding:'2px 8px',borderRadius:'20px',background:m.bg,color:m.color,fontWeight:600,fontSize:'10.5px',border:'1px solid '+(m.border||m.color),whiteSpace:'nowrap'}}>{m.label}</span>
+                                            </td>
+                                            <td style={{padding:'8px 10px',verticalAlign:'middle',fontSize:'11px',fontFamily:'monospace',color:'#4C3BAF',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{e.target||'—'}</td>
+                                            <td style={{padding:'8px 10px',verticalAlign:'middle',fontSize:'11px',color:'#0F172A',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} title={detail}>{detail||'—'}</td>
+                                            <td style={{padding:'8px 10px',verticalAlign:'middle',textAlign:'center'}}>
+                                                <span style={{fontSize:'10px',padding:'2px 7px',borderRadius:'10px',fontWeight:700,background:resBg,color:resCol}}>{e.result||''}</span>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                                {filtered.length === 0 && (
+                                    <tr><td colSpan={6} style={{padding:'48px',textAlign:'center',color:'#94A3B8',fontSize:'13px'}}>No entries match the current filters.</td></tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             );
         }
@@ -4663,7 +4012,7 @@ window.onload=function(){
                                 <span style={{fontSize:'12px'}}>Changes are logged automatically when you publish products or update portal files.</span>
                             </div>
                         ) : (
-                            <table id="tbl-versions" style={{width:'100%',borderCollapse:'collapse',tableLayout:'fixed',fontSize:'12px'}}>
+                            <table style={{width:'100%',borderCollapse:'collapse',fontSize:'12px'}}>
                                 <thead>
                                     <tr style={{background:'#D97706'}}>
                                         <th style={{padding:'10px 14px',textAlign:'left',color:'white',fontWeight:700,fontSize:'11px',textTransform:'uppercase',letterSpacing:'0.06em',width:'16%'}}>Date / Time</th>
@@ -4758,59 +4107,6 @@ window.onload=function(){
         } else {
             setTimeout(tryInitResizers, 800);
         }
-
-
-        /* ── Column resizer: MutationObserver attaches drag handles after React renders ── */
-        (function() {
-            function attachResizer(th) {
-                if (th.dataset.rzOk) return;
-                th.dataset.rzOk = '1';
-                var rz = document.createElement('div');
-                rz.className = 'col-resizer';
-                th.appendChild(rz);
-                rz.addEventListener('mousedown', function(e) {
-                    var startX = e.pageX;
-                    var startW = th.getBoundingClientRect().width;
-                    document.body.style.cursor = 'col-resize';
-                    document.body.style.userSelect = 'none';
-                    function onMove(e2) {
-                        var w = Math.max(32, startW + e2.pageX - startX);
-                        th.style.width = w + 'px';
-                        th.style.minWidth = w + 'px';
-                    }
-                    function onUp() {
-                        document.body.style.cursor = '';
-                        document.body.style.userSelect = '';
-                        document.removeEventListener('mousemove', onMove);
-                        document.removeEventListener('mouseup', onUp);
-                    }
-                    document.addEventListener('mousemove', onMove);
-                    document.addEventListener('mouseup', onUp);
-                    e.preventDefault();
-                    e.stopPropagation();
-                });
-            }
-            function scan() {
-                var tables = ['tbl-products','tbl-categories','tbl-orders','tbl-versions'];
-                tables.forEach(function(id) {
-                    var t = document.getElementById(id);
-                    if (t) t.querySelectorAll('thead th').forEach(attachResizer);
-                });
-            }
-            var obs = new MutationObserver(function(muts) {
-                var added = muts.some(function(m) { return m.addedNodes.length > 0; });
-                if (added) scan();
-            });
-            function init() {
-                obs.observe(document.body, { childList: true, subtree: true });
-                scan();
-            }
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', init);
-            } else {
-                init();
-            }
-        })();
 
         ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     </script>
