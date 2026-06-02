@@ -1505,8 +1505,6 @@
 
             return (
                 <div className="app-shell">
-
-                    
                     <div className="sidebar">
                         <div className="sidebar-gold-bar"></div>
                         <div className="sidebar-brand">
@@ -1551,8 +1549,6 @@
                             </div>
                         </div>
                     </div>
-
-                    
                     <div className="main-area">
                         {inactivityWarning && (
                             <div className="inactivity-bar">
@@ -2982,12 +2978,7 @@ document.getElementById("sc-status").textContent=stat;
                             <button onClick={()=>setStatus(null)} style={{float:'right',background:'none',border:'none',cursor:'pointer',fontSize:'14px'}}>✕</button>
                         </div>
                     )}
-
-                    
-                    
                     <div style={{height:'3px',background:'linear-gradient(90deg,#DB802E,#EFA855,#DB802E)',borderRadius:'2px',marginBottom:'16px'}}></div>
-
-                    
                     <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:'0',marginBottom:'20px',borderRadius:'10px',overflow:'hidden',border:'1px solid #1E3A5F'}}>
                         {[
                             {label:'Total orders', value: stats.total, sub:'All time', color:'#FFFFFF'},
@@ -3005,9 +2996,6 @@ document.getElementById("sc-status").textContent=stat;
                             </div>
                         ))}
                     </div>
-
-
-                    
                     <div style={{display:'flex',gap:'8px',marginBottom:'8px',flexWrap:'wrap',alignItems:'center'}}>
                         <div style={{flex:1,minWidth:'260px',position:'relative'}}>
                             <span style={{position:'absolute',left:'10px',top:'50%',transform:'translateY(-50%)',color:'#4C3BAF',fontSize:'15px'}}>🔍</span>
@@ -3038,8 +3026,6 @@ document.getElementById("sc-status").textContent=stat;
                             ))}
                         </select>
                     </div>
-
-                    
                     <div style={{display:'flex',gap:'7px',marginBottom:'16px',flexWrap:'wrap',alignItems:'center',background:'#F0F4F8',padding:'10px 12px',borderRadius:'8px',border:'0.5px solid #C7D9F0'}}>
                         <span style={{fontSize:'12px',color:'#4C3BAF',fontWeight:700}}>Date:</span>
                         <input type="date" value={dateFrom} onChange={handleFilterChange(setDateFrom)}
@@ -3113,8 +3099,6 @@ document.getElementById("sc-status").textContent=stat;
                             </button>
                         </div>
                     </div>
-
-                    
                     {loading ? (
                         <div style={{textAlign:'center',padding:'3rem',color:'#A8A29E'}}>Loading orders...</div>
                     ) : filtered.length === 0 ? (
@@ -3232,8 +3216,6 @@ document.getElementById("sc-status").textContent=stat;
                                                 <tr>
                                                     <td colSpan={10} style={{padding:0,borderBottom:'3px solid #6366F1',background:'#F0F4F8'}}>
                                                         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'0',borderTop:'2px solid #4C3BAF'}}>
-
-                                                            
                                                             <div style={{background:'#EEF4FF',borderRight:'1px solid #C7D9F0',padding:'14px 16px'}}>
                                                                 <div style={{display:'flex',alignItems:'center',gap:'6px',marginBottom:'10px',paddingBottom:'8px',borderBottom:'1.5px solid #4C3BAF'}}>
                                                                     <div style={{width:'3px',height:'14px',background:'#4C3BAF',borderRadius:'2px'}}></div>
@@ -3254,8 +3236,6 @@ document.getElementById("sc-status").textContent=stat;
                                                                     </div>
                                                                 ) : <span style={{fontSize:'12px',color:'#A8A29E'}}>No item detail available</span>}
                                                             </div>
-
-                                                            
                                                             <div style={{background:'#F0FBF6',borderRight:'1px solid #A3D9C0',padding:'14px 16px'}}>
                                                                 <div style={{display:'flex',alignItems:'center',gap:'6px',marginBottom:'10px',paddingBottom:'8px',borderBottom:'1.5px solid #4C3BAF'}}>
                                                                     <div style={{width:'3px',height:'14px',background:'#4C3BAF',borderRadius:'2px'}}></div>
@@ -3281,8 +3261,6 @@ document.getElementById("sc-status").textContent=stat;
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-                                                            
                                                             <div style={{background:'#FFFBF0',padding:'14px 16px'}}>
                                                                 <div style={{display:'flex',alignItems:'center',gap:'6px',marginBottom:'10px',paddingBottom:'8px',borderBottom:'1.5px solid #B45309'}}>
                                                                     <div style={{width:'3px',height:'14px',background:'#B45309',borderRadius:'2px'}}></div>
@@ -3323,8 +3301,6 @@ document.getElementById("sc-status").textContent=stat;
                             </table>
                         </div>
                     )}
-
-                    
                     {filtered.length > 0 && (
                         <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 4px',marginTop:'8px'}}>
                             <div style={{display:'flex',alignItems:'center',gap:'8px',fontSize:'12px',color:'#57534E'}}>
@@ -3368,8 +3344,6 @@ document.getElementById("sc-status").textContent=stat;
                             )}
                         </div>
                     )}
-
-                    
                     {deleteModal && (
                         <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.45)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center'}}>
                             <div style={{background:'white',borderRadius:'12px',padding:'1.5rem',width:'420px',maxWidth:'90vw',boxShadow:'0 8px 32px rgba(0,0,0,0.18)'}}>
@@ -3391,8 +3365,6 @@ document.getElementById("sc-status").textContent=stat;
                             </div>
                         </div>
                     )}
-
-                    
                     {restoreModal && (
                         <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.45)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center'}}>
                             <div style={{background:'white',borderRadius:'12px',padding:'1.5rem',width:'380px',maxWidth:'90vw',boxShadow:'0 8px 32px rgba(0,0,0,0.18)'}}>
@@ -3407,8 +3379,6 @@ document.getElementById("sc-status").textContent=stat;
                             </div>
                         </div>
                     )}
-
-                    
                     {permDeleteModal && isSuperAdmin && (
                         <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.55)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center'}}>
                             <div style={{background:'white',borderRadius:'12px',padding:'1.5rem',width:'440px',maxWidth:'90vw',boxShadow:'0 8px 32px rgba(0,0,0,0.25)',border:'2px solid #DC2626'}}>
@@ -3431,8 +3401,6 @@ document.getElementById("sc-status").textContent=stat;
                             </div>
                         </div>
                     )}
-
-                    
                     {showAudit && (() => {
                         const actionMeta = {
                             'auth.login':          { label: 'Login',          bg:'#E6F1FB', color:'#0C447C' },
@@ -3495,8 +3463,6 @@ document.getElementById("sc-status").textContent=stat;
                         return (
                         <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.5)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center',padding:'16px'}}>
                             <div style={{background:'white',borderRadius:'12px',width:'960px',maxWidth:'98vw',maxHeight:'90vh',overflow:'hidden',display:'flex',flexDirection:'column',boxShadow:'0 12px 40px rgba(0,0,0,0.2)'}}>
-
-                                
                                 <div style={{padding:'14px 18px',borderBottom:'0.5px solid #E7E5E4',display:'flex',justifyContent:'space-between',alignItems:'center',background:'#FAFAF9'}}>
                                     <div style={{display:'flex',alignItems:'center',gap:'12px'}}>
                                         <span style={{fontSize:'15px',fontWeight:500}}>📋 Audit Log</span>
@@ -3521,11 +3487,7 @@ document.getElementById("sc-status").textContent=stat;
                                         <button onClick={()=>setShowAudit(false)} style={{background:'none',border:'none',fontSize:'20px',cursor:'pointer',color:'#A8A29E',lineHeight:1}}>✕</button>
                                     </div>
                                 </div>
-
-                                
                                 <div style={{display:'flex',flex:1,overflow:'hidden'}}>
-
-                                    
                                     <div style={{width:'170px',flexShrink:0,borderRight:'0.5px solid #E7E5E4',padding:'12px 10px',overflowY:'auto'}}>
                                         <div style={{fontSize:'10px',fontWeight:500,textTransform:'uppercase',letterSpacing:'0.08em',color:'#A8A29E',marginBottom:'8px'}}>Filter by type</div>
                                         <div onClick={()=>setAuditTypeFilter('all')}
@@ -3548,8 +3510,6 @@ document.getElementById("sc-status").textContent=stat;
                                             );
                                         })}
                                     </div>
-
-                                    
                                     <div style={{flex:1,overflowY:'auto'}}>
                                         {filtered.length === 0 ? (
                                             <div style={{textAlign:'center',padding:'3rem',color:'#A8A29E'}}>No entries for this filter.</div>
