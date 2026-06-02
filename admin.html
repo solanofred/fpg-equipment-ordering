@@ -1603,67 +1603,55 @@
                             </div>
                         )}
                         
-                        <div className="admin-toolbar">
+                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'16px'}}>
                             <div>
-                                <h2 style={{ fontSize: '1.5rem', fontWeight: '300', marginBottom: '0.25rem' }}>
-                                    Products ({products.length})
-                                </h2>
-                                <p style={{ color: 'var(--fpg-gray)', fontSize: '0.9rem' }}>
-                                    Manage equipment packages
-                                </p>
+                                <div style={{fontSize:'16px',fontWeight:700,color:'#0F172A'}}>Products <span style={{fontWeight:400,fontSize:'13px',color:'#64748B'}}>({products.length} items)</span></div>
+                                <div style={{fontSize:'12px',color:'#94A3B8',marginTop:'2px'}}>Manage equipment packages</div>
                             </div>
-                            <button
-                                className="btn-add"
-                                onClick={() => {
-                                    setEditingProduct({
-                                        title: '',
-                                        category: 'desktop',
-                                        items: [],
-                                        price: 0,
-                                        recommended: false,
-                                        available: true,
-                                        imageUrl: ''
-                                    });
-                                    setShowModal(true);
-                                }}
-                            >
-                                + Add Product
-                            </button>
+                            <div style={{display:'flex',gap:'8px'}}>
+                                <button
+                                    style={{padding:'8px 16px',background:'white',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12px',fontWeight:600,color:'#475569',cursor:'pointer'}}
+                                    onClick={() => setShowReviewModal(true)}
+                                >Review drafts</button>
+                                <button
+                                    style={{padding:'8px 18px',background:'#4C3BAF',border:'none',borderRadius:'8px',fontSize:'12px',fontWeight:700,color:'white',cursor:'pointer'}}
+                                    onClick={() => {
+                                        setEditingProduct({ title:'',category:'desktop',items:[],price:0,recommended:false,available:true,imageUrl:'' });
+                                        setShowModal(true);
+                                    }}
+                                >+ Add Product</button>
+                            </div>
                         </div>
                         
-                        <div style={{display:'grid',gridTemplateColumns:'repeat(4,minmax(0,1fr))',gap:'14px'}}>
+                        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(180px,1fr))',gap:'12px',maxWidth:'1100px'}}>
                             {[...products].sort((a, b) => a.title.localeCompare(b.title)).map(product => {
                                 const isDraft = DraftService.isDraftProduct(product.id);
                                 return (
-                                    <div key={product.id} style={{background:'white',borderRadius:'12px',border: isDraft ? '2px solid #F59E0B' : '0.5px solid #E2E8F0',overflow:'hidden',transition:'box-shadow 0.15s'}}>
-                                        <div style={{width:'100%',height:'72px',overflow:'hidden',background:'#F5F3FF',borderBottom:'1.5px solid #EDE9FE',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',flexShrink:0}}>
+                                    <div key={product.id} style={{background:'white',borderRadius:'12px',border:isDraft?'2px solid #F59E0B':'0.5px solid #E2E8F0',overflow:'hidden',display:'flex',flexDirection:'column'}}>
+                                        <div style={{height:'120px',background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',overflow:'hidden'}}>
                                             {product.imageUrl
-                                                ? <img src={product.imageUrl} alt={product.title} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.innerHTML='<span style="font-size:28px">📦</span>';}} />
-                                                : <span style={{fontSize:'28px'}}>📦</span>}
-                                            {isDraft && <span style={{position:'absolute',top:'5px',right:'5px',background:'#F59E0B',color:'white',padding:'1px 6px',borderRadius:'6px',fontSize:'9px',fontWeight:700}}>EDITED</span>}
-                                        </div>
-                                        <div style={{padding:'10px 12px'}}>
-                                            <div style={{fontWeight:700,fontSize:'12px',color:'#0F172A',marginBottom:'2px',overflow:'hidden',display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical',lineHeight:'1.35',minHeight:'32px'}}>{product.title}</div>
-                                            <div style={{fontSize:'15px',fontWeight:700,color:'#4C3BAF',fontFamily:'Georgia,serif',marginBottom:'2px'}}>${product.price.toLocaleString()}</div>
-                                            <div style={{fontSize:'10px',color:'#64748B',marginBottom:'6px'}}>{product.category}{product.recommended ? ' · ⭐' : ''}</div>
-                                            <div style={{marginBottom:'8px'}}>
-                                                <button
-                                                    className={`status-badge ${product.available ? 'status-active' : 'status-inactive'}`}
-                                                    onClick={() => handleToggleStatus(product.id)}
-                                                    style={{cursor:'pointer',border:'none',fontSize:'10px',padding:'2px 8px',borderRadius:'20px'}}
-                                                >{product.available ? 'Published' : 'Draft'}</button>
+                                                ? <img src={product.imageUrl} alt={product.title} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.innerHTML='<span style="font-size:32px">📦</span>';}} />
+                                                : <span style={{fontSize:'32px'}}>📦</span>}
+                                            <div style={{position:'absolute',top:'7px',right:'7px',display:'flex',flexDirection:'column',gap:'3px',alignItems:'flex-end'}}>
+                                                {isDraft && <span style={{background:'#F59E0B',color:'white',padding:'2px 7px',borderRadius:'6px',fontSize:'9px',fontWeight:700}}>EDITED</span>}
+                                                <button className={`status-badge ${product.available?'status-active':'status-inactive'}`} onClick={()=>handleToggleStatus(product.id)} style={{cursor:'pointer',border:'none',fontSize:'9px',padding:'2px 7px',borderRadius:'20px'}}>{product.available?'Published':'Draft'}</button>
                                             </div>
-                                            <div style={{display:'flex',gap:'5px'}}>
-                                                <button className="btn-action btn-edit" onClick={() => { setEditingProduct(product); setShowModal(true); }} style={{flex:1,padding:'5px',fontSize:'11px',textAlign:'center'}}>Edit</button>
-                                                <button className="btn-action btn-delete" onClick={() => handleDelete(product.id)} style={{flex:1,padding:'5px',fontSize:'11px',textAlign:'center'}}>Delete</button>
+                                        </div>
+                                        <div style={{padding:'10px 12px',flex:1,display:'flex',flexDirection:'column'}}>
+                                            <div style={{fontWeight:700,fontSize:'12.5px',color:'#0F172A',marginBottom:'3px',overflow:'hidden',display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical',lineHeight:'1.4',minHeight:'35px'}}>{product.title}</div>
+                                            <div style={{fontSize:'14px',fontWeight:700,color:'#4C3BAF',fontFamily:'Georgia,serif',marginBottom:'2px'}}>${product.price.toLocaleString()}</div>
+                                            <div style={{fontSize:'10.5px',color:'#94A3B8',marginBottom:'10px'}}>{(categories||[]).find(c=>c.slug===product.category)?.label||product.category}{product.recommended?' · ⭐':''}</div>
+                                            <div style={{display:'flex',gap:'6px',marginTop:'auto'}}>
+                                                <button onClick={()=>{setEditingProduct(product);setShowModal(true);}} style={{flex:1,padding:'6px',border:'1.5px solid #E2E8F0',borderRadius:'7px',fontSize:'11px',fontWeight:600,background:'white',color:'#1E3A5F',cursor:'pointer'}}>Edit</button>
+                                                <button onClick={()=>handleDelete(product.id)} style={{flex:1,padding:'6px',border:'1.5px solid #FCA5A5',borderRadius:'7px',fontSize:'11px',fontWeight:600,background:'white',color:'#DC2626',cursor:'pointer'}}>Delete</button>
                                             </div>
                                         </div>
                                     </div>
                                 );
                             })}
-                            <div onClick={() => { setEditingProduct({ title:'',category:'desktop',items:[],price:0,recommended:false,available:true,imageUrl:'' }); setShowModal(true); }} style={{background:'white',borderRadius:'12px',border:'2px dashed #C4B5FD',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',minHeight:'195px',cursor:'pointer'}}>
-                                <div style={{fontSize:'28px',color:'6366F1',marginBottom:'6px'}}>+</div>
-                                <div style={{fontSize:'11px',fontWeight:600,color:'#4C3BAF'}}>Add Product</div>
+                            <div onClick={()=>{setEditingProduct({title:'',category:'desktop',items:[],price:0,recommended:false,available:true,imageUrl:''});setShowModal(true);}} style={{background:'white',borderRadius:'12px',border:'2px dashed #C4B5FD',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',minHeight:'220px',cursor:'pointer',gap:'6px'}}>
+                                <div style={{width:'36px',height:'36px',background:'#EDE9FE',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'20px',color:'#4C3BAF'}}>+</div>
+                                <div style={{fontSize:'12px',fontWeight:600,color:'#4C3BAF'}}>Add Product</div>
                             </div>
                         </div>
                         </div>}
@@ -1777,6 +1765,7 @@
                                                 {!draft.available && <div style={{ color: 'var(--danger)' }}>Inactive</div>}
                                             </div>
                                         )}
+                                        </div>
                                     </div>
                                 );
                             })}
@@ -2481,38 +2470,38 @@
                             </div>
                         </div>
                     )}
-                    <div style={{background:'white',borderRadius:'12px',boxShadow:'0 1px 3px rgba(0,0,0,0.1)',overflow:'hidden'}}>
-                        <div style={{padding:'1rem 1.5rem',borderBottom:'1px solid #EDE9FE',background:'#F5F3FF',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-                            <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
-                                <div style={{width:'30px',height:'30px',background:'linear-gradient(135deg,#4C3BAF,#6366F1)',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'14px'}}>🏷️</div>
-                                <div>
-                                    <h3 style={{fontSize:'1rem',fontWeight:700,margin:0,color:'#0F172A'}}>Categories</h3>
-                                    <p style={{fontSize:'0.8rem',color:'#64748B',margin:0}}>{(categories||[]).length} total · {(categories||[]).filter(function(c){return getProductCount(c.slug)===0;}).length} empty</p>
-                                </div>
+                    <div>
+                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'16px'}}>
+                            <div>
+                                <div style={{fontSize:'16px',fontWeight:700,color:'#0F172A'}}>Categories <span style={{fontWeight:400,fontSize:'13px',color:'#64748B'}}>({(categories||[]).length} total · {(categories||[]).filter(function(c){return getProductCount(c.slug)===0;}).length} empty)</span></div>
+                                <div style={{fontSize:'12px',color:'#94A3B8',marginTop:'2px'}}>Organize equipment into categories</div>
                             </div>
-                            <button onClick={function(){setShowAddModal(true);setStatus(null);}} style={{background:'#4C3BAF',color:'white',border:'none',padding:'7px 14px',borderRadius:'8px',fontWeight:700,cursor:'pointer',fontSize:'0.85rem',display:'flex',alignItems:'center',gap:'6px',whiteSpace:'nowrap'}}>
+                            <button onClick={function(){setShowAddModal(true);setStatus(null);}} style={{padding:'8px 18px',background:'#4C3BAF',border:'none',borderRadius:'8px',fontSize:'12px',fontWeight:700,color:'white',cursor:'pointer'}}>
                                 + New category
                             </button>
                         </div>
-
                         {status && !showAddModal && (
-                            <div style={{margin:'0.75rem 1.5rem',padding:'0.75rem 1rem',borderRadius:'8px',fontSize:'0.875rem',background:status.type==='success'?'#D1FAE5':'#FEE2E2',color:status.type==='success'?'#065F46':'#991B1B'}}>
+                            <div style={{padding:'10px 14px',borderRadius:'8px',fontSize:'13px',marginBottom:'12px',background:status.type==='success'?'#DCFCE7':'#FEE2E2',color:status.type==='success'?'#166534':'#991B1B',border:status.type==='success'?'1px solid #86EFAC':'1px solid #FECACA'}}>
                                 {status.type === 'success' ? '✅' : '❌'} {status.text}
                             </div>
                         )}
 
-                        <div style={{display:'grid',gridTemplateColumns:'repeat(4,minmax(0,1fr))',gap:'14px',padding:'16px'}}>
+                        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(160px,1fr))',gap:'12px',maxWidth:'1100px'}}>
                             {(categories || []).slice().sort((a,b) => a.label.localeCompare(b.label)).map(function(cat, i) {
                                 const count = getProductCount(cat.slug);
                                 const isEmpty = count === 0;
                                 const isEditing = editingSlug === cat.slug;
                                 return (
-                                    <div key={i} style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',padding:'16px',textAlign:'center',position:'relative',transition:'box-shadow 0.15s',boxSizing:'border-box'}}>
-                                        {!isEmpty && (
-                                            <span style={{position:'absolute',top:'8px',right:'8px',background:'#EDE9FE',color:'#4C3BAF',padding:'1px 7px',borderRadius:'10px',fontSize:'9px',fontWeight:700}}>In use</span>
-                                        )}
+                                    <div key={i} style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',overflow:'hidden',display:'flex',flexDirection:'column'}}>
+                                        <div style={{height:'100px',background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',overflow:'hidden'}}>
+                                            {cat.imageUrl
+                                                ? <img src={cat.imageUrl} alt={cat.label} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.style.background='#EDE9FE';}} />
+                                                : <span style={{fontSize:'32px'}}>🏷️</span>}
+                                            {!isEmpty && <span style={{position:'absolute',top:'6px',right:'6px',background:'#4C3BAF',color:'white',padding:'2px 7px',borderRadius:'10px',fontSize:'9px',fontWeight:700}}>In use</span>}
+                                        </div>
+                                        <div style={{padding:'10px 12px',flex:1,display:'flex',flexDirection:'column'}}>
                                         {isEditing ? (
-                                            <div style={{display:'flex',flexDirection:'column',gap:'6px',textAlign:'left'}}>
+                                            <div style={{display:'flex',flexDirection:'column',gap:'6px'}}>
                                                 <input
                                                     type="text"
                                                     value={editLabel}
@@ -2539,25 +2528,21 @@
                                             </div>
                                         ) : (
                                             <>
-                                                <div style={{width:'80px',height:'80px',borderRadius:'12px',overflow:'hidden',margin:'0 auto 12px',border:'2px solid #C4B5FD',boxShadow:'0 0 0 3px #EDE9FE',background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                                                    {cat.imageUrl
-                                                        ? <img src={cat.imageUrl} alt={cat.label} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.style.background='#EDE9FE';e.target.parentNode.innerHTML='🏷️';}} />
-                                                        : <span style={{fontSize:'24px'}}>🏷️</span>}
-                                                </div>
-                                                <div style={{fontWeight:700,fontSize:'13px',color:'#0F172A',marginBottom:'3px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{cat.label}</div>
-                                                <div style={{fontSize:'11px',color:'#64748B',marginBottom:'10px'}}>{count} product{count !== 1 ? 's' : ''}</div>
-                                                <div style={{display:'flex',gap:'5px',justifyContent:'center'}}>
-                                                    <button onClick={function(){handleStartEdit(cat);}} disabled={saving} style={{flex:1,padding:'5px 8px',border:'1.5px solid #4C3BAF',borderRadius:'7px',fontSize:'11px',background:'white',color:'#4C3BAF',cursor:'pointer',fontWeight:600}}>Edit</button>
-                                                    <button onClick={function(){handleRemove(cat.slug, cat.label);}} disabled={saving} style={{flex:1,padding:'5px 8px',border:'1.5px solid #FCA5A5',borderRadius:'7px',fontSize:'11px',background:'white',color:'#DC2626',cursor:'pointer',fontWeight:600}}>Remove</button>
+                                                <div style={{fontWeight:700,fontSize:'13px',color:'#0F172A',marginBottom:'2px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{cat.label}</div>
+                                                <div style={{fontSize:'11px',color:'#94A3B8',marginBottom:'10px'}}>{count} product{count!==1?'s':''}</div>
+                                                <div style={{display:'flex',gap:'5px',marginTop:'auto'}}>
+                                                    <button onClick={function(){handleStartEdit(cat);}} disabled={saving} style={{flex:1,padding:'6px',border:'1.5px solid #E2E8F0',borderRadius:'7px',fontSize:'11px',fontWeight:600,background:'white',color:'#1E3A5F',cursor:'pointer'}}>Edit</button>
+                                                    <button onClick={function(){handleRemove(cat.slug,cat.label);}} disabled={saving} style={{flex:1,padding:'6px',border:'1.5px solid #FCA5A5',borderRadius:'7px',fontSize:'11px',fontWeight:600,background:'white',color:'#DC2626',cursor:'pointer'}}>Remove</button>
                                                 </div>
                                             </>
                                         )}
+                                        </div>
                                     </div>
                                 );
                             })}
-                            <div onClick={function(){setShowAddModal(true);setStatus(null);}} style={{background:'white',borderRadius:'12px',border:'2px dashed #C4B5FD',padding:'14px',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',minHeight:'148px',cursor:'pointer'}}>
-                                <div style={{fontSize:'28px',color:'#6366F1',marginBottom:'6px'}}>+</div>
-                                <div style={{fontSize:'11px',fontWeight:600,color:'#4C3BAF'}}>Add Category</div>
+                            <div onClick={function(){setShowAddModal(true);setStatus(null);}} style={{background:'white',borderRadius:'12px',border:'2px dashed #C4B5FD',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',minHeight:'185px',cursor:'pointer',gap:'8px'}}>
+                                <div style={{width:'36px',height:'36px',background:'#EDE9FE',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'20px',color:'#4C3BAF'}}>+</div>
+                                <div style={{fontSize:'12px',fontWeight:600,color:'#4C3BAF'}}>Add Category</div>
                             </div>
                         </div>
                     </div>
