@@ -77,17 +77,6 @@
     "year": 2026
   },
   {
-    "id": "ORD-2026-TEST096",
-    "date": "2026-05-29T17:01:00Z",
-    "submitterName": "Chezarae Carter",
-    "submitterEmail": "chezarae.carter@foundationpartners.com",
-    "recipientName": "Sarah Thompson",
-    "locationId": "WAFAC",
-    "total": 2300,
-    "status": "Deleted",
-    "year": 2026
-  },
-  {
     "id": "ORD-2026-1780072800285",
     "date": "2026-05-29T16:40:00Z",
     "submitterName": "Mateo Escobar",
@@ -2294,7 +2283,7 @@
     "submitterEmail": "chezarae.carter@foundationpartners.com",
     "recipientName": "Ashley Davis",
     "locationId": "FLLFM",
-    "total": 529.0,
+    "total": 529,
     "status": "Fulfilled",
     "year": 2026
   },
@@ -3482,7 +3471,7 @@
     "submitterEmail": "chezarae.carter@foundationpartners.com",
     "recipientName": "Stephanie Harris",
     "locationId": "GAATL",
-    "total": 874.0,
+    "total": 874,
     "status": "New",
     "year": 2026
   },
@@ -5154,7 +5143,7 @@
     "submitterEmail": "joe.choss@foundationpartners.com",
     "recipientName": "Daniel Lee",
     "locationId": "AZLGC",
-    "total": 2929.0,
+    "total": 2929,
     "status": "New",
     "year": 2026
   },
@@ -7046,7 +7035,7 @@
     "submitterEmail": "chezarae.carter@foundationpartners.com",
     "recipientName": "Megan Scott",
     "locationId": "CAOAK",
-    "total": 1679.0,
+    "total": 1679,
     "status": "In Progress",
     "year": 2025
   },
@@ -12150,7 +12139,7 @@
     "submitterEmail": "fred.solano@foundationpartners.com",
     "recipientName": "Tyler Hall",
     "locationId": "ORPOR",
-    "total": 529.0,
+    "total": 529,
     "status": "In Progress",
     "year": 2025
   },
@@ -15813,7 +15802,7 @@
     "submitterEmail": "chezarae.carter@foundationpartners.com",
     "recipientName": "Melissa Jackson",
     "locationId": "MNMIN",
-    "total": 6302.0,
+    "total": 6302,
     "status": "Fulfilled",
     "year": 2024
   },
@@ -16077,7 +16066,7 @@
     "submitterEmail": "matthew.ritchotte@foundationpartners.com",
     "recipientName": "Rachel Lewis",
     "locationId": "VAPOR",
-    "total": 2323.0,
+    "total": 2323,
     "status": "Fulfilled",
     "year": 2024
   },
