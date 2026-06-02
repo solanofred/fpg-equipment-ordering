@@ -2678,89 +2678,100 @@
                     const allYears = availableYears;
                     const yearPills = allYears.map(y => '<button class="ypill' + (yearsToLoad.includes(y)?' on':'') + '" onclick="toggleYear(' + y + ',this)">' + y + '</button>').join('');
 
-                    const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Audit Log — FPG Equipment Portal</title><style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}
-body{background:#F3F4F6;height:100vh;display:flex;flex-direction:column;overflow:hidden}
-.gold-bar{height:4px;background:linear-gradient(90deg,#DB802E,#EFA855,#DB802E)}
-.titlebar{background:linear-gradient(135deg,#1E3A5F 0%,#4C3BAF 100%);padding:12px 18px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
-.titlebar h1{color:white;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
-.titlebar-logomark{width:28px;height:28px;background:linear-gradient(135deg,#4C3BAF,#6366F1);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;font-family:Georgia,serif}
-.titlebar-right{display:flex;gap:7px;align-items:center}
-.ypill{padding:4px 12px;border-radius:20px;font-size:11.5px;font-weight:700;cursor:pointer;border:1.5px solid rgba(255,255,255,0.3);background:transparent;color:rgba(255,255,255,0.65);transition:all 0.15s}
+                    const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Audit Log — FPG Equipment Portal</title><style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
+body{background:#F1F5F9;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.gold-bar{height:4px;background:linear-gradient(90deg,#DB802E,#EFA855,#DB802E);flex-shrink:0}
+.titlebar{background:linear-gradient(135deg,#1E3A5F 0%,#4C3BAF 100%);padding:11px 20px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.titlebar h1{color:white;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+.lm{width:26px;height:26px;background:linear-gradient(135deg,#4C3BAF,#6366F1);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;font-family:Georgia,serif}
+.tr{display:flex;gap:7px;align-items:center}
+.ypill{padding:4px 11px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:1.5px solid rgba(255,255,255,0.3);background:transparent;color:rgba(255,255,255,0.65)}
 .ypill.on{background:#4C3BAF;color:white;border-color:#4C3BAF}
-.exp-btn{padding:6px 14px;background:rgba(219,128,46,0.2);color:#EFA855;border:1.5px solid rgba(219,128,46,0.5);border-radius:8px;font-size:11.5px;cursor:pointer;font-weight:700;display:flex;align-items:center;gap:5px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:2px solid #4C3BAF;flex-shrink:0}
-.stat-box{padding:11px 18px;background:#1E3A5F;border-right:1px solid rgba(99,102,241,0.2);text-align:center}
-.stat-box:last-child{border-right:none}
-.stat-num{font-size:22px;font-weight:700;font-family:Georgia,serif;line-height:1.1}
-.stat-lbl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.45);margin-top:4px}
-.layout{display:flex;flex:1;overflow:hidden;max-width:1400px;width:100%;margin:0 auto}
-.sidebar{width:170px;flex-shrink:0;background:#141C3A;padding:14px 10px;overflow-y:auto;border-right:1px solid rgba(99,102,241,0.15)}
-.sb-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6366F1;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(99,102,241,0.2)}
-.filter-row{padding:7px 9px;border-radius:8px;cursor:pointer;margin-bottom:3px;display:flex;justify-content:space-between;align-items:center;transition:background 0.15s}
-.filter-row:hover{background:rgba(255,255,255,0.06)}
-.filter-row.active{background:#4C3BAF}
-.fr-left{display:flex;align-items:center;gap:7px}
-.fr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.fr-name{color:rgba(255,255,255,0.8);font-size:11.5px;font-weight:500}
-.filter-row.active .fr-name{color:white;font-weight:600}
-.fr-count{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.08);padding:1px 7px;border-radius:10px;white-space:nowrap}
-.filter-row.active .fr-count{color:white;background:rgba(255,255,255,0.2)}
-.main{flex:1;overflow:hidden;display:flex;flex-direction:column;background:white}
-.search-bar{padding:9px 14px;border-bottom:0.5px solid #F1F5F9;display:flex;gap:8px;align-items:center;flex-shrink:0;background:#FAFAFA}
-.search-bar input{flex:1;padding:7px 10px 7px 14px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:12px;color:#0F172A}
-.count-info{font-size:12px;color:#64748B;white-space:nowrap;font-weight:500}
-.count-info strong{color:#1E3A5F}
-.table-scroll{flex:1;overflow-y:auto}
-table{width:100%;border-collapse:collapse;font-size:11.5px;table-layout:fixed}
+.exp-btn{padding:5px 13px;background:rgba(219,128,46,0.2);color:#EFA855;border:1.5px solid rgba(219,128,46,0.5);border-radius:7px;font-size:11px;cursor:pointer;font-weight:700}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:12px 20px;flex-shrink:0}
+.sc{background:white;border-radius:10px;border:0.5px solid #E2E8F0;padding:12px 16px;display:flex;align-items:center;gap:12px}
+.sc-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.sc-val{font-size:22px;font-weight:800;letter-spacing:-0.5px;line-height:1}
+.sc-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:#94A3B8;margin-top:2px}
+.toolbar{padding:10px 20px;background:white;border-bottom:0.5px solid #E2E8F0;display:flex;gap:8px;align-items:center;flex-shrink:0}
+.toolbar input{flex:1;padding:7px 12px 7px 34px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:12.5px;color:#0F172A;font-family:inherit}
+.search-wrap{position:relative;flex:1}
+.search-wrap::before{content:"⌕";position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#94A3B8;font-size:16px;pointer-events:none}
+.type-select{padding:7px 12px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:12px;color:#1E3A5F;font-family:inherit;background:white;cursor:pointer;min-width:180px;font-weight:500}
+.count-badge{font-size:12px;color:#64748B;white-space:nowrap;font-weight:500}
+.count-badge strong{color:#1E3A5F;font-weight:700}
+.table-wrap{flex:1;overflow-y:auto;background:white}
+table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
 thead{position:sticky;top:0;z-index:1}
-th{padding:9px 12px;text-align:left;font-size:10px;font-weight:700;color:white;text-transform:uppercase;letter-spacing:0.07em;background:#1E3A5F;border-bottom:2px solid #4C3BAF}
-td{padding:9px 12px;border-bottom:0.5px solid #F1F5F9;vertical-align:top}
-tr:hover td{filter:brightness(0.97)}
+th{padding:9px 14px;text-align:left;font-size:10px;font-weight:700;color:white;text-transform:uppercase;letter-spacing:0.07em;background:#1E3A5F;border-bottom:2px solid #4C3BAF}
+td{padding:8px 14px;border-bottom:0.5px solid #F1F5F9;vertical-align:middle}
+tr:hover td{background:#F8F9FF}
 .snap{}
+.ab-pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:600}
 </style></head><body>
 <div class="gold-bar"></div>
 <div class="titlebar">
-  <h1><div class="titlebar-logomark">F</div> Audit Log — FPG Equipment Portal</h1>
-  <div class="titlebar-right">${yearPills}<div style="position:relative"><button class="exp-btn" onclick="toggleExportMenu()">&#8595; Export <span id="exp-arrow">&#9660;</span></button><div id="exp-menu" style="display:none;position:absolute;top:calc(100% + 4px);right:0;background:white;border:1.5px solid #4C3BAF;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.15);z-index:999;min-width:220px;overflow:hidden"><div style="padding:6px 10px;background:#EDE9FE;border-bottom:0.5px solid #C4B5FD;font-size:10px;font-weight:700;color:#4C3BAF;text-transform:uppercase;letter-spacing:0.07em">Choose what to export</div><button onclick="exportMode('page')" style="width:100%;padding:10px 14px;border:none;border-bottom:0.5px solid #F1F5F9;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">This page only</div><div id="page-count-label" style="font-size:11px;color:#64748B;margin-top:1px">First 25 visible entries</div></button><button onclick="exportMode('all')" style="width:100%;padding:10px 14px;border:none;border-bottom:0.5px solid #F1F5F9;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">All filtered results</div><div id="filtered-count-label" style="font-size:11px;color:#64748B;margin-top:1px">All visible entries</div></button><button onclick="exportMode('selected')" style="width:100%;padding:10px 14px;border:none;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">Selected only</div><div id="selected-count-label" style="font-size:11px;color:#64748B;margin-top:1px">0 entries selected</div></button></div></div></div>
+  <h1><div class="lm">F</div> Audit Log — FPG Equipment Portal</h1>
+  <div class="tr">${yearPills}
+    <div style="position:relative">
+      <button class="exp-btn" onclick="toggleExportMenu()">&#8595; Export &#9660;</button>
+      <div id="exp-menu" style="display:none;position:absolute;top:calc(100% + 4px);right:0;background:white;border:1.5px solid #4C3BAF;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.15);z-index:999;min-width:210px;overflow:hidden">
+        <div style="padding:6px 12px;background:#EDE9FE;border-bottom:0.5px solid #C4B5FD;font-size:10px;font-weight:700;color:#4C3BAF;text-transform:uppercase;letter-spacing:0.07em">Choose what to export</div>
+        <button onclick="exportMode('page')" style="width:100%;padding:9px 14px;border:none;border-bottom:0.5px solid #F1F5F9;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">This page only</div><div id="page-count-label" style="font-size:11px;color:#64748B;margin-top:1px">First 25 visible entries</div></button>
+        <button onclick="exportMode('all')" style="width:100%;padding:9px 14px;border:none;border-bottom:0.5px solid #F1F5F9;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">All filtered results</div><div id="filtered-count-label" style="font-size:11px;color:#64748B;margin-top:1px">All visible entries</div></button>
+        <button onclick="exportMode('selected')" style="width:100%;padding:9px 14px;border:none;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">Selected only</div><div id="selected-count-label" style="font-size:11px;color:#64748B;margin-top:1px">0 entries selected</div></button>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="stats">
-  <div class="stat-box"><div id="sc-total" class="stat-num" style="color:#C4B5FD">-</div><div class="stat-lbl">Total entries</div></div>
-  <div class="stat-box"><div id="sc-logins" class="stat-num" style="color:#93C5FD">-</div><div class="stat-lbl">Logins</div></div>
-  <div class="stat-box"><div id="sc-deletes" class="stat-num" style="color:#FCA5A5">-</div><div class="stat-lbl">Deletions</div></div>
-  <div class="stat-box"><div id="sc-status" class="stat-num" style="color:#FCD34D">-</div><div class="stat-lbl">Status changes</div></div>
+  <div class="sc"><div class="sc-icon" style="background:#EEF2FF">&#128203;</div><div><div class="sc-val" id="sc-total" style="color:#4C3BAF">-</div><div class="sc-lbl">Total entries</div></div></div>
+  <div class="sc"><div class="sc-icon" style="background:#EFF6FF">&#128274;</div><div><div class="sc-val" id="sc-logins" style="color:#3B82F6">-</div><div class="sc-lbl">Logins</div></div></div>
+  <div class="sc"><div class="sc-icon" style="background:#FEF2F2">&#128465;</div><div><div class="sc-val" id="sc-deletes" style="color:#EF4444">-</div><div class="sc-lbl">Deletions</div></div></div>
+  <div class="sc"><div class="sc-icon" style="background:#FFFBEB">&#8635;</div><div><div class="sc-val" id="sc-status" style="color:#F59E0B">-</div><div class="sc-lbl">Status changes</div></div></div>
 </div>
-<div class="layout">
-  <div class="sidebar">
-    <div class="sb-title">Filter by type</div>
-    <div class="filter-row active" id="all-btn" onclick="filterType('all')">
-      <div class="fr-left"><div class="fr-dot" style="background:#C4B5FD"></div><span class="fr-name">All actions</span></div>
-      <span class="fr-count" style="font-weight:700;font-size:11px">${allEntries.length}</span>
-    </div>
-    ${sidebarHtml}
-  </div>
-  <div class="main">
-    <div class="search-bar"><input type="text" id="search-input" placeholder="Search by admin, action, target, or detail..." oninput="applyFilters()"><span class="count-info">Showing <strong id="vc">${allEntries.length}</strong> of <strong>${allEntries.length}</strong> entries</span></div>
-    <div class="table-scroll"><table><thead><tr>
-      <th style="width:3%"><input type="checkbox" id="select-all" onchange="toggleSelectAll(this)" style="cursor:pointer;accent-color:#4C3BAF"></th>
-      <th style="width:11%">Date / Time</th>
-      <th style="width:16%">Admin</th>
-      <th style="width:12%">Action</th>
-      <th style="width:13%">Target</th>
-      <th style="width:39%">Detail</th>
-      <th style="width:6%">Result</th>
-    </tr></thead><tbody id="ab">${rowsHtml}</tbody></table></div>
-  </div>
+<div class="toolbar">
+  <div class="search-wrap"><input type="text" id="search-input" placeholder="Search admin, action, target, or detail..." oninput="applyFilters()"></div>
+  <select class="type-select" id="type-select" onchange="filterType(this.value)">
+    <option value="all">All action types</option>
+    <option value="auth.login">Login</option>
+    <option value="auth.auto_logoff">Auto-logout</option>
+    <option value="auth.logout">Logout</option>
+    <option value="order.status_change">Status change</option>
+    <option value="order.soft_delete">Order deleted</option>
+    <option value="order.permanent_delete">Perm. deleted</option>
+    <option value="order.restore">Restored</option>
+    <option value="access.admin_added">Admin added</option>
+    <option value="access.admin_removed">Admin removed</option>
+    <option value="access.role_changed">Role changed</option>
+    <option value="portal.products_published">Published</option>
+    <option value="category.added">Category added</option>
+    <option value="category.updated">Category updated</option>
+    <option value="category.removed">Category removed</option>
+  </select>
+  <span class="count-badge">Showing <strong id="vc">${allEntries.length}</strong> of <strong>${allEntries.length}</strong> entries</span>
+</div>
+<div class="table-wrap">
+  <table><thead><tr>
+    <th style="width:3%"><input type="checkbox" id="select-all" onchange="toggleSelectAll(this)" style="cursor:pointer;accent-color:#4C3BAF"></th>
+    <th style="width:3%"></th>
+    <th style="width:11%">Date / Time</th>
+    <th style="width:16%">Admin</th>
+    <th style="width:12%">Action</th>
+    <th style="width:13%">Target</th>
+    <th style="width:36%">Detail</th>
+    <th style="width:6%">Result</th>
+  </tr></thead><tbody id="ab">${rowsHtml}</tbody></table>
 </div>
 <script>
-function toggleExportMenu(){var m=document.getElementById("exp-menu");var a=document.getElementById("exp-arrow");var open=m.style.display!=="none";m.style.display=open?"none":"block";a.innerHTML=open?"&#9660;":"&#9650;";if(!open){var vis=document.querySelectorAll("#ab tr:not(.snap):not([style*='display:none'])");var sel=document.querySelectorAll("#ab tr:not(.snap) .row-cb:checked");document.getElementById("page-count-label").textContent="First 25 of "+vis.length+" visible entries";document.getElementById("filtered-count-label").textContent=vis.length+" entries matching current filters";document.getElementById("selected-count-label").textContent=sel.length+" entries selected";}}
-function closeExportMenu(){var m=document.getElementById("exp-menu");if(m)m.style.display="none";var a=document.getElementById("exp-arrow");if(a)a.innerHTML="&#9660;";}
+function toggleExportMenu(){var m=document.getElementById("exp-menu");var open=m.style.display!=="none";m.style.display=open?"none":"block";if(!open){var vis=document.querySelectorAll("#ab tr:not(.snap):not([style*='display:none'])");var sel=document.querySelectorAll("#ab tr:not(.snap) .row-cb:checked");document.getElementById("page-count-label").textContent="First 25 of "+vis.length+" visible entries";document.getElementById("filtered-count-label").textContent=vis.length+" entries matching current filters";document.getElementById("selected-count-label").textContent=sel.length+" entries selected";}}
+function closeExportMenu(){var m=document.getElementById("exp-menu");if(m)m.style.display="none";}
 document.addEventListener("click",function(e){if(!e.target.closest("#exp-menu")&&!e.target.closest(".exp-btn"))closeExportMenu();});
-function exportMode(mode){closeExportMenu();var rows=document.querySelectorAll("#ab tr:not(.snap)");var h=["Timestamp","Admin","Action","Target","Detail","Result"];var lines=[h.join(",")];var toExport=[];rows.forEach(function(r,i){if(r.style.display==="none")return;if(mode==="page"&&i>=25)return;if(mode==="selected"){var cb=r.querySelector(".row-cb");if(!cb||!cb.checked)return;}toExport.push(r);});toExport.forEach(function(r){var c=r.querySelectorAll("td");if(c.length<7)return;lines.push([1,2,3,4,5,6].map(function(i){return'"'+c[i].innerText.replace(/"/g,'""').replace(/\n/g," ").trim()+'"';}).join(","));});if(toExport.length===0){alert("No entries to export. Check your selection.");return;}var b=new Blob([lines.join("\n")],{type:"text/csv"});var u=URL.createObjectURL(b);var a=document.createElement("a");a.href=u;a.download="audit-log-"+mode+".csv";a.click();URL.revokeObjectURL(u);}
+function exportMode(mode){closeExportMenu();var rows=document.querySelectorAll("#ab tr:not(.snap)");var h=["Timestamp","Admin","Action","Target","Detail","Result"];var lines=[h.join(",")];var toExport=[];rows.forEach(function(r,i){if(r.style.display==="none")return;if(mode==="page"&&i>=25)return;if(mode==="selected"){var cb=r.querySelector(".row-cb");if(!cb||!cb.checked)return;}toExport.push(r);});toExport.forEach(function(r){var c=r.querySelectorAll("td");if(c.length<8)return;lines.push([2,3,4,5,6,7].map(function(i){return'"'+c[i].innerText.replace(/"/g,'""').replace(/\n/g," ").trim()+'"';}).join(","));});if(toExport.length===0){alert("No entries to export.");return;}var b=new Blob([lines.join("\n")],{type:"text/csv"});var u=URL.createObjectURL(b);var a=document.createElement("a");a.href=u;a.download="audit-log-"+mode+".csv";a.click();URL.revokeObjectURL(u);}
 function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.getElementById("chev-"+i);if(!r)return;var o=r.style.display!=="none";r.style.display=o?"none":"table-row";if(c)c.innerHTML=o?"&#9658;":"&#9660;";}
-function filterType(t){document.querySelectorAll(".filter-row").forEach(function(e){e.classList.remove("active")});document.getElementById("all-btn").classList.remove("active");if(t==="all"){document.getElementById("all-btn").classList.add("active")}else{var el=document.querySelector("[data-action=\""+t+"\"]");if(el)el.classList.add("active")}window._type=t;applyFilters();}
-function applyFilters(){var q=(document.getElementById("search-input").value||"").toLowerCase();var rows=document.querySelectorAll("#ab tr:not(.snap)");var count=0;rows.forEach(function(row){var a=row.getAttribute("data-action")||"";var text=row.textContent.toLowerCase();var tm=(!window._type||window._type==="all"||a===window._type);var sm=!q||text.includes(q);row.style.display=(tm&&sm)?"":"none";if(tm&&sm)count++;});document.getElementById("vc").textContent=count;}
+function filterType(t){window._type=t;applyFilters();}
+function applyFilters(){var q=(document.getElementById("search-input").value||"").toLowerCase();var t=window._type||"all";var rows=document.querySelectorAll("#ab tr:not(.snap)");var count=0;rows.forEach(function(row){var a=row.getAttribute("data-action")||"";var text=row.textContent.toLowerCase();var tm=(t==="all"||a===t);var sm=!q||text.includes(q);row.style.display=(tm&&sm)?"":"none";if(tm&&sm)count++;});document.getElementById("vc").textContent=count;}
 function toggleSelectAll(cb){document.querySelectorAll("#ab tr:not(.snap) .row-cb").forEach(function(c){c.checked=cb.checked;});updateSelCount();}
 function updateSelCount(){var sel=document.querySelectorAll("#ab tr:not(.snap) .row-cb:checked").length;var lbl=document.getElementById("selected-count-label");if(lbl)lbl.textContent=sel+" entries selected";}
 function toggleYear(y,btn){alert("Close this tab and reselect years in the admin panel, then click Audit Log again.");}
@@ -3727,89 +3738,100 @@ document.getElementById("sc-status").textContent=stat;
                         const allYears = availableYears;
                         const yearPills = allYears.map(y => '<button class="ypill' + (yearsToLoad.includes(y)?' on':'') + '" onclick="toggleYear(' + y + ',this)">' + y + '</button>').join('');
 
-                        const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Audit Log — FPG Equipment Portal</title><style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}
-body{background:#F3F4F6;height:100vh;display:flex;flex-direction:column;overflow:hidden}
-.gold-bar{height:4px;background:linear-gradient(90deg,#DB802E,#EFA855,#DB802E)}
-.titlebar{background:linear-gradient(135deg,#1E3A5F 0%,#4C3BAF 100%);padding:12px 18px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
-.titlebar h1{color:white;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
-.titlebar-logomark{width:28px;height:28px;background:linear-gradient(135deg,#4C3BAF,#6366F1);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;font-family:Georgia,serif}
-.titlebar-right{display:flex;gap:7px;align-items:center}
-.ypill{padding:4px 12px;border-radius:20px;font-size:11.5px;font-weight:700;cursor:pointer;border:1.5px solid rgba(255,255,255,0.3);background:transparent;color:rgba(255,255,255,0.65);transition:all 0.15s}
+                        const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Audit Log — FPG Equipment Portal</title><style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
+body{background:#F1F5F9;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.gold-bar{height:4px;background:linear-gradient(90deg,#DB802E,#EFA855,#DB802E);flex-shrink:0}
+.titlebar{background:linear-gradient(135deg,#1E3A5F 0%,#4C3BAF 100%);padding:11px 20px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.titlebar h1{color:white;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+.lm{width:26px;height:26px;background:linear-gradient(135deg,#4C3BAF,#6366F1);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;font-family:Georgia,serif}
+.tr{display:flex;gap:7px;align-items:center}
+.ypill{padding:4px 11px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:1.5px solid rgba(255,255,255,0.3);background:transparent;color:rgba(255,255,255,0.65)}
 .ypill.on{background:#4C3BAF;color:white;border-color:#4C3BAF}
-.exp-btn{padding:6px 14px;background:rgba(219,128,46,0.2);color:#EFA855;border:1.5px solid rgba(219,128,46,0.5);border-radius:8px;font-size:11.5px;cursor:pointer;font-weight:700;display:flex;align-items:center;gap:5px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:2px solid #4C3BAF;flex-shrink:0}
-.stat-box{padding:11px 18px;background:#1E3A5F;border-right:1px solid rgba(99,102,241,0.2);text-align:center}
-.stat-box:last-child{border-right:none}
-.stat-num{font-size:22px;font-weight:700;font-family:Georgia,serif;line-height:1.1}
-.stat-lbl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.45);margin-top:4px}
-.layout{display:flex;flex:1;overflow:hidden;max-width:1400px;width:100%;margin:0 auto}
-.sidebar{width:170px;flex-shrink:0;background:#141C3A;padding:14px 10px;overflow-y:auto;border-right:1px solid rgba(99,102,241,0.15)}
-.sb-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6366F1;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(99,102,241,0.2)}
-.filter-row{padding:7px 9px;border-radius:8px;cursor:pointer;margin-bottom:3px;display:flex;justify-content:space-between;align-items:center;transition:background 0.15s}
-.filter-row:hover{background:rgba(255,255,255,0.06)}
-.filter-row.active{background:#4C3BAF}
-.fr-left{display:flex;align-items:center;gap:7px}
-.fr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.fr-name{color:rgba(255,255,255,0.8);font-size:11.5px;font-weight:500}
-.filter-row.active .fr-name{color:white;font-weight:600}
-.fr-count{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.08);padding:1px 7px;border-radius:10px;white-space:nowrap}
-.filter-row.active .fr-count{color:white;background:rgba(255,255,255,0.2)}
-.main{flex:1;overflow:hidden;display:flex;flex-direction:column;background:white}
-.search-bar{padding:9px 14px;border-bottom:0.5px solid #F1F5F9;display:flex;gap:8px;align-items:center;flex-shrink:0;background:#FAFAFA}
-.search-bar input{flex:1;padding:7px 10px 7px 14px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:12px;color:#0F172A}
-.count-info{font-size:12px;color:#64748B;white-space:nowrap;font-weight:500}
-.count-info strong{color:#1E3A5F}
-.table-scroll{flex:1;overflow-y:auto}
-table{width:100%;border-collapse:collapse;font-size:11.5px;table-layout:fixed}
+.exp-btn{padding:5px 13px;background:rgba(219,128,46,0.2);color:#EFA855;border:1.5px solid rgba(219,128,46,0.5);border-radius:7px;font-size:11px;cursor:pointer;font-weight:700}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:12px 20px;flex-shrink:0}
+.sc{background:white;border-radius:10px;border:0.5px solid #E2E8F0;padding:12px 16px;display:flex;align-items:center;gap:12px}
+.sc-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.sc-val{font-size:22px;font-weight:800;letter-spacing:-0.5px;line-height:1}
+.sc-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:#94A3B8;margin-top:2px}
+.toolbar{padding:10px 20px;background:white;border-bottom:0.5px solid #E2E8F0;display:flex;gap:8px;align-items:center;flex-shrink:0}
+.toolbar input{flex:1;padding:7px 12px 7px 34px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:12.5px;color:#0F172A;font-family:inherit}
+.search-wrap{position:relative;flex:1}
+.search-wrap::before{content:"⌕";position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#94A3B8;font-size:16px;pointer-events:none}
+.type-select{padding:7px 12px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:12px;color:#1E3A5F;font-family:inherit;background:white;cursor:pointer;min-width:180px;font-weight:500}
+.count-badge{font-size:12px;color:#64748B;white-space:nowrap;font-weight:500}
+.count-badge strong{color:#1E3A5F;font-weight:700}
+.table-wrap{flex:1;overflow-y:auto;background:white}
+table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
 thead{position:sticky;top:0;z-index:1}
-th{padding:9px 12px;text-align:left;font-size:10px;font-weight:700;color:white;text-transform:uppercase;letter-spacing:0.07em;background:#1E3A5F;border-bottom:2px solid #4C3BAF}
-td{padding:9px 12px;border-bottom:0.5px solid #F1F5F9;vertical-align:top}
-tr:hover td{filter:brightness(0.97)}
+th{padding:9px 14px;text-align:left;font-size:10px;font-weight:700;color:white;text-transform:uppercase;letter-spacing:0.07em;background:#1E3A5F;border-bottom:2px solid #4C3BAF}
+td{padding:8px 14px;border-bottom:0.5px solid #F1F5F9;vertical-align:middle}
+tr:hover td{background:#F8F9FF}
 .snap{}
+.ab-pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:600}
 </style></head><body>
 <div class="gold-bar"></div>
 <div class="titlebar">
-  <h1><div class="titlebar-logomark">F</div> Audit Log — FPG Equipment Portal</h1>
-  <div class="titlebar-right">${yearPills}<div style="position:relative"><button class="exp-btn" onclick="toggleExportMenu()">&#8595; Export <span id="exp-arrow">&#9660;</span></button><div id="exp-menu" style="display:none;position:absolute;top:calc(100% + 4px);right:0;background:white;border:1.5px solid #4C3BAF;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.15);z-index:999;min-width:220px;overflow:hidden"><div style="padding:6px 10px;background:#EDE9FE;border-bottom:0.5px solid #C4B5FD;font-size:10px;font-weight:700;color:#4C3BAF;text-transform:uppercase;letter-spacing:0.07em">Choose what to export</div><button onclick="exportMode('page')" style="width:100%;padding:10px 14px;border:none;border-bottom:0.5px solid #F1F5F9;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">This page only</div><div id="page-count-label" style="font-size:11px;color:#64748B;margin-top:1px">First 25 visible entries</div></button><button onclick="exportMode('all')" style="width:100%;padding:10px 14px;border:none;border-bottom:0.5px solid #F1F5F9;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">All filtered results</div><div id="filtered-count-label" style="font-size:11px;color:#64748B;margin-top:1px">All visible entries</div></button><button onclick="exportMode('selected')" style="width:100%;padding:10px 14px;border:none;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">Selected only</div><div id="selected-count-label" style="font-size:11px;color:#64748B;margin-top:1px">0 entries selected</div></button></div></div></div>
+  <h1><div class="lm">F</div> Audit Log — FPG Equipment Portal</h1>
+  <div class="tr">${yearPills}
+    <div style="position:relative">
+      <button class="exp-btn" onclick="toggleExportMenu()">&#8595; Export &#9660;</button>
+      <div id="exp-menu" style="display:none;position:absolute;top:calc(100% + 4px);right:0;background:white;border:1.5px solid #4C3BAF;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.15);z-index:999;min-width:210px;overflow:hidden">
+        <div style="padding:6px 12px;background:#EDE9FE;border-bottom:0.5px solid #C4B5FD;font-size:10px;font-weight:700;color:#4C3BAF;text-transform:uppercase;letter-spacing:0.07em">Choose what to export</div>
+        <button onclick="exportMode('page')" style="width:100%;padding:9px 14px;border:none;border-bottom:0.5px solid #F1F5F9;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">This page only</div><div id="page-count-label" style="font-size:11px;color:#64748B;margin-top:1px">First 25 visible entries</div></button>
+        <button onclick="exportMode('all')" style="width:100%;padding:9px 14px;border:none;border-bottom:0.5px solid #F1F5F9;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">All filtered results</div><div id="filtered-count-label" style="font-size:11px;color:#64748B;margin-top:1px">All visible entries</div></button>
+        <button onclick="exportMode('selected')" style="width:100%;padding:9px 14px;border:none;background:white;text-align:left;cursor:pointer;font-family:inherit"><div style="font-weight:700;font-size:12px;color:#1E3A5F">Selected only</div><div id="selected-count-label" style="font-size:11px;color:#64748B;margin-top:1px">0 entries selected</div></button>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="stats">
-  <div class="stat-box"><div id="sc-total" class="stat-num" style="color:#C4B5FD">-</div><div class="stat-lbl">Total entries</div></div>
-  <div class="stat-box"><div id="sc-logins" class="stat-num" style="color:#93C5FD">-</div><div class="stat-lbl">Logins</div></div>
-  <div class="stat-box"><div id="sc-deletes" class="stat-num" style="color:#FCA5A5">-</div><div class="stat-lbl">Deletions</div></div>
-  <div class="stat-box"><div id="sc-status" class="stat-num" style="color:#FCD34D">-</div><div class="stat-lbl">Status changes</div></div>
+  <div class="sc"><div class="sc-icon" style="background:#EEF2FF">&#128203;</div><div><div class="sc-val" id="sc-total" style="color:#4C3BAF">-</div><div class="sc-lbl">Total entries</div></div></div>
+  <div class="sc"><div class="sc-icon" style="background:#EFF6FF">&#128274;</div><div><div class="sc-val" id="sc-logins" style="color:#3B82F6">-</div><div class="sc-lbl">Logins</div></div></div>
+  <div class="sc"><div class="sc-icon" style="background:#FEF2F2">&#128465;</div><div><div class="sc-val" id="sc-deletes" style="color:#EF4444">-</div><div class="sc-lbl">Deletions</div></div></div>
+  <div class="sc"><div class="sc-icon" style="background:#FFFBEB">&#8635;</div><div><div class="sc-val" id="sc-status" style="color:#F59E0B">-</div><div class="sc-lbl">Status changes</div></div></div>
 </div>
-<div class="layout">
-  <div class="sidebar">
-    <div class="sb-title">Filter by type</div>
-    <div class="filter-row active" id="all-btn" onclick="filterType('all')">
-      <div class="fr-left"><div class="fr-dot" style="background:#C4B5FD"></div><span class="fr-name">All actions</span></div>
-      <span class="fr-count" style="font-weight:700;font-size:11px">${allEntries.length}</span>
-    </div>
-    ${sidebarHtml}
-  </div>
-  <div class="main">
-    <div class="search-bar"><input type="text" id="search-input" placeholder="Search by admin, action, target, or detail..." oninput="applyFilters()"><span class="count-info">Showing <strong id="vc">${allEntries.length}</strong> of <strong>${allEntries.length}</strong> entries</span></div>
-    <div class="table-scroll"><table><thead><tr>
-      <th style="width:3%"><input type="checkbox" id="select-all" onchange="toggleSelectAll(this)" style="cursor:pointer;accent-color:#4C3BAF"></th>
-      <th style="width:11%">Date / Time</th>
-      <th style="width:16%">Admin</th>
-      <th style="width:12%">Action</th>
-      <th style="width:13%">Target</th>
-      <th style="width:39%">Detail</th>
-      <th style="width:6%">Result</th>
-    </tr></thead><tbody id="ab">${rowsHtml}</tbody></table></div>
-  </div>
+<div class="toolbar">
+  <div class="search-wrap"><input type="text" id="search-input" placeholder="Search admin, action, target, or detail..." oninput="applyFilters()"></div>
+  <select class="type-select" id="type-select" onchange="filterType(this.value)">
+    <option value="all">All action types</option>
+    <option value="auth.login">Login</option>
+    <option value="auth.auto_logoff">Auto-logout</option>
+    <option value="auth.logout">Logout</option>
+    <option value="order.status_change">Status change</option>
+    <option value="order.soft_delete">Order deleted</option>
+    <option value="order.permanent_delete">Perm. deleted</option>
+    <option value="order.restore">Restored</option>
+    <option value="access.admin_added">Admin added</option>
+    <option value="access.admin_removed">Admin removed</option>
+    <option value="access.role_changed">Role changed</option>
+    <option value="portal.products_published">Published</option>
+    <option value="category.added">Category added</option>
+    <option value="category.updated">Category updated</option>
+    <option value="category.removed">Category removed</option>
+  </select>
+  <span class="count-badge">Showing <strong id="vc">${allEntries.length}</strong> of <strong>${allEntries.length}</strong> entries</span>
+</div>
+<div class="table-wrap">
+  <table><thead><tr>
+    <th style="width:3%"><input type="checkbox" id="select-all" onchange="toggleSelectAll(this)" style="cursor:pointer;accent-color:#4C3BAF"></th>
+    <th style="width:3%"></th>
+    <th style="width:11%">Date / Time</th>
+    <th style="width:16%">Admin</th>
+    <th style="width:12%">Action</th>
+    <th style="width:13%">Target</th>
+    <th style="width:36%">Detail</th>
+    <th style="width:6%">Result</th>
+  </tr></thead><tbody id="ab">${rowsHtml}</tbody></table>
 </div>
 <script>
-function toggleExportMenu(){var m=document.getElementById("exp-menu");var a=document.getElementById("exp-arrow");var open=m.style.display!=="none";m.style.display=open?"none":"block";a.innerHTML=open?"&#9660;":"&#9650;";if(!open){var vis=document.querySelectorAll("#ab tr:not(.snap):not([style*='display:none'])");var sel=document.querySelectorAll("#ab tr:not(.snap) .row-cb:checked");document.getElementById("page-count-label").textContent="First 25 of "+vis.length+" visible entries";document.getElementById("filtered-count-label").textContent=vis.length+" entries matching current filters";document.getElementById("selected-count-label").textContent=sel.length+" entries selected";}}
-function closeExportMenu(){var m=document.getElementById("exp-menu");if(m)m.style.display="none";var a=document.getElementById("exp-arrow");if(a)a.innerHTML="&#9660;";}
+function toggleExportMenu(){var m=document.getElementById("exp-menu");var open=m.style.display!=="none";m.style.display=open?"none":"block";if(!open){var vis=document.querySelectorAll("#ab tr:not(.snap):not([style*='display:none'])");var sel=document.querySelectorAll("#ab tr:not(.snap) .row-cb:checked");document.getElementById("page-count-label").textContent="First 25 of "+vis.length+" visible entries";document.getElementById("filtered-count-label").textContent=vis.length+" entries matching current filters";document.getElementById("selected-count-label").textContent=sel.length+" entries selected";}}
+function closeExportMenu(){var m=document.getElementById("exp-menu");if(m)m.style.display="none";}
 document.addEventListener("click",function(e){if(!e.target.closest("#exp-menu")&&!e.target.closest(".exp-btn"))closeExportMenu();});
-function exportMode(mode){closeExportMenu();var rows=document.querySelectorAll("#ab tr:not(.snap)");var h=["Timestamp","Admin","Action","Target","Detail","Result"];var lines=[h.join(",")];var toExport=[];rows.forEach(function(r,i){if(r.style.display==="none")return;if(mode==="page"&&i>=25)return;if(mode==="selected"){var cb=r.querySelector(".row-cb");if(!cb||!cb.checked)return;}toExport.push(r);});toExport.forEach(function(r){var c=r.querySelectorAll("td");if(c.length<7)return;lines.push([1,2,3,4,5,6].map(function(i){return'"'+c[i].innerText.replace(/"/g,'""').replace(/\n/g," ").trim()+'"';}).join(","));});if(toExport.length===0){alert("No entries to export. Check your selection.");return;}var b=new Blob([lines.join("\n")],{type:"text/csv"});var u=URL.createObjectURL(b);var a=document.createElement("a");a.href=u;a.download="audit-log-"+mode+".csv";a.click();URL.revokeObjectURL(u);}
+function exportMode(mode){closeExportMenu();var rows=document.querySelectorAll("#ab tr:not(.snap)");var h=["Timestamp","Admin","Action","Target","Detail","Result"];var lines=[h.join(",")];var toExport=[];rows.forEach(function(r,i){if(r.style.display==="none")return;if(mode==="page"&&i>=25)return;if(mode==="selected"){var cb=r.querySelector(".row-cb");if(!cb||!cb.checked)return;}toExport.push(r);});toExport.forEach(function(r){var c=r.querySelectorAll("td");if(c.length<8)return;lines.push([2,3,4,5,6,7].map(function(i){return'"'+c[i].innerText.replace(/"/g,'""').replace(/\n/g," ").trim()+'"';}).join(","));});if(toExport.length===0){alert("No entries to export.");return;}var b=new Blob([lines.join("\n")],{type:"text/csv"});var u=URL.createObjectURL(b);var a=document.createElement("a");a.href=u;a.download="audit-log-"+mode+".csv";a.click();URL.revokeObjectURL(u);}
 function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.getElementById("chev-"+i);if(!r)return;var o=r.style.display!=="none";r.style.display=o?"none":"table-row";if(c)c.innerHTML=o?"&#9658;":"&#9660;";}
-function filterType(t){document.querySelectorAll(".filter-row").forEach(function(e){e.classList.remove("active")});document.getElementById("all-btn").classList.remove("active");if(t==="all"){document.getElementById("all-btn").classList.add("active")}else{var el=document.querySelector("[data-action=\""+t+"\"]");if(el)el.classList.add("active")}window._type=t;applyFilters();}
-function applyFilters(){var q=(document.getElementById("search-input").value||"").toLowerCase();var rows=document.querySelectorAll("#ab tr:not(.snap)");var count=0;rows.forEach(function(row){var a=row.getAttribute("data-action")||"";var text=row.textContent.toLowerCase();var tm=(!window._type||window._type==="all"||a===window._type);var sm=!q||text.includes(q);row.style.display=(tm&&sm)?"":"none";if(tm&&sm)count++;});document.getElementById("vc").textContent=count;}
+function filterType(t){window._type=t;applyFilters();}
+function applyFilters(){var q=(document.getElementById("search-input").value||"").toLowerCase();var t=window._type||"all";var rows=document.querySelectorAll("#ab tr:not(.snap)");var count=0;rows.forEach(function(row){var a=row.getAttribute("data-action")||"";var text=row.textContent.toLowerCase();var tm=(t==="all"||a===t);var sm=!q||text.includes(q);row.style.display=(tm&&sm)?"":"none";if(tm&&sm)count++;});document.getElementById("vc").textContent=count;}
 function toggleSelectAll(cb){document.querySelectorAll("#ab tr:not(.snap) .row-cb").forEach(function(c){c.checked=cb.checked;});updateSelCount();}
 function updateSelCount(){var sel=document.querySelectorAll("#ab tr:not(.snap) .row-cb:checked").length;var lbl=document.getElementById("selected-count-label");if(lbl)lbl.textContent=sel+" entries selected";}
 function toggleYear(y,btn){alert("Close this tab and reselect years in the admin panel, then click Audit Log again.");}
