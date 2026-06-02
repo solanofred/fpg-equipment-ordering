@@ -117,16 +117,21 @@ setEntries(allEntries);
         <div style={{display:'flex',flexDirection:'column',height:'100%',overflow:'hidden'}}>
             <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'14px',padding:'14px 20px',flexShrink:0}}>
                 {[
-                    {label:'Total Entries',val:entries.length,sub:'All time',grad:'linear-gradient(135deg,#4F46E5,#6366F1)'},
-                    {label:'Auth Events',val:entries.filter(e=>e.action.startsWith('auth.')).length,sub:'Logins & logouts',grad:'linear-gradient(135deg,#0EA5E9,#38BDF8)'},
-                    {label:'Order Events',val:entries.filter(e=>e.action.startsWith('order.')).length,sub:'Deletes & changes',grad:'linear-gradient(135deg,#EF4444,#F87171)'},
-                    {label:'Access & System',val:entries.filter(e=>!e.action.startsWith('order.')&&!e.action.startsWith('auth.')).length,sub:'Admin & publish',grad:'linear-gradient(135deg,#10B981,#34D399)'},
+                    {label:'Total Entries',val:entries.length,sub:'All time',grad:'linear-gradient(135deg,#4F46E5 0%,#6366F1 100%)',icon:'ti-file-description'},
+                    {label:'Auth Events',val:entries.filter(e=>e.action.startsWith('auth.')).length,sub:'Logins & logouts',grad:'linear-gradient(135deg,#0EA5E9 0%,#38BDF8 100%)',icon:'ti-login'},
+                    {label:'Order Events',val:entries.filter(e=>e.action.startsWith('order.')).length,sub:'Deletes & changes',grad:'linear-gradient(135deg,#F59E0B 0%,#FBBF24 100%)',icon:'ti-clipboard-list'},
+                    {label:'Access & System',val:entries.filter(e=>!e.action.startsWith('order.')&&!e.action.startsWith('auth.')).length,sub:'Admins & publish',grad:'linear-gradient(135deg,#10B981 0%,#34D399 100%)',icon:'ti-shield-check'},
                 ].map((s,i) => (
-                    <div key={i} onClick={()=>setShowDrill(i)} style={{cursor:'pointer',background:s.grad,borderRadius:'14px',padding:'16px 18px',position:'relative',overflow:'hidden'}}>
-                        <div style={{position:'absolute',top:'-12px',right:'-12px',width:'70px',height:'70px',background:'rgba(255,255,255,0.12)',borderRadius:'50%'}}></div>
-                        <div style={{fontSize:'32px',fontWeight:800,color:'rgba(255,255,255,0.92)',letterSpacing:'-1px',lineHeight:1}}>{s.val}</div>
-                        <div style={{fontSize:'12px',color:'rgba(255,255,255,0.72)',marginTop:'6px',fontWeight:600}}>{s.label}</div>
-                        <div style={{fontSize:'10.5px',color:'rgba(255,255,255,0.50)',marginTop:'2px'}}>{s.sub}</div>
+                    <div key={i} onClick={()=>setShowDrill(i)} style={{cursor:'pointer',background:s.grad,borderRadius:'16px',padding:'20px',position:'relative',overflow:'hidden'}}>
+                        <div style={{position:'absolute',top:'-10px',right:'-10px',width:'70px',height:'70px',background:'rgba(255,255,255,0.1)',borderRadius:'50%'}}></div>
+                        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'16px'}}>
+                            <div style={{width:'36px',height:'36px',background:'rgba(255,255,255,0.2)',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                                <i className={'ti '+s.icon} style={{fontSize:'18px',color:'white'}}></i>
+                            </div>
+                        </div>
+                        <div style={{fontSize:'36px',fontWeight:800,color:'white',lineHeight:1,letterSpacing:'-1px'}}>{s.val}</div>
+                        <div style={{fontSize:'13px',color:'white',marginTop:'8px',fontWeight:600}}>{s.label}</div>
+                        <div style={{fontSize:'11px',color:'rgba(255,255,255,0.85)',marginTop:'2px'}}>{s.sub}</div>
                     </div>
                 ))}
             </div>
@@ -163,7 +168,7 @@ setEntries(allEntries);
                 <button onClick={()=>{setFilterQ('');setFilterType('');setFilterAdmin('');setFilterResult('');setFilterFrom('');setFilterTo('');}} style={{padding:'7px 12px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'11.5px',color:'#64748B',background:'white',cursor:'pointer',fontWeight:600}}>Clear</button>
                 <span style={{background:'#EEF2FF',color:'#4C3BAF',borderRadius:'20px',padding:'3px 11px',fontSize:'11.5px',fontWeight:700,marginLeft:'auto',whiteSpace:'nowrap'}}>{filtered.length} {filtered.length===1?'entry':'entries'}</span>
             </div>
-            <div style={{flex:1,overflowY:'auto',background:'white'}}>
+            <div style={{flex:1,overflowY:'auto',background:'white',minWidth:0}}>
                 <table id="tbl-auditlog" style={{width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed'}}>
                     <thead>
                         <tr style={{background:'#D97706'}}>
@@ -233,16 +238,16 @@ setEntries(allEntries);
                                 <tr key={i} style={{background:i%2===0?'#ffffff':'#F5F3FF'}}>
                                     <td style={{padding:'10px 12px',verticalAlign:'middle'}}>
                                         <div style={{fontWeight:700,fontSize:'12px',color:'#1E293B'}}>{dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
-                                        <div style={{fontSize:'11px',color:'#57534E'}}>{dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
+                                        <div style={{fontSize:'11px',color:'#57534E',fontWeight:600}}>{dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
                                     </td>
                                     <td style={{padding:'10px 12px',verticalAlign:'middle',overflow:'hidden'}}>
-                                        <div style={{fontWeight:600,fontSize:'12px',color:'#1E293B',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} title={e.adminEmail||''}>{adminName}</div>
+                                        <div style={{fontWeight:700,fontSize:'12px',color:'#1E293B',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} title={e.adminEmail||''}>{adminName}</div>
                                     </td>
                                     <td style={{padding:'10px 12px',verticalAlign:'middle'}}>
                                         <span style={{display:'inline-block',padding:'2px 9px',borderRadius:'20px',background:m.bg,color:m.color,fontWeight:600,fontSize:'11px',border:'1px solid '+(m.border||m.color),whiteSpace:'nowrap'}}>{m.label}</span>
                                     </td>
-                                    <td style={{padding:'10px 12px',verticalAlign:'middle',fontSize:'11.5px',fontFamily:'monospace',color:'#4C3BAF',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} title={ref}>{ref||'—'}</td>
-                                    <td style={{padding:'10px 12px',verticalAlign:'middle',fontSize:'12px',color:'#0F172A',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} title={summary}>{summary||'—'}</td>
+                                    <td style={{padding:'10px 12px',verticalAlign:'middle',fontSize:'11.5px',fontFamily:'monospace',color:'#4C3BAF',fontWeight:600,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} title={ref}>{ref||'—'}</td>
+                                    <td style={{padding:'10px 12px',verticalAlign:'middle',fontSize:'12px',color:'#0F172A',fontWeight:600,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} title={summary}>{summary||'—'}</td>
                                     <td style={{padding:'10px 12px',verticalAlign:'middle',textAlign:'center'}}>
                                         <span style={{fontSize:'11px',padding:'2px 8px',borderRadius:'10px',fontWeight:700,background:resBg,color:resCol}}>{e.result||''}</span>
                                     </td>
