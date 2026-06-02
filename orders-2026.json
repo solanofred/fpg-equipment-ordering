@@ -1,7 +1,7 @@
 [
   {
     "id": "ORD-2026-1780246020181",
-    "status": "New",
+    "status": "Deleted",
     "submittedAt": "2026-05-31T16:47:00Z",
     "year": 2026,
     "submitterName": "Doni Perry",
@@ -30,7 +30,10 @@
     "total": 4843.75,
     "isNewEmployee": "no",
     "dateNeeded": "2026-06-08",
-    "notes": ""
+    "notes": "",
+    "deletedBy": "fred.solano@foundationpartners.com",
+    "deletedAt": "2026-06-02T04:39:23.745Z",
+    "deleteReason": "Fred Test"
   },
   {
     "id": "ORD-2026-1780234680423",
