@@ -1638,7 +1638,7 @@
                         <div style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',overflow:'hidden',maxWidth:'1200px'}}>
                             <table style={{width:'100%',borderCollapse:'collapse',fontSize:'13px'}}>
                                 <thead>
-                                    <tr style={{background:'#0369A1'}}>
+                                    <tr style={{background:'#D97706'}}>
                                         <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'36%'}}>Product</th>
                                         <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'16%'}}>Category</th>
                                         <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'12%'}}>Price</th>
@@ -2513,7 +2513,7 @@
                         <div style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',overflow:'hidden',maxWidth:'1200px'}}>
                             <table style={{width:'100%',borderCollapse:'collapse',fontSize:'13px'}}>
                                 <thead>
-                                    <tr style={{background:'#0369A1'}}>
+                                    <tr style={{background:'#D97706'}}>
                                         <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'42%'}}>Category</th>
                                         <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'14%'}}>Products</th>
                                         <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'14%'}}>Status</th>
@@ -2741,7 +2741,7 @@ body{background:#F1F5F9;height:100vh;display:flex;flex-direction:column;overflow
 .table-wrap{flex:1;overflow-y:auto;background:white}
 table{width:100%;border-collapse:collapse;table-layout:fixed}
 thead{position:sticky;top:0;z-index:2}
-th{padding:9px 12px;text-align:left;font-size:10px;font-weight:700;color:white;text-transform:uppercase;letter-spacing:0.07em;background:#0369A1;border-bottom:2px solid #38BDF8;white-space:nowrap;overflow:hidden}
+th{padding:9px 12px;text-align:left;font-size:10px;font-weight:700;color:white;text-transform:uppercase;letter-spacing:0.07em;background:#D97706;border-bottom:2px solid #F59E0B;white-space:nowrap;overflow:hidden}
 th.center{text-align:center}
 td{padding:9px 12px;border-bottom:0.5px solid #F1F5F9;vertical-align:middle;overflow:hidden;text-overflow:ellipsis}
 tr.data-row:hover td{background:#F8F9FF}
@@ -3467,7 +3467,7 @@ window.onload=function(){
                                         {Object.values(selectedOrders).filter(Boolean).length} order{Object.values(selectedOrders).filter(Boolean).length > 1 ? 's' : ''} selected
                                     </span>
                                     <button onClick={handleExportSelected}
-                                        style={{padding:'4px 14px',background:'#0369A1',color:'white',border:'none',borderRadius:'6px',fontSize:'11px',cursor:'pointer',fontFamily:'inherit',fontWeight:500}}>
+                                        style={{padding:'4px 14px',background:'#D97706',color:'white',border:'none',borderRadius:'6px',fontSize:'11px',cursor:'pointer',fontFamily:'inherit',fontWeight:500}}>
                                         ⬇ Export selected
                                     </button>
                                 </div>
@@ -3494,7 +3494,7 @@ window.onload=function(){
                                             <th key={i} onClick={h.col ? ()=>handleSort(h.col) : undefined}
                                                 style={{padding:'9px 10px',textAlign:'left',fontSize:'11px',fontWeight:700,color:'#1E3A5F',textTransform:'uppercase',
                                                     letterSpacing:'0.05em',borderBottom:'3px solid #6366F1',width:h.w,
-                                                    cursor:h.col?'pointer':'default',userSelect:'none',background:'#0369A1',color:'white'}}>
+                                                    cursor:h.col?'pointer':'default',userSelect:'none',background:'#D97706',color:'white'}}>
                                                 {h.label}
                                                 {h.col && <span style={{marginLeft:'4px',fontSize:'10px',opacity:sortCol===h.col?1:0.35,color:sortCol===h.col?'#4C3BAF':'#78716C'}}>
                                                     {sortCol===h.col ? (sortDir==='asc'?'▲':'▼') : '⇅'}
@@ -3835,7 +3835,7 @@ window.onload=function(){
                                     </div>
                                     <div style={{display:'flex',gap:'8px',alignItems:'center'}}>
                                         <button onClick={exportAuditCSV}
-                                            style={{padding:'5px 14px',background:'#0369A1',color:'white',border:'none',borderRadius:'6px',fontSize:'12px',cursor:'pointer',fontFamily:'inherit',fontWeight:500}}>
+                                            style={{padding:'5px 14px',background:'#D97706',color:'white',border:'none',borderRadius:'6px',fontSize:'12px',cursor:'pointer',fontFamily:'inherit',fontWeight:500}}>
                                             ⬇ Export CSV
                                         </button>
                                         <button onClick={()=>setShowAudit(false)} style={{background:'none',border:'none',fontSize:'20px',cursor:'pointer',color:'#A8A29E',lineHeight:1}}>✕</button>
@@ -3870,7 +3870,7 @@ window.onload=function(){
                                         ) : (
                                             <table style={{width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed'}}>
                                                 <thead style={{position:'sticky',top:0,zIndex:1}}>
-                                                    <tr style={{background:'#0369A1'}}>
+                                                    <tr style={{background:'#D97706'}}>
                                                         <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'3%'}}></th>
                                                         <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'14%'}}>Date/Time</th>
                                                         <th style={{padding:'8px 10px',textAlign:'left',fontSize:'10px',fontWeight:500,color:'#78716C',textTransform:'uppercase',letterSpacing:'0.05em',borderBottom:'0.5px solid #E7E5E4',width:'17%'}}>Admin</th>
@@ -4206,7 +4206,7 @@ body{background:#F1F5F9;height:100vh;display:flex;flex-direction:column;overflow
 .table-wrap{flex:1;overflow-y:auto;background:white}
 table{width:100%;border-collapse:collapse;table-layout:fixed}
 thead{position:sticky;top:0;z-index:2}
-th{padding:9px 12px;text-align:left;font-size:10px;font-weight:700;color:white;text-transform:uppercase;letter-spacing:0.07em;background:#0369A1;border-bottom:2px solid #38BDF8;white-space:nowrap;overflow:hidden}
+th{padding:9px 12px;text-align:left;font-size:10px;font-weight:700;color:white;text-transform:uppercase;letter-spacing:0.07em;background:#D97706;border-bottom:2px solid #F59E0B;white-space:nowrap;overflow:hidden}
 th.center{text-align:center}
 td{padding:9px 12px;border-bottom:0.5px solid #F1F5F9;vertical-align:middle;overflow:hidden;text-overflow:ellipsis}
 tr.data-row:hover td{background:#F8F9FF}
@@ -4656,7 +4656,7 @@ window.onload=function(){
                         ) : (
                             <table style={{width:'100%',borderCollapse:'collapse',fontSize:'12px'}}>
                                 <thead>
-                                    <tr style={{background:'#0369A1'}}>
+                                    <tr style={{background:'#D97706'}}>
                                         <th style={{padding:'10px 14px',textAlign:'left',color:'white',fontWeight:700,fontSize:'11px',textTransform:'uppercase',letterSpacing:'0.06em',width:'16%'}}>Date / Time</th>
                                         <th style={{padding:'10px 14px',textAlign:'left',color:'white',fontWeight:700,fontSize:'11px',textTransform:'uppercase',letterSpacing:'0.06em',width:'16%'}}>Admin</th>
                                         <th style={{padding:'10px 14px',textAlign:'left',color:'white',fontWeight:700,fontSize:'11px',textTransform:'uppercase',letterSpacing:'0.06em',width:'14%'}}>Action</th>
