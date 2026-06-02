@@ -216,7 +216,7 @@ function CategoryManagement({ session, azureUrl, categories, products, onCategor
                                                 <div style={{display:'flex',alignItems:'center',gap:'12px'}}>
                                                     <div style={{width:'44px',height:'44px',borderRadius:'8px',overflow:'hidden',flexShrink:0,background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center',border:'1px solid #EDE9FE'}}>
                                                         {cat.imageUrl
-                                                            ? <img src={cat.imageUrl} alt={cat.label} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.style.display='flex';e.target.parentNode.innerHTML='<i class="ti ti-tag" style="font-size:20px;color:#6366F1"></i>';}} />
+                                                            ? <img src={cat.imageUrl} alt={cat.label} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.style.display='flex';e.target.parentNode.innerHTML='<i className="ti ti-tag" style="font-size:20px;color:#6366F1"></i>';}} />
                                                             : <i className="ti ti-tag" style={{fontSize:'20px',color:'#6366F1'}}></i>}
                                                     </div>
                                                     <div style={{fontWeight:600,color:'#0F172A',fontSize:'13px'}}>{cat.label}</div>

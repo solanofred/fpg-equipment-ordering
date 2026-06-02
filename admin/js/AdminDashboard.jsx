@@ -307,25 +307,25 @@ function AdminDashboard({ onLogout }) {
                 <nav className="sidebar-nav">
                     <div className="sidebar-section-label">Main</div>
                     <button className={`sidebar-item ${activeTab==='orders'?'active':''}`} onClick={()=>setActiveTab('orders')}>
-                        <i class="ti ti-clipboard-list sidebar-item-icon"></i> Orders
+                        <i className="ti ti-clipboard-list sidebar-item-icon"></i> Orders
                     </button>
                     <div className="sidebar-section-label">Ordering Portal</div>
                     <button className={`sidebar-item ${activeTab==='categories'?'active':''}`} onClick={()=>setActiveTab('categories')}>
-                        <i class="ti ti-tag sidebar-item-icon"></i> Categories
+                        <i className="ti ti-tag sidebar-item-icon"></i> Categories
                     </button>
                     <button className={`sidebar-item ${activeTab==='products'?'active':''}`} onClick={()=>setActiveTab('products')}>
-                        <i class="ti ti-package sidebar-item-icon"></i> Products
+                        <i className="ti ti-package sidebar-item-icon"></i> Products
                     </button>
                     <div className="sidebar-section-label">System Settings</div>
                     <button className={`sidebar-item ${activeTab==='access'?'active':''}`} onClick={()=>setActiveTab('access')}>
-                        <i class="ti ti-users sidebar-item-icon"></i> Admins
+                        <i className="ti ti-users sidebar-item-icon"></i> Admins
                     </button>
                     <button className={`sidebar-item ${activeTab==='auditlog'?'active':''}`} onClick={()=>setActiveTab('auditlog')}>
-                        <i class="ti ti-file-description sidebar-item-icon"></i> Audit Log
+                        <i className="ti ti-file-description sidebar-item-icon"></i> Audit Log
                     </button>
                     {isSuperAdmin && (
                         <button className={`sidebar-item ${activeTab==='versions'?'active':''}`} onClick={()=>setActiveTab('versions')}>
-                            <i class="ti ti-versions sidebar-item-icon"></i> Version Control
+                            <i className="ti ti-versions sidebar-item-icon"></i> Version Control
                         </button>
                     )}
                 </nav>
@@ -431,7 +431,7 @@ function AdminDashboard({ onLogout }) {
                                             <div style={{display:'flex',alignItems:'center',gap:'12px'}}>
                                                 <div style={{width:'44px',height:'44px',borderRadius:'8px',overflow:'hidden',flexShrink:0,background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center',border:'1px solid #EDE9FE'}}>
                                                     {product.imageUrl
-                                                        ? <img src={product.imageUrl} alt={product.title} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.style.display='flex';e.target.parentNode.innerHTML='<i class="ti ti-package" style="font-size:20px;color:#6366F1"></i>';}} />
+                                                        ? <img src={product.imageUrl} alt={product.title} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={function(e){e.target.style.display='none';e.target.parentNode.style.display='flex';e.target.parentNode.innerHTML='<i className="ti ti-package" style="font-size:20px;color:#6366F1"></i>';}} />
                                                         : <i className="ti ti-package" style={{fontSize:'20px',color:'#6366F1'}}></i>}
                                                 </div>
                                                 <div>
