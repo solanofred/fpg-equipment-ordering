@@ -12,6 +12,8 @@ function AdminDashboard({ onLogout }) {
     const [confirmData, setConfirmData] = useState({});
     const [draftCount, setDraftCount] = useState(DraftService.getDraftCount());
     const [activeTab, setActiveTab] = useState('orders');
+    const [selectedProducts, setSelectedProducts] = useState({});
+    const [showProductExportMenu, setShowProductExportMenu] = useState(false);
     const [categories, setCategories] = useState([]);
     const [inactivityWarning, setInactivityWarning] = useState(false);
     const session = AuthService.getSession();
@@ -19,7 +21,17 @@ function AdminDashboard({ onLogout }) {
     const WARNING_AT = 50 * 60 * 1000;     // 50 minutes
 
     // Auto-logoff after 60 minutes inactivity
-    useEffect(() => {
+    const exportProductsCSV = function(rows, filename) {
+        const headers = ['Product Name','Category','Price','Status','Recommended','Image URL'];
+        const data = rows.map(function(p) {
+            const cat = (categories||[]).find(function(c){return c.slug===p.category;});
+            return [p.title||'', cat?cat.label:(p.category||''), (p.price||0).toFixed(2), p.available?'Published':'Hidden', p.recommended?'Yes':'No', p.imageUrl||''];
+        });
+        const csv = [headers,...data].map(function(r){return r.map(function(v){var s=String(v==null?'':v);return s.includes(',')||s.includes('"')?'"'+s.replace(/"/g,'""')+'"':s;}).join(',');}).join('\n');
+        const blob = new Blob([csv],{type:'text/csv'});const url = URL.createObjectURL(blob);const a = document.createElement('a');a.href=url;a.download=filename||'products.csv';a.click();URL.revokeObjectURL(url);
+    };
+    const toggleSelectProduct = function(id) { setSelectedProducts(function(prev){var n=Object.assign({},prev);n[id]=!n[id];return n;}); };
+        useEffect(() => {
         let lastActivity = Date.now();
         const resetTimer = () => { lastActivity = Date.now(); setInactivityWarning(false); };
         const events = ['mousemove','keydown','click','scroll','touchstart'];
@@ -409,11 +421,42 @@ function AdminDashboard({ onLogout }) {
                             <button onClick={()=>{setEditingProduct({title:'',category:'desktop',items:[],price:0,recommended:false,available:true,imageUrl:''});setShowModal(true);}} style={{padding:'7px 16px',background:'linear-gradient(135deg,#15803D,#16A34A)',color:'white',border:'none',borderRadius:'8px',fontSize:'13px',fontWeight:600,cursor:'pointer'}}>
                                 + Add Product
                             </button>
+                            <div style={{position:'relative'}}>
+                                <button onClick={()=>setShowProductExportMenu(function(p){return !p;})} style={{padding:'7px 12px',border:'1.5px solid #0369A1',borderRadius:'8px',fontSize:'12px',fontWeight:500,cursor:'pointer',background:'white',color:'#0369A1'}}>
+                                    ⬇ Export <span style={{fontSize:'10px'}}>{showProductExportMenu?'▲':'▼'}</span>
+                                </button>
+                                {showProductExportMenu && (function(){
+                                    const sorted=[...products].sort(function(a,b){return a.title.localeCompare(b.title);});
+                                    const sel=sorted.filter(function(p){return selectedProducts[p.id];});
+                                    return (
+                                    <div style={{position:'absolute',top:'calc(100% + 4px)',right:0,background:'white',border:'1.5px solid #0369A1',borderRadius:'8px',zIndex:50,minWidth:'210px',boxShadow:'0 4px 16px rgba(0,0,0,0.12)',overflow:'hidden'}}>
+                                        <div style={{padding:'6px 8px',background:'#F0F4F8',borderBottom:'0.5px solid #C7D9F0',fontSize:'10px',fontWeight:600,color:'#475569',textTransform:'uppercase',letterSpacing:'0.06em'}}>Choose what to export</div>
+                                        <button onClick={()=>{exportProductsCSV(sorted.slice(0,25),'products-first25.csv');setShowProductExportMenu(false);}} style={{width:'100%',padding:'9px 14px',border:'none',borderBottom:'0.5px solid #E7E5E4',background:'white',textAlign:'left',cursor:'pointer',fontSize:'13px'}}>
+                                            <div style={{fontWeight:600}}>First 25 visible</div><div style={{fontSize:'11px',color:'#78716C'}}>{Math.min(25,sorted.length)} products</div>
+                                        </button>
+                                        <button onClick={()=>{exportProductsCSV(sorted,'products-all.csv');setShowProductExportMenu(false);}} style={{width:'100%',padding:'9px 14px',border:'none',borderBottom:'0.5px solid #E7E5E4',background:'white',textAlign:'left',cursor:'pointer',fontSize:'13px'}}>
+                                            <div style={{fontWeight:600}}>All products</div><div style={{fontSize:'11px',color:'#78716C'}}>{sorted.length} products</div>
+                                        </button>
+                                        <button onClick={()=>{if(!sel.length){alert('Select products using checkboxes first.');return;}exportProductsCSV(sel,'products-selected.csv');setShowProductExportMenu(false);}} style={{width:'100%',padding:'9px 14px',border:'none',background:'white',textAlign:'left',cursor:'pointer',fontSize:'13px'}}>
+                                            <div style={{fontWeight:600}}>Selected only</div><div style={{fontSize:'11px',color:'#78716C'}}>{sel.length} selected</div>
+                                        </button>
+                                    </div>);
+                                })()}
+                            </div>
                         </div>
                     </div>
-                    <table id="tbl-products" className="resizable-table" style={{width:'100%',borderCollapse:'collapse',fontSize:'13px',tableLayout:'fixed'}}>
+                    {Object.values(selectedProducts).some(Boolean) && (
+                                    <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'8px 14px',background:'#EFF6FF',borderBottom:'0.5px solid #BFDBFE'}}>
+                                        <span style={{fontSize:'12px',color:'#1E40AF',fontWeight:500}}>{Object.values(selectedProducts).filter(Boolean).length} product{Object.values(selectedProducts).filter(Boolean).length!==1?'s':''} selected</span>
+                                        <button onClick={function(){const s=[...products].sort(function(a,b){return a.title.localeCompare(b.title);});exportProductsCSV(s.filter(function(p){return selectedProducts[p.id];}), 'products-selected.csv');}} style={{padding:'4px 14px',background:'#D97706',color:'white',border:'none',borderRadius:'6px',fontSize:'11px',fontWeight:600,cursor:'pointer'}}>⬇ Export selected</button>
+                                    </div>
+                                )}
+                                <table id="tbl-products" className="resizable-table" style={{width:'100%',borderCollapse:'collapse',fontSize:'13px',tableLayout:'fixed'}}>
                         <thead>
                             <tr style={{background:'#D97706'}}>
+                                <th style={{padding:'11px 10px',width:'40px',textAlign:'center',color:'white'}}>
+                                    {(function(){const s=[...products].sort(function(a,b){return a.title.localeCompare(b.title);});return<input type="checkbox" onChange={function(e){if(e.target.checked){const all={};s.forEach(function(p){all[p.id]=true;});setSelectedProducts(all);}else setSelectedProducts({});}} checked={s.length>0&&s.every(function(p){return selectedProducts[p.id];})} style={{cursor:'pointer',accentColor:'white'}}/>;})()}
+                                </th>
                                 <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'36%',position:'relative'}}>Product</th>
                                 <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'16%'}}>Category</th>
                                 <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'12%'}}>Price</th>
@@ -427,6 +470,9 @@ function AdminDashboard({ onLogout }) {
                                 const catLabel = (categories||[]).find(c=>c.slug===product.category);
                                 return (
                                     <tr key={product.id} style={{background:isDraft?'#FFFBEB':idx%2===0?'white':'#F9FAFB',borderBottom:'1px solid #F1F5F9'}}>
+                                        <td style={{padding:'11px 10px',textAlign:'center'}} onClick={function(e){e.stopPropagation();}}>
+                                            <input type="checkbox" checked={!!selectedProducts[product.id]} onChange={function(){toggleSelectProduct(product.id);}} style={{cursor:'pointer',accentColor:'#4C3BAF'}}/>
+                                        </td>
                                         <td style={{padding:'11px 16px'}}>
                                             <div style={{display:'flex',alignItems:'center',gap:'12px'}}>
                                                 <div style={{width:'44px',height:'44px',borderRadius:'8px',overflow:'hidden',flexShrink:0,background:'#F5F3FF',display:'flex',alignItems:'center',justifyContent:'center',border:'1px solid #EDE9FE'}}>

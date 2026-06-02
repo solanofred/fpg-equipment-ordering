@@ -7,6 +7,17 @@ function AccessManagement({ session, azureUrl, adminPortalUrl }) {
     const [newEmail, setNewEmail] = React.useState('');
     const [adding, setAdding] = React.useState(false);
     const [status, setStatus] = React.useState(null);
+    const [selectedAdmins, setSelectedAdmins] = React.useState({});
+    const [showAdminExportMenu, setShowAdminExportMenu] = React.useState(false);
+    const exportAdminsCSV = function(rows, filename) {
+        const headers = ['Name','Email','Role','Added By','Added At'];
+        const data = rows.map(function(a) {
+            return [a.name||'', a.email||'', a.role||'', a.addedBy||'', a.addedAt||''];
+        });
+        const csv = [headers,...data].map(function(r){return r.map(function(v){var s=String(v==null?'':v);return s.includes(',')||s.includes('"')?'"'+s.replace(/"/g,'""')+'"':s;}).join(',');}).join('\n');
+        const blob = new Blob([csv],{type:'text/csv'});const url = URL.createObjectURL(blob);const a = document.createElement('a');a.href=url;a.download=filename||'admins.csv';a.click();URL.revokeObjectURL(url);
+    };
+    const toggleSelectAdmin = function(email) { setSelectedAdmins(function(prev){var n=Object.assign({},prev);n[email]=!n[email];return n;}); };
 
     const callApi = async (action, extra = {}) => {
         const res = await fetch(azureUrl, {
@@ -90,6 +101,27 @@ function AccessManagement({ session, azureUrl, adminPortalUrl }) {
                     <span style={{fontSize:'16px',fontWeight:700,color:'#0F172A'}}>Current Admins</span>
                     <span style={{fontSize:'13px',fontWeight:400,color:'#64748B',marginLeft:'8px'}}>{loading ? 'Loading...' : admins.length + ' authorized user' + (admins.length !== 1 ? 's' : '')}</span>
                 </div>
+                <div style={{position:'relative'}}>
+                    <button onClick={function(){setShowAdminExportMenu(function(p){return !p;});}} style={{padding:'7px 12px',border:'1.5px solid #0369A1',borderRadius:'8px',fontSize:'12px',fontWeight:500,cursor:'pointer',background:'white',color:'#0369A1'}}>
+                        ⬇ Export <span style={{fontSize:'10px'}}>{showAdminExportMenu?'▲':'▼'}</span>
+                    </button>
+                    {showAdminExportMenu && (function(){
+                        const sel=admins.filter(function(a){return selectedAdmins[a.email];});
+                        return (
+                        <div style={{position:'absolute',top:'calc(100% + 4px)',right:0,background:'white',border:'1.5px solid #0369A1',borderRadius:'8px',zIndex:50,minWidth:'210px',boxShadow:'0 4px 16px rgba(0,0,0,0.12)',overflow:'hidden'}}>
+                            <div style={{padding:'6px 8px',background:'#F0F4F8',borderBottom:'0.5px solid #C7D9F0',fontSize:'10px',fontWeight:600,color:'#475569',textTransform:'uppercase',letterSpacing:'0.06em'}}>Choose what to export</div>
+                            <button onClick={function(){exportAdminsCSV(admins.slice(0,25),'admins-first25.csv');setShowAdminExportMenu(false);}} style={{width:'100%',padding:'9px 14px',border:'none',borderBottom:'0.5px solid #E7E5E4',background:'white',textAlign:'left',cursor:'pointer',fontSize:'13px'}}>
+                                <div style={{fontWeight:600}}>First 25 visible</div><div style={{fontSize:'11px',color:'#78716C'}}>{Math.min(25,admins.length)} admins</div>
+                            </button>
+                            <button onClick={function(){exportAdminsCSV(admins,'admins-all.csv');setShowAdminExportMenu(false);}} style={{width:'100%',padding:'9px 14px',border:'none',borderBottom:'0.5px solid #E7E5E4',background:'white',textAlign:'left',cursor:'pointer',fontSize:'13px'}}>
+                                <div style={{fontWeight:600}}>All admins</div><div style={{fontSize:'11px',color:'#78716C'}}>{admins.length} admins</div>
+                            </button>
+                            <button onClick={function(){if(!sel.length){alert('Select admins using checkboxes first.');return;}exportAdminsCSV(sel,'admins-selected.csv');setShowAdminExportMenu(false);}} style={{width:'100%',padding:'9px 14px',border:'none',background:'white',textAlign:'left',cursor:'pointer',fontSize:'13px'}}>
+                                <div style={{fontWeight:600}}>Selected only</div><div style={{fontSize:'11px',color:'#78716C'}}>{sel.length} selected</div>
+                            </button>
+                        </div>);
+                    })()}
+                </div>
             </div>
             <div style={{background:'white',borderRadius:'12px',border:'0.5px solid #E2E8F0',marginBottom:'24px',overflow:'hidden'}}>
                 {status && (
@@ -105,6 +137,7 @@ function AccessManagement({ session, azureUrl, adminPortalUrl }) {
                         return (
                             <div key={i} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'12px 16px',borderBottom:'0.5px solid #F1F5F9'}}>
                                 <div style={{display:'flex',alignItems:'center',gap:'0.875rem'}}>
+                                    <input type="checkbox" checked={!!selectedAdmins[admin.email]} onChange={function(){toggleSelectAdmin(admin.email);}} style={{cursor:'pointer',accentColor:'#4C3BAF',width:'15px',height:'15px',flexShrink:0}}/>
                                     <div style={{width:'40px',height:'40px',background:'linear-gradient(135deg,#4C3BAF,#1E3A5F)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontWeight:700,fontSize:'0.9rem',flexShrink:0}}>{getInitials(admin.name)}</div>
                                     <div>
                                         <div style={{fontWeight:600,fontSize:'0.95rem',display:'flex',alignItems:'center',gap:'6px'}}>

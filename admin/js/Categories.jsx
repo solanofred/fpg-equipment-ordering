@@ -9,10 +9,22 @@ function CategoryManagement({ session, azureUrl, categories, products, onCategor
     const [editLabel, setEditLabel] = React.useState('');
     const [editImageUrl, setEditImageUrl] = React.useState('');
     const [showAddModal, setShowAddModal] = React.useState(false);
+    const [selectedCats, setSelectedCats] = React.useState({});
+    const [showCatExportMenu, setShowCatExportMenu] = React.useState(false);
     const getProductCount = function(slug) {
         if (slug === 'all') return (products || []).length;
         if (slug === 'recommended') return (products || []).filter(function(p) { return p.recommended; }).length;
-        return (products || []).filter(function(p) { return p.category === slug; }).length;
+        const exportCatsCSV = function(rows, filename) {
+        const headers = ['Category Name','Slug','Products','Status','Image URL'];
+        const data = rows.map(function(c) {
+            var count = typeof getProductCount === 'function' ? getProductCount(c.slug) : 0;
+            return [c.label||'', c.slug||'', count, count>0?'In use':'Empty', c.imageUrl||''];
+        });
+        const csv = [headers,...data].map(function(r){return r.map(function(v){var s=String(v==null?'':v);return s.includes(',')||s.includes('"')?'"'+s.replace(/"/g,'""')+'"':s;}).join(',');}).join('\n');
+        const blob = new Blob([csv],{type:'text/csv'});const url = URL.createObjectURL(blob);const a = document.createElement('a');a.href=url;a.download=filename||'categories.csv';a.click();URL.revokeObjectURL(url);
+    };
+    const toggleSelectCat = function(slug) { setSelectedCats(function(prev){var n=Object.assign({},prev);n[slug]=!n[slug];return n;}); };
+    return (products || []).filter(function(p) { return p.category === slug; }).length;
     };
 
     const handleAdd = async function() {
@@ -188,10 +200,41 @@ function CategoryManagement({ session, azureUrl, categories, products, onCategor
                         <button onClick={function(){setShowAddModal(true);setStatus(null);}} style={{padding:'7px 16px',background:'linear-gradient(135deg,#15803D,#16A34A)',color:'white',border:'none',borderRadius:'8px',fontSize:'13px',fontWeight:600,cursor:'pointer'}}>
                             + New category
                         </button>
+                        <div style={{position:'relative'}}>
+                            <button onClick={function(){setShowCatExportMenu(function(p){return !p;});}} style={{padding:'7px 12px',border:'1.5px solid #0369A1',borderRadius:'8px',fontSize:'12px',fontWeight:500,cursor:'pointer',background:'white',color:'#0369A1'}}>
+                                ⬇ Export <span style={{fontSize:'10px'}}>{showCatExportMenu?'▲':'▼'}</span>
+                            </button>
+                            {showCatExportMenu && (function(){
+                                const sorted=(categories||[]).slice().sort(function(a,b){return a.label.localeCompare(b.label);});
+                                const sel=sorted.filter(function(c){return selectedCats[c.slug];});
+                                return (
+                                <div style={{position:'absolute',top:'calc(100% + 4px)',right:0,background:'white',border:'1.5px solid #0369A1',borderRadius:'8px',zIndex:50,minWidth:'210px',boxShadow:'0 4px 16px rgba(0,0,0,0.12)',overflow:'hidden'}}>
+                                    <div style={{padding:'6px 8px',background:'#F0F4F8',borderBottom:'0.5px solid #C7D9F0',fontSize:'10px',fontWeight:600,color:'#475569',textTransform:'uppercase',letterSpacing:'0.06em'}}>Choose what to export</div>
+                                    <button onClick={function(){exportCatsCSV(sorted.slice(0,25),'categories-first25.csv');setShowCatExportMenu(false);}} style={{width:'100%',padding:'9px 14px',border:'none',borderBottom:'0.5px solid #E7E5E4',background:'white',textAlign:'left',cursor:'pointer',fontSize:'13px'}}>
+                                        <div style={{fontWeight:600}}>First 25 visible</div><div style={{fontSize:'11px',color:'#78716C'}}>{Math.min(25,sorted.length)} categories</div>
+                                    </button>
+                                    <button onClick={function(){exportCatsCSV(sorted,'categories-all.csv');setShowCatExportMenu(false);}} style={{width:'100%',padding:'9px 14px',border:'none',borderBottom:'0.5px solid #E7E5E4',background:'white',textAlign:'left',cursor:'pointer',fontSize:'13px'}}>
+                                        <div style={{fontWeight:600}}>All categories</div><div style={{fontSize:'11px',color:'#78716C'}}>{sorted.length} categories</div>
+                                    </button>
+                                    <button onClick={function(){if(!sel.length){alert('Select categories using checkboxes first.');return;}exportCatsCSV(sel,'categories-selected.csv');setShowCatExportMenu(false);}} style={{width:'100%',padding:'9px 14px',border:'none',background:'white',textAlign:'left',cursor:'pointer',fontSize:'13px'}}>
+                                        <div style={{fontWeight:600}}>Selected only</div><div style={{fontSize:'11px',color:'#78716C'}}>{sel.length} selected</div>
+                                    </button>
+                                </div>);
+                            })()}
+                        </div>
                     </div>
+                    {Object.values(selectedCats).some(Boolean) && (
+                        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'8px 14px',background:'#EFF6FF',borderBottom:'0.5px solid #BFDBFE'}}>
+                            <span style={{fontSize:'12px',color:'#1E40AF',fontWeight:500}}>{Object.values(selectedCats).filter(Boolean).length} categor{Object.values(selectedCats).filter(Boolean).length!==1?'ies':'y'} selected</span>
+                            <button onClick={function(){const s=(categories||[]).slice().sort(function(a,b){return a.label.localeCompare(b.label);});exportCatsCSV(s.filter(function(c){return selectedCats[c.slug];}),'categories-selected.csv');}} style={{padding:'4px 14px',background:'#D97706',color:'white',border:'none',borderRadius:'6px',fontSize:'11px',fontWeight:600,cursor:'pointer'}}>⬇ Export selected</button>
+                        </div>
+                    )}
                     <table id="tbl-categories" className="resizable-table" style={{tableLayout:'fixed',width:'100%',borderCollapse:'collapse',fontSize:'13px'}}>
                         <thead>
                             <tr style={{background:'#D97706'}}>
+                                <th style={{padding:'11px 10px',width:'40px',textAlign:'center',color:'white'}}>
+                                    {(function(){const s=(categories||[]).slice().sort(function(a,b){return a.label.localeCompare(b.label);});return<input type="checkbox" onChange={function(e){if(e.target.checked){const all={};s.forEach(function(c){all[c.slug]=true;});setSelectedCats(all);}else setSelectedCats({});}} checked={s.length>0&&s.every(function(c){return selectedCats[c.slug];})} style={{cursor:'pointer',accentColor:'white'}}/>;})()}
+                                </th>
                                 <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'42%'}}>Category</th>
                                 <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'14%'}}>Products</th>
                                 <th style={{padding:'11px 16px',textAlign:'left',color:'white',fontSize:'11px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'14%'}}>Status</th>
@@ -205,6 +248,9 @@ function CategoryManagement({ session, azureUrl, categories, products, onCategor
                                 const isEditing = editingSlug === cat.slug;
                                 return (
                                     <tr key={i} style={{background:i%2===0?'white':'#F9FAFB',borderBottom:'1px solid #F1F5F9'}}>
+                                        <td style={{padding:'11px 10px',textAlign:'center'}} onClick={function(e){e.stopPropagation();}}>
+                                            <input type="checkbox" checked={!!selectedCats[cat.slug]} onChange={function(){toggleSelectCat(cat.slug);}} style={{cursor:'pointer',accentColor:'#4C3BAF'}}/>
+                                        </td>
                                         <td style={{padding:'11px 16px'}}>
                                             {isEditing ? (
                                                 <div style={{display:'flex',flexDirection:'column',gap:'6px'}}>

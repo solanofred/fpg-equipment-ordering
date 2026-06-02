@@ -54,6 +54,27 @@ function VersionControl({ session, azureUrl }) {
                     </div>
                 </div>
 
+                <div style={{position:'relative'}}>
+                    <button onClick={function(){setShowVCExportMenu(function(p){return !p;});}} style={{padding:'7px 12px',border:'1.5px solid #0369A1',borderRadius:'8px',fontSize:'12px',fontWeight:500,cursor:'pointer',background:'white',color:'#0369A1'}}>
+                        ⬇ Export <span style={{fontSize:'10px'}}>{showVCExportMenu?'▲':'▼'}</span>
+                    </button>
+                    {showVCExportMenu && (function(){
+                        const sel=versions.filter(function(v,i){return selectedVersions[i];});
+                        return (
+                        <div style={{position:'absolute',top:'calc(100% + 4px)',right:0,background:'white',border:'1.5px solid #0369A1',borderRadius:'8px',zIndex:50,minWidth:'210px',boxShadow:'0 4px 16px rgba(0,0,0,0.12)',overflow:'hidden'}}>
+                            <div style={{padding:'6px 8px',background:'#F0F4F8',borderBottom:'0.5px solid #C7D9F0',fontSize:'10px',fontWeight:600,color:'#475569',textTransform:'uppercase',letterSpacing:'0.06em'}}>Choose what to export</div>
+                            <button onClick={function(){exportVCCSV(versions.slice(0,25),'versions-first25.csv');setShowVCExportMenu(false);}} style={{width:'100%',padding:'9px 14px',border:'none',borderBottom:'0.5px solid #E7E5E4',background:'white',textAlign:'left',cursor:'pointer',fontSize:'13px'}}>
+                                <div style={{fontWeight:600}}>First 25 visible</div><div style={{fontSize:'11px',color:'#78716C'}}>{Math.min(25,versions.length)} entries</div>
+                            </button>
+                            <button onClick={function(){exportVCCSV(versions,'versions-all.csv');setShowVCExportMenu(false);}} style={{width:'100%',padding:'9px 14px',border:'none',borderBottom:'0.5px solid #E7E5E4',background:'white',textAlign:'left',cursor:'pointer',fontSize:'13px'}}>
+                                <div style={{fontWeight:600}}>All versions</div><div style={{fontSize:'11px',color:'#78716C'}}>{versions.length} entries</div>
+                            </button>
+                            <button onClick={function(){if(!sel.length){alert('Select entries using checkboxes first.');return;}exportVCCSV(sel,'versions-selected.csv');setShowVCExportMenu(false);}} style={{width:'100%',padding:'9px 14px',border:'none',background:'white',textAlign:'left',cursor:'pointer',fontSize:'13px'}}>
+                                <div style={{fontWeight:600}}>Selected only</div><div style={{fontSize:'11px',color:'#78716C'}}>{sel.length} selected</div>
+                            </button>
+                        </div>);
+                    })()}
+                </div>
                 {loading ? (
                     <div style={{padding:'2rem',textAlign:'center',color:'#94A3B8'}}>Loading version history...</div>
                 ) : versions.length === 0 ? (
@@ -66,6 +87,9 @@ function VersionControl({ session, azureUrl }) {
                     <table style={{width:'100%',borderCollapse:'collapse',fontSize:'12px'}}>
                         <thead>
                             <tr style={{background:'#D97706'}}>
+                                <th style={{padding:'10px 10px',width:'40px',textAlign:'center',color:'white'}}>
+                                    <input type="checkbox" onChange={function(e){if(e.target.checked){const all={};versions.forEach(function(v,i){all[i]=true;});setSelectedVersions(all);}else setSelectedVersions({});}} checked={versions.length>0&&versions.every(function(v,i){return selectedVersions[i];})} style={{cursor:'pointer',accentColor:'white'}}/>
+                                </th>
                                 <th style={{padding:'10px 14px',textAlign:'left',color:'white',fontWeight:700,fontSize:'11px',textTransform:'uppercase',letterSpacing:'0.06em',width:'16%'}}>Date / Time</th>
                                 <th style={{padding:'10px 14px',textAlign:'left',color:'white',fontWeight:700,fontSize:'11px',textTransform:'uppercase',letterSpacing:'0.06em',width:'16%'}}>Admin</th>
                                 <th style={{padding:'10px 14px',textAlign:'left',color:'white',fontWeight:700,fontSize:'11px',textTransform:'uppercase',letterSpacing:'0.06em',width:'14%'}}>Action</th>
@@ -88,6 +112,9 @@ function VersionControl({ session, azureUrl }) {
                                 const fileName = detail.file || (v.action === 'portal.products_published' ? 'products.json' : 'portal file');
                                 return (
                                     <tr key={i} style={{background: i % 2 === 0 ? 'white' : '#F5F3FF', borderBottom:'0.5px solid #F1F5F9'}}>
+                                        <td style={{padding:'10px 10px',textAlign:'center'}} onClick={function(ev){ev.stopPropagation();}}>
+                                            <input type="checkbox" checked={!!selectedVersions[i]} onChange={function(){toggleSelectVersion(i);}} style={{cursor:'pointer',accentColor:'#4C3BAF'}}/>
+                                        </td>
                                         <td style={{padding:'10px 14px',color:'#1E3A5F',fontWeight:600}}>
                                             {dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}
                                             <br/><span style={{fontSize:'10.5px',color:'#64748B',fontWeight:400}}>{dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>

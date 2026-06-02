@@ -10,6 +10,8 @@ function AuditLogOpener({ session, azureUrl }) {
     const [filterFrom, setFilterFrom] = React.useState('');
     const [filterTo, setFilterTo] = React.useState('');
             const [showDrill, setShowDrill] = React.useState(null);
+            const [selectedEntries, setSelectedEntries] = React.useState({});
+            const [showAuditExportMenu, setShowAuditExportMenu] = React.useState(false);
 
     React.useEffect(() => {
         (async () => {
@@ -104,6 +106,17 @@ setEntries(allEntries);
         if (filterTo && ts > filterTo) return false;
         return true;
     });
+    const exportAuditCSV = function(rows, filename) {
+        const headers = ['Date','Time','Admin','Action','Reference','Summary','Result'];
+        const data = rows.map(function(e) {
+            const dt = new Date(e.timestamp);
+            const adminName = (e.adminEmail||'').split('@')[0].replace('.',' ');
+            return [dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}), dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}), adminName, e.action||'', e.target||'', '', e.result||''];
+        });
+        const csv = [headers,...data].map(function(r){return r.map(function(v){var s=String(v==null?'':v);return s.includes(',')||s.includes('"')?'"'+s.replace(/"/g,'""')+'"':s;}).join(',');}).join('\n');
+        const blob = new Blob([csv],{type:'text/csv'});const url = URL.createObjectURL(blob);const a = document.createElement('a');a.href=url;a.download=filename||'audit-log.csv';a.click();URL.revokeObjectURL(url);
+    };
+    const toggleSelectEntry = function(idx) { setSelectedEntries(function(prev){var n=Object.assign({},prev);n[idx]=!n[idx];return n;}); };
     if (status === 'loading') return (
         <div style={{display:'flex',alignItems:'center',justifyContent:'center',padding:'3rem',gap:'12px',color:'#64748B'}}>
             <div style={{width:'20px',height:'20px',border:'2px solid #E2E8F0',borderTopColor:'#16A34A',borderRadius:'50%',animation:'spin 0.8s linear infinite'}}></div>
@@ -166,12 +179,36 @@ setEntries(allEntries);
                 <input type="date" value={filterFrom} onChange={e=>setFilterFrom(e.target.value)} style={{padding:'7px 9px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12px',fontFamily:'inherit',background:'white',outline:'none'}} />
                 <input type="date" value={filterTo} onChange={e=>setFilterTo(e.target.value)} style={{padding:'7px 9px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12px',fontFamily:'inherit',background:'white',outline:'none'}} />
                 <button onClick={()=>{setFilterQ('');setFilterType('');setFilterAdmin('');setFilterResult('');setFilterFrom('');setFilterTo('');}} style={{padding:'7px 12px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'11.5px',color:'#64748B',background:'white',cursor:'pointer',fontWeight:600}}>Clear</button>
+                    <div style={{position:'relative'}}>
+                        <button onClick={function(){setShowAuditExportMenu(function(p){return !p;});}} style={{padding:'7px 12px',border:'1.5px solid #0369A1',borderRadius:'8px',fontSize:'12px',fontWeight:500,cursor:'pointer',background:'white',color:'#0369A1'}}>
+                            ⬇ Export <span style={{fontSize:'10px'}}>{showAuditExportMenu?'▲':'▼'}</span>
+                        </button>
+                        {showAuditExportMenu && (function(){
+                            const sel=filtered.filter(function(e,i){return selectedEntries[i];});
+                            return (
+                            <div style={{position:'absolute',top:'calc(100% + 4px)',right:0,background:'white',border:'1.5px solid #0369A1',borderRadius:'8px',zIndex:50,minWidth:'210px',boxShadow:'0 4px 16px rgba(0,0,0,0.12)',overflow:'hidden'}}>
+                                <div style={{padding:'6px 8px',background:'#F0F4F8',borderBottom:'0.5px solid #C7D9F0',fontSize:'10px',fontWeight:600,color:'#475569',textTransform:'uppercase',letterSpacing:'0.06em'}}>Choose what to export</div>
+                                <button onClick={function(){exportAuditCSV(filtered.slice(0,25),'audit-first25.csv');setShowAuditExportMenu(false);}} style={{width:'100%',padding:'9px 14px',border:'none',borderBottom:'0.5px solid #E7E5E4',background:'white',textAlign:'left',cursor:'pointer',fontSize:'13px'}}>
+                                    <div style={{fontWeight:600}}>First 25 visible</div><div style={{fontSize:'11px',color:'#78716C'}}>{Math.min(25,filtered.length)} entries</div>
+                                </button>
+                                <button onClick={function(){exportAuditCSV(filtered,'audit-filtered.csv');setShowAuditExportMenu(false);}} style={{width:'100%',padding:'9px 14px',border:'none',borderBottom:'0.5px solid #E7E5E4',background:'white',textAlign:'left',cursor:'pointer',fontSize:'13px'}}>
+                                    <div style={{fontWeight:600}}>All filtered results</div><div style={{fontSize:'11px',color:'#78716C'}}>{filtered.length} entries</div>
+                                </button>
+                                <button onClick={function(){if(!sel.length){alert('Select entries using checkboxes first.');return;}exportAuditCSV(sel,'audit-selected.csv');setShowAuditExportMenu(false);}} style={{width:'100%',padding:'9px 14px',border:'none',background:'white',textAlign:'left',cursor:'pointer',fontSize:'13px'}}>
+                                    <div style={{fontWeight:600}}>Selected only</div><div style={{fontSize:'11px',color:'#78716C'}}>{sel.length} selected</div>
+                                </button>
+                            </div>);
+                        })()}
+                    </div>
                 <span style={{background:'#EEF2FF',color:'#4C3BAF',borderRadius:'20px',padding:'3px 11px',fontSize:'11.5px',fontWeight:700,marginLeft:'auto',whiteSpace:'nowrap'}}>{filtered.length} {filtered.length===1?'entry':'entries'}</span>
             </div>
             <div style={{flex:1,overflowY:'auto',background:'white',minWidth:0}}>
                 <table id="tbl-auditlog" style={{width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed',maxWidth:'1400px'}}>
                     <thead>
                         <tr style={{background:'#D97706'}}>
+                            <th style={{padding:'10px 10px',width:'40px',textAlign:'center',color:'white'}}>
+                                <input type="checkbox" onChange={function(e){if(e.target.checked){const all={};filtered.forEach(function(en,i){all[i]=true;});setSelectedEntries(all);}else setSelectedEntries({});}} checked={filtered.length>0&&filtered.every(function(en,i){return selectedEntries[i];})} style={{cursor:'pointer',accentColor:'white'}}/>
+                            </th>
                             <th style={{padding:'10px 12px',textAlign:'left',color:'white',fontSize:'10.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'12%',position:'relative'}}>Date / Time</th>
                             <th style={{padding:'10px 12px',textAlign:'left',color:'white',fontSize:'10.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'11%',position:'relative'}}>Admin</th>
                             <th style={{padding:'10px 12px',textAlign:'left',color:'white',fontSize:'10.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'12%',position:'relative'}}>Action</th>
@@ -236,6 +273,9 @@ setEntries(allEntries);
                             const resCol = e.result==='success'?'#166534':e.result==='denied'?'#991B1B':'#78716C';
                             return (
                                 <tr key={i} style={{background:i%2===0?'#ffffff':'#F5F3FF'}}>
+                                    <td style={{padding:'10px 10px',verticalAlign:'middle',textAlign:'center'}} onClick={function(ev){ev.stopPropagation();}}>
+                                        <input type="checkbox" checked={!!selectedEntries[i]} onChange={function(){toggleSelectEntry(i);}} style={{cursor:'pointer',accentColor:'#4C3BAF'}}/>
+                                    </td>
                                     <td style={{padding:'10px 12px',verticalAlign:'middle'}}>
                                         <div style={{fontWeight:700,fontSize:'12px',color:'#1E293B'}}>{dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
                                         <div style={{fontSize:'11px',color:'#57534E',fontWeight:600}}>{dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
@@ -325,5 +365,3 @@ setEntries(allEntries);
     );
 }
 
-
-// ─── VERSION CONTROL — SUPERADMIN ONLY ──────────────────────────
