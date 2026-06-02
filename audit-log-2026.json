@@ -6572,5 +6572,50 @@
     "id": "LOG-1780374991597",
     "timestamp": "2026-06-02T04:36:31.597Z",
     "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "id": "LOG-1780375166465",
+    "timestamp": "2026-06-02T04:39:26.465Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.soft_delete",
+    "target": "ORD-2026-1780246020181",
+    "detail": {
+      "orderId": "ORD-2026-1780246020181",
+      "reason": "Fred Test",
+      "orderSnapshot": {
+        "id": "ORD-2026-1780246020181",
+        "status": "New",
+        "submittedAt": "2026-05-31T16:47:00Z",
+        "year": 2026,
+        "submitterName": "Doni Perry",
+        "submitterEmail": "doni.perry@foundationpartners.com",
+        "recipientName": "Joshua Allen",
+        "recipientEmail": "joshua.allen@foundationpartners.com",
+        "locationId": "LABAN",
+        "shipTo": "222 St Louis St, Baton Rouge, LA 70802",
+        "items": [
+          {
+            "title": "Wireless Headset for Polycom Phones",
+            "price": 488.75,
+            "quantity": 1
+          },
+          {
+            "title": "Laptop with Dock",
+            "price": 2400,
+            "quantity": 1
+          },
+          {
+            "title": "Laptop",
+            "price": 1955,
+            "quantity": 1
+          }
+        ],
+        "total": 4843.75,
+        "isNewEmployee": "no",
+        "dateNeeded": "2026-06-08",
+        "notes": ""
+      }
+    },
+    "result": "success"
   }
 ]
