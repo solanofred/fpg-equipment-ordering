@@ -2557,7 +2557,7 @@
             };
 
             const loadAuditLog = async function(years) {
-                const yearsToLoad = years || auditYears;
+                const yearsToLoad = Array.isArray(years) ? years : Array.isArray(auditYears) ? auditYears : [new Date().getFullYear()];
                 try {
                     let allEntries = [];
                     for (const year of yearsToLoad) {
@@ -2567,14 +2567,67 @@
                             body: JSON.stringify({ action: 'get-audit-log', year })
                         });
                         const data = await res.json();
-                        allEntries = allEntries.concat(data.log || []);
+                        const entries = Array.isArray(data.log) ? data.log : [];
+                        allEntries = allEntries.concat(entries);
                     }
                     allEntries.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
-                    setAuditLog(allEntries);
-                    setAuditTypeFilter('all');
-                    setAuditExpandedRows({});
-                    setShowAudit(true);
-                } catch(e) { setStatus({ type: 'error', text: 'Failed to load audit log: ' + (e.message || 'Unknown error') + '. Wait 30 seconds and try again.' }); }
+
+                    const actionMetaMap = {
+                        'auth.login':          { label: 'Login',           bg:'#E6F1FB', color:'#0C447C' },
+                        'auth.logout':         { label: 'Logout',          bg:'#F1EFE8', color:'#5F5E5A' },
+                        'auth.auto_logoff':    { label: 'Auto-logout',     bg:'#F1EFE8', color:'#5F5E5A' },
+                        'order.soft_delete':   { label: 'Order deleted',   bg:'#FEE2E2', color:'#991B1B' },
+                        'order.permanent_delete': { label:'Perm. deleted', bg:'#FCA5A5', color:'#7F1D1D' },
+                        'order.permanent_delete_attempt': { label:'Perm. denied', bg:'#FCA5A5', color:'#7F1D1D' },
+                        'order.restore':       { label: 'Restored',        bg:'#D1FAE5', color:'#065F46' },
+                        'order.status_change': { label: 'Status change',   bg:'#FEF3C7', color:'#92400E' },
+                        'access.admin_added':  { label: 'Admin added',     bg:'#D1FAE5', color:'#065F46' },
+                        'access.admin_removed':{ label: 'Admin removed',   bg:'#FEE2E2', color:'#991B1B' },
+                        'access.role_changed': { label: 'Role changed',    bg:'#FAEEDA', color:'#633806' },
+                    };
+                    const getMetaFn = (action) => actionMetaMap[action] || { label: action, bg:'#F1F5F9', color:'#475569' };
+
+                    const typeCounts = {};
+                    allEntries.forEach(e => { typeCounts[e.action] = (typeCounts[e.action]||0) + 1; });
+
+                    const rowsHtml = allEntries.map((entry, i) => {
+                        const m = getMetaFn(entry.action);
+                        const dt = new Date(entry.timestamp);
+                        const s = entry.detail && entry.detail.orderSnapshot;
+                        const expandable = entry.action === 'order.soft_delete' || entry.action === 'order.permanent_delete';
+                        const bg = i % 2 === 0 ? '#ffffff' : '#DBEAFE';
+                        let detail = '';
+                        if (entry.detail && entry.detail.reason) detail += '<strong>Reason:</strong> ' + entry.detail.reason + ' &middot; ';
+                        if (entry.detail && entry.detail.oldStatus) detail += entry.detail.oldStatus + ' &rarr; <strong>' + entry.detail.newStatus + '</strong> &middot; ';
+                        if (entry.detail && entry.detail.newEmail) detail += '<strong>Added:</strong> ' + entry.detail.newEmail + ' (' + entry.detail.role + ') &middot; ';
+                        if (entry.detail && entry.detail.removedEmail) detail += '<strong>Removed:</strong> ' + entry.detail.removedEmail + ' &middot; ';
+                        if (s) detail += '<strong>For:</strong> ' + (s.recipientName||'') + ' &middot; <strong style="color:#185FA5">' + (s.locationId||'') + '</strong> &middot; $' + ((s.total||0).toFixed(2));
+                        if (entry.detail && entry.detail.browser) detail += '<span style="color:#A8A29E">' + (entry.detail.browser||'').substring(0,70) + '</span>';
+                        const resBg = entry.result==='success' ? '#D1FAE5' : entry.result==='denied' ? '#FEE2E2' : '#F5F5F4';
+                        const resColor = entry.result==='success' ? '#065F46' : entry.result==='denied' ? '#991B1B' : '#78716C';
+                        let snapHtml = '';
+                        if (expandable && s) {
+                            const items = (s.items||[]).map(it => it.title + ' x' + (it.quantity||1) + ' ($' + (((it.price||0)*(it.quantity||1)).toFixed(2)) + ')').join(', ');
+                            snapHtml = '<tr class="snap" id="snap-' + i + '" style="display:none;background:#F0F4F8"><td colspan="7" style="padding:10px 14px 12px 32px"><div style="background:white;border-radius:6px;border:0.5px solid #C7D9F0;padding:10px 14px;font-size:11.5px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#78716C;margin-bottom:8px">Order snapshot</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px"><div><span style="color:#A8A29E">Submitter:</span> ' + (s.submitterName||'') + '</div><div><span style="color:#A8A29E">Recipient:</span> ' + (s.recipientName||'') + '</div><div><span style="color:#A8A29E">Location:</span> <strong style="color:#185FA5">' + (s.locationId||'') + '</strong></div><div><span style="color:#A8A29E">Total:</span> <strong>$' + ((s.total||0).toFixed(2)) + '</strong></div><div style="grid-column:2/-1"><span style="color:#A8A29E">Ship to:</span> ' + (s.shipTo||'') + '</div><div style="grid-column:1/-1"><span style="color:#A8A29E">Items:</span> ' + items + '</div></div></div></td></tr>';
+                        }
+                        return '<tr data-action="' + entry.action + '" style="background:' + bg + ';cursor:' + (expandable?'pointer':'default') + '"' + (expandable?' onclick="toggleSnap(' + i + ')"':'') + '><td style="padding:9px 8px;text-align:center;color:#A8A29E;font-size:13px;width:3%">' + (expandable?'<span id="chev-'+i+'">&#9658;</span>':'') + '</td><td style="padding:9px 10px;font-size:11px;font-weight:700;color:#0A2540;width:12%">' + dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) + '<br><span style="font-size:10.5px;color:#57534E">' + dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) + '</span></td><td style="padding:9px 10px;width:16%"><div style="font-weight:500;font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + ((entry.adminEmail||'').split('@')[0].replace('.',' ').replace(/\b\w/g,function(c){return c.toUpperCase()})) + '</div><div style="font-size:10px;color:#A8A29E;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.adminEmail||'') + '</div></td><td style="padding:9px 10px;width:13%"><span style="display:inline-block;padding:2px 8px;border-radius:4px;background:' + m.bg + ';color:' + m.color + ';font-weight:700;font-size:10.5px">' + m.label + '</span></td><td style="padding:9px 10px;font-size:11px;font-family:monospace;color:#185FA5;width:14%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (entry.target||'&mdash;') + '</td><td style="padding:9px 10px;font-size:11px;color:#57534E;width:33%">' + detail + '</td><td style="padding:9px 10px;width:9%"><span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;background:' + resBg + ';color:' + resColor + '">' + (entry.result||'') + '</span></td></tr>' + snapHtml;
+                    }).join('');
+
+                    const sidebarHtml = Object.entries(typeCounts).sort((a,b)=>b[1]-a[1]).map(([action, count]) => {
+                        const m = getMetaFn(action);
+                        return '<div class="filter-item" onclick="filterType('' + action + '')" data-action="' + action + '"><span style="display:inline-block;padding:2px 7px;border-radius:4px;background:' + m.bg + ';color:' + m.color + ';font-weight:700;font-size:10.5px">' + m.label + '</span><span style="font-size:11px;color:#A8A29E;font-weight:700">' + count + '</span></div>';
+                    }).join('');
+
+                    const allYears = availableYears;
+                    const yearPills = allYears.map(y => '<button class="ypill' + (yearsToLoad.includes(y)?' on':'') + '" onclick="toggleYear(' + y + ',this)">' + y + '</button>').join('');
+
+                    const html = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Audit Log — FPG Equipment Portal</title><style>*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}body{background:#F3F4F6;height:100vh;display:flex;flex-direction:column;overflow:hidden}.titlebar{background:#1B3A5C;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}.titlebar h1{color:white;font-size:15px;font-weight:500}.titlebar-right{display:flex;gap:8px;align-items:center}.ypill{padding:3px 10px;border:0.5px solid rgba(255,255,255,0.35);border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;background:transparent;color:rgba(255,255,255,0.75)}.ypill.on{background:white;color:#1B3A5C;border-color:white}.exp-btn{padding:5px 14px;background:rgba(255,255,255,0.15);color:white;border:0.5px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;cursor:pointer;font-weight:700}.layout{display:flex;flex:1;overflow:hidden}.sidebar{width:165px;flex-shrink:0;border-right:0.5px solid #E7E5E4;padding:12px 10px;background:#FAFAF9;overflow-y:auto}.sidebar-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:#78716C;margin-bottom:8px}.filter-item{padding:6px 8px;border-radius:6px;font-size:11px;cursor:pointer;margin-bottom:3px;display:flex;justify-content:space-between;align-items:center}.filter-item:hover,.all-btn:hover{background:#F1F5F9}.filter-item.active{background:#0A2540}.filter-item.active>span{color:white!important}.all-btn{padding:6px 8px;border-radius:6px;font-size:12px;cursor:pointer;margin-bottom:3px;display:flex;justify-content:space-between;align-items:center;font-weight:700}.all-btn.active{background:#0A2540;color:white}.all-btn:not(.active){color:#57534E}.main{flex:1;overflow:hidden;display:flex;flex-direction:column;background:white}.search-bar{padding:10px 14px;border-bottom:0.5px solid #E7E5E4;display:flex;gap:8px;align-items:center;flex-shrink:0}.search-bar input{flex:1;padding:6px 10px;border:0.5px solid #D6D3D1;border-radius:8px;font-size:12px}.count-info{font-size:12px;color:#78716C;white-space:nowrap}.count-info strong{color:#0A2540}.table-scroll{flex:1;overflow-y:auto}table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}thead{position:sticky;top:0;z-index:1}th{padding:9px 10px;text-align:left;font-size:11px;font-weight:700;color:#0A2540;text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid #1B5A8E;background:#F5F5F4}td{border-bottom:0.5px solid #E7E5E4;vertical-align:top}tr:hover td{filter:brightness(0.97)}.snap{}</style></head><body><div class="titlebar"><h1>&#128203; Audit Log — FPG Equipment Portal</h1><div class="titlebar-right">' + yearPills + '<button class="exp-btn" onclick="exportCSV()">&#8595; Export CSV</button></div></div><div class="layout"><div class="sidebar"><div class="sidebar-title">Filter by type</div><div class="all-btn active" id="all-btn" onclick="filterType('all')"><span>All actions</span><span style="font-weight:700;font-size:11px">' + allEntries.length + '</span></div>' + sidebarHtml + '</div><div class="main"><div class="search-bar"><input type="text" id="search-input" placeholder="Search by admin, action, target, or detail..." oninput="applyFilters()"><span class="count-info">Showing <strong id="vc">' + allEntries.length + '</strong> of <strong>' + allEntries.length + '</strong> entries</span></div><div class="table-scroll"><table><thead><tr><th style="width:3%"></th><th style="width:12%">Date / Time</th><th style="width:16%">Admin</th><th style="width:13%">Action</th><th style="width:14%">Target</th><th style="width:33%">Detail</th><th style="width:9%">Result</th></tr></thead><tbody id="ab">' + rowsHtml + '</tbody></table></div></div></div><script>function toggleSnap(i){var r=document.getElementById("snap-"+i);var c=document.getElementById("chev-"+i);if(!r)return;var o=r.style.display!=="none";r.style.display=o?"none":"table-row";if(c)c.innerHTML=o?"&#9658;":"&#9660;";}function filterType(t){document.querySelectorAll(".filter-item").forEach(function(e){e.classList.remove("active")});document.getElementById("all-btn").classList.remove("active");if(t==="all"){document.getElementById("all-btn").classList.add("active")}else{var el=document.querySelector("[data-action=\""+t+"\"]");if(el)el.classList.add("active")}window._type=t;applyFilters();}function applyFilters(){var q=(document.getElementById("search-input").value||"").toLowerCase();var rows=document.querySelectorAll("#ab tr:not(.snap)");var count=0;rows.forEach(function(row){var a=row.getAttribute("data-action")||"";var text=row.textContent.toLowerCase();var tm=(!window._type||window._type==="all"||a===window._type);var sm=!q||text.includes(q);row.style.display=(tm&&sm)?"":"none";if(tm&&sm)count++;});document.getElementById("vc").textContent=count;}function exportCSV(){var rows=document.querySelectorAll("#ab tr:not(.snap)");var h=["Timestamp","Admin","Action","Target","Detail","Result"];var lines=[h.join(",")];rows.forEach(function(r){if(r.style.display==="none")return;var c=r.querySelectorAll("td");if(c.length<7)return;lines.push([1,2,3,4,5,6].map(function(i){return'"'+c[i].innerText.replace(/"/g,'""')'.replace(/\n/g," ").trim()+'"'}).join(","));});var b=new Blob([lines.join("\n")],{type:"text/csv"});var u=URL.createObjectURL(b);var a=document.createElement("a");a.href=u;a.download="audit-log.csv";a.click();URL.revokeObjectURL(u);}function toggleYear(y,btn){alert("Close this tab and reselect years in the Audit Log settings, then click Audit Log again.");}window._type="all";<\/script></body></html>';
+
+                    const blob = new Blob([html], { type: 'text/html' });
+                    const url = URL.createObjectURL(blob);
+                    window.open(url, '_blank');
+                    setAuditYears(yearsToLoad);
+                } catch(e) { setStatus({ type: 'error', text: 'Failed to load audit log: ' + (e.message || 'Unknown error') }); }
             };
 
             const handleStatusChange = async function(order, newStatus) {
