@@ -1,0 +1,224 @@
+// ─── AuditLog: AuditLogOpener (inline render, no new window)
+
+function AuditLogOpener({ session, azureUrl }) {
+    const [status, setStatus] = React.useState('loading');
+    const [entries, setEntries] = React.useState([]);
+    const [filterQ, setFilterQ] = React.useState('');
+    const [filterType, setFilterType] = React.useState('');
+    const [filterAdmin, setFilterAdmin] = React.useState('');
+    const [filterResult, setFilterResult] = React.useState('');
+    const [filterFrom, setFilterFrom] = React.useState('');
+    const [filterTo, setFilterTo] = React.useState('');
+
+    React.useEffect(() => {
+        (async () => {
+            try {
+                const year = new Date().getFullYear();
+                const availableYears = [year, year - 1, year - 2].filter(y => y >= 2024);
+                const yearsToLoad = [year];
+
+                let allEntries = [];
+                for (const y of yearsToLoad) {
+                    const res = await fetch(azureUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'x-admin-email': session.email },
+                        body: JSON.stringify({ action: 'get-audit-log', year: y })
+                    });
+                    const data = await res.json();
+                    if (Array.isArray(data.log)) allEntries = allEntries.concat(data.log);
+                }
+                allEntries.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+                const actionMetaMap = {
+                    'auth.login':          { label: 'Login',           bg:'#EEF2FF', color:'#4C3BAF', border:'#C7D2FE', dot:'#818CF8' },
+                    'auth.logout':         { label: 'Logout',          bg:'#F1F5F9', color:'#475569', border:'#CBD5E1', dot:'#94A3B8' },
+                    'auth.auto_logoff':    { label: 'Auto-logout',     bg:'#F1F5F9', color:'#475569', border:'#CBD5E1', dot:'#94A3B8' },
+                    'order.soft_delete':   { label: 'Order deleted',   bg:'#FEE2E2', color:'#DC2626', border:'#FECACA', dot:'#F87171' },
+                    'order.permanent_delete': { label:'Perm. deleted', bg:'#FCA5A5', color:'#7F1D1D', border:'#F87171', dot:'#EF4444' },
+                    'order.permanent_delete_attempt': { label:'Perm. denied', bg:'#FCA5A5', color:'#7F1D1D', border:'#F87171', dot:'#EF4444' },
+                    'order.restore':       { label: 'Restored',        bg:'#DCFCE7', color:'#166534', border:'#86EFAC', dot:'#4ADE80' },
+                    'order.status_change': { label: 'Status change',   bg:'#FEF9C3', color:'#854D0E', border:'#FDE68A', dot:'#FCD34D' },
+                    'access.admin_added':  { label: 'Admin added',     bg:'#DCFCE7', color:'#166534', border:'#86EFAC', dot:'#4ADE80' },
+                    'access.admin_removed':{ label: 'Admin removed',   bg:'#FEE2E2', color:'#DC2626', border:'#FECACA', dot:'#F87171' },
+                    'access.role_changed': { label: 'Role changed',    bg:'#FEF9C3', color:'#854D0E', border:'#FDE68A', dot:'#FCD34D' },
+                    'category.added':      { label: 'Category added',  bg:'#EEF2FF', color:'#4C3BAF', border:'#C7D2FE', dot:'#818CF8' },
+                    'category.updated':    { label: 'Category updated',bg:'#EEF2FF', color:'#4C3BAF', border:'#C7D2FE', dot:'#818CF8' },
+                    'category.removed':    { label: 'Category removed',bg:'#FEE2E2', color:'#DC2626', border:'#FECACA', dot:'#F87171' },
+                    'portal.products_published': { label: 'Published', bg:'#DCFCE7', color:'#166534', border:'#86EFAC', dot:'#4ADE80' },
+                };
+                const getMetaFn = (action) => actionMetaMap[action] || { label: action, bg:'#F1F5F9', color:'#475569', border:'#CBD5E1', dot:'#94A3B8' };
+
+                const typeCounts = {};
+                allEntries.forEach(e => { typeCounts[e.action] = (typeCounts[e.action]||0) + 1; });
+
+setEntries(allEntries);
+                setStatus('done');
+            } catch(e) {
+                setStatus('error');
+            }
+        })();
+    }, []);
+
+    if (status === 'loading') {
+        return (
+            <div style={{display:'flex',alignItems:'center',justifyContent:'center',padding:'3rem',gap:'12px',color:'#64748B'}}>
+                <div style={{width:'20px',height:'20px',border:'2px solid #E2E8F0',borderTop:'2px solid #4C3BAF',borderRadius:'50%',animation:'spin 0.8s linear infinite'}}></div>
+                Loading audit log...
+            </div>
+        );
+    }
+    if (status === 'error') {
+        return (
+            <div style={{padding:'2rem',textAlign:'center',color:'#DC2626'}}>
+                Failed to load audit log. Check your connection and try again.
+            </div>
+        );
+    }
+    const META = {
+        'auth.login':          { label: 'Login',            bg:'#EEF2FF', color:'#4C3BAF', border:'#C7D2FE' },
+        'auth.logout':         { label: 'Logout',           bg:'#F1F5F9', color:'#475569', border:'#CBD5E1' },
+        'auth.auto_logoff':    { label: 'Auto-logout',      bg:'#F1F5F9', color:'#475569', border:'#CBD5E1' },
+        'order.soft_delete':   { label: 'Order deleted',    bg:'#FEE2E2', color:'#DC2626', border:'#FECACA' },
+        'order.permanent_delete': { label:'Perm. deleted',  bg:'#FCA5A5', color:'#7F1D1D', border:'#F87171' },
+        'order.restore':       { label: 'Restored',         bg:'#DCFCE7', color:'#166534', border:'#86EFAC' },
+        'order.status_change': { label: 'Status change',    bg:'#FEF9C3', color:'#854D0E', border:'#FDE68A' },
+        'access.admin_added':  { label: 'Admin added',      bg:'#DCFCE7', color:'#166534', border:'#86EFAC' },
+        'access.admin_removed':{ label: 'Admin removed',    bg:'#FEE2E2', color:'#DC2626', border:'#FECACA' },
+        'access.role_changed': { label: 'Role changed',     bg:'#FEF3C7', color:'#92400E', border:'#FDE68A' },
+        'portal.products_published': { label:'Published',   bg:'#DCFCE7', color:'#166534', border:'#86EFAC' },
+        'category.added':      { label: 'Cat. added',       bg:'#EFF6FF', color:'#1E40AF', border:'#BFDBFE' },
+        'category.updated':    { label: 'Cat. updated',     bg:'#EFF6FF', color:'#1E40AF', border:'#BFDBFE' },
+        'category.removed':    { label: 'Cat. removed',     bg:'#FEE2E2', color:'#DC2626', border:'#FECACA' },
+    };
+    const getMeta = (a) => META[a] || { label: a, bg:'#F1F5F9', color:'#475569', border:'#CBD5E1' };
+    const admins = [...new Set(entries.map(e=>e.adminEmail).filter(Boolean))].sort();
+    const filtered = entries.filter(e => {
+        const q = filterQ.toLowerCase();
+        const ts = e.timestamp ? e.timestamp.slice(0,10) : '';
+        if (filterQ && ![(e.adminEmail||''),(e.action||''),(e.target||''),JSON.stringify(e.detail||'')].join(' ').toLowerCase().includes(q)) return false;
+        if (filterType && e.action !== filterType) return false;
+        if (filterAdmin && e.adminEmail !== filterAdmin) return false;
+        if (filterResult && e.result !== filterResult) return false;
+        if (filterFrom && ts < filterFrom) return false;
+        if (filterTo && ts > filterTo) return false;
+        return true;
+    });
+    if (status === 'loading') return (
+        <div style={{display:'flex',alignItems:'center',justifyContent:'center',padding:'3rem',gap:'12px',color:'#64748B'}}>
+            <div style={{width:'20px',height:'20px',border:'2px solid #E2E8F0',borderTopColor:'#16A34A',borderRadius:'50%',animation:'spin 0.8s linear infinite'}}></div>
+            Loading audit log...
+        </div>
+    );
+    if (status === 'error') return (
+        <div style={{padding:'3rem',textAlign:'center',color:'#DC2626'}}>Failed to load audit log. Please try again.</div>
+    );
+    return (
+        <div style={{display:'flex',flexDirection:'column',height:'100%',overflow:'hidden'}}>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'14px',padding:'14px 20px',flexShrink:0}}>
+                {[
+                    {label:'Total Entries',val:entries.length,sub:'All time',grad:'linear-gradient(135deg,#4F46E5,#6366F1)'},
+                    {label:'Auth Events',val:entries.filter(e=>e.action.startsWith('auth.')).length,sub:'Logins & logouts',grad:'linear-gradient(135deg,#0EA5E9,#38BDF8)'},
+                    {label:'Order Events',val:entries.filter(e=>e.action.startsWith('order.')).length,sub:'Deletes & changes',grad:'linear-gradient(135deg,#EF4444,#F87171)'},
+                    {label:'Access & System',val:entries.filter(e=>!e.action.startsWith('order.')&&!e.action.startsWith('auth.')).length,sub:'Admin & publish',grad:'linear-gradient(135deg,#10B981,#34D399)'},
+                ].map((s,i) => (
+                    <div key={i} style={{background:s.grad,borderRadius:'14px',padding:'16px 18px',position:'relative',overflow:'hidden'}}>
+                        <div style={{position:'absolute',top:'-12px',right:'-12px',width:'70px',height:'70px',background:'rgba(255,255,255,0.12)',borderRadius:'50%'}}></div>
+                        <div style={{fontSize:'32px',fontWeight:800,color:'rgba(255,255,255,0.92)',letterSpacing:'-1px',lineHeight:1}}>{s.val}</div>
+                        <div style={{fontSize:'12px',color:'rgba(255,255,255,0.72)',marginTop:'6px',fontWeight:600}}>{s.label}</div>
+                        <div style={{fontSize:'10.5px',color:'rgba(255,255,255,0.50)',marginTop:'2px'}}>{s.sub}</div>
+                    </div>
+                ))}
+            </div>
+            <div style={{padding:'8px 20px',background:'white',borderBottom:'0.5px solid #E2E8F0',display:'flex',gap:'8px',alignItems:'center',flexShrink:0,flexWrap:'wrap'}}>
+                <input value={filterQ} onChange={e=>setFilterQ(e.target.value)} placeholder="Search admin, action, target, detail..." style={{flex:1,minWidth:'180px',padding:'7px 10px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12.5px',fontFamily:'inherit',outline:'none'}} />
+                <select value={filterType} onChange={e=>setFilterType(e.target.value)} style={{padding:'7px 10px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12px',fontFamily:'inherit',background:'white',cursor:'pointer',outline:'none'}}>
+                    <option value="">All action types</option>
+                    <option value="access.admin_added">Admin added</option>
+                    <option value="access.admin_removed">Admin removed</option>
+                    <option value="access.role_changed">Admin role changed</option>
+                    <option value="auth.auto_logoff">Auto-logout</option>
+                    <option value="category.added">Category added</option>
+                    <option value="category.removed">Category removed</option>
+                    <option value="category.updated">Category updated</option>
+                    <option value="auth.login">Login</option>
+                    <option value="auth.logout">Logout</option>
+                    <option value="order.soft_delete">Order deleted</option>
+                    <option value="order.permanent_delete">Order perm. deleted</option>
+                    <option value="order.restore">Order restored</option>
+                    <option value="order.status_change">Order status change</option>
+                    <option value="portal.products_published">Products published</option>
+                </select>
+                <select value={filterAdmin} onChange={e=>setFilterAdmin(e.target.value)} style={{padding:'7px 10px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12px',fontFamily:'inherit',background:'white',cursor:'pointer',outline:'none'}}>
+                    <option value="">All admins</option>
+                    {admins.map(a => <option key={a} value={a}>{(a.split('@')[0].replace('.',' ')).replace(/\w/g,c=>c.toUpperCase())}</option>)}
+                </select>
+                <select value={filterResult} onChange={e=>setFilterResult(e.target.value)} style={{padding:'7px 10px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12px',fontFamily:'inherit',background:'white',cursor:'pointer',outline:'none'}}>
+                    <option value="">All results</option>
+                    <option value="success">Success</option>
+                    <option value="denied">Denied</option>
+                </select>
+                <input type="date" value={filterFrom} onChange={e=>setFilterFrom(e.target.value)} style={{padding:'7px 9px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12px',fontFamily:'inherit',background:'white',outline:'none'}} />
+                <input type="date" value={filterTo} onChange={e=>setFilterTo(e.target.value)} style={{padding:'7px 9px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'12px',fontFamily:'inherit',background:'white',outline:'none'}} />
+                <button onClick={()=>{setFilterQ('');setFilterType('');setFilterAdmin('');setFilterResult('');setFilterFrom('');setFilterTo('');}} style={{padding:'7px 12px',border:'1.5px solid #E2E8F0',borderRadius:'8px',fontSize:'11.5px',color:'#64748B',background:'white',cursor:'pointer',fontWeight:600}}>Clear</button>
+                <span style={{background:'#EEF2FF',color:'#4C3BAF',borderRadius:'20px',padding:'3px 11px',fontSize:'11.5px',fontWeight:700,marginLeft:'auto',whiteSpace:'nowrap'}}>{filtered.length} {filtered.length===1?'entry':'entries'}</span>
+            </div>
+            <div style={{flex:1,overflowY:'auto',background:'white'}}>
+                <table id="tbl-auditlog" style={{width:'100%',borderCollapse:'collapse',fontSize:'12px',tableLayout:'fixed'}}>
+                    <thead>
+                        <tr style={{background:'#D97706'}}>
+                            <th style={{padding:'9px 10px',textAlign:'left',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'11%',position:'relative'}}>Date / Time</th>
+                            <th style={{padding:'9px 10px',textAlign:'left',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'14%',position:'relative'}}>Admin</th>
+                            <th style={{padding:'9px 10px',textAlign:'left',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'11%',position:'relative'}}>Action</th>
+                            <th style={{padding:'9px 10px',textAlign:'left',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'12%',position:'relative'}}>Target</th>
+                            <th style={{padding:'9px 10px',textAlign:'left',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',position:'relative'}}>Detail</th>
+                            <th style={{padding:'9px 10px',textAlign:'center',color:'white',fontSize:'9.5px',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',width:'7%',position:'relative'}}>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {filtered.map((e,i) => {
+                            const m = getMeta(e.action);
+                            const dt = new Date(e.timestamp);
+                            const s = e.detail && e.detail.orderSnapshot;
+                            let detail = '';
+                            if (e.detail && e.detail.reason) detail += 'Reason: ' + e.detail.reason + ' · ';
+                            if (e.detail && e.detail.oldStatus) detail += e.detail.oldStatus + ' → ' + e.detail.newStatus + ' · ';
+                            if (e.detail && e.detail.newEmail) detail += 'Added: ' + e.detail.newEmail + ' (' + (e.detail.role||'') + ') · ';
+                            if (e.detail && e.detail.removedEmail) detail += 'Removed: ' + e.detail.removedEmail + ' · ';
+                            if (s) detail += 'For: ' + (s.recipientName||'') + ' · ' + (s.locationId||'') + ' · $' + ((s.total||0).toFixed(2));
+                            if (e.detail && e.detail.browser) detail += (e.detail.browser||'').substring(0,80);
+                            if (e.detail && e.detail.productsCount) detail += e.detail.productsCount + ' products published';
+                            const resBg = e.result==='success'?'#DCFCE7':e.result==='denied'?'#FEE2E2':'#F5F5F4';
+                            const resCol = e.result==='success'?'#166534':e.result==='denied'?'#991B1B':'#78716C';
+                            return (
+                                <tr key={i} style={{background:i%2===0?'#ffffff':'#F5F3FF'}}>
+                                    <td style={{padding:'8px 10px',verticalAlign:'middle'}}>
+                                        <div style={{fontWeight:700,fontSize:'11px',color:'#1E293B'}}>{dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
+                                        <div style={{fontSize:'10px',color:'#57534E'}}>{dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
+                                    </td>
+                                    <td style={{padding:'8px 10px',verticalAlign:'middle',overflow:'hidden'}}>
+                                        <div style={{fontWeight:600,fontSize:'11.5px',color:'#1E293B',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{(e.adminEmail||'').split('@')[0].replace('.',' ').replace(/\w/g,c=>c.toUpperCase())}</div>
+                                        <div style={{fontSize:'10px',color:'#A8A29E',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{e.adminEmail||''}</div>
+                                    </td>
+                                    <td style={{padding:'8px 10px',verticalAlign:'middle'}}>
+                                        <span style={{display:'inline-block',padding:'2px 8px',borderRadius:'20px',background:m.bg,color:m.color,fontWeight:600,fontSize:'10.5px',border:'1px solid '+(m.border||m.color),whiteSpace:'nowrap'}}>{m.label}</span>
+                                    </td>
+                                    <td style={{padding:'8px 10px',verticalAlign:'middle',fontSize:'11px',fontFamily:'monospace',color:'#4C3BAF',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{e.target||'—'}</td>
+                                    <td style={{padding:'8px 10px',verticalAlign:'middle',fontSize:'11px',color:'#0F172A',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} title={detail}>{detail||'—'}</td>
+                                    <td style={{padding:'8px 10px',verticalAlign:'middle',textAlign:'center'}}>
+                                        <span style={{fontSize:'10px',padding:'2px 7px',borderRadius:'10px',fontWeight:700,background:resBg,color:resCol}}>{e.result||''}</span>
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                        {filtered.length === 0 && (
+                            <tr><td colSpan={6} style={{padding:'48px',textAlign:'center',color:'#94A3B8',fontSize:'13px'}}>No entries match the current filters.</td></tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+}
+
+
+// ─── VERSION CONTROL — SUPERADMIN ONLY ──────────────────────────
