@@ -7209,5 +7209,16 @@
     "id": "LOG-1780433304530",
     "timestamp": "2026-06-02T20:48:24.530Z",
     "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "action": "auth.auto_logoff",
+    "detail": {
+      "reason": "inactivity_timeout",
+      "lastActivity": "2026-06-02T20:55:21.085Z"
+    },
+    "result": "success",
+    "id": "LOG-1780437348994",
+    "timestamp": "2026-06-02T21:55:48.994Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
   }
 ]
