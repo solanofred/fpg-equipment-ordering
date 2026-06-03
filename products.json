@@ -298,7 +298,10 @@
     "price": 345,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-Hybrid-USB-C-Dock.jpg"
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-Hybrid-USB-C-Dock.jpg",
+    "categories": [
+      "telepresence"
+    ]
   },
   {
     "id": 15,
