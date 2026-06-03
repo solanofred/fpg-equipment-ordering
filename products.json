@@ -298,7 +298,10 @@
     "price": 345,
     "recommended": false,
     "available": true,
-    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-Hybrid-USB-C-Dock.jpg"
+    "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/Lenovo-Hybrid-USB-C-Dock.jpg",
+    "categories": [
+      "telepresence"
+    ]
   },
   {
     "id": 15,
@@ -532,20 +535,5 @@
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/TIO_24inch.jpg",
     "id": 26
-  },
-  {
-    "title": "Mateo's PC",
-    "category": "telepresence",
-    "items": [
-      {
-        "name": "Mateo's PC",
-        "price": 2000
-      }
-    ],
-    "price": 2360,
-    "recommended": false,
-    "available": true,
-    "imageUrl": "",
-    "id": 27
   }
 ]
