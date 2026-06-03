@@ -16089,5 +16089,57 @@
     ],
     "total": 300,
     "notes": "NONE"
+  },
+  {
+    "id": "ORD-2026-1780495549420",
+    "status": "New",
+    "submittedAt": "2026-06-03T14:05:49.420Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Mateo Escobar",
+    "recipientEmail": "Mateo.Escobar@foundationpartners.com",
+    "locationId": "WIKCP",
+    "shipTo": "9000 W. Capitol Drive, Milwaukee, WI 53222",
+    "items": [
+      {
+        "title": "Audio Visual Stardard Setup with 2 Audio Zones - 4 Ceiling Speakers",
+        "price": 10000,
+        "quantity": 1,
+        "total": 10000,
+        "components": [
+          {
+            "name": "AV System - 2 Zones - 4 Ceiling Speakers",
+            "price": 10000
+          }
+        ]
+      },
+      {
+        "title": "Color MFP",
+        "price": 715,
+        "quantity": 1,
+        "total": 715,
+        "components": [
+          {
+            "name": "HP LaserJet Pro 3301fdw",
+            "price": 650
+          }
+        ]
+      },
+      {
+        "title": "Headset",
+        "price": 40.25,
+        "quantity": 1,
+        "total": 40.25,
+        "components": [
+          {
+            "name": "Poly Blackwire 3210 Monoear USB-C/A",
+            "price": 35
+          }
+        ]
+      }
+    ],
+    "total": 10755.25,
+    "notes": "None"
   }
 ]
