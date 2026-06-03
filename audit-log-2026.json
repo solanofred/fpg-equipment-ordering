@@ -7438,5 +7438,16 @@
       }
     },
     "result": "success"
+  },
+  {
+    "action": "auth.auto_logoff",
+    "detail": {
+      "reason": "inactivity_timeout",
+      "lastActivity": "2026-06-03T14:50:12.401Z"
+    },
+    "result": "success",
+    "id": "LOG-1780501872052",
+    "timestamp": "2026-06-03T15:51:12.052Z",
+    "adminEmail": "fred.solano@foundationpartners.com"
   }
 ]
