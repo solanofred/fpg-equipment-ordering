@@ -7230,5 +7230,18 @@
     "id": "LOG-1780495675600",
     "timestamp": "2026-06-03T14:07:55.600Z",
     "adminEmail": "fred.solano@foundationpartners.com"
+  },
+  {
+    "id": "LOG-1780495802522",
+    "timestamp": "2026-06-03T14:10:02.522Z",
+    "adminEmail": "fred.solano@foundationpartners.com",
+    "action": "order.status_change",
+    "target": "ORD-2026-1780495549420",
+    "detail": {
+      "orderId": "ORD-2026-1780495549420",
+      "oldStatus": "New",
+      "newStatus": "In Progress"
+    },
+    "result": "success"
   }
 ]
