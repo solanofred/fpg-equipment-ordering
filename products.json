@@ -535,23 +535,5 @@
     "available": true,
     "imageUrl": "https://solanofred.github.io/fpg-equipment-ordering/images/TIO_24inch.jpg",
     "id": 26
-  },
-  {
-    "title": "Spencer 2",
-    "category": "telepresence",
-    "items": [
-      {
-        "name": "spencer 2",
-        "price": 1500
-      }
-    ],
-    "price": 1680,
-    "recommended": true,
-    "available": true,
-    "imageUrl": "",
-    "categories": [
-      "recommended"
-    ],
-    "id": 27
   }
 ]
