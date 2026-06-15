@@ -16133,5 +16133,92 @@
     ],
     "total": 2750,
     "notes": "None"
+  },
+  {
+    "id": "ORD-2026-1781547979610",
+    "status": "New",
+    "submittedAt": "2026-06-15T18:26:19.610Z",
+    "year": 2026,
+    "submitterName": "Fred Solano",
+    "submitterEmail": "fred.solano@foundationpartners.com",
+    "recipientName": "Chez Carter",
+    "recipientEmail": "chezarae.carter@foundationpartners.com",
+    "locationId": "FLADC",
+    "shipTo": "sdfpisjdfpsidfjsdpfijsdpfijsdfpoijsdfpoij",
+    "items": [
+      {
+        "title": "Amcrest Network Video Recorder",
+        "price": 300,
+        "quantity": 1,
+        "total": 300,
+        "components": []
+      },
+      {
+        "title": "Accounting Laptop",
+        "price": 2100,
+        "quantity": 1,
+        "total": 2100,
+        "components": [
+          {
+            "name": "Lenovo L16 - 32GB/512GB/R5-215",
+            "price": 1850
+          }
+        ]
+      },
+      {
+        "title": "Wireless Keyboard/Mouse",
+        "price": 40,
+        "quantity": 1,
+        "total": 40,
+        "components": [
+          {
+            "name": "Logitech MK270 Wireless Keyboard/Mouse",
+            "price": 30
+          }
+        ]
+      },
+      {
+        "title": "Wireless Headset for Polycom Phones",
+        "price": 488.75,
+        "quantity": 1,
+        "total": 488.75,
+        "components": [
+          {
+            "name": "Poly CS510 XD",
+            "price": 350
+          },
+          {
+            "name": "Poly APP-51 Eledtronic Hookswitch TAA",
+            "price": 75
+          }
+        ]
+      },
+      {
+        "title": "Tribucast - Cellular",
+        "price": 2200,
+        "quantity": 1,
+        "total": 2200,
+        "components": [
+          {
+            "name": "iPad Pro 12.9\" (M5) + Monthly Cellular Cost (~$50)",
+            "price": 1500
+          },
+          {
+            "name": "iOgrapher Adjustable iPad Case",
+            "price": 100
+          },
+          {
+            "name": "Belkin 3.5mm Audio + USB-C Charge",
+            "price": 35
+          },
+          {
+            "name": "Rode VideoMic Pro",
+            "price": 250
+          }
+        ]
+      }
+    ],
+    "total": 5128.75,
+    "notes": "None"
   }
 ]
