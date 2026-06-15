@@ -47,5 +47,12 @@
     "role": "admin",
     "addedBy": "fred.solano@foundationpartners.com",
     "addedAt": "2026-06-01T17:34:44.472Z"
+  },
+  {
+    "email": "spencer.stanley@foundationpartners.com",
+    "name": "Spencer Stanley",
+    "role": "admin",
+    "addedBy": "fred.solano@foundationpartners.com",
+    "addedAt": "2026-06-15T18:21:54.143Z"
   }
 ]
