@@ -16161,5 +16161,33 @@
     ],
     "total": 2100,
     "notes": "None"
+  },
+  {
+    "id": "ORD-2026-1784220942313",
+    "status": "New",
+    "submittedAt": "2026-07-16T16:55:42.314Z",
+    "year": 2026,
+    "submitterName": "Journee Andrews",
+    "submitterEmail": "Journee.Andrews@omegasociety.com",
+    "recipientName": "Karen Smith ",
+    "recipientEmail": "Karen.Smith@omegasociety.com",
+    "locationId": "CAOMS ",
+    "shipTo": "1577 N Main Street Orange Ca 92867",
+    "items": [
+      {
+        "title": "ThinkVision Monitor - 24\"",
+        "price": 250,
+        "quantity": 1,
+        "total": 250,
+        "components": [
+          {
+            "name": "ThinkVision - 24\"",
+            "price": 170
+          }
+        ]
+      }
+    ],
+    "total": 250,
+    "notes": "None"
   }
 ]
