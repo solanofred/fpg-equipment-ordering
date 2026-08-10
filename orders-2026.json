@@ -16217,5 +16217,69 @@
     ],
     "total": 250,
     "notes": "None"
+  },
+  {
+    "id": "ORD-2026-1786393584916",
+    "status": "New",
+    "submittedAt": "2026-08-10T20:26:24.917Z",
+    "year": 2026,
+    "submitterName": "Christine Chung",
+    "submitterEmail": "Christine.Chung@foundationpartners.com",
+    "recipientName": "Emil Panzarino",
+    "recipientEmail": "emil.panzarino@gmail.com",
+    "locationId": "FLFPG",
+    "shipTo": "902 Woodland Dr, Havertown, PA 19083",
+    "items": [
+      {
+        "title": "ThinkVision Monitor - 24\"",
+        "price": 250,
+        "quantity": 1,
+        "total": 250,
+        "components": [
+          {
+            "name": "ThinkVision - 24\"",
+            "price": 170
+          }
+        ]
+      },
+      {
+        "title": "Laptop",
+        "price": 1955,
+        "quantity": 1,
+        "total": 1955,
+        "components": [
+          {
+            "name": "Lenovo T14 Gen 6 - 32GB/512GB/Intel U7",
+            "price": 1700
+          }
+        ]
+      },
+      {
+        "title": "Wireless Keyboard/Mouse",
+        "price": 40,
+        "quantity": 1,
+        "total": 40,
+        "components": [
+          {
+            "name": "Logitech MK270 Wireless Keyboard/Mouse",
+            "price": 30
+          }
+        ]
+      },
+      {
+        "title": "Webcam",
+        "price": 80.5,
+        "quantity": 1,
+        "total": 80.5,
+        "components": [
+          {
+            "name": "Logitech C920S Webcam",
+            "price": 70
+          }
+        ]
+      }
+    ],
+    "total": 2325.5,
+    "notes": "None"
   }
 ]
