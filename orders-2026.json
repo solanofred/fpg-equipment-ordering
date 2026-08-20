@@ -16281,5 +16281,33 @@
     ],
     "total": 2325.5,
     "notes": "None"
+  },
+  {
+    "id": "ORD-2026-1787266094115",
+    "status": "New",
+    "submittedAt": "2026-08-20T22:48:14.115Z",
+    "year": 2026,
+    "submitterName": "Journee Andrews",
+    "submitterEmail": "Journee.Andrews@omegasociety.com",
+    "recipientName": "Tonya Price",
+    "recipientEmail": "Tonya.Price@omegasociety.com",
+    "locationId": "CAOMS",
+    "shipTo": "1577 North Main Street, Orange, CA 92867",
+    "items": [
+      {
+        "title": "Document Scanner",
+        "price": 460,
+        "quantity": 1,
+        "total": 460,
+        "components": [
+          {
+            "name": "Epson DS-530 II Color Duplex Scanner",
+            "price": 400
+          }
+        ]
+      }
+    ],
+    "total": 460,
+    "notes": "None"
   }
 ]
