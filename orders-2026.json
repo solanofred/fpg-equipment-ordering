@@ -16369,5 +16369,77 @@
     ],
     "total": 3122.25,
     "notes": "Mindy's cell:   503-310-3553"
+  },
+  {
+    "id": "ORD-2026-1787693607345",
+    "status": "New",
+    "submittedAt": "2026-08-25T21:33:27.346Z",
+    "year": 2026,
+    "submitterName": "Kathy King",
+    "submitterEmail": "kathy.king@foundationpartners.com",
+    "recipientName": "Paul Lovgren",
+    "recipientEmail": "paul.lovgrenfde@gmail.com",
+    "locationId": "WAELW",
+    "shipTo": "Paul Lovgren\n5922 Hannah Pierce Rd W Apt A\n98467, WA 98467",
+    "items": [
+      {
+        "title": "Laptop with 2 Monitors",
+        "price": 3082,
+        "quantity": 1,
+        "total": 3082,
+        "components": [
+          {
+            "name": "Lenovo T14 - 32GB/512GB/Intel U7",
+            "price": 1700
+          },
+          {
+            "name": "Lenovo Tiny-in-One 24\" LED",
+            "price": 290
+          },
+          {
+            "name": "Lenovo Tiny-in-One 24\" LED",
+            "price": 290
+          },
+          {
+            "name": "Lenovo ThinkPad Hybrid USB-C Dock",
+            "price": 300
+          },
+          {
+            "name": "Logitech C920S Webcam",
+            "price": 70
+          },
+          {
+            "name": "Logitech MK270 Wireless Keyboard/Mouse",
+            "price": 30
+          }
+        ]
+      },
+      {
+        "title": "Headset",
+        "price": 40.25,
+        "quantity": 1,
+        "total": 40.25,
+        "components": [
+          {
+            "name": "Poly Blackwire 3210 Monoear USB-C/A",
+            "price": 35
+          }
+        ]
+      },
+      {
+        "title": "Wireless Keyboard/Mouse",
+        "price": 40,
+        "quantity": 1,
+        "total": 40,
+        "components": [
+          {
+            "name": "Logitech MK270 Wireless Keyboard/Mouse",
+            "price": 30
+          }
+        ]
+      }
+    ],
+    "total": 3162.25,
+    "notes": "Starts 9/1"
   }
 ]
