@@ -17664,5 +17664,16 @@
     "total": 3122.25,
     "status": "New",
     "year": 2026
+  },
+  {
+    "id": "ORD-2026-1787693607345",
+    "date": "2026-08-25T21:33:27.346Z",
+    "submitterName": "Kathy King",
+    "submitterEmail": "kathy.king@foundationpartners.com",
+    "recipientName": "Paul Lovgren",
+    "locationId": "WAELW",
+    "total": 3162.25,
+    "status": "New",
+    "year": 2026
   }
 ]
