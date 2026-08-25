@@ -16309,5 +16309,65 @@
     ],
     "total": 460,
     "notes": "None"
+  },
+  {
+    "id": "ORD-2026-1787693257691",
+    "status": "New",
+    "submittedAt": "2026-08-25T21:27:37.691Z",
+    "year": 2026,
+    "submitterName": "Kathy King",
+    "submitterEmail": "kathy.king@foundationpartners.com",
+    "recipientName": "Mindy Barella-Rocha",
+    "recipientEmail": "mindy.barella@outlook.com",
+    "locationId": "WABTC",
+    "shipTo": "Mindy Barella-Rocha\n14902 146th Lane SE\nYelm, WA 9859",
+    "items": [
+      {
+        "title": "Laptop with 2 Monitors",
+        "price": 3082,
+        "quantity": 1,
+        "total": 3082,
+        "components": [
+          {
+            "name": "Lenovo T14 - 32GB/512GB/Intel U7",
+            "price": 1700
+          },
+          {
+            "name": "Lenovo Tiny-in-One 24\" LED",
+            "price": 290
+          },
+          {
+            "name": "Lenovo Tiny-in-One 24\" LED",
+            "price": 290
+          },
+          {
+            "name": "Lenovo ThinkPad Hybrid USB-C Dock",
+            "price": 300
+          },
+          {
+            "name": "Logitech C920S Webcam",
+            "price": 70
+          },
+          {
+            "name": "Logitech MK270 Wireless Keyboard/Mouse",
+            "price": 30
+          }
+        ]
+      },
+      {
+        "title": "Headset",
+        "price": 40.25,
+        "quantity": 1,
+        "total": 40.25,
+        "components": [
+          {
+            "name": "Poly Blackwire 3210 Monoear USB-C/A",
+            "price": 35
+          }
+        ]
+      }
+    ],
+    "total": 3122.25,
+    "notes": "Mindy's cell:   503-310-3553"
   }
 ]
