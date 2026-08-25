@@ -16441,5 +16441,33 @@
     ],
     "total": 3162.25,
     "notes": "Starts 9/1"
+  },
+  {
+    "id": "ORD-2026-1787694079856",
+    "status": "New",
+    "submittedAt": "2026-08-25T21:41:19.856Z",
+    "year": 2026,
+    "submitterName": "Kathy King",
+    "submitterEmail": "kathy.king@foundationpartners.com",
+    "recipientName": "Mindy Barella-Rocha",
+    "recipientEmail": "mindy.barella@outlook.com",
+    "locationId": "WABTC",
+    "shipTo": "Mindy Barella-Rocha\n14902 146th Lane SE\nYelm, WA 98597",
+    "items": [
+      {
+        "title": "Wireless Keyboard/Mouse",
+        "price": 40,
+        "quantity": 1,
+        "total": 40,
+        "components": [
+          {
+            "name": "Logitech MK270 Wireless Keyboard/Mouse",
+            "price": 30
+          }
+        ]
+      }
+    ],
+    "total": 40,
+    "notes": "None"
   }
 ]
