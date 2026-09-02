@@ -16513,5 +16513,49 @@
     ],
     "total": 2750,
     "notes": "None"
+  },
+  {
+    "id": "ORD-2026-1788371169161",
+    "status": "New",
+    "submittedAt": "2026-09-02T17:46:09.162Z",
+    "year": 2026,
+    "submitterName": "Brooke Howe",
+    "submitterEmail": "Brooke.Howe@foundationpartners.com",
+    "recipientName": "Julie Robinson",
+    "recipientEmail": "julierobinsonjd@gmail.com",
+    "locationId": "FLFPG",
+    "shipTo": "8076 Wellsmere Cir, Orlando, FL 32835. ",
+    "items": [
+      {
+        "title": "Laptop with Monitor",
+        "price": 2750,
+        "quantity": 1,
+        "total": 2750,
+        "components": [
+          {
+            "name": "Lenovo T14 - 32GB/512GB/Intel U7",
+            "price": 1750
+          },
+          {
+            "name": "ThinkVision 24\" T24-40 - 1080P LED",
+            "price": 200
+          },
+          {
+            "name": "Lenovo ThinkPad Hybrid USB-C Dock",
+            "price": 300
+          },
+          {
+            "name": "Logitech C920S Webcam",
+            "price": 70
+          },
+          {
+            "name": "Logitech MK270 Wireless Keyboard/Mouse",
+            "price": 30
+          }
+        ]
+      }
+    ],
+    "total": 2750,
+    "notes": "None"
   }
 ]
