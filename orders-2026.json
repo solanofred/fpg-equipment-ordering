@@ -16585,5 +16585,33 @@
     ],
     "total": 715,
     "notes": "None"
+  },
+  {
+    "id": "ORD-2026-1791405973133",
+    "status": "New",
+    "submittedAt": "2026-10-07T20:46:13.134Z",
+    "year": 2026,
+    "submitterName": "Lydia Kurtz",
+    "submitterEmail": "Lydia.Kurtz@foundationpartners.com",
+    "recipientName": "Ana Romero",
+    "recipientEmail": "Not provided",
+    "locationId": "CABRU",
+    "shipTo": "626 Broadway Street, Chico, CA 95928",
+    "items": [
+      {
+        "title": "Laptop",
+        "price": 1955,
+        "quantity": 1,
+        "total": 1955,
+        "components": [
+          {
+            "name": "Lenovo T14 Gen 6 - 32GB/512GB/Intel U7",
+            "price": 1700
+          }
+        ]
+      }
+    ],
+    "total": 1955,
+    "notes": "For new hire at CABRU - please send tracking slip to Stephen Crawford (Stephen.Crawford@foundationpartners.com)"
   }
 ]
