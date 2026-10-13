@@ -16641,5 +16641,33 @@
     ],
     "total": 1955,
     "notes": "None"
+  },
+  {
+    "id": "ORD-2026-1791908554437",
+    "status": "New",
+    "submittedAt": "2026-10-13T16:22:34.437Z",
+    "year": 2026,
+    "submitterName": "Melissa Spacy",
+    "submitterEmail": "Melissa.Spacy@foundationpartners.com",
+    "recipientName": "Tracy Hart",
+    "recipientEmail": "tracy.hart@crowncremationservices.com",
+    "locationId": "ORMWP",
+    "shipTo": "225 S Danebo Avenue, Eugene, OR 97402",
+    "items": [
+      {
+        "title": "Laptop",
+        "price": 1955,
+        "quantity": 1,
+        "total": 1955,
+        "components": [
+          {
+            "name": "Lenovo T14 Gen 6 - 32GB/512GB/Intel U7",
+            "price": 1700
+          }
+        ]
+      }
+    ],
+    "total": 1955,
+    "notes": "None"
   }
 ]
