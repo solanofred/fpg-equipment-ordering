@@ -16669,5 +16669,45 @@
     ],
     "total": 1955,
     "notes": "None"
+  },
+  {
+    "id": "ORD-2026-1792163612736",
+    "status": "New",
+    "submittedAt": "2026-10-16T15:13:32.736Z",
+    "year": 2026,
+    "submitterName": "Jill McKee",
+    "submitterEmail": "jill.mckee@lowcountryfuneral.com",
+    "recipientName": "Jill McKee",
+    "recipientEmail": "jill.mckee@lowcountryfuneral.com",
+    "locationId": "SCSIB",
+    "shipTo": "17 Sherington Dr, Suite D, Bluffton, SC 29910",
+    "items": [
+      {
+        "title": "Wireless Keyboard/Mouse",
+        "price": 40,
+        "quantity": 1,
+        "total": 40,
+        "components": [
+          {
+            "name": "Logitech MK270 Wireless Keyboard/Mouse",
+            "price": 30
+          }
+        ]
+      },
+      {
+        "title": "ThinkVision Monitor - 24\"",
+        "price": 250,
+        "quantity": 1,
+        "total": 250,
+        "components": [
+          {
+            "name": "ThinkVision - 24\"",
+            "price": 170
+          }
+        ]
+      }
+    ],
+    "total": 290,
+    "notes": "None"
   }
 ]
