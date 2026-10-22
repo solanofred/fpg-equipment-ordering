@@ -16709,5 +16709,33 @@
     ],
     "total": 290,
     "notes": "None"
+  },
+  {
+    "id": "ORD-2026-1792669661258",
+    "status": "New",
+    "submittedAt": "2026-10-22T11:47:41.260Z",
+    "year": 2026,
+    "submitterName": "Brooke Howe",
+    "submitterEmail": "Brooke.Howe@foundationpartners.com",
+    "recipientName": "Drew Fiorentini ",
+    "recipientEmail": "dfiorentini13@yahoo.com",
+    "locationId": "FLFPG",
+    "shipTo": "107 Barnwood Drive, Bethel Park, PA 15102",
+    "items": [
+      {
+        "title": "Laptop",
+        "price": 1955,
+        "quantity": 1,
+        "total": 1955,
+        "components": [
+          {
+            "name": "Lenovo T14 Gen 6 - 32GB/512GB/Intel U7",
+            "price": 1700
+          }
+        ]
+      }
+    ],
+    "total": 1955,
+    "notes": "None"
   }
 ]
