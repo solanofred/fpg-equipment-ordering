@@ -16781,5 +16781,33 @@
     ],
     "total": 2750,
     "notes": "None"
+  },
+  {
+    "id": "ORD-2026-1793218784785",
+    "status": "New",
+    "submittedAt": "2026-10-28T20:19:44.785Z",
+    "year": 2026,
+    "submitterName": "Toni Pagliarini",
+    "submitterEmail": "Toni.Pagliarini@mcgfuneral.com",
+    "recipientName": "Toni Marie  Pagliarini",
+    "recipientEmail": "toni.pagliarini@mcgfuneral.com",
+    "locationId": "NJMCG",
+    "shipTo": "34 Hunter Street, Woodbury, NJ 08096",
+    "items": [
+      {
+        "title": "Desktop (Computer Only)",
+        "price": 1265,
+        "quantity": 1,
+        "total": 1265,
+        "components": [
+          {
+            "name": "Lenovo M75q Gen 5 - 16GB/512GB/R5-8500",
+            "price": 1100
+          }
+        ]
+      }
+    ],
+    "total": 1265,
+    "notes": "I need as soon as possible.  I keep having serious issues that inhibit my daily work. I have had the help desk (IT) try to resolve my issues, and nothing works.\nThank you kindly."
   }
 ]
