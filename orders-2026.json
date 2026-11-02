@@ -16853,5 +16853,33 @@
     ],
     "total": 2750,
     "notes": "Reporting into Alex Kelly Matthews, Job Title Director of Facilities & Real Estate "
+  },
+  {
+    "id": "ORD-2026-1793626375333",
+    "status": "New",
+    "submittedAt": "2026-11-02T13:32:55.333Z",
+    "year": 2026,
+    "submitterName": "Brooke Howe",
+    "submitterEmail": "Brooke.Howe@foundationpartners.com",
+    "recipientName": " Cimberly Wilkins",
+    "recipientEmail": "cimberlywilkins@yahoo.com",
+    "locationId": "FLFPG",
+    "shipTo": "9523 9th Ave NW Seattle Washington 98117 ",
+    "items": [
+      {
+        "title": "Laptop",
+        "price": 1955,
+        "quantity": 1,
+        "total": 1955,
+        "components": [
+          {
+            "name": "Lenovo T14 Gen 6 - 32GB/512GB/Intel U7",
+            "price": 1700
+          }
+        ]
+      }
+    ],
+    "total": 1955,
+    "notes": "Reporting to Ron Marbrey - new HRBP "
   }
 ]
