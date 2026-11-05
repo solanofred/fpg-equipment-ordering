@@ -16881,5 +16881,41 @@
     ],
     "total": 1955,
     "notes": "Reporting to Ron Marbrey - new HRBP "
+  },
+  {
+    "id": "ORD-2026-1793896372439",
+    "status": "New",
+    "submittedAt": "2026-11-05T16:32:52.440Z",
+    "year": 2026,
+    "submitterName": "Lindsay Keeser",
+    "submitterEmail": "Lindsay.Keeser@nitardyfuneralhome.com",
+    "recipientName": "Lindsay Keeser",
+    "recipientEmail": "lindsay.keeser@nitardyfuneralhome.com",
+    "locationId": "WINIF",
+    "shipTo": "1008 Madison Ave, Fort Atkinson, WI 53538",
+    "items": [
+      {
+        "title": "Desktop (TIO) with Additional Monitor",
+        "price": 1794,
+        "quantity": 1,
+        "total": 1794,
+        "components": [
+          {
+            "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
+            "price": 1100
+          },
+          {
+            "name": "Lenovo Tiny-in-One 24\" LED",
+            "price": 290
+          },
+          {
+            "name": "Lenovo ThinkVision 24\" LED",
+            "price": 170
+          }
+        ]
+      }
+    ],
+    "total": 1794,
+    "notes": "None"
   }
 ]
