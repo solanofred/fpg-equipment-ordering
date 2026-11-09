@@ -16917,5 +16917,45 @@
     ],
     "total": 1794,
     "notes": "None"
+  },
+  {
+    "id": "ORD-2026-1794245460263",
+    "status": "New",
+    "submittedAt": "2026-11-09T17:31:00.264Z",
+    "year": 2026,
+    "submitterName": "Lindsay Keeser",
+    "submitterEmail": "Lindsay.Keeser@nitardyfuneralhome.com",
+    "recipientName": "Lindsay Keeser",
+    "recipientEmail": "lindsay.keeser@nitardyfuneralhome.com",
+    "locationId": "WINSM",
+    "shipTo": "900 W. Racine Street, Jefferson, WI 53549",
+    "items": [
+      {
+        "title": "ThinkVision Monitor - 24\"",
+        "price": 250,
+        "quantity": 2,
+        "total": 500,
+        "components": [
+          {
+            "name": "ThinkVision - 24\"",
+            "price": 170
+          }
+        ]
+      },
+      {
+        "title": "Wireless Keyboard/Mouse",
+        "price": 40,
+        "quantity": 1,
+        "total": 40,
+        "components": [
+          {
+            "name": "Logitech MK270 Wireless Keyboard/Mouse",
+            "price": 30
+          }
+        ]
+      }
+    ],
+    "total": 540,
+    "notes": "We have a computer modem, just need new monitors and keyboard/mouse"
   }
 ]
