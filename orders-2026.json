@@ -16957,5 +16957,33 @@
     ],
     "total": 540,
     "notes": "We have a computer modem, just need new monitors and keyboard/mouse"
+  },
+  {
+    "id": "ORD-2026-1794329244645",
+    "status": "New",
+    "submittedAt": "2026-11-10T16:47:24.645Z",
+    "year": 2026,
+    "submitterName": "David Inere",
+    "submitterEmail": "David.Inere@wymanfuneral.com",
+    "recipientName": "David Inere",
+    "recipientEmail": "david.inere@wymanfuneral.com",
+    "locationId": "AZWYM",
+    "shipTo": "115 South Country Club Drive, Mesa, AZ 85210",
+    "items": [
+      {
+        "title": "Document Scanner",
+        "price": 460,
+        "quantity": 1,
+        "total": 460,
+        "components": [
+          {
+            "name": "Epson DS-530 II Color Duplex Scanner",
+            "price": 400
+          }
+        ]
+      }
+    ],
+    "total": 460,
+    "notes": "None"
   }
 ]
