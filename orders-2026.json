@@ -17041,5 +17041,73 @@
     ],
     "total": 40.25,
     "notes": "None"
+  },
+  {
+    "id": "ORD-2026-1795057715105",
+    "status": "New",
+    "submittedAt": "2026-11-19T03:08:35.105Z",
+    "year": 2026,
+    "submitterName": "Daniel Moore",
+    "submitterEmail": "Daniel.Moore@thompsonsfuneral.com",
+    "recipientName": "Daniel Moore",
+    "recipientEmail": "daniel.moore@thompsonsfuneral.com",
+    "locationId": "SCCCC",
+    "shipTo": "4720 Augusta Road, Lexington, SC 29073",
+    "items": [
+      {
+        "title": "Laptop with 2 Monitors",
+        "price": 3082,
+        "quantity": 1,
+        "total": 3082,
+        "components": [
+          {
+            "name": "Lenovo T14 - 32GB/512GB/Intel U7",
+            "price": 1700
+          },
+          {
+            "name": "Lenovo Tiny-in-One 24\" LED",
+            "price": 290
+          },
+          {
+            "name": "Lenovo Tiny-in-One 24\" LED",
+            "price": 290
+          },
+          {
+            "name": "Lenovo ThinkPad Hybrid USB-C Dock",
+            "price": 300
+          },
+          {
+            "name": "Logitech C920S Webcam",
+            "price": 70
+          },
+          {
+            "name": "Logitech MK270 Wireless Keyboard/Mouse",
+            "price": 30
+          }
+        ]
+      },
+      {
+        "title": "Desktop (TIO) with Additional Monitor",
+        "price": 1794,
+        "quantity": 1,
+        "total": 1794,
+        "components": [
+          {
+            "name": "Lenovo M75q Gen 5 - 32GB/512GB/R5-8500",
+            "price": 1100
+          },
+          {
+            "name": "Lenovo Tiny-in-One 24\" LED",
+            "price": 290
+          },
+          {
+            "name": "Lenovo ThinkVision 24\" LED",
+            "price": 170
+          }
+        ]
+      }
+    ],
+    "total": 4876,
+    "notes": "None"
   }
 ]
