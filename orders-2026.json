@@ -17109,5 +17109,33 @@
     ],
     "total": 4876,
     "notes": "None"
+  },
+  {
+    "id": "ORD-2026-1795196093634",
+    "status": "New",
+    "submittedAt": "2026-11-20T17:34:53.634Z",
+    "year": 2026,
+    "submitterName": "Lisa Campanella",
+    "submitterEmail": "Lisa.Campanella@foundationpartners.com",
+    "recipientName": "Lisa Campanella",
+    "recipientEmail": "lisa.campanella@foundationpartners.com",
+    "locationId": "FLFPG",
+    "shipTo": "2496 Biscotto Circle Davenport FL 33897",
+    "items": [
+      {
+        "title": "Monochrome (B/W) MFP",
+        "price": 450,
+        "quantity": 1,
+        "total": 450,
+        "components": [
+          {
+            "name": "HP B&W LaserJet Pro MFP M3101fdw",
+            "price": 300
+          }
+        ]
+      }
+    ],
+    "total": 450,
+    "notes": "None"
   }
 ]
