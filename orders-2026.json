@@ -17137,5 +17137,45 @@
     ],
     "total": 450,
     "notes": "None"
+  },
+  {
+    "id": "ORD-2026-1795401994921",
+    "status": "New",
+    "submittedAt": "2026-11-23T02:46:34.921Z",
+    "year": 2026,
+    "submitterName": "Noah Watry",
+    "submitterEmail": "noah.watry@nitardyfuneralhome.com",
+    "recipientName": "Noah Watry",
+    "recipientEmail": "noah.watry@nitardyfuneralhome.com",
+    "locationId": "WINSM",
+    "shipTo": "900 W. Racine Street, Jefferson, WI 53549",
+    "items": [
+      {
+        "title": "Tiny-in-One (TIO) Monitor - 24\"",
+        "price": 350,
+        "quantity": 1,
+        "total": 350,
+        "components": [
+          {
+            "name": "TIO 24\"",
+            "price": 290
+          }
+        ]
+      },
+      {
+        "title": "Laptop",
+        "price": 1955,
+        "quantity": 1,
+        "total": 1955,
+        "components": [
+          {
+            "name": "Lenovo T14 Gen 6 - 32GB/512GB/Intel U7",
+            "price": 1700
+          }
+        ]
+      }
+    ],
+    "total": 2305,
+    "notes": "None"
   }
 ]
